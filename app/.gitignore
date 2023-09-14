@@ -23,4 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
+// MacOS stuff
 .DS_Store
