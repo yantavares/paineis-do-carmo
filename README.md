@@ -18,15 +18,21 @@ git clone <https://github.com/yantavares/paineis-do-carmo-front>
 
 2. Navegue até a pasta do projeto:
 
-cd art-gallery-pibic
+```bash
+cd paineis-do-carmo-front/art-gallery-pibic
+```
 
 3. Instale as dependências:
 
+```bash
 yarn install
+```
 
 4. Inicie o projeto:
 
+```bash
 yarn dev
+```
 
 O projeto agora deve estar rodando no seu `localhost:5174`.
 
