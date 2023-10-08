@@ -14,7 +14,9 @@ O projeto "Painéis do Carmo" é uma iniciativa para criar um repositório digit
 
 1. Clone o repositório:
 
+```bash
 git clone <https://github.com/yantavares/paineis-do-carmo-front>
+```
 
 2. Navegue até a pasta do projeto:
 
