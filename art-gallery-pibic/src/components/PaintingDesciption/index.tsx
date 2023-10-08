@@ -1,5 +1,11 @@
 export const PaintingDescription = () => {
-  return <div>PaintingDescription</div>;
+  return (
+    <div>
+      <div>
+        <h1>PaintingDescription</h1>
+      </div>
+    </div>
+  );
 };
 
 export default PaintingDescription;
