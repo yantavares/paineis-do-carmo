@@ -30,7 +30,7 @@ export const ChurchName = styled.h2`
   font-weight: 700;
   line-height: 1.5;
   margin: 0;
-  padding: 0;
+  padding: 0 2%;
 `;
 
 export const PaintingName = styled.h1`
