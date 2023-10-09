@@ -2,6 +2,7 @@ import { useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { CarouselImage, CarouselItem } from "./styles";
+import Modal from "../EngravingModal";
 
 // From react-multi-carousel docs
 const responsive = {
@@ -23,7 +24,7 @@ const responsive = {
   },
 };
 
-interface Engraving {
+export interface Engraving {
   id: number;
   title: string;
   image: string;
@@ -33,65 +34,6 @@ interface Engraving {
 interface EngravingCarouselProps {
   engravings: Engraving[];
 }
-
-interface ModalProps {
-  engraving: Engraving | null;
-  onClose: () => void;
-}
-
-const Modal: React.FC<ModalProps> = ({ engraving, onClose }) => {
-  if (!engraving) return null;
-
-  return (
-    <div
-      className="modal-background"
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: "rgba(0, 0, 0, 0.7)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        zIndex: 1000,
-      }}
-      onClick={(e) => {
-        if ((e.target as Element).classList.contains("modal-background")) {
-          onClose();
-        }
-      }}
-    >
-      <div
-        style={{
-          background: "lightgray",
-          color: "black",
-          padding: "20px",
-          borderRadius: "10px",
-          width: "60%",
-          maxWidth: "500px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          gap: "20px",
-        }}
-      >
-        <h2 style={{ fontSize: "1.2rem" }}>{engraving.author}</h2>
-        <img
-          src={engraving.image}
-          alt={engraving.title}
-          style={{ height: "20rem", borderRadius: "10px" }}
-        />
-        <p>{engraving.title}</p>
-
-        <button onClick={onClose}>Close</button>
-      </div>
-    </div>
-  );
-};
 
 const EngravingCarousel = ({ engravings }: EngravingCarouselProps) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
