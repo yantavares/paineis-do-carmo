@@ -1,3 +1,4 @@
+import { capitalizeStr } from "../../utils/stringOperations";
 import {
   ChurchName,
   DescriptionText,
@@ -34,8 +35,8 @@ export const PaintingDescription = ({
         <PaintingContainer>
           <TextContainer>
             <Description>
-              <ChurchName>{church}</ChurchName>
-              <PaintingName>{title}</PaintingName>
+              <ChurchName>{capitalizeStr(church)}</ChurchName>
+              <PaintingName>{capitalizeStr(title)}</PaintingName>
               <DescriptionText>{desciption}</DescriptionText>
             </Description>
 
