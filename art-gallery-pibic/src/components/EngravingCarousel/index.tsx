@@ -56,6 +56,7 @@ const EngravingCarousel = ({ engravings }: EngravingCarouselProps) => {
       autoPlaySpeed={2000}
       transitionDuration={2000}
       customTransition="transform 2000ms ease-in-out"
+      pauseOnHover={true}
     >
       {engravings.map((engraving: Engraving) => (
         <CarouselItem
