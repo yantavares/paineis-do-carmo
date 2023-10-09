@@ -34,9 +34,9 @@ const EngravingCarousel = () => {
       showDots={true}
       focusOnSelect={true}
       centerMode={true}
-      autoPlaySpeed={2000}
-      transitionDuration={2000}
-      customTransition="transform 2000ms ease-in-out"
+      autoPlaySpeed={3000}
+      transitionDuration={3000}
+      customTransition="transform 3000ms ease-in-out"
     >
       <CarouselItem>
         <CarouselImage src={temp} alt="" />
