@@ -1,11 +1,11 @@
 import PaintingDescription from "../../components/PaintingDesciption";
-import EngravingCarousel from "../../components/EngravingCarousel";
+import Engravings from "../../components/Engravings";
 
 const PaintingDetail = () => {
   return (
     <div style={{ padding: "0 10%", display: "flex", flexDirection: "column" }}>
       <PaintingDescription />
-      <EngravingCarousel />
+      <Engravings />
     </div>
   );
 };
