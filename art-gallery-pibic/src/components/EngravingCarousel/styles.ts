@@ -16,6 +16,6 @@ export const CarouselItem = styled.div`
 
 export const CarouselImage = styled.img`
   max-width: 90%;
-
+  border-radius: 2rem;
   height: 25rem;
 `;
