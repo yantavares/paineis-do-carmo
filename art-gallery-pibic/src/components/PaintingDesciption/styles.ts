@@ -49,6 +49,8 @@ export const TagContainer = styled.div`
 `;
 
 export const Tag = styled.p`
+  font-size: 1rem;
+  font-weight: 500;
   margin: 0;
   padding: 0.5rem 1rem;
   border-radius: 2rem;
