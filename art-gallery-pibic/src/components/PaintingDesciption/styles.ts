@@ -25,13 +25,21 @@ export const ChurchName = styled.h2`
   border: 1px solid white;
   border-radius: 2rem;
   width: max-content;
-  padding: 0 1rem;
   margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
 `;
 
 export const PaintingName = styled.h1`
   margin: 0;
   line-height: 1.2;
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
 `;
 
 export const DescriptionText = styled.p`
