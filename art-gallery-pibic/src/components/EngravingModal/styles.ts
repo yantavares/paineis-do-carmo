@@ -14,7 +14,7 @@ export const ModalBackground = styled.div`
 `;
 
 export const ModalContainer = styled.div`
-  background: lightgray;
+  background: rgb(200, 200, 200, 0.9);
   border: 2px solid gray;
   color: black;
   padding: 20px;
