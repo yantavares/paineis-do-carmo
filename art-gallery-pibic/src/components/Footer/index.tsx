@@ -1,14 +1,42 @@
-import { FooterContainer, FooterSection } from "./styles";
+import {
+  FooterContainer,
+  FooterContent,
+  FooterLink,
+  FooterSection,
+  FooterTitle,
+  HorizontalDivider,
+} from "./styles";
 
 const Footer = () => {
   return (
     <FooterContainer>
-      <FooterSection>
-        <h1>Sobre</h1>
-        <h2>Sla</h2>
-        <h2>Sla</h2>
-        <h2>Sla</h2>
-      </FooterSection>
+      <FooterContent>
+        <FooterSection>
+          <FooterTitle>SOBRE</FooterTitle>
+          <FooterLink>Projeto de Pesquisa</FooterLink>
+          <FooterLink>Professor Orientador</FooterLink>
+          <FooterLink>Autor do Trabalho</FooterLink>
+        </FooterSection>
+        <FooterSection>
+          <FooterTitle>NAVEGAÇÃO</FooterTitle>
+          <FooterLink>Home</FooterLink>
+          <FooterLink>Galeria de Obras</FooterLink>
+          <FooterLink>Igrejas</FooterLink>
+        </FooterSection>
+        <FooterSection>
+          <FooterTitle>WEBSITE</FooterTitle>
+          <FooterLink>Desenvolvimento</FooterLink>
+          <FooterLink>GitHub do Projeto</FooterLink>
+          <FooterLink>Tecnologias Utilizadas</FooterLink>
+        </FooterSection>
+        <HorizontalDivider />
+        <FooterSection>
+          <FooterTitle>CONTATO</FooterTitle>
+          <FooterLink>E-mail</FooterLink>
+          <FooterLink>Telefone</FooterLink>
+          <FooterLink>Redes Sociais</FooterLink>
+        </FooterSection>
+      </FooterContent>
     </FooterContainer>
   );
 };
