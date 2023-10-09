@@ -31,6 +31,7 @@ export const ChurchName = styled.h2`
 
 export const PaintingName = styled.h1`
   margin: 0;
+  line-height: 1.2;
 `;
 
 export const DescriptionText = styled.p`
@@ -49,7 +50,7 @@ export const TagContainer = styled.div`
 `;
 
 export const Tag = styled.p`
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
   margin: 0;
   padding: 0.5rem 1rem;
@@ -68,7 +69,7 @@ export const LineDivider = styled.div`
 export const Description = styled.p`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   text-align: justify;
 `;
 
