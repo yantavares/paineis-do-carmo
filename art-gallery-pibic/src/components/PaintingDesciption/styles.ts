@@ -74,7 +74,7 @@ export const LineDivider = styled.div`
   margin: 2rem 0;
 `;
 
-export const Description = styled.p`
+export const Description = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;

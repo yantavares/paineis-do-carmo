@@ -22,7 +22,8 @@ const engravings = [
   },
   {
     id: 3,
-    title: "Vita Effigiata et Essercizi",
+    title:
+      "Vita effigiata et essercizi affettiui di S. Teresa di giesu maestra di celeste dottrina per il giorno delia sacra comunione (Página 220; Prancha 45)",
     image: via,
     author: "Anônimo",
   },

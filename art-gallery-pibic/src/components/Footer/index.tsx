@@ -32,9 +32,9 @@ const Footer = () => {
         <HorizontalDivider />
         <FooterSection>
           <FooterTitle>CONTATO</FooterTitle>
+          <FooterLink>Redes Sociais</FooterLink>
           <FooterLink>E-mail</FooterLink>
           <FooterLink>Telefone</FooterLink>
-          <FooterLink>Redes Sociais</FooterLink>
         </FooterSection>
       </FooterContent>
     </FooterContainer>
