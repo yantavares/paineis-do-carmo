@@ -1,7 +1,9 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import temp from "../../assets/temp.png";
+import { CarouselImage, CarouselItem } from "./styles";
 
+// From react-multi-carousel docs
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 3000 },
@@ -27,88 +29,31 @@ const EngravingCarousel = () => {
       arrows={false}
       swipeable={true}
       autoPlay={true}
-      autoPlaySpeed={2000}
       infinite={true}
       responsive={responsive}
       showDots={true}
       focusOnSelect={true}
       centerMode={true}
+      autoPlaySpeed={2000}
       transitionDuration={2000}
       customTransition="transform 2000ms ease-in-out"
     >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "1rem",
-          marginBottom: "3rem",
-          userSelect: "none",
-          pointerEvents: "none",
-        }}
-      >
-        <img
-          src={temp}
-          style={{ maxWidth: "90%", userSelect: "none", pointerEvents: "none" }}
-          alt=""
-        />
+      <CarouselItem>
+        <CarouselImage src={temp} alt="" />
         Item 1
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "1rem",
-          userSelect: "none",
-          pointerEvents: "none",
-        }}
-      >
-        <img
-          src={temp}
-          style={{ maxWidth: "90%", userSelect: "none", pointerEvents: "none" }}
-          alt=""
-        />
+      </CarouselItem>
+      <CarouselItem>
+        <CarouselImage src={temp} alt="" />
         Item 2
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "1rem",
-          userSelect: "none",
-          pointerEvents: "none",
-        }}
-      >
-        <img
-          src={temp}
-          style={{ maxWidth: "90%", userSelect: "none", pointerEvents: "none" }}
-          alt=""
-        />
+      </CarouselItem>
+      <CarouselItem>
+        <CarouselImage src={temp} alt="" />
         Item 3
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "1rem",
-          userSelect: "none",
-          pointerEvents: "none",
-        }}
-      >
-        <img
-          src={temp}
-          style={{ maxWidth: "90%", userSelect: "none", pointerEvents: "none" }}
-          alt=""
-        />
+      </CarouselItem>
+      <CarouselItem>
+        <CarouselImage src={temp} alt="" />
         Item 4
-      </div>
+      </CarouselItem>
     </Carousel>
   );
 };
