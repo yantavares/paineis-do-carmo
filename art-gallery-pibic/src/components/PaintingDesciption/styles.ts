@@ -74,6 +74,7 @@ export const Description = styled.p`
 `;
 
 export const PaintingImage = styled.img`
-  width: 100%;
+  max-width: 100%;
   border-radius: 2rem;
+  max-height: 40rem;
 `;

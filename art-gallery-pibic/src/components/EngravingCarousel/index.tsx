@@ -29,46 +29,121 @@ interface Engraving {
   image: string;
   author: string;
 }
+
 interface EngravingCarouselProps {
   engravings: Engraving[];
 }
 
-const EngravingCarousel = ({ engravings }: EngravingCarouselProps) => {
-  const [autoPlay, setAutoPlay] = useState(true);
+interface ModalProps {
+  engraving: Engraving | null;
+  onClose: () => void;
+}
 
-  const handleMouseEnter = () => {
-    setAutoPlay(false);
-  };
+const Modal: React.FC<ModalProps> = ({ engraving, onClose }) => {
+  if (!engraving) return null;
 
-  const handleMouseLeave = () => {
-    setAutoPlay(true);
-  };
   return (
-    <Carousel
-      arrows={false}
-      swipeable={true}
-      autoPlay={autoPlay}
-      infinite={true}
-      responsive={responsive}
-      showDots={true}
-      focusOnSelect={true}
-      centerMode={true}
-      autoPlaySpeed={2000}
-      transitionDuration={2000}
-      customTransition="transform 2000ms ease-in-out"
-      pauseOnHover={true}
+    <div
+      className="modal-background"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: "rgba(0, 0, 0, 0.7)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 1000,
+      }}
+      onClick={(e) => {
+        if ((e.target as Element).classList.contains("modal-background")) {
+          onClose();
+        }
+      }}
     >
-      {engravings.map((engraving: Engraving) => (
-        <CarouselItem
-          key={engraving.id}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          <CarouselImage src={engraving.image} alt={engraving.title} />
-          {engraving.author}
-        </CarouselItem>
-      ))}
-    </Carousel>
+      <div
+        style={{
+          background: "lightgray",
+          color: "black",
+          padding: "20px",
+          borderRadius: "10px",
+          width: "60%",
+          maxWidth: "500px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          gap: "20px",
+        }}
+      >
+        <h2 style={{ fontSize: "1.2rem" }}>{engraving.author}</h2>
+        <img
+          src={engraving.image}
+          alt={engraving.title}
+          style={{ height: "20rem", borderRadius: "10px" }}
+        />
+        <p>{engraving.title}</p>
+
+        <button onClick={onClose}>Close</button>
+      </div>
+    </div>
+  );
+};
+
+const EngravingCarousel = ({ engravings }: EngravingCarouselProps) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [autoPlay, setAutoPlay] = useState(true);
+  const [currentEngraving, setCurrentEngraving] = useState<Engraving | null>(
+    null
+  );
+
+  const handleImageClick = (engraving: Engraving) => {
+    setCurrentEngraving(engraving);
+    setIsModalVisible(true);
+  };
+
+  const handleModalClose = () => {
+    setCurrentEngraving(null);
+    setIsModalVisible(false);
+  };
+
+  return (
+    <div>
+      <Carousel
+        arrows={false}
+        swipeable={true}
+        autoPlay={autoPlay}
+        infinite={true}
+        responsive={responsive}
+        showDots={true}
+        focusOnSelect={true}
+        centerMode={true}
+        autoPlaySpeed={2000}
+        transitionDuration={2000}
+        customTransition="transform 2000ms ease-in-out"
+      >
+        {engravings.map((engraving: Engraving) => (
+          <CarouselItem
+            key={engraving.id}
+            onMouseEnter={() => setAutoPlay(false)}
+            onMouseLeave={() => setAutoPlay(true)}
+          >
+            <CarouselImage
+              src={engraving.image}
+              alt={engraving.title}
+              onClick={() => handleImageClick(engraving)}
+            />
+            {engraving.author}
+          </CarouselItem>
+        ))}
+      </Carousel>
+      {isModalVisible && (
+        <Modal engraving={currentEngraving} onClose={handleModalClose} />
+      )}
+    </div>
   );
 };
 
