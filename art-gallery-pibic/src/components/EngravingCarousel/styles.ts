@@ -8,11 +8,14 @@ export const CarouselItem = styled.div`
   gap: 1rem;
   margin-bottom: 3rem;
   user-select: none;
-  pointer-events: none;
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const CarouselImage = styled.img`
   max-width: 90%;
-  user-select: none;
-  pointer-events: none;
+
+  height: 25rem;
 `;
