@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChurch, faPalette } from "@fortawesome/free-solid-svg-icons";
 import { capitalizeStr } from "../../utils/stringOperations";
 import {
   ChurchName,
@@ -12,6 +14,8 @@ import {
   Container,
   Description,
   PaintingImage,
+  PaintingAuthor,
+  IconContainer,
 } from "./styles";
 
 interface PaintingDescriptionProps {
@@ -20,6 +24,7 @@ interface PaintingDescriptionProps {
   desciption: string;
   tags: string[];
   image: string;
+  author: string;
 }
 
 export const PaintingDescription = ({
@@ -28,6 +33,7 @@ export const PaintingDescription = ({
   desciption,
   tags,
   image,
+  author,
 }: PaintingDescriptionProps) => {
   return (
     <>
@@ -35,8 +41,23 @@ export const PaintingDescription = ({
         <PaintingContainer>
           <TextContainer>
             <Description>
-              <ChurchName>{capitalizeStr(church)}</ChurchName>
+              <IconContainer>
+                <FontAwesomeIcon
+                  icon={faChurch}
+                  size="lg"
+                  style={{ color: "#ffffff" }}
+                />
+                <ChurchName>{capitalizeStr(church)}</ChurchName>
+              </IconContainer>
               <PaintingName>{capitalizeStr(title)}</PaintingName>
+              <IconContainer>
+                <FontAwesomeIcon
+                  icon={faPalette}
+                  size="lg"
+                  style={{ color: "#ffffff" }}
+                />
+                <PaintingAuthor>{capitalizeStr(author)}</PaintingAuthor>
+              </IconContainer>
               <DescriptionText>{desciption}</DescriptionText>
             </Description>
 
