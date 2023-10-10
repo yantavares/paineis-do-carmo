@@ -50,7 +50,7 @@ export const PaintingDescription = ({
                 <ChurchName>{capitalizeStr(church)}</ChurchName>
               </IconContainer>
               <PaintingName>{capitalizeStr(title)}</PaintingName>
-              <IconContainer>
+              <IconContainer removeBorder={true}>
                 <FontAwesomeIcon
                   icon={faPalette}
                   size="lg"
@@ -60,14 +60,12 @@ export const PaintingDescription = ({
               </IconContainer>
               <DescriptionText>{desciption}</DescriptionText>
             </Description>
-
             <TagContainer>
               {tags.map((tag: string, id: number) => (
                 <Tag key={id}>{tag}</Tag>
               ))}
             </TagContainer>
           </TextContainer>
-
           <ImageContainer>
             <PaintingImage src={image} alt={title} />
           </ImageContainer>

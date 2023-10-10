@@ -20,11 +20,15 @@ export const TextContainer = styled.div`
   width: 40%;
 `;
 
-export const IconContainer = styled.div`
+interface IconContainerProps {
+  removeBorder?: boolean;
+}
+
+export const IconContainer = styled.div<IconContainerProps>`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  border: 1px solid white;
+  border: ${(props) => (props.removeBorder ? "none" : "1px solid white")};
   border-radius: 2rem;
   width: max-content;
   padding: 0 2%;
