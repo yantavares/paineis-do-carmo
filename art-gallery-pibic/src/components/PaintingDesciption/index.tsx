@@ -50,7 +50,7 @@ export const PaintingDescription = ({
                 <ChurchName>{capitalizeStr(church)}</ChurchName>
               </IconContainer>
               <PaintingName>{capitalizeStr(title)}</PaintingName>
-              <IconContainer removeBorder={true}>
+              <IconContainer removeBorder>
                 <FontAwesomeIcon
                   icon={faPalette}
                   size="lg"
