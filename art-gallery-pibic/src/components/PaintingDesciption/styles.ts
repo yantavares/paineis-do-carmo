@@ -20,16 +20,21 @@ export const TextContainer = styled.div`
   width: 40%;
 `;
 
-export const ChurchName = styled.h2`
+export const IconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   border: 1px solid white;
   border-radius: 2rem;
   width: max-content;
+  padding: 0 2%;
+`;
+
+export const ChurchName = styled.h2`
   margin: 0;
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.5;
-  margin: 0;
-  padding: 0 2%;
 `;
 
 export const PaintingName = styled.h1`
@@ -37,6 +42,14 @@ export const PaintingName = styled.h1`
   line-height: 1.2;
   font-size: 3rem;
   font-weight: 700;
+  margin: 0;
+  padding: 0;
+`;
+
+export const PaintingAuthor = styled.h3`
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
   margin: 0;
   padding: 0;
 `;
@@ -83,5 +96,5 @@ export const Description = styled.div`
 export const PaintingImage = styled.img`
   max-width: 100%;
   border-radius: 2rem;
-  max-height: 40rem;
+  max-height: 45rem;
 `;
