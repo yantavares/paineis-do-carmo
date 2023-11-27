@@ -1,5 +1,8 @@
 # Painéis do Carmo
 
+[![GitHub stars](https://img.shields.io/github/stars/yantavares/paineis-do-carmo_front-end)](https://github.com/yantavares/paineis-do-carmo-front)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 ## Descrição
 
 O projeto "Painéis do Carmo" é uma iniciativa para criar um repositório digital de pinturas produzidas durante o período Barroco no Brasil. O objetivo é criar um banco de dados aberto e acessível ao público que permita pesquisas e estudos sobre a arte brasileira desse período.
