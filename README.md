@@ -1,6 +1,6 @@
 # Painéis do Carmo
 
-[![GitHub stars](https://img.shields.io/github/stars/yantavares/paineis-do-carmo_front-end)](https://github.com/yantavares/paineis-do-carmo-front)
+[![GitHub stars](https://img.shields.io/github/stars/yantavares/paineis-do-carmo)](https://github.com/yantavares/paineis-do-carmo)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## Descrição
