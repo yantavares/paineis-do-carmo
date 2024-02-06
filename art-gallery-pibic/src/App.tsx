@@ -2,7 +2,6 @@
 import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ExamplePage from "src/pages/ExamplePage";
-import "src/App.css";
 
 function App() {
   return (
