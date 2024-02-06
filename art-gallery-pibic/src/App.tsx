@@ -1,20 +1,18 @@
-import "./App.css";
-import React from "react";
-import Icon from "./assets/baroque-no-bg.png";
+// import CircularProgress from "@mui/material/CircularProgress";
+import React, { Suspense } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ExamplePage from "src/pages/ExamplePage";
+import "src/App.css";
 
 function App() {
   return (
-    <div
-      style={{
-        display: "flex",
-        height: "8rem",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <img height={"100%"} src={Icon} alt="Museu Barroco" />
-      <h1>Museu Barroco</h1>
-    </div>
+    <BrowserRouter>
+      <Suspense fallback="">
+        <Routes>
+          <Route path="/" element={<ExamplePage />} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   );
 }
 
