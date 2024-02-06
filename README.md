@@ -31,13 +31,13 @@ cd paineis-do-carmo-front/art-gallery-pibic
 3. Instale as dependências:
 
 ```bash
-yarn install
+npm install
 ```
 
 4. Inicie o projeto:
 
 ```bash
-yarn dev
+npm run dev
 ```
 
 O projeto agora deve estar rodando no seu `localhost:5174`.
