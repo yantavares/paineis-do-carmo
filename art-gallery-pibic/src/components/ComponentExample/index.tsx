@@ -1,7 +1,11 @@
 import React from "react";
-import { ExampleHeader } from "./styles";
+import { ExampleContainer, ExampleHeader } from "./styles";
 
 const ExampleComponent = () => {
-  return <ExampleHeader>Example</ExampleHeader>;
+  return (
+    <ExampleContainer>
+      <ExampleHeader>Example</ExampleHeader>
+    </ExampleContainer>
+  );
 };
 export default ExampleComponent;
