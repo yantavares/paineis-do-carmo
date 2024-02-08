@@ -1,14 +1,14 @@
 import { CircularProgress } from "@mui/material";
 import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ExamplePage from "src/pages/ExamplePage";
+import Home from "src/pages/Home";
 
 function App() {
   return (
     <BrowserRouter>
       <Suspense fallback={<CircularProgress />}>
         <Routes>
-          <Route path="/" element={<ExamplePage />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

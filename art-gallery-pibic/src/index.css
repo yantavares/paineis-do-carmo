@@ -32,27 +32,21 @@ body {
   width: 100vw;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
 button {
-  border-radius: 8px;
+  height: fit-content;
+  background: unset;
+  border-radius: 10px;
   border: 1px solid #dee2e6;
   padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
   font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
+  color: #212529;
+  font-weight: 500;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+
+button:focus {
+  outline: 1px solid #588157;
 }
 
 /* @media (prefers-color-scheme: light) {
