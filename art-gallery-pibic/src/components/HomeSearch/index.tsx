@@ -9,6 +9,8 @@ import {
 } from "./styles";
 import magGlass from "src/assets/mag-glass.svg";
 
+// TODO add button logic
+
 const HomeSearch = () => {
   const [inputValue, setInputValue] = useState("");
 
