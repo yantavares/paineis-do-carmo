@@ -4,7 +4,6 @@ export const HomeHeader = styled.header`
   display: flex;
   width: 100%;
   justify-content: space-between;
-  padding: 0 3%;
 `;
 
 export const Col1 = styled.div`
