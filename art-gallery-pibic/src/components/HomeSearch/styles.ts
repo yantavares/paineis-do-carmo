@@ -34,7 +34,7 @@ export const Container = styled.div`
 export const SearchOption = styled.button`
   border-radius: 0.8rem;
   border: 1px solid #cccccc;
-  font-size: 1rem;
+  font-size: 0.9rem;
   transition: color 0.3s;
   transition: all 0.3s;
   &:hover {
