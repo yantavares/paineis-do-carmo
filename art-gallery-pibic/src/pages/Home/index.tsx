@@ -5,6 +5,8 @@ import ImageCarousel from "src/components/ImageCarousel";
 import temp from "src/assets/baroque.jpg";
 import { CarouselContainer, PaddingContainer } from "./style";
 
+// Test
+
 const Home = () => {
   return (
     <div>
