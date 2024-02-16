@@ -30,3 +30,24 @@ export const Container = styled.div`
   margin-top: 4rem;
   padding: 0 3.4%;
 `;
+
+export const SearchOption = styled.button`
+  border-radius: 0.8rem;
+  border: 1px solid #cccccc;
+  font-size: 1rem;
+  transition: color 0.3s;
+  transition: all 0.3s;
+  &:hover {
+    transform: scale(1.04);
+    color: #588157;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const SearchOptionContainer = styled.div`
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 1rem;
+`;

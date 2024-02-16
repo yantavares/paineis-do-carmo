@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Container, HomeInput, InputContainer, SvgIcon } from "./styles";
+import {
+  Container,
+  HomeInput,
+  InputContainer,
+  SearchOption,
+  SearchOptionContainer,
+  SvgIcon,
+} from "./styles";
 import magGlass from "src/assets/mag-glass.svg";
 
 const HomeSearch = () => {
@@ -19,6 +26,11 @@ const HomeSearch = () => {
           onChange={handleInputChange}
         />
       </InputContainer>
+      <SearchOptionContainer>
+        <SearchOption>Obras</SearchOption>
+        <SearchOption>Igrejas</SearchOption>
+        <SearchOption>Artistas</SearchOption>
+      </SearchOptionContainer>
     </Container>
   );
 };
