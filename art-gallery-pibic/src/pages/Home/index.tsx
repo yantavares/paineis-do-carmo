@@ -9,7 +9,6 @@ const Home = () => {
   return (
     <div>
       <PaddingContainer>
-        <Header />
         <HomeSearch />
       </PaddingContainer>
       <CarouselContainer>

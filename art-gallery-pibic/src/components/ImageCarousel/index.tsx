@@ -12,7 +12,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
     slidesToShow: 3,
     slidesToScroll: images.length,
     autoplay: true,
-    autoplaySpeed: 0,
+    autoplaySpeed: 1,
     cssEase: "linear",
     fade: false,
     arrows: false,
