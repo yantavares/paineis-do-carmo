@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
-export const HomeHeader = styled.header`
+export const HeaderContainer = styled.header`
   display: flex;
   width: 100%;
   justify-content: space-between;
+  padding: 0 5%;
 `;
 
 export const Col1 = styled.div`

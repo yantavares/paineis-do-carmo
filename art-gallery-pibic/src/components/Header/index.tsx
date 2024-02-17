@@ -6,7 +6,7 @@ import {
   Col2,
   ContribButton,
   HeaderButton,
-  HomeHeader,
+  HeaderContainer,
   LoginButton,
   Title,
   TitleContainer,
@@ -14,7 +14,7 @@ import {
 
 const Header = () => {
   return (
-    <HomeHeader>
+    <HeaderContainer>
       <Col1>
         <TitleContainer>
           <img src={PaintBucket} alt="Museu Barroco" />
@@ -32,7 +32,7 @@ const Header = () => {
         <LoginButton>Log In</LoginButton>
         <ContribButton>Fazer Parte</ContribButton>
       </Col2>
-    </HomeHeader>
+    </HeaderContainer>
   );
 };
 export default Header;

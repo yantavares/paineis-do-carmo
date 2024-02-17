@@ -43,6 +43,9 @@ button {
   transition: border-color 0.25s;
   color: #212529;
   font-weight: 500;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  transition: background-color 0.3s;
 }
 
 button:focus {
