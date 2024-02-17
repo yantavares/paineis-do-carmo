@@ -40,6 +40,7 @@ export const SearchOption = styled.button`
   &:hover {
     transform: scale(1.04);
     color: #588157;
+    border-color: #588157;
   }
   &:focus {
     outline: none;
