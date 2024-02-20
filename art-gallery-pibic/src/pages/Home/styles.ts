@@ -28,6 +28,7 @@ export const TopicsContainer = styled.div`
   gap: 3rem;
   margin-top: 3rem;
   width: 100%;
+  flex-direction: column;
 `;
 
 export const Topic = styled.div`

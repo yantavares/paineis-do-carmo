@@ -50,6 +50,30 @@ const Home = () => {
               />
             </TopicBody>
           </Topic>
+          <Topic>
+            <TopicHeader>
+              <TopicTitle>Igrejas</TopicTitle>
+              <TopicSubTitle>
+                Procure por igrejas do período barroco brasileiro
+              </TopicSubTitle>
+            </TopicHeader>
+          </Topic>
+          <Topic>
+            <TopicHeader>
+              <TopicTitle>Obras</TopicTitle>
+              <TopicSubTitle>
+                Procure por igrejas do período barroco brasileiro
+              </TopicSubTitle>
+            </TopicHeader>
+          </Topic>
+          <Topic>
+            <TopicHeader>
+              <TopicTitle>Artistas</TopicTitle>
+              <TopicSubTitle>
+                Procure por artistas do barrroco brasileiro
+              </TopicSubTitle>
+            </TopicHeader>
+          </Topic>
         </TopicsContainer>
       </PaddingContainer>
     </div>
