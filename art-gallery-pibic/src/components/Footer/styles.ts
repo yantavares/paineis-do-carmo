@@ -55,6 +55,11 @@ export const Text = styled.p`
 export const FooterButton = styled.button`
   color: white;
   width: fit-content;
+  transition: all 0.3s;
+  &:hover {
+    transform: scale(1.04);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 `;
 
 export const FinancingContainer = styled.div`

@@ -39,7 +39,7 @@ export const SearchOption = styled.button`
   transition: all 0.3s;
   &:hover {
     transform: scale(1.04);
-    color: #588157;
+    // color: #588157;
     border-color: #588157;
   }
   &:focus {
