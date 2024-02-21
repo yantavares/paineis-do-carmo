@@ -24,6 +24,7 @@ const HomeSearch = () => {
         <SvgIcon src={magGlass} alt="Search" />
         <HomeInput
           type="text"
+          name="search"
           placeholder="Busque por imagens, tópicos, pintores, igrejas..."
           value={inputValue}
           onChange={handleInputChange}

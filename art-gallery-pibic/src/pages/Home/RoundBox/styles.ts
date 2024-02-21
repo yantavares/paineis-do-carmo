@@ -13,7 +13,7 @@ export const RoundBoxContainer = styled.div<RoundBoxProps>`
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
-  transition: all 0.5s;
+  transition: all 0.2s;
 `;
 
 export const BoxText = styled.h2`
@@ -39,7 +39,10 @@ interface DropdownContentProps {
 
 export const DropdownContent = styled.div<DropdownContentProps>`
   background-color: ${(props) => props.color};
-  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  transition: ${(props) =>
+    props.$isopen === "true"
+      ? "max-height 0.6s ease-in, opacity 0.2s ease-in"
+      : "max-height 0.6s ease-out, opacity 0.4s ease-out"};
   max-height: ${(props) => (props.$isopen === "true" ? "500px" : "0")};
   opacity: ${(props) => (props.$isopen === "true" ? "1" : "0")};
   overflow: hidden;

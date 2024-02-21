@@ -46,5 +46,4 @@ export const TopicHeader = styled.div`
 export const TopicBody = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
 `;
