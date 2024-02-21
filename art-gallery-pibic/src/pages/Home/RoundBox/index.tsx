@@ -1,4 +1,3 @@
-// Import useState from React
 import React, { useState } from "react";
 import {
   BoxButton,
@@ -7,7 +6,7 @@ import {
   RoundBoxContainer,
 } from "./styles";
 
-const RoundBox = ({ text, buttonText, color }) => {
+const RoundBox = ({ text, buttonText, color, videoURL = "dQw4w9WgXcQ" }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -23,14 +22,13 @@ const RoundBox = ({ text, buttonText, color }) => {
 
       <DropdownContent color={color} $isopen={isOpen.toString()}>
         <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ"
+          width="500"
+          height="300"
+          src={`https://www.youtube-nocookie.com/embed/${videoURL}`}
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
         ></iframe>
-        <p>Some additional text here</p>
       </DropdownContent>
     </>
   );

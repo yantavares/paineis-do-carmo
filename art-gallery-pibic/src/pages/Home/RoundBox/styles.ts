@@ -13,7 +13,7 @@ export const RoundBoxContainer = styled.div<RoundBoxProps>`
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
-  transition: all 0.2s;
+  transition: all 0.4s ease-in-out;
 `;
 
 export const BoxText = styled.h2`
@@ -49,4 +49,11 @@ export const DropdownContent = styled.div<DropdownContentProps>`
   color: white;
   padding: 1rem;
   border-radius: 0 0 1rem 1rem;
+  margin-bottom: ${(props) => (props.$isopen === "true" ? "1.6rem" : "0")};
+
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 2rem;
 `;
