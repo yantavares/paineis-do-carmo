@@ -2,14 +2,20 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { Artist, Church, Painting } from "../mockData";
-import { Data, DataContainer, DataImage, SeeMoreButton } from "./styles";
+import {
+  Data,
+  DataContainer,
+  DataImage,
+  HomeTopicContainer,
+  SeeMoreButton,
+} from "./styles";
 import ChurchText from "./texts/ChurchText";
 import ArtistText from "./texts/ArtistText";
 import PaintingText from "./texts/PaintingText";
 
 const HomeTopic = ({ data, type }) => {
   return (
-    <div>
+    <HomeTopicContainer>
       <SeeMoreButton>
         <p>{getTypeText(type)}</p>
         <FontAwesomeIcon icon={faArrowRight} />
@@ -22,7 +28,7 @@ const HomeTopic = ({ data, type }) => {
           </Data>
         ))}
       </DataContainer>
-    </div>
+    </HomeTopicContainer>
   );
 };
 
