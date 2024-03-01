@@ -13,6 +13,12 @@ import {
   TopicsContainer,
 } from "./styles";
 import RoundBox from "./RoundBox";
+import HomeTopic from "./HomeTopic";
+import {
+  brazilianArtists,
+  brazilianChurches,
+  brazilianPaintings,
+} from "./mockData";
 
 const Home = () => {
   return (
@@ -57,14 +63,16 @@ const Home = () => {
                 Procure por igrejas do período barroco brasileiro
               </TopicSubTitle>
             </TopicHeader>
+            <HomeTopic type={"churches"} data={brazilianChurches} />
           </Topic>
           <Topic>
             <TopicHeader>
               <TopicTitle>Obras</TopicTitle>
               <TopicSubTitle>
-                Procure por igrejas do período barroco brasileiro
+                Procure por pinturas do período barroco brasileiro
               </TopicSubTitle>
             </TopicHeader>
+            <HomeTopic type={"paintings"} data={brazilianPaintings} />
           </Topic>
           <Topic>
             <TopicHeader>
@@ -73,6 +81,7 @@ const Home = () => {
                 Procure por artistas do barrroco brasileiro
               </TopicSubTitle>
             </TopicHeader>
+            <HomeTopic type={"artists"} data={brazilianArtists} />
           </Topic>
         </TopicsContainer>
       </PaddingContainer>
