@@ -34,7 +34,7 @@ export const TopicsContainer = styled.div`
 export const Topic = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   width: 100%;
 `;
 
