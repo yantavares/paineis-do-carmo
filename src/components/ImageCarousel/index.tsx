@@ -16,9 +16,6 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
     cssEase: "linear",
     fade: false,
     arrows: false,
-
-    centerMode: true,
-    centerPadding: "40px",
   };
 
   return (

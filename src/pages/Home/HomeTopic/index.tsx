@@ -21,8 +21,8 @@ const HomeTopic = ({ data, type }) => {
         <FontAwesomeIcon icon={faArrowRight} />
       </SeeMoreButton>
       <DataContainer>
-        {data.map((item: Church) => (
-          <Data>
+        {data.map((item: Church, index: number) => (
+          <Data key={index}>
             <DataImage src={item.image} alt={item.name} />
             {getTypeInfo(type, item)}
           </Data>
