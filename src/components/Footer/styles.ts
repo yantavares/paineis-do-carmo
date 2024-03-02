@@ -16,7 +16,8 @@ export const DashedLine = styled.div`
   border: 1px dashed rgba(255, 255, 255, 0.5);
   width: 100%;
   height: 1px;
-  margin: 2rem 0;
+  margin: 1rem 0;
+  margin-top: 2rem;
 `;
 
 export const PaintBucket = styled.img`
@@ -75,9 +76,4 @@ export const FinancingContainer = styled.div`
 export const SocialsContainer = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-export const Socials = styled.div`
-  display: flex;
-  gap: 1rem;
 `;

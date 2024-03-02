@@ -7,15 +7,19 @@ import {
   FooterContainer,
   InnerDiv,
   PaintBucket,
-  Socials,
   SocialsContainer,
   Text,
   TextContainer,
   TitleText,
 } from "./styles";
 import paintBucket from "src/assets/paint-bucket-alt.svg";
-import wpp from "src/assets/wpp.svg";
-import insta from "src/assets/insta.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faWhatsapp,
+  faInstagram,
+  faGithub,
+} from "@fortawesome/free-brands-svg-icons";
+import "./social-media.css";
 
 const Footer = () => {
   return (
@@ -37,10 +41,20 @@ const Footer = () => {
         </TextContainer>
         <SocialsContainer>
           <DashedLine />
-          <Socials>
-            <img src={wpp} alt="Whatsapp" />
-            <img src={insta} alt="Instagram" />
-          </Socials>
+          <div className="social-media">
+            <a href="">
+              <FontAwesomeIcon icon={faWhatsapp} color="white" size="lg" />
+              <span className="tooltip-social">WhatsApp</span>
+            </a>
+            <a href="">
+              <FontAwesomeIcon icon={faInstagram} color="white" size="lg" />
+              <span className="tooltip-social">Instagram</span>
+            </a>
+            <a href="">
+              <FontAwesomeIcon icon={faGithub} color="white" size="lg" />
+              <span className="tooltip-social">GitHub</span>
+            </a>
+          </div>
         </SocialsContainer>
       </InnerDiv>
     </FooterContainer>
