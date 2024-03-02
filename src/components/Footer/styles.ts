@@ -72,7 +72,7 @@ export const FinancingContainer = styled.div`
   gap: 1rem;
   width: 25%;
   @media (max-width: 768px) {
-    display: none; // Hide ButtonsContainer on small screens
+    display: none;
   }
 `;
 

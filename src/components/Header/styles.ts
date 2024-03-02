@@ -17,7 +17,7 @@ export const Col2 = styled.div`
   place-items: center;
   gap: 0.8rem;
   @media (max-width: 768px) {
-    display: none; // Hide ButtonsContainer on small screens
+    display: none;
   }
 `;
 
@@ -30,7 +30,7 @@ export const ButtonsContainer = styled.div`
   display: flex;
   place-items: center;
   @media (max-width: 768px) {
-    display: none; // Hide ButtonsContainer on small screens
+    display: none;
   }
 `;
 
