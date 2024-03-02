@@ -21,6 +21,13 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import "./social-media.css";
 
+const wppMessage =
+  "Olá, gostaria de saber mais sobre o projeto Paineis do Carmo!";
+const phoneNumber = "5561981020218";
+
+const wppMessageFormatted = wppMessage.replace(" ", "%20");
+const wppLink = `https://wa.me/${phoneNumber}?text=${wppMessageFormatted}`;
+
 const Footer = () => {
   return (
     <FooterContainer>
@@ -42,15 +49,19 @@ const Footer = () => {
         <SocialsContainer>
           <DashedLine />
           <div className="social-media">
-            <a href="">
+            <a href={wppLink} target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faWhatsapp} color="white" size="lg" />
               <span className="tooltip-social">WhatsApp</span>
             </a>
-            <a href="">
+            <a>
               <FontAwesomeIcon icon={faInstagram} color="white" size="lg" />
               <span className="tooltip-social">Instagram</span>
             </a>
-            <a href="">
+            <a
+              href="https://github.com/yantavares/paineis-do-carmo"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FontAwesomeIcon icon={faGithub} color="white" size="lg" />
               <span className="tooltip-social">GitHub</span>
             </a>
