@@ -4,6 +4,11 @@ export const DataTitle = styled.h3`
   padding: 0;
   margin: 0;
   font-size: 0.9rem;
+  transition: all 0.3s;
+  &:hover {
+    cursor: pointer;
+    color: #588157;
+  }
 `;
 
 export const DataInfo = styled.p`
