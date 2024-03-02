@@ -14,6 +14,13 @@ export const SeeMoreButton = styled.button`
   margin: 0;
   margin-bottom: 1rem;
   padding: 0;
+  transition: all 0.3s;
+  &:hover {
+    color: #588157;
+  }
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const DataContainer = styled.div`
