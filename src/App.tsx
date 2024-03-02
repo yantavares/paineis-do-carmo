@@ -9,6 +9,7 @@ function App() {
       <Suspense fallback={<CircularProgress />}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/paineis-do-carmo" element={<Home />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

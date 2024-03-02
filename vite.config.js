@@ -7,7 +7,6 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      // Set the alias
       "src/": "/src/",
     },
   },
