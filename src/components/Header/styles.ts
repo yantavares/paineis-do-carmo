@@ -16,6 +16,9 @@ export const Col2 = styled.div`
   display: flex;
   place-items: center;
   gap: 0.8rem;
+  @media (max-width: 768px) {
+    display: none; // Hide ButtonsContainer on small screens
+  }
 `;
 
 export const TitleContainer = styled.div`
@@ -26,6 +29,9 @@ export const TitleContainer = styled.div`
 export const ButtonsContainer = styled.div`
   display: flex;
   place-items: center;
+  @media (max-width: 768px) {
+    display: none; // Hide ButtonsContainer on small screens
+  }
 `;
 
 export const HeaderButton = styled.button`
