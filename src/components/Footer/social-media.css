@@ -1,0 +1,60 @@
+.social-media {
+  width: fit-content;
+  display: flex;
+}
+
+.social-media:before {
+  content: " ";
+  display: block;
+  margin: 18px 0;
+}
+
+.social-media a {
+  position: relative;
+  margin-right: 20px;
+  text-decoration: none;
+  color: inherit;
+  width: fit-content;
+}
+
+.social-media a svg {
+  width: fit-content;
+  fill: currentColor;
+}
+
+.tooltip-social {
+  background: #262626;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  padding: 0.5rem 0.4rem;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -90%);
+  transition: all 0.2s ease;
+  z-index: 1;
+}
+
+.tooltip-social:after {
+  content: " ";
+  position: absolute;
+  bottom: 1px;
+  left: 50%;
+  border: solid;
+  border-width: 10px 10px 0 10px;
+  border-color: transparent;
+  transform: translate(-50%, 100%);
+}
+
+.social-media a .tooltip-social:after {
+  border-top-color: #262626;
+}
+
+.social-media a:hover .tooltip-social {
+  opacity: 1;
+  transform: translate(-50%, -130%);
+}
