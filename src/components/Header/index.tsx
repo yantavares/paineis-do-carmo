@@ -11,15 +11,18 @@ import {
   Title,
   TitleContainer,
 } from "./styles";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <HeaderContainer>
       <Col1>
-        <TitleContainer>
+        <TitleContainer onClick={() => navigate("/")}>
           <img src={PaintBucket} alt="Museu Barroco" />
           <Title>Museu Barroco</Title>
         </TitleContainer>
+
         <ButtonsContainer>
           <HeaderButton>Galeria de Obras</HeaderButton>
           <HeaderButton>Igrejas</HeaderButton>
@@ -29,7 +32,7 @@ const Header = () => {
       </Col1>
 
       <Col2>
-        <LoginButton>Log In</LoginButton>
+        <LoginButton onClick={() => navigate("/login")}>Log In</LoginButton>
         <ContribButton>Fazer Parte</ContribButton>
       </Col2>
     </HeaderContainer>

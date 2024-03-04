@@ -24,6 +24,11 @@ export const Col2 = styled.div`
 export const TitleContainer = styled.div`
   display: flex;
   gap: 0.8rem;
+  cursor: pointer;
+  transition: color 0.3s;
+  &:hover {
+    color: #588157;
+  }
 `;
 
 export const ButtonsContainer = styled.div`
