@@ -5,7 +5,7 @@ export const FooterContainer = styled.footer`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  height: 22rem;
+  height: 40%;
   background-color: #588157;
   color: white;
   margin-top: 5rem;
@@ -71,6 +71,9 @@ export const FinancingContainer = styled.div`
   border-radius: 1.5rem;
   gap: 1rem;
   width: 25%;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const SocialsContainer = styled.div`

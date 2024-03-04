@@ -16,16 +16,27 @@ export const Col2 = styled.div`
   display: flex;
   place-items: center;
   gap: 0.8rem;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const TitleContainer = styled.div`
   display: flex;
   gap: 0.8rem;
+  cursor: pointer;
+  transition: color 0.3s;
+  &:hover {
+    color: #588157;
+  }
 `;
 
 export const ButtonsContainer = styled.div`
   display: flex;
   place-items: center;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const HeaderButton = styled.button`
