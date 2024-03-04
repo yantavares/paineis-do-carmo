@@ -1,4 +1,4 @@
-# Painéis do Carmo
+# Painéis do Carmo - Museu Barroco
 
 [![GitHub stars](https://img.shields.io/github/stars/yantavares/paineis-do-carmo)](https://shields.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
