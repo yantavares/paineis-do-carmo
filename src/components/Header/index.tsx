@@ -18,7 +18,7 @@ const Header = () => {
   return (
     <HeaderContainer>
       <Col1>
-        <TitleContainer onClick={() => navigate("/")}>
+        <TitleContainer onClick={() => navigate("/paineis-do-carmo/")}>
           <img src={PaintBucket} alt="Museu Barroco" />
           <Title>Museu Barroco</Title>
         </TitleContainer>
@@ -32,7 +32,9 @@ const Header = () => {
       </Col1>
 
       <Col2>
-        <LoginButton onClick={() => navigate("/login")}>Log In</LoginButton>
+        <LoginButton onClick={() => navigate("/paineis-do-carmo/login")}>
+          Log In
+        </LoginButton>
         <ContribButton>Fazer Parte</ContribButton>
       </Col2>
     </HeaderContainer>
