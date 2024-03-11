@@ -47,3 +47,26 @@ export const TopicBody = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+export const MainTextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 3rem 3.5rem;
+  margin-top: 2rem;
+`;
+
+export const MainTextHeader = styled.h1`
+  font-size: 3.2rem;
+  margin: 0;
+  padding: 0;
+`;
+
+export const MainText = styled.h2`
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #707272;
+  text-align: justify;
+  margin: 0;
+  padding: 0;
+`;

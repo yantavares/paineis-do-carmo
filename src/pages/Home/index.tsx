@@ -9,6 +9,9 @@ import temp5 from "src/assets/pintura2.jpeg";
 import temp6 from "src/assets/artista1.jpg";
 import {
   CarouselContainer,
+  MainText,
+  MainTextContainer,
+  MainTextHeader,
   PaddingContainer,
   Topic,
   TopicBody,
@@ -29,6 +32,21 @@ const Home = () => {
   return (
     <div>
       <PaddingContainer>
+        <MainTextContainer>
+          <MainTextHeader>
+            O Barroco{" "}
+            <span style={{ color: "#588157", borderBottom: "2px solid #ded" }}>
+              Reinventado
+            </span>
+          </MainTextHeader>
+          <MainText>
+            Bem-vindo ao nosso site! Aqui você pode encontrar informações sobre
+            igrejas, pinturas e artistas do período barroco brasileiro. O
+            barroco foi um período de grande efervescência artística no Brasil,
+            com a chegada dos colonizadores portugueses e a influência da igreja
+            católica.
+          </MainText>
+        </MainTextContainer>
         <HomeSearch />
       </PaddingContainer>
       <CarouselContainer>
