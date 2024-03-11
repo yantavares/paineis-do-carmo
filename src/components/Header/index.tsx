@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PaintBucket from "src/assets/paint-bucket.svg";
 import {
   ButtonsContainer,
@@ -11,10 +12,11 @@ import {
   Title,
   TitleContainer,
 } from "./styles";
-import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
+  const [count, setCount] = useState(0);
+
   return (
     <HeaderContainer>
       <Col1>
@@ -24,7 +26,14 @@ const Header = () => {
         </TitleContainer>
 
         <ButtonsContainer>
-          <HeaderButton>Galeria de Obras</HeaderButton>
+          <HeaderButton
+            onClick={() => {
+              setCount(count + 1);
+              navigate(`/paineis-do-carmo/?comoutilizar=${count + 1}`);
+            }}
+          >
+            Galeria de Obras
+          </HeaderButton>
           <HeaderButton>Igrejas</HeaderButton>
           <HeaderButton>Artistas</HeaderButton>
           <HeaderButton>Como utilizar</HeaderButton>

@@ -1,12 +1,21 @@
-import HomeSearch from "src/components/HomeSearch";
-import React from "react";
-import ImageCarousel from "src/components/ImageCarousel";
+import React, { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
+import temp6 from "src/assets/artista1.jpg";
 import temp from "src/assets/baroque.jpg";
+import temp4 from "src/assets/baroque2.jpg";
 import temp2 from "src/assets/baroque3.jpg";
 import temp3 from "src/assets/igreja2.jpg";
-import temp4 from "src/assets/baroque2.jpg";
 import temp5 from "src/assets/pintura2.jpeg";
-import temp6 from "src/assets/artista1.jpg";
+import HomeSearch from "src/components/HomeSearch";
+import ImageCarousel from "src/components/ImageCarousel";
+import ImageCarousel2 from "src/components/ImageCarousel2";
+import HomeTopic from "./HomeTopic";
+import RoundBox from "./RoundBox";
+import {
+  brazilianArtists,
+  brazilianChurches,
+  brazilianPaintings,
+} from "./mockData";
 import {
   CarouselContainer,
   MainText,
@@ -21,16 +30,23 @@ import {
   TopicTitle,
   TopicsContainer,
 } from "./styles";
-import RoundBox from "./RoundBox";
-import HomeTopic from "./HomeTopic";
-import {
-  brazilianArtists,
-  brazilianChurches,
-  brazilianPaintings,
-} from "./mockData";
-import ImageCarousel2 from "src/components/ImageCarousel2";
 
 const Home = () => {
+  const location = useLocation();
+  const scrollToDivRef = useRef(null);
+  const queryParams = new URLSearchParams(location.search);
+
+  const prevRef = useRef(queryParams.get("comoutilizar"));
+
+  useEffect(() => {
+    if (queryParams.has("comoutilizar")) {
+      if (queryParams.get("comoutilizar") != prevRef.current) {
+        prevRef.current = queryParams.get("comoutilizar");
+        scrollToDivRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location.search]);
+
   return (
     <div>
       <PaddingContainer>
@@ -70,7 +86,7 @@ const Home = () => {
       </CarouselContainer>
       <PaddingContainer>
         <TopicsContainer>
-          <Topic>
+          <Topic ref={scrollToDivRef}>
             <TopicHeader>
               <TopicTitle>Como utilizar</TopicTitle>
               <TopicSubTitle>
