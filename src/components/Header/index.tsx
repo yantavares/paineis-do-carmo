@@ -15,7 +15,6 @@ import {
 
 const Header = () => {
   const navigate = useNavigate();
-  const [count, setCount] = useState(0);
 
   return (
     <HeaderContainer>
@@ -26,14 +25,7 @@ const Header = () => {
         </TitleContainer>
 
         <ButtonsContainer>
-          <HeaderButton
-            onClick={() => {
-              setCount(count + 1);
-              navigate(`/paineis-do-carmo/?comoutilizar=${count + 1}`);
-            }}
-          >
-            Galeria de Obras
-          </HeaderButton>
+          <HeaderButton>Galeria de Obras</HeaderButton>
           <HeaderButton>Igrejas</HeaderButton>
           <HeaderButton>Artistas</HeaderButton>
           <HeaderButton>Como utilizar</HeaderButton>

@@ -32,21 +32,6 @@ import {
 } from "./styles";
 
 const Home = () => {
-  const location = useLocation();
-  const scrollToDivRef = useRef(null);
-  const queryParams = new URLSearchParams(location.search);
-
-  const prevRef = useRef(queryParams.get("comoutilizar"));
-
-  useEffect(() => {
-    if (queryParams.has("comoutilizar")) {
-      if (queryParams.get("comoutilizar") != prevRef.current) {
-        prevRef.current = queryParams.get("comoutilizar");
-        scrollToDivRef.current.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  }, [location.search]);
-
   return (
     <div>
       <PaddingContainer>
@@ -86,7 +71,7 @@ const Home = () => {
       </CarouselContainer>
       <PaddingContainer>
         <TopicsContainer>
-          <Topic ref={scrollToDivRef}>
+          <Topic>
             <TopicHeader>
               <TopicTitle>Como utilizar</TopicTitle>
               <TopicSubTitle>
