@@ -16,6 +16,7 @@ import {
   Topic,
   TopicBody,
   TopicHeader,
+  TopicOne,
   TopicSubTitle,
   TopicTitle,
   TopicsContainer,
@@ -94,8 +95,7 @@ const Home = () => {
               />
             </TopicBody>
           </Topic>
-
-          <Topic>
+          <TopicOne>
             <TopicHeader>
               <TopicTitle>Obras</TopicTitle>
               <TopicSubTitle>
@@ -103,7 +103,7 @@ const Home = () => {
               </TopicSubTitle>
             </TopicHeader>
             <HomeTopic type={"paintings"} data={brazilianPaintings} />
-          </Topic>
+          </TopicOne>
           <Topic>
             <TopicHeader>
               <TopicTitle>Igrejas</TopicTitle>

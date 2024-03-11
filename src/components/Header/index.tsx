@@ -27,6 +27,7 @@ const Header = () => {
           <HeaderButton>Galeria de Obras</HeaderButton>
           <HeaderButton>Igrejas</HeaderButton>
           <HeaderButton>Artistas</HeaderButton>
+          <HeaderButton>Como utilizar</HeaderButton>
           <HeaderButton>Sobre</HeaderButton>
         </ButtonsContainer>
       </Col1>

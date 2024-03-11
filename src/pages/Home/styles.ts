@@ -38,6 +38,14 @@ export const Topic = styled.div`
   width: 100%;
 `;
 
+export const TopicOne = styled.div`
+  margin-top: -2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+`;
+
 export const TopicHeader = styled.div`
   display: flex;
   flex-direction: column;
