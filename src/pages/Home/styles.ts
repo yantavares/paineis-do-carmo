@@ -66,7 +66,7 @@ export const MainTextContainer = styled.div`
 `;
 
 export const MainTextHeader = styled.h1`
-  font-size: 3.2rem;
+  font-size: 3rem;
   margin: 0;
   padding: 0;
 `;
