@@ -52,8 +52,9 @@ export const MainTextContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  margin: 3rem 3.5rem;
-  margin-top: 2rem;
+  padding: 0 3.2rem;
+  padding-top: 2rem;
+  width: 70%;
 `;
 
 export const MainTextHeader = styled.h1`
@@ -68,5 +69,6 @@ export const MainText = styled.h2`
   color: #707272;
   text-align: justify;
   margin: 0;
+  line-height: 1.6;
   padding: 0;
 `;

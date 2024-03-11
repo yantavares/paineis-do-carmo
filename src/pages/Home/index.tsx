@@ -27,26 +27,41 @@ import {
   brazilianChurches,
   brazilianPaintings,
 } from "./mockData";
+import ImageCarousel2 from "src/components/ImageCarousel2";
 
 const Home = () => {
   return (
     <div>
       <PaddingContainer>
-        <MainTextContainer>
-          <MainTextHeader>
-            O Barroco{" "}
-            <span style={{ color: "#588157", borderBottom: "2px solid #ded" }}>
-              Reinventado
-            </span>
-          </MainTextHeader>
-          <MainText>
-            Bem-vindo ao nosso site! Aqui você pode encontrar informações sobre
-            igrejas, pinturas e artistas do período barroco brasileiro. O
-            barroco foi um período de grande efervescência artística no Brasil,
-            com a chegada dos colonizadores portugueses e a influência da igreja
-            católica.
-          </MainText>
-        </MainTextContainer>
+        <div style={{ display: "flex", width: "100%" }}>
+          <MainTextContainer>
+            <MainTextHeader>
+              O Barroco{" "}
+              <span
+                style={{ color: "#588157", borderBottom: "2px solid #ded" }}
+              >
+                Reinventado
+              </span>
+            </MainTextHeader>
+            <MainText>
+              Bem-vindo ao nosso site! Aqui você pode encontrar informações
+              sobre igrejas, pinturas e artistas do período barroco brasileiro.
+              O barroco foi um período de grande efervescência artística no
+              Brasil, com a chegada dos colonizadores portugueses e a influência
+              da igreja católica.
+            </MainText>
+          </MainTextContainer>
+          <div
+            style={{
+              width: "30%",
+              paddingTop: "3rem",
+            }}
+          >
+            <ImageCarousel2
+              images={[temp, temp2, temp3, temp4, temp5, temp6]}
+            />
+          </div>
+        </div>
         <HomeSearch />
       </PaddingContainer>
       <CarouselContainer>
@@ -79,15 +94,7 @@ const Home = () => {
               />
             </TopicBody>
           </Topic>
-          <Topic>
-            <TopicHeader>
-              <TopicTitle>Igrejas</TopicTitle>
-              <TopicSubTitle>
-                Procure por igrejas do período barroco brasileiro
-              </TopicSubTitle>
-            </TopicHeader>
-            <HomeTopic type={"churches"} data={brazilianChurches} />
-          </Topic>
+
           <Topic>
             <TopicHeader>
               <TopicTitle>Obras</TopicTitle>
@@ -96,6 +103,15 @@ const Home = () => {
               </TopicSubTitle>
             </TopicHeader>
             <HomeTopic type={"paintings"} data={brazilianPaintings} />
+          </Topic>
+          <Topic>
+            <TopicHeader>
+              <TopicTitle>Igrejas</TopicTitle>
+              <TopicSubTitle>
+                Procure por igrejas do período barroco brasileiro
+              </TopicSubTitle>
+            </TopicHeader>
+            <HomeTopic type={"churches"} data={brazilianChurches} />
           </Topic>
           <Topic>
             <TopicHeader>
