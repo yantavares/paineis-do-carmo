@@ -4,17 +4,17 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ImageContainer, SliderImage } from "./styles";
 
-const ImageCarousel = ({ images }: { images: string[] }) => {
+const ImageCarousel2 = ({ images }: { images: string[] }) => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 20000,
-    slidesToShow: 3,
+    speed: 2000,
+    slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 1,
+    autoplaySpeed: 6000,
     cssEase: "linear",
-    fade: false,
+    fade: true,
     arrows: false,
   };
 
@@ -29,4 +29,4 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   );
 };
 
-export default ImageCarousel;
+export default ImageCarousel2;

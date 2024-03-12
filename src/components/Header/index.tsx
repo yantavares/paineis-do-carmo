@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PaintBucket from "src/assets/paint-bucket.svg";
 import {
   ButtonsContainer,
@@ -11,10 +12,10 @@ import {
   Title,
   TitleContainer,
 } from "./styles";
-import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
+
   return (
     <HeaderContainer>
       <Col1>
@@ -27,6 +28,7 @@ const Header = () => {
           <HeaderButton>Galeria de Obras</HeaderButton>
           <HeaderButton>Igrejas</HeaderButton>
           <HeaderButton>Artistas</HeaderButton>
+          <HeaderButton>Como utilizar</HeaderButton>
           <HeaderButton>Sobre</HeaderButton>
         </ButtonsContainer>
       </Col1>

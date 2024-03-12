@@ -38,6 +38,14 @@ export const Topic = styled.div`
   width: 100%;
 `;
 
+export const TopicOne = styled.div`
+  margin-top: -2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+`;
+
 export const TopicHeader = styled.div`
   display: flex;
   flex-direction: column;
@@ -46,4 +54,29 @@ export const TopicHeader = styled.div`
 export const TopicBody = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+export const MainTextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0 3.2rem;
+  padding-top: 2rem;
+  width: 70%;
+`;
+
+export const MainTextHeader = styled.h1`
+  font-size: 3rem;
+  margin: 0;
+  padding: 0;
+`;
+
+export const MainText = styled.h2`
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #707272;
+  text-align: justify;
+  margin: 0;
+  line-height: 1.6;
+  padding: 0;
 `;

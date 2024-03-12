@@ -27,8 +27,7 @@ export const InputContainer = styled.div`
 `;
 
 export const Container = styled.div`
-  margin-top: 4rem;
-  padding: 0 3.4%;
+  margin-top: 3rem;
 `;
 
 export const SearchOption = styled.button`
