@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import colors from "src/utils/colors";
 
 export const PaddingContainer = styled.div`
   padding: 0 5%;
@@ -18,7 +19,7 @@ export const TopicTitle = styled.h2`
 export const TopicSubTitle = styled.p`
   font-size: 1.6rem;
   font-weight: 600;
-  color: #707272;
+  color: ${colors.lightGray};
   padding: 0;
   margin: 0;
 `;
@@ -82,7 +83,7 @@ export const MainTextHeader = styled.h1`
 export const MainText = styled.h2`
   font-size: 1.6rem;
   font-weight: 600;
-  color: #707272;
+  color: ${colors.lightGray};
   text-align: justify;
   margin: 0;
   line-height: 1.6;

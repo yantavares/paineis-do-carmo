@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import colors from "src/utils/colors";
 
 export const HomeTopicContainer = styled.div`
   &:hover {
@@ -16,7 +17,7 @@ export const SeeMoreButton = styled.button`
   padding: 0;
   transition: all 0.3s;
   &:hover {
-    color: #588157;
+    color: ${colors.green};
   }
   &:focus {
     outline: none;

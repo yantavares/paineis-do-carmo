@@ -31,6 +31,7 @@ import {
   TopicTitle,
   TopicsContainer,
 } from "./styles";
+import colors from "src/utils/colors";
 
 const Home = () => {
   return (
@@ -41,7 +42,10 @@ const Home = () => {
             <MainTextHeader>
               O Barroco{" "}
               <span
-                style={{ color: "#588157", borderBottom: "2px solid #ded" }}
+                style={{
+                  color: colors.green,
+                  borderBottom: "2px solid #ded",
+                }}
               >
                 Reinventado
               </span>
@@ -88,7 +92,7 @@ const Home = () => {
               <RoundBox
                 text={"Fazer parte do projeto"}
                 buttonText={"Fazer parte"}
-                color={"#588157"}
+                color={colors.green}
               />
               <RoundBox
                 text={"Entrar em contato conosco"}

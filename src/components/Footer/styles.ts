@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import colors from "src/utils/colors";
 
 export const FooterContainer = styled.footer`
   display: flex;
@@ -6,7 +7,7 @@ export const FooterContainer = styled.footer`
   justify-content: space-evenly;
   align-items: center;
   height: 40%;
-  background-color: #588157;
+  background-color: ${colors.green};
   color: white;
   margin-top: 5rem;
   padding: 2% 0;
