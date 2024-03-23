@@ -59,7 +59,7 @@ export const TopicBody = styled.div`
 export const MainTextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 5rem;
   padding: 0 3.2rem;
   padding-top: 2rem;
   width: 70%;
@@ -73,7 +73,8 @@ export const GreetingContainer = styled.div`
 `;
 
 export const MainTextHeader = styled.h1`
-  font-size: 3rem;
+  font-size: 6rem;
+  line-height: 1;
   margin: 0;
   padding: 0;
 `;
