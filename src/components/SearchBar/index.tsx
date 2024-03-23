@@ -11,7 +11,7 @@ import magGlass from "src/assets/mag-glass.svg";
 
 // TODO add button logic
 
-const HomeSearch = () => {
+const SearchBar = () => {
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,4 +38,4 @@ const HomeSearch = () => {
     </Container>
   );
 };
-export default HomeSearch;
+export default SearchBar;

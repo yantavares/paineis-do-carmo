@@ -5,7 +5,7 @@ import temp4 from "src/assets/baroque2.jpg";
 import temp2 from "src/assets/baroque3.jpg";
 import temp6 from "src/assets/igreja2.jpg";
 import temp5 from "src/assets/pintura2.jpeg";
-import HomeSearch from "src/components/HomeSearch";
+import HomeSearch from "src/components/SearchBar";
 import ImageCarousel from "src/components/ImageCarousel";
 import ImageCarousel2 from "src/components/ImageCarousel2";
 import colors from "src/utils/colors";
