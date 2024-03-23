@@ -5,6 +5,7 @@ import Home from "src/pages/Home";
 import LoginPage from "src/pages/LoginPage";
 import Header from "src/components/Header";
 import Footer from "src/components/Footer";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
 
           <Route path="/login" element={<LoginPage />} />
           <Route path="/paineis-do-carmo/login" element={<LoginPage />} />
+
+          <Route path="/pesquisa" element={<SearchPage />} />
+          <Route path="/paineis-do-carmo/pesquisa" element={<SearchPage />} />
         </Routes>
       </Suspense>
       <Footer />

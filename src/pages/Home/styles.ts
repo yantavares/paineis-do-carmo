@@ -65,6 +65,13 @@ export const MainTextContainer = styled.div`
   width: 70%;
 `;
 
+export const GreetingContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 0;
+`;
+
 export const MainTextHeader = styled.h1`
   font-size: 3rem;
   margin: 0;

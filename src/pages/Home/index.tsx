@@ -18,6 +18,7 @@ import {
 } from "./mockData";
 import {
   CarouselContainer,
+  GreetingContainer,
   MainText,
   MainTextContainer,
   MainTextHeader,
@@ -35,7 +36,7 @@ const Home = () => {
   return (
     <div>
       <PaddingContainer>
-        <div style={{ display: "flex", width: "100%" }}>
+        <GreetingContainer>
           <MainTextContainer>
             <MainTextHeader>
               O Barroco{" "}
@@ -63,7 +64,7 @@ const Home = () => {
               images={[temp, temp2, temp3, temp4, temp5, temp6]}
             />
           </div>
-        </div>
+        </GreetingContainer>
         <HomeSearch />
       </PaddingContainer>
       <CarouselContainer>
