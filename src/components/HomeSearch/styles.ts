@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import colors from "src/utils/colors";
 
 export const HomeInput = styled.input`
   background-color: #eeefef;
@@ -38,8 +39,8 @@ export const SearchOption = styled.button`
   transition: all 0.3s;
   &:hover {
     transform: scale(1.04);
-    // color: #588157;
-    border-color: #588157;
+    // color: colors.green;
+    border-color: ${colors.green};
   }
   &:focus {
     outline: none;

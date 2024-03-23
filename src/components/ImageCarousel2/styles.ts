@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ImageContainer = styled.div`
-  height: 300px;
+  height: 100%;
   &:focus {
     outline: none;
   }

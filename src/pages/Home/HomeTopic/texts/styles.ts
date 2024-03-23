@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import colors from "src/utils/colors";
 
 export const DataTitle = styled.h3`
   padding: 0;
@@ -7,7 +8,7 @@ export const DataTitle = styled.h3`
   transition: all 0.3s;
   &:hover {
     cursor: pointer;
-    color: #588157;
+    color: ${colors.green};
   }
 `;
 
@@ -23,5 +24,5 @@ export const DataInfoContainer = styled.div`
 
 export const PaintingDate = styled.span`
   font-size: 0.8rem;
-  color: #666;
+  color: ${colors.gray};
 `;

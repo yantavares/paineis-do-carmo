@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import colors from "src/utils/colors";
 
 export const HeaderContainer = styled.header`
   display: flex;
@@ -27,7 +28,7 @@ export const TitleContainer = styled.div`
   cursor: pointer;
   transition: color 0.3s;
   &:hover {
-    color: #588157;
+    color: ${colors.green};
   }
 `;
 
@@ -44,7 +45,7 @@ export const HeaderButton = styled.button`
   font-size: 1rem;
   transition: color 0.3s;
   &:hover {
-    color: #588157;
+    color: ${colors.green};
   }
   &:focus {
     outline: none;
@@ -57,7 +58,7 @@ export const Title = styled.h3`
 
 export const ContribButton = styled.button`
   padding: 0.6rem 1.2rem;
-  background-color: #588157;
+  background-color: ${colors.green};
   font-size: 1rem;
   color: white;
   border: none;

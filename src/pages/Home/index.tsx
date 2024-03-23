@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import React from "react";
 import temp6 from "src/assets/artista1.jpg";
 import temp from "src/assets/baroque.jpg";
 import temp4 from "src/assets/baroque2.jpg";
@@ -18,6 +17,7 @@ import {
 } from "./mockData";
 import {
   CarouselContainer,
+  GreetingContainer,
   MainText,
   MainTextContainer,
   MainTextHeader,
@@ -30,17 +30,21 @@ import {
   TopicTitle,
   TopicsContainer,
 } from "./styles";
+import colors from "src/utils/colors";
 
 const Home = () => {
   return (
     <div>
       <PaddingContainer>
-        <div style={{ display: "flex", width: "100%" }}>
+        <GreetingContainer>
           <MainTextContainer>
             <MainTextHeader>
               O Barroco{" "}
               <span
-                style={{ color: "#588157", borderBottom: "2px solid #ded" }}
+                style={{
+                  color: colors.green,
+                  borderBottom: "2px solid #ded",
+                }}
               >
                 Reinventado
               </span>
@@ -63,7 +67,7 @@ const Home = () => {
               images={[temp, temp2, temp3, temp4, temp5, temp6]}
             />
           </div>
-        </div>
+        </GreetingContainer>
         <HomeSearch />
       </PaddingContainer>
       <CarouselContainer>
@@ -87,7 +91,7 @@ const Home = () => {
               <RoundBox
                 text={"Fazer parte do projeto"}
                 buttonText={"Fazer parte"}
-                color={"#588157"}
+                color={colors.green}
               />
               <RoundBox
                 text={"Entrar em contato conosco"}
