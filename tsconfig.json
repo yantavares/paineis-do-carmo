@@ -110,7 +110,7 @@
     "moduleResolution": "Node",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "src/*": ["src/*"]
     }
   },
   "include": ["src/**/*", "declarations.d.ts"],

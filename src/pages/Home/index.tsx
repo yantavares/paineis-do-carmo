@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import React from "react";
 import temp6 from "src/assets/artista1.jpg";
 import temp from "src/assets/baroque.jpg";
 import temp4 from "src/assets/baroque2.jpg";
