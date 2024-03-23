@@ -1,6 +1,6 @@
 import { CircularProgress } from "@mui/material";
 import React, { Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "src/pages/Home";
 import LoginPage from "src/pages/LoginPage";
 import Header from "src/components/Header";
@@ -19,8 +19,15 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/paineis-do-carmo/login" element={<LoginPage />} />
 
-          <Route path="/pesquisa" element={<SearchPage />} />
-          <Route path="/paineis-do-carmo/pesquisa" element={<SearchPage />} />
+          <Route path="/pesquisa/:selected" element={<SearchPage />} />
+          <Route
+            path="/paineis-do-carmo/pesquisa/:selected"
+            element={<SearchPage />}
+          />
+          <Route
+            path="/paineis-do-carmo/pesquisa/"
+            element={<Navigate to="/paineis-do-carmo/pesquisa/obras" />}
+          />
         </Routes>
       </Suspense>
       <Footer />
