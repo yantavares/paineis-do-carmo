@@ -11,7 +11,7 @@ import magGlass from "src/assets/mag-glass.svg";
 
 // TODO add button logic
 
-const SearchBar = () => {
+const SearchBar = ({ placeHolder = "", showButtons = true }) => {
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,16 +25,18 @@ const SearchBar = () => {
         <HomeInput
           type="text"
           name="search"
-          placeholder="Busque por imagens, tópicos, pintores, igrejas..."
+          placeholder={placeHolder}
           value={inputValue}
           onChange={handleInputChange}
         />
       </InputContainer>
-      <SearchOptionContainer>
-        <SearchOption>Obras</SearchOption>
-        <SearchOption>Igrejas</SearchOption>
-        <SearchOption>Artistas</SearchOption>
-      </SearchOptionContainer>
+      {showButtons && (
+        <SearchOptionContainer>
+          <SearchOption>Obras</SearchOption>
+          <SearchOption>Igrejas</SearchOption>
+          <SearchOption>Artistas</SearchOption>
+        </SearchOptionContainer>
+      )}
     </Container>
   );
 };
