@@ -14,7 +14,9 @@ const HomeTopic = ({ data, type }) => {
       </SeeMoreButton>
       <DataContainer>
         {data.map((item: Church | Artist | Painting, index: number) => (
-          <Item item={item} type={type} key={index} />
+          <div style={{ width: "18%" }}>
+            <Item item={item} type={type} key={index} />
+          </div>
         ))}
       </DataContainer>
     </HomeTopicContainer>

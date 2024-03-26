@@ -10,6 +10,7 @@ const Item = ({ item, type, fixedImgHeight = false }) => {
     <Data>
       <DataImage
         height={fixedImgHeight ? "100%" : "auto"}
+        width={fixedImgHeight ? "100%" : "auto"}
         src={item.image}
         alt={item.name}
       />

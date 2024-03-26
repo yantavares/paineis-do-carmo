@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Data = styled.div`
-  width: 18%;
+  height: 100%;
 `;
 
 export const DataImage = styled.img`
