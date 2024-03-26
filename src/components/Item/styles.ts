@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Data = styled.div`
   height: 100%;
+  cursor: pointer;
 `;
 
 export const DataImage = styled.img`

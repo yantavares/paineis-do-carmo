@@ -68,10 +68,11 @@ const SearchPage = () => {
           display: "flex",
           flexWrap: "wrap",
           gap: "4rem",
+          alignItems: "center",
         }}
       >
         {data.map((item: Church | Artist | Painting, index: number) => (
-          <div key={index} style={{ height: "10rem", width: "20%" }}>
+          <div key={index} style={{ height: "10rem", width: "21%" }}>
             <Item item={item} type={translateType(selected)} fixedImgHeight />
           </div>
         ))}
