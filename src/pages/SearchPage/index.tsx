@@ -63,16 +63,20 @@ const SearchPage = () => {
         <span style={{ color: colors.green }}>{capitalize(selected)}</span>
         <SearchBar placeHolder={`Busque por ${selected}`} showButtons={false} />
       </SearchHeader>
+
       <div
         style={{
           display: "flex",
           flexWrap: "wrap",
-          gap: "4rem",
+          gap: "6.4rem 2.6rem",
           alignItems: "center",
         }}
       >
         {data.map((item: Church | Artist | Painting, index: number) => (
-          <div key={index} style={{ height: "10rem", width: "21%" }}>
+          <div
+            key={index}
+            style={{ height: "12rem", width: "calc(20% - 2.1rem)" }}
+          >
             <Item item={item} type={translateType(selected)} fixedImgHeight />
           </div>
         ))}
