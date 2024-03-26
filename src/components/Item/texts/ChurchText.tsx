@@ -1,6 +1,6 @@
 import React from "react";
 import { DataTitle, DataInfoContainer, DataInfo } from "./styles";
-import { Church } from "../../mockData";
+import { Church } from "src/utils/mockData";
 
 const ChurchText = ({ church }: { church: Church }) => {
   return (

@@ -24,6 +24,7 @@ export const SvgIcon = styled.img`
 `;
 
 export const InputContainer = styled.div`
+  display: flex;
   position: relative;
 `;
 

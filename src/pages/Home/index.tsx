@@ -1,20 +1,21 @@
 import React from "react";
-import temp6 from "src/assets/artista1.jpg";
-import temp from "src/assets/baroque.jpg";
-import temp4 from "src/assets/baroque2.jpg";
-import temp2 from "src/assets/baroque3.jpg";
-import temp3 from "src/assets/igreja2.jpg";
+import temp3 from "src/assets/artista1.jpg";
+import temp4 from "src/assets/baroque.jpg";
+import temp2 from "src/assets/baroque2.jpg";
+import temp from "src/assets/baroque3.jpg";
+import temp6 from "src/assets/igreja2.jpg";
 import temp5 from "src/assets/pintura2.jpeg";
-import HomeSearch from "src/components/HomeSearch";
 import ImageCarousel from "src/components/ImageCarousel";
 import ImageCarousel2 from "src/components/ImageCarousel2";
-import HomeTopic from "./HomeTopic";
-import RoundBox from "./RoundBox";
+import HomeSearch from "src/components/SearchBar";
+import colors from "src/utils/colors";
 import {
   brazilianArtists,
   brazilianChurches,
   brazilianPaintings,
-} from "./mockData";
+} from "../../utils/mockData";
+import HomeTopic from "./HomeTopic";
+import RoundBox from "./RoundBox";
 import {
   CarouselContainer,
   GreetingContainer,
@@ -30,7 +31,6 @@ import {
   TopicTitle,
   TopicsContainer,
 } from "./styles";
-import colors from "src/utils/colors";
 
 const Home = () => {
   return (
@@ -68,7 +68,9 @@ const Home = () => {
             />
           </div>
         </GreetingContainer>
-        <HomeSearch />
+        <HomeSearch
+          placeHolder={"Busque por imagens, tópicos, pintores, igrejas..."}
+        />
       </PaddingContainer>
       <CarouselContainer>
         <ImageCarousel images={[temp, temp2, temp3, temp4, temp5, temp6]} />

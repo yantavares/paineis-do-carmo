@@ -1,31 +1,34 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { Artist, Church, Painting } from "../mockData";
-import {
-  Data,
-  DataContainer,
-  DataImage,
-  HomeTopicContainer,
-  SeeMoreButton,
-} from "./styles";
-import ChurchText from "./texts/ChurchText";
-import ArtistText from "./texts/ArtistText";
-import PaintingText from "./texts/PaintingText";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import Item from "src/components/Item";
+import { Artist, Church, Painting } from "src/utils/mockData";
+import { translateBackTopicType } from "src/utils/strings";
+import { DataContainer, HomeTopicContainer, SeeMoreButton } from "./styles";
+import { navigateNoScroll } from "src/utils/wrappers";
 
 const HomeTopic = ({ data, type }) => {
+  const navigate = useNavigate();
+
   return (
     <HomeTopicContainer>
-      <SeeMoreButton>
+      <SeeMoreButton
+        onClick={() =>
+          navigateNoScroll(
+            navigate,
+            `/pesquisa/${translateBackTopicType(type)}`
+          )
+        }
+      >
         <p>{getTypeText(type)}</p>
         <FontAwesomeIcon icon={faArrowRight} />
       </SeeMoreButton>
       <DataContainer>
-        {data.map((item: Church, index: number) => (
-          <Data key={index}>
-            <DataImage src={item.image} alt={item.name} />
-            {getTypeInfo(type, item)}
-          </Data>
+        {data.map((item: Church | Artist | Painting, index: number) => (
+          <div style={{ width: "18%" }}>
+            <Item item={item} type={type} key={index} />
+          </div>
         ))}
       </DataContainer>
     </HomeTopicContainer>
@@ -45,16 +48,4 @@ const getTypeText = (type: string) => {
   }
 };
 
-const getTypeInfo = (type: string, item: Church | Artist | Painting) => {
-  switch (type) {
-    case "artists":
-      return <ArtistText artist={item as Artist} />;
-    case "churches":
-      return <ChurchText church={item as Church} />;
-    case "paintings":
-      return <PaintingText painting={item as Painting} />;
-    default:
-      return <></>;
-  }
-};
 export default HomeTopic;

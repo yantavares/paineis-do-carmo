@@ -1,6 +1,6 @@
 import React from "react";
 import { DataTitle, DataInfoContainer, DataInfo, PaintingDate } from "./styles";
-import { Painting } from "../../mockData";
+import { Painting } from "src/utils/mockData";
 
 const PaintingText = ({ painting }: { painting: Painting }) => {
   return (

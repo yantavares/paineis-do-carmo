@@ -1,6 +1,6 @@
 import React from "react";
 import { DataTitle, DataInfoContainer, DataInfo } from "./styles";
-import { Artist } from "../../mockData";
+import { Artist } from "src/utils/mockData";
 
 const ArtistText = ({ artist }: { artist: Artist }) => {
   return (
