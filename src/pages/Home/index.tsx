@@ -9,13 +9,13 @@ import ImageCarousel from "src/components/ImageCarousel";
 import ImageCarousel2 from "src/components/ImageCarousel2";
 import HomeSearch from "src/components/SearchBar";
 import colors from "src/utils/colors";
-import HomeTopic from "./HomeTopic";
-import RoundBox from "./RoundBox";
 import {
   brazilianArtists,
   brazilianChurches,
   brazilianPaintings,
 } from "../../utils/mockData";
+import HomeTopic from "./HomeTopic";
+import RoundBox from "./RoundBox";
 import {
   CarouselContainer,
   GreetingContainer,

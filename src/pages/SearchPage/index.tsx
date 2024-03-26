@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SearchHeader } from "./styles";
 import { useParams } from "react-router-dom";
-import { capitalize } from "src/utils/strings";
+import { capitalize, translateTopicType } from "src/utils/strings";
 import colors from "src/utils/colors";
 import SearchBar from "src/components/SearchBar";
 import Item from "src/components/Item";
@@ -13,19 +13,6 @@ import {
   brazilianChurches,
   brazilianPaintings,
 } from "src/utils/mockData";
-
-const translateType = (type: string) => {
-  switch (type) {
-    case "artistas":
-      return "artists";
-    case "igrejas":
-      return "churches";
-    case "obras":
-      return "paintings";
-    default:
-      return "";
-  }
-};
 
 const SearchPage = () => {
   const { selected } = useParams();
@@ -77,7 +64,11 @@ const SearchPage = () => {
             key={index}
             style={{ height: "12rem", width: "calc(20% - 2.1rem)" }}
           >
-            <Item item={item} type={translateType(selected)} fixedImgHeight />
+            <Item
+              item={item}
+              type={translateTopicType(selected)}
+              fixedImgHeight
+            />
           </div>
         ))}
       </div>
