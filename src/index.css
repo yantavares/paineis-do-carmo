@@ -14,7 +14,7 @@
 }
 
 html {
-  font-size: 100%;
+  font-size: 62.5%;
 }
 
 * {
@@ -41,14 +41,13 @@ button {
   background: unset;
   border-radius: 10px;
   border: 1px solid #dee2e6;
-  padding: 0.6em 1.2em;
   font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
   color: #212529;
   font-weight: 500;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
+  padding: 1rem 1.6rem;
+  font-size: 1.4rem;
   transition: background-color 0.3s;
 }
 

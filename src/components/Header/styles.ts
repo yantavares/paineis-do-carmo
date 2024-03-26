@@ -6,17 +6,18 @@ export const HeaderContainer = styled.header`
   width: 100%;
   justify-content: space-between;
   padding: 0 5%;
+  background-color: white;
 `;
 
 export const Col1 = styled.div`
   display: flex;
-  gap: 2rem;
+  gap: 3rem;
 `;
 
 export const Col2 = styled.div`
   display: flex;
   place-items: center;
-  gap: 0.8rem;
+  gap: 1.4rem;
   @media (max-width: 768px) {
     display: none;
   }
@@ -24,7 +25,7 @@ export const Col2 = styled.div`
 
 export const TitleContainer = styled.div`
   display: flex;
-  gap: 0.8rem;
+  gap: 1.4rem;
   cursor: pointer;
   transition: color 0.3s;
   &:hover {
@@ -42,7 +43,7 @@ export const ButtonsContainer = styled.div`
 
 export const HeaderButton = styled.button`
   border: none;
-  font-size: 1rem;
+  font-size: 1.68rem;
   transition: color 0.3s;
   &:hover {
     color: ${colors.green};
@@ -53,16 +54,16 @@ export const HeaderButton = styled.button`
 `;
 
 export const Title = styled.h3`
-  font-size: 1.5rem;
+  font-size: 2.5rem;
 `;
 
 export const ContribButton = styled.button`
-  padding: 0.6rem 1.2rem;
+  padding: 1rem 1.6rem;
   background-color: ${colors.green};
-  font-size: 1rem;
+  font-size: 1.6rem;
   color: white;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   transition: background-color 0.3s;
   &:hover {
     background-color: #4a6a4f;
@@ -73,8 +74,8 @@ export const ContribButton = styled.button`
 `;
 
 export const LoginButton = styled.button`
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
+  padding: 1rem 1.6rem;
+  font-size: 1.6rem;
   transition: background-color 0.3s;
   &:hover {
     background-color: #eeeeee;

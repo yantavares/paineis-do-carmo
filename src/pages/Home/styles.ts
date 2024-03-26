@@ -68,20 +68,20 @@ export const MainTextContainer = styled.div`
 
 export const GreetingContainer = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 5rem;
   width: 100%;
-  padding: 1rem 0;
+  padding: 5rem 0;
 `;
 
 export const MainTextHeader = styled.h1`
-  font-size: 6rem;
+  font-size: 10rem;
   line-height: 1;
   margin: 0;
   padding: 0;
 `;
 
 export const MainText = styled.h2`
-  font-size: 1.6rem;
+  font-size: 2.6rem;
   font-weight: 600;
   color: ${colors.lightGray};
   text-align: justify;
