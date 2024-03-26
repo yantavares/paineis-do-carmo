@@ -9,6 +9,7 @@ export interface Painting {
   id: number;
   title: string;
   image: string;
+  name?: string;
   date?: string | number;
   city?: string;
   state?: string;

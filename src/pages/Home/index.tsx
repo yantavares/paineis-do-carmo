@@ -15,7 +15,7 @@ import {
   brazilianArtists,
   brazilianChurches,
   brazilianPaintings,
-} from "./mockData";
+} from "../../utils/mockData";
 import {
   CarouselContainer,
   GreetingContainer,

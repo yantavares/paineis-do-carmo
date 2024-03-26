@@ -1,17 +1,8 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { Artist, Church, Painting } from "../mockData";
-import {
-  Data,
-  DataContainer,
-  DataImage,
-  HomeTopicContainer,
-  SeeMoreButton,
-} from "./styles";
-import ChurchText from "./texts/ChurchText";
-import ArtistText from "./texts/ArtistText";
-import PaintingText from "./texts/PaintingText";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import Item from "src/components/Item";
+import { HomeTopicContainer, SeeMoreButton } from "./styles";
 
 const HomeTopic = ({ data, type }) => {
   return (
@@ -20,14 +11,7 @@ const HomeTopic = ({ data, type }) => {
         <p>{getTypeText(type)}</p>
         <FontAwesomeIcon icon={faArrowRight} />
       </SeeMoreButton>
-      <DataContainer>
-        {data.map((item: Church, index: number) => (
-          <Data key={index}>
-            <DataImage src={item.image} alt={item.name} />
-            {getTypeInfo(type, item)}
-          </Data>
-        ))}
-      </DataContainer>
+      <Item data={data} type={type} />
     </HomeTopicContainer>
   );
 };
@@ -45,16 +29,4 @@ const getTypeText = (type: string) => {
   }
 };
 
-const getTypeInfo = (type: string, item: Church | Artist | Painting) => {
-  switch (type) {
-    case "artists":
-      return <ArtistText artist={item as Artist} />;
-    case "churches":
-      return <ChurchText church={item as Church} />;
-    case "paintings":
-      return <PaintingText painting={item as Painting} />;
-    default:
-      return <></>;
-  }
-};
 export default HomeTopic;
