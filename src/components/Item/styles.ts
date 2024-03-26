@@ -1,10 +1,5 @@
 import styled from "styled-components";
 
-export const DataContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
 export const Data = styled.div`
   width: 18%;
 `;

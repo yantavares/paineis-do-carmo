@@ -1,9 +1,9 @@
-import igreja1 from "../../assets/igreja1.jpeg";
-import igreja2 from "../../assets/igreja2.jpg";
-import pintura1 from "../../assets/pintura1.jpeg";
-import pintura2 from "../../assets/pintura2.jpeg";
-import artista1 from "../../assets/artista1.jpg";
-import artista2 from "../../assets/artista2.jpg";
+import igreja1 from "src/assets/igreja1.jpeg";
+import igreja2 from "src/assets/igreja2.jpg";
+import pintura1 from "src/assets/pintura1.jpeg";
+import pintura2 from "src/assets/pintura2.jpeg";
+import artista1 from "src/assets/artista1.jpg";
+import artista2 from "src/assets/artista2.jpg";
 
 export interface Painting {
   id: number;

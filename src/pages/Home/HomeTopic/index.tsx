@@ -2,7 +2,8 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Item from "src/components/Item";
-import { HomeTopicContainer, SeeMoreButton } from "./styles";
+import { DataContainer, HomeTopicContainer, SeeMoreButton } from "./styles";
+import { Church, Artist, Painting } from "src/utils/mockData";
 
 const HomeTopic = ({ data, type }) => {
   return (
@@ -11,7 +12,11 @@ const HomeTopic = ({ data, type }) => {
         <p>{getTypeText(type)}</p>
         <FontAwesomeIcon icon={faArrowRight} />
       </SeeMoreButton>
-      <Item data={data} type={type} />
+      <DataContainer>
+        {data.map((item: Church | Artist | Painting, index: number) => (
+          <Item item={item} type={type} key={index} />
+        ))}
+      </DataContainer>
     </HomeTopicContainer>
   );
 };

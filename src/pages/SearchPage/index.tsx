@@ -5,6 +5,19 @@ import { capitalize } from "src/utils/strings";
 import colors from "src/utils/colors";
 import SearchBar from "src/components/SearchBar";
 
+const translateType = (type: string) => {
+  switch (type) {
+    case "artistas":
+      return "artists";
+    case "igrejas":
+      return "churches";
+    case "obras":
+      return "paintings";
+    default:
+      return "";
+  }
+};
+
 const SearchPage = () => {
   const { selected } = useParams();
   return (
