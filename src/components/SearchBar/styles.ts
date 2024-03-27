@@ -50,6 +50,6 @@ export const SearchOption = styled.button`
 
 export const SearchOptionContainer = styled.div`
   display: flex;
-  gap: 0.4rem;
+  gap: 0.76rem;
   margin-top: 1rem;
 `;

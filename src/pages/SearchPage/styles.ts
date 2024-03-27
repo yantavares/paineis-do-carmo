@@ -5,7 +5,7 @@ export const PaddingContainer = styled.div`
 `;
 
 export const SearchHeader = styled.h1`
-  font-size: 3.5rem;
+  font-size: 5.5rem;
   font-weight: 800;
   padding: 0;
   margin: 0;

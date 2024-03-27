@@ -42,27 +42,32 @@ const SearchPage = () => {
         padding: "2% 5%",
         display: "flex",
         flexDirection: "column",
-        gap: "4rem",
+        gap: "6.4rem",
       }}
     >
       <SearchHeader>
         Nossa Coleção de{" "}
         <span style={{ color: colors.green }}>{capitalize(selected)}</span>
-        <SearchBar placeHolder={`Busque por ${selected}`} showButtons={false} />
+        <div style={{ paddingTop: "2rem" }}>
+          <SearchBar
+            placeHolder={`Busque por ${selected}`}
+            showButtons={false}
+          />
+        </div>
       </SearchHeader>
 
       <div
         style={{
           display: "flex",
           flexWrap: "wrap",
-          gap: "6.4rem 2.6rem",
+          gap: "9.2rem 3.6rem",
           alignItems: "center",
         }}
       >
         {data.map((item: Church | Artist | Painting, index: number) => (
           <div
             key={index}
-            style={{ height: "12rem", width: "calc(20% - 2.1rem)" }}
+            style={{ height: "20rem", width: "calc(20% - 2.92rem)" }}
           >
             <Item
               item={item}

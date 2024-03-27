@@ -7,7 +7,7 @@ export const PaddingContainer = styled.div`
 
 export const CarouselContainer = styled.div`
   width: 100%;
-  margin-top: 3rem;
+  margin: 5rem 0;
 `;
 
 export const TopicTitle = styled.h2`
