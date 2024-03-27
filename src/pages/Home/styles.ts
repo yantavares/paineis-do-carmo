@@ -7,17 +7,17 @@ export const PaddingContainer = styled.div`
 
 export const CarouselContainer = styled.div`
   width: 100%;
-  margin-top: 3rem;
+  margin: 5rem 0;
 `;
 
 export const TopicTitle = styled.h2`
-  font-size: 3rem;
+  font-size: 4.8rem;
   padding: 0;
   margin: 0;
 `;
 
 export const TopicSubTitle = styled.p`
-  font-size: 1.6rem;
+  font-size: 2.6rem;
   font-weight: 600;
   color: ${colors.lightGray};
   padding: 0;
@@ -26,7 +26,7 @@ export const TopicSubTitle = styled.p`
 
 export const TopicsContainer = styled.div`
   display: flex;
-  gap: 3rem;
+  gap: 5rem;
   margin-top: 3rem;
   width: 100%;
   flex-direction: column;
@@ -35,7 +35,7 @@ export const TopicsContainer = styled.div`
 export const Topic = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2.4rem;
   width: 100%;
 `;
 
@@ -43,7 +43,7 @@ export const TopicOne = styled.div`
   margin-top: -2rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2.4rem;
   width: 100%;
 `;
 
@@ -62,26 +62,26 @@ export const MainTextContainer = styled.div`
   flex-direction: column;
   gap: 5rem;
   padding: 0 3.2rem;
-  padding-top: 2rem;
+  padding-top: 1rem;
   width: 70%;
 `;
 
 export const GreetingContainer = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 5rem;
   width: 100%;
-  padding: 1rem 0;
+  padding: 4rem 0;
 `;
 
 export const MainTextHeader = styled.h1`
-  font-size: 6rem;
+  font-size: 10rem;
   line-height: 1;
   margin: 0;
   padding: 0;
 `;
 
 export const MainText = styled.h2`
-  font-size: 1.6rem;
+  font-size: 2.6rem;
   font-weight: 600;
   color: ${colors.lightGray};
   text-align: justify;

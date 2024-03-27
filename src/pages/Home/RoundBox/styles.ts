@@ -8,7 +8,7 @@ interface RoundBoxProps {
 export const RoundBoxContainer = styled.div<RoundBoxProps>`
   background-color: ${(props) => props.color};
   border-radius: ${(props) =>
-    props.$isopen === "true" ? "1rem 1rem 0 0" : "1rem"};
+    props.$isopen === "true" ? "2rem 2rem 0 0" : "2rem"};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,7 +18,7 @@ export const RoundBoxContainer = styled.div<RoundBoxProps>`
 
 export const BoxText = styled.h2`
   color: white;
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: 600;
 `;
 
@@ -47,12 +47,12 @@ export const DropdownContent = styled.div<DropdownContentProps>`
   opacity: ${(props) => (props.$isopen === "true" ? "1" : "0")};
   overflow: hidden;
   color: white;
-  padding: 1rem;
-  border-radius: 0 0 1rem 1rem;
+  padding: 2rem;
+  border-radius: 0 0 2rem 2rem;
   margin-bottom: ${(props) => (props.$isopen === "true" ? "1.6rem" : "0")};
 
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
   align-items: center;
   justify-content: center;
   padding-bottom: 2rem;

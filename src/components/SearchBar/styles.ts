@@ -5,10 +5,10 @@ export const HomeInput = styled.input`
   background-color: #eeefef;
   color: #a2a4a4;
   border: 1px solid #d5d6d6;
-  font-size: 1.6rem;
-  padding: 1.2rem 1.5rem;
-  padding-left: 3.6rem;
-  border-radius: 1.4rem;
+  font-size: 2.6rem;
+  padding: 1.8rem 2.5rem;
+  padding-left: 5.6rem;
+  border-radius: 2.4rem;
   width: 100%;
   &:focus {
     outline: none;
@@ -18,9 +18,9 @@ export const HomeInput = styled.input`
 export const SvgIcon = styled.img`
   position: absolute;
   top: 50%;
-  left: 1.2rem;
+  left: 2.2rem;
   transform: translateY(-50%);
-  width: 1.4rem;
+  width: 2.2rem;
 `;
 
 export const InputContainer = styled.div`
@@ -33,9 +33,9 @@ export const Container = styled.div`
 `;
 
 export const SearchOption = styled.button`
-  border-radius: 0.8rem;
+  border-radius: 1.2rem;
   border: 1px solid #cccccc;
-  font-size: 0.9rem;
+  font-size: 1.4rem;
   transition: color 0.3s;
   transition: all 0.3s;
   &:hover {
@@ -50,6 +50,6 @@ export const SearchOption = styled.button`
 
 export const SearchOptionContainer = styled.div`
   display: flex;
-  gap: 0.4rem;
+  gap: 0.76rem;
   margin-top: 1rem;
 `;

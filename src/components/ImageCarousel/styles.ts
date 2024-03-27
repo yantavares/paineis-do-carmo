@@ -11,5 +11,5 @@ export const SliderImage = styled.img`
   width: 90%;
   height: 100%;
   object-fit: cover;
-  border-radius: 1rem;
+  border-radius: 2rem;
 `;

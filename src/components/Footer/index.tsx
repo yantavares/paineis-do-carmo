@@ -50,11 +50,11 @@ const Footer = () => {
           <DashedLine />
           <div className="social-media">
             <a href={wppLink} target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faWhatsapp} color="white" size="lg" />
+              <FontAwesomeIcon icon={faWhatsapp} color="white" size="2xl" />
               <span className="tooltip-social">WhatsApp</span>
             </a>
             <a>
-              <FontAwesomeIcon icon={faInstagram} color="white" size="lg" />
+              <FontAwesomeIcon icon={faInstagram} color="white" size="2xl" />
               <span className="tooltip-social">Instagram</span>
             </a>
             <a
@@ -62,7 +62,7 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FontAwesomeIcon icon={faGithub} color="white" size="lg" />
+              <FontAwesomeIcon icon={faGithub} color="white" size="2xl" />
               <span className="tooltip-social">GitHub</span>
             </a>
           </div>
