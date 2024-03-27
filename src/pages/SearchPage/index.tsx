@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { SearchHeader } from "./styles";
+import {
+  SearchBarContainer,
+  SearchContainer,
+  SearchHeader,
+  SearchResultsContainer,
+} from "./styles";
 import { useParams } from "react-router-dom";
 import { capitalize, translateTopicType } from "src/utils/strings";
 import colors from "src/utils/colors";
@@ -37,33 +42,19 @@ const SearchPage = () => {
   }, [selected]);
 
   return (
-    <div
-      style={{
-        padding: "2% 5%",
-        display: "flex",
-        flexDirection: "column",
-        gap: "6.4rem",
-      }}
-    >
+    <SearchContainer>
       <SearchHeader>
         Nossa Coleção de{" "}
         <span style={{ color: colors.green }}>{capitalize(selected)}</span>
-        <div style={{ paddingTop: "2rem" }}>
+        <SearchBarContainer>
           <SearchBar
             placeHolder={`Busque por ${selected}`}
             showButtons={false}
           />
-        </div>
+        </SearchBarContainer>
       </SearchHeader>
 
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "9.2rem 3.6rem",
-          alignItems: "center",
-        }}
-      >
+      <SearchResultsContainer>
         {data.map((item: Church | Artist | Painting, index: number) => (
           <div
             key={index}
@@ -76,8 +67,8 @@ const SearchPage = () => {
             />
           </div>
         ))}
-      </div>
-    </div>
+      </SearchResultsContainer>
+    </SearchContainer>
   );
 };
 export default SearchPage;
