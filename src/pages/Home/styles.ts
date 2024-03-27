@@ -11,13 +11,13 @@ export const CarouselContainer = styled.div`
 `;
 
 export const TopicTitle = styled.h2`
-  font-size: 3rem;
+  font-size: 4.8rem;
   padding: 0;
   margin: 0;
 `;
 
 export const TopicSubTitle = styled.p`
-  font-size: 1.6rem;
+  font-size: 2.6rem;
   font-weight: 600;
   color: ${colors.lightGray};
   padding: 0;
@@ -26,7 +26,7 @@ export const TopicSubTitle = styled.p`
 
 export const TopicsContainer = styled.div`
   display: flex;
-  gap: 3rem;
+  gap: 5rem;
   margin-top: 3rem;
   width: 100%;
   flex-direction: column;
@@ -35,7 +35,7 @@ export const TopicsContainer = styled.div`
 export const Topic = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 3rem;
   width: 100%;
 `;
 
@@ -70,7 +70,7 @@ export const GreetingContainer = styled.div`
   display: flex;
   gap: 5rem;
   width: 100%;
-  padding: 5rem 0;
+  padding: 4rem 0;
 `;
 
 export const MainTextHeader = styled.h1`

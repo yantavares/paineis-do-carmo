@@ -9,7 +9,7 @@ export const FooterContainer = styled.footer`
   height: 40%;
   background-color: ${colors.green};
   color: white;
-  margin-top: 5rem;
+  margin-top: 8rem;
   padding: 2% 0;
 `;
 
@@ -41,10 +41,12 @@ export const TextContainer = styled.div`
 export const ContactContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.8rem;
 `;
 
 export const TitleText = styled.h3`
+  font-weight: 700;
+  font-size: 1.8rem;
   padding: 0;
   margin: 0;
 `;
@@ -67,9 +69,9 @@ export const FooterButton = styled.button`
 export const FinancingContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 3.2rem;
   background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 1.5rem;
+  border-radius: 2rem;
   gap: 1rem;
   width: 25%;
   @media (max-width: 768px) {
