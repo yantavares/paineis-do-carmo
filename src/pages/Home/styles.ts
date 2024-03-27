@@ -35,7 +35,7 @@ export const TopicsContainer = styled.div`
 export const Topic = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2.4rem;
   width: 100%;
 `;
 
@@ -43,7 +43,7 @@ export const TopicOne = styled.div`
   margin-top: -2rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2.4rem;
   width: 100%;
 `;
 
@@ -62,7 +62,7 @@ export const MainTextContainer = styled.div`
   flex-direction: column;
   gap: 5rem;
   padding: 0 3.2rem;
-  padding-top: 2rem;
+  padding-top: 1rem;
   width: 70%;
 `;
 

@@ -6,7 +6,7 @@ export const HeaderContainer = styled.header`
   width: 100%;
   justify-content: space-between;
   padding: 0 5%;
-  background-color: white;
+  border-bottom: 2px dashed #ededed;
 `;
 
 export const Col1 = styled.div`
