@@ -73,7 +73,7 @@ const Home = () => {
         />
       </PaddingContainer>
       <CarouselContainer>
-        {/* <ImageCarousel images={[temp, temp2, temp3, temp4, temp5, temp6]} /> */}
+        <ImageCarousel images={[temp, temp2, temp3, temp4, temp5, temp6]} />
       </CarouselContainer>
       <PaddingContainer>
         <TopicsContainer>
