@@ -6,7 +6,7 @@ export const Data = styled.div`
 `;
 
 export const DataImage = styled.img`
-  max-width: 100%;
+  width: 100%;
   border-radius: 0.8rem;
   transition: all 0.3s;
   &:hover {

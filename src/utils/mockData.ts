@@ -62,13 +62,6 @@ export const brazilianChurches: Church[] = [
     city: "Ouro Preto",
     state: "MG",
   },
-  {
-    id: 5,
-    name: "Catedral da Sé",
-    image: igreja1,
-    city: "São Paulo",
-    state: "SP",
-  },
 ];
 
 export const brazilianPaintings: Painting[] = [
@@ -91,7 +84,7 @@ export const brazilianPaintings: Painting[] = [
   {
     id: 3,
     title: "Retirantes",
-    image: pintura1,
+    image: igreja1,
     date: 1944,
     city: "São Paulo",
     state: "SP",
@@ -99,18 +92,10 @@ export const brazilianPaintings: Painting[] = [
   {
     id: 4,
     title: "Guerra e Paz",
-    image: pintura2,
+    image: igreja2,
     date: 1956,
     city: "Rio de Janeiro",
     state: "RJ",
-  },
-  {
-    id: 5,
-    title: "O Vendedor de Frutas",
-    image: pintura1,
-    date: 1893,
-    city: "São Paulo",
-    state: "SP",
   },
 ];
 
