@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
+  ColItem,
+  GridCol,
   SearchBarContainer,
   SearchContainer,
   SearchHeader,
@@ -33,7 +35,12 @@ const SearchPage = () => {
         setData(brazilianChurches.concat(brazilianChurches));
         break;
       case "obras":
-        setData(brazilianPaintings.concat(brazilianPaintings));
+        setData(
+          brazilianPaintings
+            .concat(brazilianPaintings)
+            .concat(brazilianPaintings)
+            .concat(brazilianPaintings)
+        );
         break;
       default:
         setData([]);
@@ -55,20 +62,61 @@ const SearchPage = () => {
       </SearchHeader>
 
       <SearchResultsContainer>
-        {data.map((item: Church | Artist | Painting, index: number) => (
-          <div
-            key={index}
-            style={{ height: "20rem", width: "calc(20% - 2.92rem)" }}
-          >
-            <Item
-              item={item}
-              type={translateTopicType(selected)}
-              fixedImgHeight
-            />
-          </div>
-        ))}
+        <GridCol>
+          {filterData(data, 0).map(
+            (item: Church | Artist | Painting, index: number) => (
+              <ColItem key={index}>
+                <Item item={item} type={translateTopicType(selected)} />
+              </ColItem>
+            )
+          )}
+        </GridCol>
+        <GridCol>
+          {filterData(data, 1).map(
+            (item: Church | Artist | Painting, index: number) => (
+              <ColItem key={index}>
+                <Item item={item} type={translateTopicType(selected)} />
+              </ColItem>
+            )
+          )}
+        </GridCol>
+        <GridCol>
+          {filterData(data, 2).map(
+            (item: Church | Artist | Painting, index: number) => (
+              <ColItem key={index}>
+                <Item item={item} type={translateTopicType(selected)} />
+              </ColItem>
+            )
+          )}
+        </GridCol>
+        <GridCol>
+          {filterData(data, 3).map(
+            (item: Church | Artist | Painting, index: number) => (
+              <ColItem key={index}>
+                <Item item={item} type={translateTopicType(selected)} />
+              </ColItem>
+            )
+          )}
+        </GridCol>
+        <GridCol>
+          {filterData(data, 4).map(
+            (item: Church | Artist | Painting, index: number) => (
+              <ColItem key={index}>
+                <Item item={item} type={translateTopicType(selected)} />
+              </ColItem>
+            )
+          )}
+        </GridCol>
       </SearchResultsContainer>
     </SearchContainer>
   );
 };
 export default SearchPage;
+
+const filterData = (
+  data: Church[] | Artist[] | Painting[],
+  start: number,
+  step: number = 5
+) => {
+  return data.filter((_, i) => (i - start) % step === 0);
+};

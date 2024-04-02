@@ -16,10 +16,19 @@ export const SearchBarContainer = styled.div`
 `;
 
 export const SearchResultsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9.2rem 3.6rem;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+  gap: 2rem;
+`;
+
+export const GridCol = styled.div`
+  width: 100%;
+`;
+
+export const ColItem = styled.div`
+  width: 100%;
+  padding-bottom: 1rem;
 `;
 
 export const SearchHeader = styled.h1`
