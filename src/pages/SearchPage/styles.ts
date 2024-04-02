@@ -19,7 +19,7 @@ export const SearchResultsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   width: 100%;
-  gap: 1rem;
+  gap: 2rem;
 `;
 
 export const GridCol = styled.div`

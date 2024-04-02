@@ -21,18 +21,6 @@ import {
   brazilianPaintings,
 } from "src/utils/mockData";
 
-const filterData = (
-  data: Church[] | Artist[] | Painting[],
-  start: number,
-  step: number = 5
-) => {
-  const filteredData = [];
-  for (let i = start; i < data.length; i += step) {
-    filteredData.push(data[i]);
-  }
-  return filteredData;
-};
-
 const SearchPage = () => {
   const { selected } = useParams();
 
@@ -124,3 +112,11 @@ const SearchPage = () => {
   );
 };
 export default SearchPage;
+
+const filterData = (
+  data: Church[] | Artist[] | Painting[],
+  start: number,
+  step: number = 5
+) => {
+  return data.filter((_, i) => (i - start) % step === 0);
+};
