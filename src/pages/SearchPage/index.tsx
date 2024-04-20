@@ -18,7 +18,7 @@ import {
   brazilianChurches,
   brazilianPaintings,
 } from "src/utils/mockData";
-import ChurchMap from "./churchMap";
+import ChurchMap from "./ChurchMap";
 
 const SearchPage = () => {
   const { selected } = useParams();

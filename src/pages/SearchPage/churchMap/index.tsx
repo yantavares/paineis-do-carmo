@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MapContainer, GeoJSON, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import brazilGeoJSON from "src/assets/br_states.json"; // Ajuste o caminho conforme necessário
+import brazilGeoJSON from "src/json/br_states.json"; // Ajuste o caminho conforme necessário
 import colors from "src/utils/colors";
 import { SearchHeader } from "./styles";
 
@@ -40,6 +40,10 @@ const ChurchMap = () => {
 
           layer.on("mouseout", () => {
             initialStateNameIcon.setOpacity(0); // Esconde o ícone
+          });
+
+          layer.on("click", () => {
+            console.log(feature.properties.SIGLA); // Loga o nome do estado ao clicar
           });
         },
       }).addTo(map);
