@@ -1,47 +1,50 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { MapContainer, GeoJSON, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import brazilGeoJSON from "src/assets/br_states.json"; // Caminho para o seu arquivo GeoJSON
+import brazilGeoJSON from "src/assets/br_states.json"; // Ajuste o caminho conforme necessário
 
 const ChurchMap = () => {
-  const AddSiglasOnHover = () => {
+  const ShowStateNameOnHover = () => {
     const map = useMap();
+    const [stateNameIcon, setStateNameIcon] = useState(null);
 
     useEffect(() => {
-      // Cria e retorna um marcador de sigla baseado na posição e sigla fornecidas
-      const createSiglaMarker = (latlng, sigla) => {
-        return L.marker(latlng, {
-          icon: L.divIcon({
-            className: "sigla-icon", // Classe para estilização customizada
-            html: `<div>${sigla}</div>`,
-            iconSize: [20, 20],
-          }),
-        });
-      };
+      // Cria um L.divIcon vazio que será atualizado e movido conforme necessário
+      const initialStateNameIcon = L.marker([0, 0], {
+        icon: L.divIcon({
+          className: "state-name-icon",
+          html: "",
+        }),
+        interactive: false, // Torna o marcador não-reativo a eventos de mouse
+      }).addTo(map);
 
-      // Adiciona interatividade ao GeoJSON para mostrar siglas no hover
+      setStateNameIcon(initialStateNameIcon);
+
+      // Adiciona interatividade ao GeoJSON para mostrar nomes dos estados no hover
       const geoJsonLayer = L.geoJSON(brazilGeoJSON, {
         onEachFeature: (feature, layer) => {
-          let siglaMarker;
-
           layer.on("mouseover", (e) => {
             const center = e.target.getBounds().getCenter();
-            siglaMarker = createSiglaMarker(center, feature.properties.SIGLA);
-            siglaMarker.addTo(map);
+            initialStateNameIcon.setLatLng(center);
+            initialStateNameIcon.setOpacity(1); // Torna visível
+            initialStateNameIcon.setIcon(
+              L.divIcon({
+                className: "state-name-icon",
+                html: `<div>${feature.properties.SIGLA}</div>`, // Atualiza o HTML com a sigla do estado
+              })
+            );
           });
 
           layer.on("mouseout", () => {
-            if (siglaMarker) {
-              map.removeLayer(siglaMarker);
-              siglaMarker = null;
-            }
+            initialStateNameIcon.setOpacity(0); // Esconde o ícone
           });
         },
       }).addTo(map);
 
       return () => {
         // Limpeza ao desmontar o componente
+        initialStateNameIcon.remove();
         geoJsonLayer.remove();
       };
     }, [map]);
@@ -53,7 +56,12 @@ const ChurchMap = () => {
     <MapContainer
       center={[-14.235, -51.9253]}
       zoom={4}
-      style={{ height: "500px", width: "100%" }}
+      style={{
+        height: "500px",
+        width: "100%",
+        cursor: "pointer",
+        transition: "all 0.3s",
+      }}
       scrollWheelZoom={false}
       doubleClickZoom={false}
       zoomControl={false}
@@ -63,13 +71,13 @@ const ChurchMap = () => {
       <GeoJSON
         data={brazilGeoJSON}
         style={() => ({
-          color: "#4a83ec", // Cor da borda
-          weight: 1, // Espessura da borda
-          fillColor: "#ffffff", // Cor de preenchimento alterada para branco
-          fillOpacity: 1, // Opacidade do preenchimento
+          color: "#4a83ec",
+          weight: 1,
+          fillColor: "#ffffff",
+          fillOpacity: 1,
         })}
       />
-      <AddSiglasOnHover />
+      <ShowStateNameOnHover />
     </MapContainer>
   );
 };

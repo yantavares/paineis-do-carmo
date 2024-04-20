@@ -76,10 +76,13 @@ button:focus {
   }
 } */
 
-.sigla-icon div {
+.state-name-icon div {
+  transition: all 0.3s;
   background-color: rgba(255, 255, 255, 0.8);
-  padding: 2px 5px;
+  text-align: center;
+  width: fit-content;
   border-radius: 3px;
+  font-size: 2rem;
   text-align: center;
   border: 1px solid #333;
 }
