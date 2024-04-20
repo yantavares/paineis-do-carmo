@@ -9,8 +9,6 @@ import {
 } from "./styles";
 import magGlass from "src/assets/mag-glass.svg";
 
-// TODO add button logic
-
 const SearchBar = ({ placeHolder = "", showButtons = true }) => {
   const [inputValue, setInputValue] = useState("");
 
@@ -34,7 +32,7 @@ const SearchBar = ({ placeHolder = "", showButtons = true }) => {
         <SearchOptionContainer>
           <SearchOption>Obras</SearchOption>
           <SearchOption>Igrejas</SearchOption>
-          <SearchOption>Artistas</SearchOption>
+          <SearchOption>Artífices</SearchOption>
         </SearchOptionContainer>
       )}
     </Container>

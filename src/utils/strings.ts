@@ -4,7 +4,7 @@ export function capitalize(str: string) {
 
 export const translateTopicType = (type: string) => {
   switch (type) {
-    case "artistas":
+    case "artifices":
       return "artists";
     case "igrejas":
       return "churches";
@@ -18,7 +18,7 @@ export const translateTopicType = (type: string) => {
 export const translateBackTopicType = (type: string) => {
   switch (type) {
     case "artists":
-      return "artistas";
+      return "artifices";
     case "churches":
       return "igrejas";
     case "paintings":

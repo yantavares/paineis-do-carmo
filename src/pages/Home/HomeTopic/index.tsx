@@ -38,7 +38,7 @@ const HomeTopic = ({ data, type }) => {
 const getTypeText = (type: string) => {
   switch (type) {
     case "artists":
-      return "Ver todos os artistas";
+      return "Ver todos os artifices";
     case "churches":
       return "Ver todas as igrejas";
     case "paintings":

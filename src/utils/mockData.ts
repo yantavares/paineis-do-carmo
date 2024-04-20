@@ -161,3 +161,16 @@ export const brazilianArtists: Artist[] = [
     dateOfBirth: "1886",
   },
 ];
+
+export type Tag = string;
+
+export const tags: Tag[] = [
+  "arte",
+  "barroco",
+  "igrejas",
+  "pinturas",
+  "artistas",
+  "história",
+  "cultura",
+  "brasil",
+];

@@ -51,7 +51,7 @@ const Home = () => {
             </MainTextHeader>
             <MainText>
               Bem-vindo ao nosso site! Aqui você pode encontrar informações
-              sobre igrejas, pinturas e artistas do período barroco brasileiro.
+              sobre igrejas, pinturas e artifices do período barroco brasileiro.
               O barroco foi um período de grande efervescência artística no
               Brasil, com a chegada dos colonizadores portugueses e a influência
               da igreja católica.
@@ -72,9 +72,9 @@ const Home = () => {
           placeHolder={"Busque por imagens, tópicos, pintores, igrejas..."}
         />
       </PaddingContainer>
-      <CarouselContainer>
+      {/* <CarouselContainer>
         <ImageCarousel images={[temp, temp2, temp3, temp4, temp5, temp6]} />
-      </CarouselContainer>
+      </CarouselContainer> */}
       <PaddingContainer>
         <TopicsContainer>
           <Topic>
@@ -122,9 +122,9 @@ const Home = () => {
           </Topic>
           <Topic>
             <TopicHeader>
-              <TopicTitle>Artistas</TopicTitle>
+              <TopicTitle>Artífices</TopicTitle>
               <TopicSubTitle>
-                Procure por artistas do barrroco brasileiro
+                Procure por artifices do barrroco brasileiro
               </TopicSubTitle>
             </TopicHeader>
             <HomeTopic type={"artists"} data={brazilianArtists} />
