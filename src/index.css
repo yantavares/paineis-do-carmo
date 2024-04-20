@@ -75,9 +75,3 @@ button:focus {
     background-color: #f9f9f9;
   }
 } */
-
-.sigla-icon div {
-  margin-top: 5px;
-  font-size: 1.5rem;
-  border: 1px solid gray;
-}
