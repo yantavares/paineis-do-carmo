@@ -20,7 +20,7 @@ import {
   tags,
   Tag,
 } from "src/utils/mockData";
-import ChurchMap from "./ChurchMap";
+import ChurchMap from "./ChurchMapTemp";
 import TopicSearch from "./TopicSearch";
 
 const SearchPage = () => {
