@@ -88,6 +88,8 @@ button:focus {
   font-size: 1.5rem;
   text-align: center;
   border: 1px solid #333;
+  cursor: pointer;
+  margin-top: 2.2rem;
 }
 
 /* Overriding the specific path styles for Leaflet's GeoJSON layer */
