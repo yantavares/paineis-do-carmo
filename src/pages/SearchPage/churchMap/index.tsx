@@ -5,29 +5,45 @@ import "leaflet/dist/leaflet.css";
 import brazilGeoJSON from "src/assets/br_states.json"; // Caminho para o seu arquivo GeoJSON
 
 const ChurchMap = () => {
-  // Componente auxiliar para adicionar as siglas após o mapa ser inicializado
-  const AddSiglas = () => {
+  const AddSiglasOnHover = () => {
     const map = useMap();
 
     useEffect(() => {
-      // Função para calcular o centro do polígono de cada estado para posicionar a sigla
-      const getCenterOfPolygon = (geoJsonFeature) => {
-        const latlngs = L.geoJSON(geoJsonFeature).getBounds().getCenter();
-        return latlngs;
+      // Cria e retorna um marcador de sigla baseado na posição e sigla fornecidas
+      const createSiglaMarker = (latlng, sigla) => {
+        return L.marker(latlng, {
+          icon: L.divIcon({
+            className: "sigla-icon", // Classe para estilização customizada
+            html: `<div>${sigla}</div>`,
+            iconSize: [20, 20],
+          }),
+        });
       };
 
-      // Adiciona a sigla no centro de cada estado
-      brazilGeoJSON.features.forEach((feature) => {
-        const center = getCenterOfPolygon(feature);
-        const sigla = feature.properties.SIGLA; // Ajuste conforme a propriedade correta no seu GeoJSON
-        const marker = L.marker(center, {
-          icon: L.divIcon({
-            className: "sigla-icon", // Adicione estilos no seu CSS para esta classe
-            html: `<div>${sigla}</div>`,
-            iconSize: [11, 20],
-          }),
-        }).addTo(map);
-      });
+      // Adiciona interatividade ao GeoJSON para mostrar siglas no hover
+      const geoJsonLayer = L.geoJSON(brazilGeoJSON, {
+        onEachFeature: (feature, layer) => {
+          let siglaMarker;
+
+          layer.on("mouseover", (e) => {
+            const center = e.target.getBounds().getCenter();
+            siglaMarker = createSiglaMarker(center, feature.properties.SIGLA);
+            siglaMarker.addTo(map);
+          });
+
+          layer.on("mouseout", () => {
+            if (siglaMarker) {
+              map.removeLayer(siglaMarker);
+              siglaMarker = null;
+            }
+          });
+        },
+      }).addTo(map);
+
+      return () => {
+        // Limpeza ao desmontar o componente
+        geoJsonLayer.remove();
+      };
     }, [map]);
 
     return null;
@@ -53,7 +69,7 @@ const ChurchMap = () => {
           fillOpacity: 1, // Opacidade do preenchimento
         })}
       />
-      <AddSiglas />
+      <AddSiglasOnHover />
     </MapContainer>
   );
 };

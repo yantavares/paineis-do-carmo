@@ -75,3 +75,11 @@ button:focus {
     background-color: #f9f9f9;
   }
 } */
+
+.sigla-icon div {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 2px 5px;
+  border-radius: 3px;
+  text-align: center;
+  border: 1px solid #333;
+}
