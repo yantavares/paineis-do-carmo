@@ -86,7 +86,7 @@ const ChurchMap = () => {
             transition: "all 0.3s",
           }}
           scrollWheelZoom={true}
-          doubleClickZoom={true}
+          doubleClickZoom={false}
           zoomControl={true}
           dragging={true}
           zoomAnimation={true}

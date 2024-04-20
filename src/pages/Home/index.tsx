@@ -72,9 +72,9 @@ const Home = () => {
           placeHolder={"Busque por imagens, tópicos, pintores, igrejas..."}
         />
       </PaddingContainer>
-      <CarouselContainer>
+      {/* <CarouselContainer>
         <ImageCarousel images={[temp, temp2, temp3, temp4, temp5, temp6]} />
-      </CarouselContainer>
+      </CarouselContainer> */}
       <PaddingContainer>
         <TopicsContainer>
           <Topic>
