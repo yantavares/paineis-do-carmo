@@ -27,7 +27,7 @@ const SearchPage = () => {
 
   useEffect(() => {
     switch (selected) {
-      case "artistas":
+      case "artifices":
         setData(brazilianArtists.concat(brazilianArtists));
         break;
       case "igrejas":

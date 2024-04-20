@@ -28,7 +28,7 @@ const Header = () => {
           <HeaderButton onClick={() => navigate("/pesquisa/obras")}>
             Galeria de Obras
           </HeaderButton>
-          <HeaderButton onClick={() => navigate("/pesquisa/artistas")}>
+          <HeaderButton onClick={() => navigate("/pesquisa/artifices")}>
             Artífices
           </HeaderButton>
           <HeaderButton onClick={() => navigate("/pesquisa/igrejas")}>

@@ -89,3 +89,9 @@ button:focus {
   text-align: center;
   border: 1px solid #333;
 }
+
+/* Overriding the specific path styles for Leaflet's GeoJSON layer */
+.leaflet-pane .leaflet-overlay-pane svg path {
+  stroke: #3a5a40 !important;
+  stroke-width: 3;
+}
