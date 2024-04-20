@@ -34,6 +34,9 @@ const Header = () => {
           <HeaderButton onClick={() => navigate("/pesquisa/igrejas")}>
             Igrejas
           </HeaderButton>
+          <HeaderButton onClick={() => navigate("/pesquisa/topicos")}>
+            Tópicos
+          </HeaderButton>
           <HeaderButton>Como utilizar</HeaderButton>
           <HeaderButton>Sobre</HeaderButton>
         </ButtonsContainer>
