@@ -34,7 +34,7 @@ const SearchBar = ({ placeHolder = "", showButtons = true }) => {
         <SearchOptionContainer>
           <SearchOption>Obras</SearchOption>
           <SearchOption>Igrejas</SearchOption>
-          <SearchOption>Artistas</SearchOption>
+          <SearchOption>Artífices</SearchOption>
         </SearchOptionContainer>
       )}
     </Container>

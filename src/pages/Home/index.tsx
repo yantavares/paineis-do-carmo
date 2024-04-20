@@ -122,7 +122,7 @@ const Home = () => {
           </Topic>
           <Topic>
             <TopicHeader>
-              <TopicTitle>Artistas</TopicTitle>
+              <TopicTitle>Artífices</TopicTitle>
               <TopicSubTitle>
                 Procure por artistas do barrroco brasileiro
               </TopicSubTitle>
