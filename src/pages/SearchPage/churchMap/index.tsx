@@ -57,7 +57,7 @@ const ChurchMap = () => {
       center={[-14.235, -51.9253]}
       zoom={4}
       style={{
-        height: "500px",
+        height: "100%",
         width: "100%",
         cursor: "pointer",
         transition: "all 0.3s",
