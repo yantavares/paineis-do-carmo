@@ -18,6 +18,7 @@ import {
   brazilianChurches,
   brazilianPaintings,
 } from "src/utils/mockData";
+import ChurchMap from "./churchMap";
 
 const SearchPage = () => {
   const { selected } = useParams();
@@ -43,31 +44,37 @@ const SearchPage = () => {
 
   return (
     <SearchContainer>
-      <SearchHeader>
-        Nossa Coleção de{" "}
-        <span style={{ color: colors.green }}>{capitalize(selected)}</span>
-        <SearchBarContainer>
-          <SearchBar
-            placeHolder={`Busque por ${selected}`}
-            showButtons={false}
-          />
-        </SearchBarContainer>
-      </SearchHeader>
+      {selected !== "igrejas" ? (
+        <>
+          <SearchHeader>
+            Nossa Coleção de{" "}
+            <span style={{ color: colors.green }}>{capitalize(selected)}</span>
+            <SearchBarContainer>
+              <SearchBar
+                placeHolder={`Busque por ${selected}`}
+                showButtons={false}
+              />
+            </SearchBarContainer>
+          </SearchHeader>
 
-      <SearchResultsContainer>
-        {data.map((item: Church | Artist | Painting, index: number) => (
-          <div
-            key={index}
-            style={{ height: "20rem", width: "calc(20% - 2.92rem)" }}
-          >
-            <Item
-              item={item}
-              type={translateTopicType(selected)}
-              fixedImgHeight
-            />
-          </div>
-        ))}
-      </SearchResultsContainer>
+          <SearchResultsContainer>
+            {data.map((item: Church | Artist | Painting, index: number) => (
+              <div
+                key={index}
+                style={{ height: "20rem", width: "calc(20% - 2.92rem)" }}
+              >
+                <Item
+                  item={item}
+                  type={translateTopicType(selected)}
+                  fixedImgHeight
+                />
+              </div>
+            ))}
+          </SearchResultsContainer>
+        </>
+      ) : (
+        <ChurchMap />
+      )}
     </SearchContainer>
   );
 };
