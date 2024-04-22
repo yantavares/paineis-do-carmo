@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { MapContainer, GeoJSON, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import brazilGeoJSON from "src/json/br_states.json"; // Ajuste o caminho conforme necessário
+import brazilGeoJSON from "src/json/br_states.json";
 import colors from "src/utils/colors";
 import { SearchHeader } from "./styles";
 
@@ -16,33 +16,55 @@ const ChurchMap = () => {
           className: "state-name-icon",
           html: "",
         }),
-        interactive: false, // Torna o marcador não-reativo a eventos de mouse
+        interactive: false,
       }).addTo(map);
 
+      const hoverStyle = {
+        fillColor: "gray",
+        fillOpacity: 0.8,
+      };
+
+      const originalStyle = () => ({
+        weight: 10,
+        stroke: true,
+        color: colors.darkGreen,
+        fillColor: colors.lightGreen,
+        fillOpacity: 0.9,
+      });
+
       const geoJsonLayer = L.geoJSON(brazilGeoJSON, {
+        style: originalStyle,
         onEachFeature: (feature, layer) => {
           layer.on("mouseover", (e) => {
+            const pathLayer = layer as L.Path;
+            pathLayer.setStyle(hoverStyle);
+
             initialStateNameIcon.setIcon(
               L.divIcon({
                 className: "state-name-icon",
-                html: `<div>${feature.properties.SIGLA}</div>`, // Atualiza o HTML com a sigla do estado
+                html: `<div>${feature.properties.SIGLA}</div>`,
               })
             );
-            initialStateNameIcon.setOpacity(1); // Torna visível
+            initialStateNameIcon.setOpacity(1);
           });
 
           layer.on("mousemove", (e) => {
-            initialStateNameIcon.setLatLng(e.latlng); // Atualiza a posição para seguir o cursor
+            initialStateNameIcon.setLatLng(e.latlng);
           });
 
           layer.on("mouseout", () => {
-            initialStateNameIcon.setOpacity(0); // Esconde o ícone
+            const pathLayer = layer as L.Path;
+            pathLayer.setStyle(originalStyle());
+            initialStateNameIcon.setOpacity(0);
+          });
+
+          layer.on("click", (e) => {
+            console.log(feature.properties.SIGLA);
           });
         },
       }).addTo(map);
 
       return () => {
-        // Limpeza ao desmontar o componente
         initialStateNameIcon.remove();
         geoJsonLayer.remove();
       };

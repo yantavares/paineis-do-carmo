@@ -4,8 +4,15 @@ import { Church, Artist, Painting } from "src/utils/mockData";
 import ArtistText from "./texts/ArtistText";
 import ChurchText from "./texts/ChurchText";
 import PaintingText from "./texts/PaintingText";
+import Tags from "../Tags";
 
-const Item = ({ item, type, fixedImgHeight = false }) => {
+interface ItemProps {
+  item: Church | Artist | Painting;
+  type: string;
+  fixedImgHeight?: boolean;
+}
+
+const Item = ({ item, type, fixedImgHeight = false }: ItemProps) => {
   return (
     <Data>
       <DataImage
@@ -15,6 +22,7 @@ const Item = ({ item, type, fixedImgHeight = false }) => {
         alt={item.name}
       />
       {getTypeInfo(type, item)}
+      <Tags tags={item?.tags} />
     </Data>
   );
 };
