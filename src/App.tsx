@@ -6,6 +6,7 @@ import LoginPage from "src/pages/LoginPage";
 import Header from "src/components/Header";
 import Footer from "src/components/Footer";
 import SearchPage from "./pages/SearchPage";
+import ChurchState from "./pages/ChurchState";
 
 function App() {
   return (
@@ -24,6 +25,11 @@ function App() {
             path="/paineis-do-carmo/pesquisa/:selected"
             element={<SearchPage />}
           />
+          <Route
+            path="/paineis-do-carmo/pesquisa/igrejas/:state"
+            element={<ChurchState />}
+          />
+          <Route path="/pesquisa/igrejas/:state" element={<ChurchState />} />
           <Route
             path="/paineis-do-carmo/pesquisa/"
             element={<Navigate to="/paineis-do-carmo/pesquisa/obras" />}

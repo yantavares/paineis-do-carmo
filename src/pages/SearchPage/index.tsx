@@ -53,7 +53,7 @@ const SearchPage = () => {
         break;
     }
   }, [selected]);
-  // Função para renderizar o conteúdo com base na seleção
+
   const renderContent = () => {
     switch (selected) {
       case "artifices":
@@ -88,7 +88,34 @@ const SearchPage = () => {
         );
 
       case "igrejas":
-        return <ChurchMap />;
+        return (
+          <>
+            <ChurchMap />
+            <SearchHeader>
+              Todas as{" "}
+              <span style={{ color: colors.green }}>
+                {capitalize(selected)}
+              </span>
+              <SearchBarContainer>
+                <SearchBar
+                  placeHolder={`Busque por ${selected}`}
+                  showButtons={false}
+                />
+              </SearchBarContainer>
+            </SearchHeader>
+            <SearchResultsContainer>
+              {data.map((item: any, index: number) => (
+                <SearchResult key={index}>
+                  <Item
+                    item={item}
+                    type={translateTopicType(selected)}
+                    fixedImgHeight
+                  />
+                </SearchResult>
+              ))}
+            </SearchResultsContainer>
+          </>
+        );
 
       case "topicos":
         return <TopicSearch />;

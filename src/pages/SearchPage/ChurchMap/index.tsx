@@ -5,10 +5,12 @@ import "leaflet/dist/leaflet.css";
 import brazilGeoJSON from "src/json/br_states.json";
 import colors from "src/utils/colors";
 import { SearchHeader } from "./styles";
+import { useNavigate } from "react-router-dom";
 
 const ChurchMap = () => {
   const ShowStateNameOnHover = () => {
     const map = useMap();
+    const navigate = useNavigate();
 
     useEffect(() => {
       const initialStateNameIcon = L.marker(map.getCenter(), {
@@ -60,6 +62,7 @@ const ChurchMap = () => {
 
           layer.on("click", (e) => {
             console.log(feature.properties.SIGLA);
+            navigate(`/pesquisa/igrejas/${feature.properties.SIGLA}`);
           });
         },
       }).addTo(map);
