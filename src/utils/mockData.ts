@@ -13,6 +13,7 @@ export interface Painting {
   date?: string | number;
   city?: string;
   state?: string;
+  tags?: string[];
 }
 
 export interface Artist {
@@ -23,6 +24,7 @@ export interface Artist {
   dateOfBirth?: string;
   city?: string;
   state?: string;
+  tags?: string[];
 }
 
 export interface Church {
@@ -31,6 +33,7 @@ export interface Church {
   image: string;
   city?: string;
   state?: string;
+  tags?: string[];
 }
 
 export const brazilianChurches: Church[] = [
@@ -40,6 +43,7 @@ export const brazilianChurches: Church[] = [
     image: igreja1,
     city: "Brasília",
     state: "DF",
+    tags: ["catedral", "moderna", "arquitetura"],
   },
   {
     id: 2,
@@ -47,6 +51,7 @@ export const brazilianChurches: Church[] = [
     image: igreja2,
     city: "São Paulo",
     state: "SP",
+    tags: ["barroco", "igreja", "século 18"],
   },
   {
     id: 3,
@@ -54,6 +59,7 @@ export const brazilianChurches: Church[] = [
     image: igreja1,
     city: "Rio de Janeiro",
     state: "RJ",
+    tags: ["barroco", "igreja", "século 18"],
   },
   {
     id: 4,
@@ -61,6 +67,7 @@ export const brazilianChurches: Church[] = [
     image: igreja2,
     city: "Ouro Preto",
     state: "MG",
+    tags: ["barroco", "igreja", "século 18"],
   },
   {
     id: 5,
@@ -68,6 +75,7 @@ export const brazilianChurches: Church[] = [
     image: igreja1,
     city: "São Paulo",
     state: "SP",
+    tags: ["catedral", "moderna", "arquitetura"],
   },
 ];
 
@@ -79,6 +87,7 @@ export const brazilianPaintings: Painting[] = [
     date: 1860,
     city: "Rio de Janeiro",
     state: "RJ",
+    tags: ["pintura", "história", "brasil"],
   },
   {
     id: 2,
@@ -87,6 +96,7 @@ export const brazilianPaintings: Painting[] = [
     date: 1928,
     city: "São Paulo",
     state: "SP",
+    tags: ["pintura", "moderna", "brasil"],
   },
   {
     id: 3,
@@ -95,6 +105,7 @@ export const brazilianPaintings: Painting[] = [
     date: 1944,
     city: "São Paulo",
     state: "SP",
+    tags: ["pintura", "social", "brasil"],
   },
   {
     id: 4,
@@ -103,6 +114,7 @@ export const brazilianPaintings: Painting[] = [
     date: 1956,
     city: "Rio de Janeiro",
     state: "RJ",
+    tags: ["pintura", "painel", "brasil"],
   },
   {
     id: 5,
@@ -111,6 +123,7 @@ export const brazilianPaintings: Painting[] = [
     date: 1893,
     city: "São Paulo",
     state: "SP",
+    tags: ["pintura", "realismo", "brasil"],
   },
 ];
 
@@ -123,6 +136,7 @@ export const brazilianArtists: Artist[] = [
     city: "São Paulo",
     state: "SP",
     dateOfBirth: "1886",
+    tags: ["artista", "moderna", "brasil"],
   },
   {
     id: 2,
@@ -132,6 +146,7 @@ export const brazilianArtists: Artist[] = [
     city: "Brodowski",
     state: "SP",
     dateOfBirth: "1886",
+    tags: ["artista", "social", "brasil"],
   },
   {
     id: 3,
@@ -141,6 +156,7 @@ export const brazilianArtists: Artist[] = [
     city: "Rio de Janeiro",
     state: "RJ",
     dateOfBirth: "1886",
+    tags: ["artista", "moderna", "brasil"],
   },
   {
     id: 4,
@@ -150,6 +166,7 @@ export const brazilianArtists: Artist[] = [
     city: "São Paulo",
     state: "SP",
     dateOfBirth: "1886",
+    tags: ["artista", "expressionismo", "brasil"],
   },
   {
     id: 5,
@@ -159,6 +176,7 @@ export const brazilianArtists: Artist[] = [
     city: "Belo Horizonte",
     state: "MG",
     dateOfBirth: "1886",
+    tags: ["artista", "moderna", "brasil"],
   },
 ];
 
