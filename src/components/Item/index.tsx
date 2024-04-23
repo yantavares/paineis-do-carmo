@@ -6,9 +6,11 @@ import ChurchText from "./texts/ChurchText";
 import PaintingText from "./texts/PaintingText";
 import Tags from "../Tags";
 
+type ItemType = "artists" | "churches" | "paintings" | "";
+
 interface ItemProps {
   item: Church | Artist | Painting;
-  type: string;
+  type: ItemType;
   fixedImgHeight?: boolean;
 }
 

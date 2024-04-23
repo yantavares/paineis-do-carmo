@@ -10,7 +10,8 @@ export const Tag = styled.span`
   border: 1px solid #ddd;
   transition: all 0.3s;
   &:hover {
-    transform: scale(1.05);
+    border-color: ${colors.green};
+    transform: scale(1.08);
     cursor: pointer;
   }
 `;
