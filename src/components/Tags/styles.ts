@@ -11,7 +11,7 @@ export const Tag = styled.span`
   transition: all 0.3s;
   &:hover {
     border-color: ${colors.green};
-    transform: scale(1.05);
+    transform: scale(1.08);
     cursor: pointer;
   }
 `;
