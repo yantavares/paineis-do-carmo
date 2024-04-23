@@ -7,6 +7,7 @@ import Header from "src/components/Header";
 import Footer from "src/components/Footer";
 import SearchPage from "./pages/SearchPage";
 import ChurchState from "./pages/ChurchState";
+import TagDetail from "./pages/TagDetail";
 
 function App() {
   return (
@@ -33,6 +34,11 @@ function App() {
           <Route
             path="/paineis-do-carmo/pesquisa/"
             element={<Navigate to="/paineis-do-carmo/pesquisa/obras" />}
+          />
+          <Route path="/topicos/:tag" element={<TagDetail />} />
+          <Route
+            path="/paineis-do-carmo/topicos/:tag"
+            element={<TagDetail />}
           />
         </Routes>
       </Suspense>
