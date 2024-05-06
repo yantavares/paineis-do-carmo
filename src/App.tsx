@@ -8,6 +8,7 @@ import Footer from "src/components/Footer";
 import SearchPage from "./pages/SearchPage";
 import ChurchState from "./pages/ChurchState";
 import TagDetail from "./pages/TagDetail";
+import AboutPage from "./pages/about";
 
 function App() {
   return (
@@ -40,6 +41,8 @@ function App() {
             path="/paineis-do-carmo/topicos/:tag"
             element={<TagDetail />}
           />
+          <Route path="/sobre" element={<AboutPage />} />
+          <Route path="/paineis-do-carmo/sobre" element={<AboutPage />} />
         </Routes>
       </Suspense>
       <Footer />

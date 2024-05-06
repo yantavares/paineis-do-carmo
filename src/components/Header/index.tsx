@@ -37,8 +37,7 @@ const Header = () => {
           <HeaderButton onClick={() => navigate("/pesquisa/topicos")}>
             Tópicos
           </HeaderButton>
-          <HeaderButton>Como utilizar</HeaderButton>
-          <HeaderButton>Sobre</HeaderButton>
+          <HeaderButton onClick={() => navigate("/sobre")}>Sobre</HeaderButton>
         </ButtonsContainer>
       </Col1>
 
