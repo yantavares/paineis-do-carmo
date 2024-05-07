@@ -52,7 +52,10 @@ export const Container = styled.div`
 
   .img-container {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    gap: 1rem;
     margin: 0 0 2rem;
   }
 

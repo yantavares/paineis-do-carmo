@@ -23,6 +23,7 @@ const ItemDetails = () => {
       <div className="item-content">
         <div className="img-container">
           <img src={Carousel1} alt="" style={{ width: "440px" }} />
+          <button style={{ width: "10rem" }}>Baixar</button>
         </div>
         <div className="item-info">
           <div className="topic-wrapper">
