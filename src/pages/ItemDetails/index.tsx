@@ -1,9 +1,17 @@
 import React from "react";
 import Carousel1 from "../../assets/pintura1.jpeg";
 import Carousel2 from "../../assets/pintura2.jpeg";
-
 import { ArrowLeft } from "lucide-react";
-import { Container } from "./styles";
+import {
+  Container,
+  ImageContainer,
+  DownloadButton,
+  Image,
+  EngravingLayout,
+  Col,
+  EngravingImage,
+  EngravingDescription,
+} from "./styles";
 import Tags from "src/components/Tags";
 import { useNavigate } from "react-router-dom";
 
@@ -22,8 +30,14 @@ const ItemDetails = () => {
       </p>
       <div className="item-content">
         <div className="img-container">
-          <img src={Carousel1} alt="" style={{ width: "440px" }} />
-          <button style={{ width: "10rem" }}>Baixar</button>
+          <ImageContainer>
+            <Image src={Carousel1} alt="" />
+            <DownloadButton>Baixar</DownloadButton>
+          </ImageContainer>
+          {/* <ImageContainer>
+            <Image src={Carousel1} alt="" />
+            <DownloadButton>Baixar</DownloadButton>
+          </ImageContainer> */}
         </div>
         <div className="item-info">
           <div className="topic-wrapper">
@@ -96,43 +110,43 @@ const ItemDetails = () => {
         </div>
       </div>
       <h2 className="topic-title">Gravuras</h2>
-      <div className="engraving-layout">
-        <div className="col">
-          <img src={Carousel1} alt="" className="engraving-img" />
-          <div className="engraving-description">
+      <EngravingLayout>
+        <Col>
+          <EngravingImage src={Carousel1} alt="" />
+          <EngravingDescription>
             <p className="engraving-title">Título da Gravura</p>
             <p className="engraving-author">Autor da Gravura</p>
-          </div>
-        </div>
-        <div className="col">
-          <img src={Carousel2} alt="" className="engraving-img" />
-          <div className="engraving-description">
+          </EngravingDescription>
+        </Col>
+        <Col>
+          <EngravingImage src={Carousel2} alt="" />
+          <EngravingDescription>
             <p className="engraving-title">Título da Gravura</p>
             <p className="engraving-author">Autor da Gravura</p>
-          </div>
-        </div>
-        <div className="col">
-          <img src={Carousel1} alt="" className="engraving-img" />
-          <div className="engraving-description">
+          </EngravingDescription>
+        </Col>
+        <Col>
+          <EngravingImage src={Carousel1} alt="" />
+          <EngravingDescription>
             <p className="engraving-title">Título da Gravura</p>
             <p className="engraving-author">Autor da Gravura</p>
-          </div>
-        </div>
-        <div className="col">
-          <img src={Carousel2} alt="" className="engraving-img" />
-          <div className="engraving-description">
+          </EngravingDescription>
+        </Col>
+        <Col>
+          <EngravingImage src={Carousel2} alt="" />
+          <EngravingDescription>
             <p className="engraving-title">Título da Gravura</p>
             <p className="engraving-author">Autor da Gravura</p>
-          </div>
-        </div>
-        <div className="col">
-          <img src={Carousel1} alt="" className="engraving-img" />
-          <div className="engraving-description">
+          </EngravingDescription>
+        </Col>
+        <Col>
+          <EngravingImage src={Carousel1} alt="" />
+          <EngravingDescription>
             <p className="engraving-title">Título da Gravura</p>
             <p className="engraving-author">Autor da Gravura</p>
-          </div>
-        </div>
-      </div>
+          </EngravingDescription>
+        </Col>
+      </EngravingLayout>
     </Container>
   );
 };

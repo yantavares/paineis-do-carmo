@@ -52,10 +52,8 @@ export const Container = styled.div`
 
   .img-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 2rem;
     margin: 0 0 2rem;
   }
 
@@ -191,4 +189,73 @@ export const Container = styled.div`
     font-weight: 400;
     margin: 0;
   }
+`;
+
+export const ImageContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: fit-content;
+  cursor: pointer;
+
+  &:hover {
+    img {
+      filter: brightness(0.7);
+    }
+    button {
+      opacity: 1;
+    }
+  }
+`;
+
+export const Image = styled.img`
+  width: 440px;
+  border-radius: 20px;
+  transition: filter 0.3s ease;
+`;
+
+export const DownloadButton = styled.button`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+`;
+
+export const EngravingLayout = styled.div`
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+`;
+
+export const Col = styled.div`
+  flex: 1 1 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const EngravingImage = styled.img`
+  width: 100%;
+  border-radius: 10px;
+  transition: filter 0.3s ease;
+`;
+
+export const EngravingDescription = styled.div`
+  text-align: center;
+  margin-top: 0.5rem;
 `;
