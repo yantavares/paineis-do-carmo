@@ -81,6 +81,7 @@ export const Container = styled.div`
     font-size: 24px;
     font-weight: 600;
     margin: 0 0 1rem;
+    padding: 2rem 0;
   }
 
   .topic-text {
@@ -244,10 +245,11 @@ export const Col = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const EngravingImage = styled.img`
-  width: 100%;
+  max-height: 40rem;
   border-radius: 10px;
   transition: filter 0.3s ease;
 `;
