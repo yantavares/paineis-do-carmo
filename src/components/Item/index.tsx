@@ -21,7 +21,7 @@ const Item = ({ item, type, fixedImgHeight = false }: ItemProps) => {
     <Data onClick={() => navigate("/item/1")}>
       <DataImage
         height={fixedImgHeight ? "100%" : "auto"}
-        width={fixedImgHeight ? "100%" : "auto"}
+        width={fixedImgHeight ? "100%" : "100%"}
         src={item.image}
         alt={item.name}
       />

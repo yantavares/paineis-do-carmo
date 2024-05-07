@@ -5,12 +5,14 @@ import Carousel2 from "../../assets/pintura2.jpeg";
 import { ArrowLeft } from "lucide-react";
 import { Container } from "./styles";
 import Tags from "src/components/Tags";
+import { useNavigate } from "react-router-dom";
 
 const ItemDetails = () => {
+  const navigate = useNavigate();
   return (
     <Container>
       <div className="flex-group">
-        <a className="inner-link">
+        <a className="inner-link" onClick={() => navigate("/pesquisa/obras")}>
           <ArrowLeft size={20} /> Obras
         </a>
       </div>
