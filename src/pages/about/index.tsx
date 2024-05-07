@@ -8,13 +8,14 @@ import {
   AboutUsText,
   HorizontalLine,
   PaddingContainer,
+  Us,
 } from "./styles";
 
 const AboutPage = () => {
   return (
     <PaddingContainer>
       <AboutText>
-        O presente site é fruto do projeto
+        O presente site é fruto do projeto{" "}
         <AboutSpan>
           “As pinturas barrocas de Santa Teresa D'Ávila nas Igrejas das Ordens
           Terceiras Carmelitas da América portuguesa (Séc. XVII a XIX)”{" "}
@@ -114,10 +115,13 @@ const AboutPage = () => {
         <AboutUs style={{ textAlign: "end" }}>
           <AboutUsHeader>Discentes Proic (2023-2024)</AboutUsHeader>
           <AboutUsText>
-            Yan Tavares (Bolsista Engenharia da Computação)
+            <Us href="https://github.com/yantavares" target="_blank">
+              Yan Tavares{" "}
+            </Us>{" "}
+            (Bolsista Engenharia da Computação)
           </AboutUsText>
           <AboutUsText>
-            Guilherme Gonçalves (Bolsista Engenharia da Computação)
+            Guilherme Soares (Bolsista Engenharia da Computação)
           </AboutUsText>
           <AboutUsText>
             Gabriel Farago (Voluntário Engenharia da Computação)
