@@ -5,6 +5,7 @@ import ArtistText from "./texts/ArtistText";
 import ChurchText from "./texts/ChurchText";
 import PaintingText from "./texts/PaintingText";
 import Tags from "../Tags";
+import { useNavigate } from "react-router-dom";
 
 type ItemType = "artists" | "churches" | "paintings" | "";
 
@@ -15,8 +16,9 @@ interface ItemProps {
 }
 
 const Item = ({ item, type, fixedImgHeight = false }: ItemProps) => {
+  const navigate = useNavigate();
   return (
-    <Data>
+    <Data onClick={() => navigate("/item/1")}>
       <DataImage
         height={fixedImgHeight ? "100%" : "auto"}
         width={fixedImgHeight ? "100%" : "auto"}

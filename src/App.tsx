@@ -8,7 +8,8 @@ import Footer from "src/components/Footer";
 import SearchPage from "./pages/SearchPage";
 import ChurchState from "./pages/ChurchState";
 import TagDetail from "./pages/TagDetail";
-import AboutPage from "./pages/about";
+import AboutPage from "./pages/About";
+import ItemDetails from "./pages/ItemDetails";
 
 function App() {
   return (
@@ -41,6 +42,8 @@ function App() {
             path="/paineis-do-carmo/topicos/:tag"
             element={<TagDetail />}
           />
+          <Route path="/item/:id" element={<ItemDetails />} />
+          <Route path="/paineis-do-carmo/item/:id" element={<ItemDetails />} />
           <Route path="/sobre" element={<AboutPage />} />
           <Route path="/paineis-do-carmo/sobre" element={<AboutPage />} />
         </Routes>
