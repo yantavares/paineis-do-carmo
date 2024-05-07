@@ -166,11 +166,7 @@ export const Container = styled.div`
 
   .engraving-layout {
     display: flex;
-
     gap: 2rem;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: thin;
   }
 
   .engraving-img {
@@ -239,7 +235,8 @@ export const DownloadButton = styled.button`
 export const EngravingLayout = styled.div`
   display: flex;
   gap: 2rem;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 `;
 
 export const Col = styled.div`
