@@ -43,7 +43,7 @@ export const AboutUs = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 `;
 
 export const AboutUsHeader = styled.h3`
@@ -60,4 +60,9 @@ export const AboutUsText = styled.h3`
   padding: 0;
   padding-top: 1rem;
   margin: 0;
+`;
+
+export const Us = styled.a`
+  color: ${colors.white};
+  transition: all 0.3s;
 `;
