@@ -84,18 +84,18 @@ const Home = () => {
             </TopicHeader>
             <TopicBody>
               <RoundBox
-                text={"Utilizar como visitante"}
-                buttonText={"Como utilizar"}
+                text={"Apresentação do projeto"}
+                buttonText={"Sobre nós"}
                 color={"#3A5A40"}
               />
               <RoundBox
-                text={"Fazer parte do projeto"}
-                buttonText={"Fazer parte"}
+                text={"Como navegar pelo site"}
+                buttonText={"Como utilizar"}
                 color={colors.green}
               />
               <RoundBox
-                text={"Entrar em contato conosco"}
-                buttonText={"Entrar em contato"}
+                text={"Faça parte do projeto!"}
+                buttonText={"Fazer parte"}
                 color={"#A3B18A"}
               />
             </TopicBody>

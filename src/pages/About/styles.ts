@@ -10,7 +10,8 @@ export const PaddingContainer = styled.div`
 `;
 
 export const AboutText = styled.h3`
-  font-size: 3rem;
+  text-align: justify;
+  font-size: 2.2rem;
   font-weight: 800;
   padding: 0;
   padding-top: 1rem;
