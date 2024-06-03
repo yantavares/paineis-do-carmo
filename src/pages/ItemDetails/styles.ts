@@ -259,4 +259,5 @@ export const EngravingImage = styled.img`
 export const EngravingDescription = styled.div`
   text-align: center;
   margin-top: 0.5rem;
+  width: 100%;
 `;

@@ -16,6 +16,7 @@ import {
 } from "./styles";
 import Tags from "src/components/Tags";
 import { useNavigate } from "react-router-dom";
+import TextTruncate from "src/components/TextTruncate";
 
 const ItemDetails = () => {
   const navigate = useNavigate();
@@ -156,11 +157,11 @@ const ItemDetails = () => {
         <Col style={{ cursor: "not-allowed" }}>
           <EngravingImage src={G1} alt="" />
           <EngravingDescription>
-            <p className="engraving-title">
+            <TextTruncate className="engraving-title">
               Vita effigiata et essercizi affettiui di S. Teresa di giesu
               maestra di celeste dottrina per il giorno delia sacra comunione
               (Página 220; Prancha 45).
-            </p>
+            </TextTruncate>
             <p className="engraving-author">Autor anônimo</p>
           </EngravingDescription>
         </Col>
