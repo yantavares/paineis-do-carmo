@@ -6,6 +6,8 @@ export const Container = styled.div`
   transition: all 0.3s ease-in-out;
 
   .text-truncate {
+    position: relative;
+    overflow: hidden;
   }
 
   .full-text,
@@ -21,11 +23,15 @@ export const Container = styled.div`
   .full-text {
     opacity: 0;
     position: absolute;
+    left: 0;
+    top: 0;
   }
 
   .truncated-text.hidden {
     opacity: 0;
     position: absolute;
+    left: 0;
+    top: 0;
   }
 
   .truncated-text {
