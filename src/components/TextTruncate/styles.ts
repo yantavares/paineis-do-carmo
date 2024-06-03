@@ -1,37 +1,35 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  position: relative;
   width: 100%;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 
   .text-truncate {
-    display: inline-block;
-    width: auto;
-    position: relative;
-    width: 100%;
   }
 
   .full-text,
   .truncated-text {
-    width: 100%;
-    left: 0;
-    position: absolute;
-    transition: opacity 0.3s ease-in-out;
+    display: inline-block;
   }
 
   .full-text.visible {
     opacity: 1;
+    position: static;
   }
 
   .full-text {
     opacity: 0;
+    position: absolute;
   }
 
   .truncated-text.hidden {
     opacity: 0;
+    position: absolute;
   }
 
   .truncated-text {
     opacity: 1;
+    position: static;
   }
 `;
