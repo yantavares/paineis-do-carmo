@@ -43,7 +43,7 @@ export const ButtonsContainer = styled.div`
 
 export const HeaderButton = styled.button`
   border: none;
-  font-size: 1.68rem;
+  font-size: 1.8rem;
   transition: color 0.3s;
   &:hover {
     color: ${colors.green};
