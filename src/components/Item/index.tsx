@@ -13,20 +13,29 @@ interface ItemProps {
   item: Church | Artist | Painting;
   type: ItemType;
   fixedImgHeight?: boolean;
+  width?: string | null;
+  tagCount?: number;
 }
 
-const Item = ({ item, type, fixedImgHeight = false }: ItemProps) => {
+const Item = ({
+  item,
+  type,
+  fixedImgHeight = false,
+  width = null,
+  tagCount = -1, // -1 -> All tags
+}: ItemProps) => {
   const navigate = useNavigate();
   return (
-    <Data onClick={() => navigate("/item/1")}>
+    <Data style={width && { width }}>
       <DataImage
+        onClick={() => navigate("/item/1")}
         height={fixedImgHeight ? "100%" : "auto"}
         width={fixedImgHeight ? "100%" : "100%"}
         src={item.image}
         alt={item.name}
       />
       {getTypeInfo(type, item)}
-      <Tags tags={item?.tags} />
+      <Tags tagCount={tagCount} tags={item?.tags} />
     </Data>
   );
 };

@@ -18,7 +18,8 @@ export const SearchResultsContainer = styled.div`
   overflow-y: hidden;
   gap: 6rem 3.6rem;
   align-items: center;
-  height: 100%;
+  scrollbar-width: thin;
+  display: flex;
 `;
 
 export const SearchHeader = styled.h1`
@@ -37,9 +38,10 @@ export const SearchSubHeader = styled.h2`
 `;
 
 export const SearchResult = styled.div`
-  width: calc(20% - 2.92rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.6rem;
+  height: 30rem;
+
+  img {
+    height: 60%;
+  }
 `;
