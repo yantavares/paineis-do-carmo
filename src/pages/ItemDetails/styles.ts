@@ -177,8 +177,8 @@ export const Container = styled.div`
   }
 
   .engraving-title {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 1.8rem;
+    font-weight: 600;
   }
 
   .engraving-author {
@@ -236,16 +236,18 @@ export const DownloadButton = styled.button`
 export const EngravingLayout = styled.div`
   display: flex;
   gap: 2rem;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+  overflow-x: scroll;
   scrollbar-width: thin;
 `;
 
 export const Col = styled.div`
   flex: 1 1 220px;
+  padding-bottom: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 340px;
+  max-width: 400px;
   cursor: pointer;
 `;
 
@@ -259,4 +261,5 @@ export const EngravingImage = styled.img`
 export const EngravingDescription = styled.div`
   text-align: center;
   margin-top: 0.5rem;
+  width: 100%;
 `;

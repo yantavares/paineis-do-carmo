@@ -97,9 +97,9 @@ const ChurchMap = () => {
           zoom={4}
           style={{
             height: "52rem",
-            border: "1px dashed rgba(0, 0, 0, 0.1)",
+            border: "1px dashed rgba(0, 0, 0, 0.25)",
             backgroundColor: "#f5f5f5",
-            width: "80%",
+            width: "70%",
             cursor: "pointer",
             transition: "all 0.3s",
           }}

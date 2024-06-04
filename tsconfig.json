@@ -114,5 +114,5 @@
     }
   },
   "include": ["src/**/*", "declarations.d.ts"],
-  "exclude": ["node_modules"]
+  "exclude": [".github/node_modules"]
 }

@@ -16,6 +16,7 @@ import {
 } from "./styles";
 import Tags from "src/components/Tags";
 import { useNavigate } from "react-router-dom";
+import TextTruncate from "src/components/TextTruncate";
 
 const ItemDetails = () => {
   const navigate = useNavigate();
@@ -132,35 +133,77 @@ const ItemDetails = () => {
       </div>
       <h2 className="topic-title">Gravuras</h2>
       <EngravingLayout>
-        <Col style={{ cursor: "not-allowed" }}>
+        <Col style={{}}>
           <EngravingImage src={G2} alt="" />
           <EngravingDescription>
-            <p className="engraving-title">
-              La Vie de Ia séraphique Mère sainte Thérèse de Jesus, fondatrice
-              dês Carmes Déchaussez & dês Carmelites Déchaussées, en figures &
-              en vers François & Latins (Folha 209; Prancha 33)
-            </p>
+            <TextTruncate className="engraving-title">
+              La Vie de Ia séraphique
+            </TextTruncate>
             <p className="engraving-author">Claudine Brunard.</p>
           </EngravingDescription>
         </Col>
-        <Col style={{ cursor: "not-allowed" }}>
+        <Col style={{}}>
           <EngravingImage src={G3} alt="" />
           <EngravingDescription>
-            <p className="engraving-title">
+            <TextTruncate className="engraving-title">
               Vita effigiata della serafica vergine S. Teresa di Gesú fondatrice
               dell’Ordine Carmelitano Scalzo. (Prancha XXXVI).
-            </p>
+            </TextTruncate>
             <p className="engraving-author">Arnold van Westerhout.</p>
           </EngravingDescription>
         </Col>
-        <Col style={{ cursor: "not-allowed" }}>
+        <Col style={{}}>
           <EngravingImage src={G1} alt="" />
           <EngravingDescription>
-            <p className="engraving-title">
+            <TextTruncate className="engraving-title">
               Vita effigiata et essercizi affettiui di S. Teresa di giesu
               maestra di celeste dottrina per il giorno delia sacra comunione
               (Página 220; Prancha 45).
-            </p>
+            </TextTruncate>
+            <p className="engraving-author">Autor anônimo</p>
+          </EngravingDescription>
+        </Col>
+        <Col style={{}}>
+          <EngravingImage src={G1} alt="" />
+          <EngravingDescription>
+            <TextTruncate className="engraving-title">
+              Vita effigiata et essercizi affettiui di S. Teresa di giesu
+              maestra di celeste dottrina per il giorno delia sacra comunione
+              (Página 220; Prancha 45).
+            </TextTruncate>
+            <p className="engraving-author">Autor anônimo</p>
+          </EngravingDescription>
+        </Col>
+        <Col style={{}}>
+          <EngravingImage src={G1} alt="" />
+          <EngravingDescription>
+            <TextTruncate className="engraving-title">
+              Vita effigiata et essercizi affettiui di S. Teresa di giesu
+              maestra di celeste dottrina per il giorno delia sacra comunione
+              (Página 220; Prancha 45).
+            </TextTruncate>
+            <p className="engraving-author">Autor anônimo</p>
+          </EngravingDescription>
+        </Col>
+        <Col style={{}}>
+          <EngravingImage src={G1} alt="" />
+          <EngravingDescription>
+            <TextTruncate className="engraving-title">
+              Vita effigiata et essercizi affettiui di S. Teresa di giesu
+              maestra di celeste dottrina per il giorno delia sacra comunione
+              (Página 220; Prancha 45).
+            </TextTruncate>
+            <p className="engraving-author">Autor anônimo</p>
+          </EngravingDescription>
+        </Col>
+        <Col style={{}}>
+          <EngravingImage src={G1} alt="" />
+          <EngravingDescription>
+            <TextTruncate className="engraving-title">
+              Vita effigiata et essercizi affettiui di S. Teresa di giesu
+              maestra di celeste dottrina per il giorno delia sacra comunione
+              (Página 220; Prancha 45).
+            </TextTruncate>
             <p className="engraving-author">Autor anônimo</p>
           </EngravingDescription>
         </Col>
