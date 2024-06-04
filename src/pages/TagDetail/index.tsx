@@ -29,7 +29,7 @@ const TagDetail = () => {
           .concat(brazilianArtists)
           .map((item: any, index: number) => (
             <SearchResult key={index}>
-              <Item item={item} type={"artists"} fixedImgHeight />
+              <Item tagCount={2} width="20rem" item={item} type={"artists"} />
             </SearchResult>
           ))}
       </SearchResultsContainer>
@@ -39,7 +39,7 @@ const TagDetail = () => {
           .concat(brazilianChurches)
           .map((item: any, index: number) => (
             <SearchResult key={index}>
-              <Item item={item} type={"churches"} fixedImgHeight />
+              <Item tagCount={2} width="20rem" item={item} type={"churches"} />
             </SearchResult>
           ))}
       </SearchResultsContainer>
@@ -49,7 +49,7 @@ const TagDetail = () => {
           .concat(brazilianPaintings)
           .map((item: any, index: number) => (
             <SearchResult key={index}>
-              <Item item={item} type={"paintings"} fixedImgHeight />
+              <Item tagCount={2} width="20rem" item={item} type={"paintings"} />
             </SearchResult>
           ))}
       </SearchResultsContainer>

@@ -12,7 +12,7 @@ export const DataTitle = styled.h3`
   }
 `;
 
-export const DataInfo = styled.p`
+export const DataInfo = styled.span`
   padding: 0;
   margin: 0;
   font-size: 1.4rem;
