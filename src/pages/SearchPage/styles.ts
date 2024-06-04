@@ -13,6 +13,7 @@ export const SearchContainer = styled.div`
 
 export const SearchBarContainer = styled.div`
   padding-top: 1rem;
+  font-size: 1rem;
 `;
 
 export const SearchResultsContainer = styled.div`
