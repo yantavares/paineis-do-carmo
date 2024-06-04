@@ -1,9 +1,10 @@
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Item from "src/components/Item";
 import SearchBar from "src/components/SearchBar";
 import colors from "src/utils/colors";
-import { capitalize, translateTopicType } from "src/utils/strings";
+import { brazilianChurches } from "src/utils/mockData";
+import { capitalize } from "src/utils/strings";
 import {
   SearchBarContainer,
   SearchContainer,
@@ -11,11 +12,9 @@ import {
   SearchResult,
   SearchResultsContainer,
 } from "../SearchPage/styles";
-import { brazilianChurches } from "src/utils/mockData";
 
 const ChurchState = () => {
   const { state } = useParams();
-  const navigate = useNavigate();
   return (
     <SearchContainer>
       <SearchHeader>

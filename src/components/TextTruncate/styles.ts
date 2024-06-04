@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  cursor: pointer;
   transition: all 0.3s ease-in-out;
+  cursor: text;
 
   .text-truncate {
     position: relative;
@@ -13,6 +13,12 @@ export const Container = styled.div`
   .full-text,
   .truncated-text {
     display: inline-block;
+    z-index: 3;
+  }
+
+  .icon-truncate:hover {
+    transition: all 0.1s ease-in-out;
+    transform: scale(1.2);
   }
 
   .full-text.visible {
@@ -25,6 +31,7 @@ export const Container = styled.div`
     position: absolute;
     left: 0;
     top: 0;
+    transition: all 0.3s ease-in;
   }
 
   .truncated-text.hidden {

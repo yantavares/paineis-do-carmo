@@ -1,16 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Container } from "./styles";
-import React, { useState } from "react";
-import {
-  faArrowAltCircleDown,
-  faArrowAltCircleUp,
-  faCirclePlus,
-  faMinusCircle,
-  faPlug,
-  faPlugCirclePlus,
-  faPlus,
-  faPlusCircle,
-} from "@fortawesome/free-solid-svg-icons";
+import React, { useState, useMemo } from "react";
+import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { SizeProp } from "@fortawesome/fontawesome-svg-core";
 
 interface TextTruncateProps {
@@ -21,55 +12,56 @@ interface TextTruncateProps {
 
 const TextTruncate: React.FC<TextTruncateProps> = ({
   children,
-  limit = 45,
+  limit = 40,
   className,
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [iconSize, setIconSize] = useState<SizeProp>("xs");
+  const [shouldOpen, setShouldOpen] = useState(false);
 
-  const handleMouseEnter = () => {
-    setIconSize("sm");
-  };
+  const text = useMemo(
+    () => (typeof children === "string" ? children : ""),
+    [children]
+  );
 
-  const handleMouseLeave = () => {
-    setIconSize("xs");
-  };
+  const truncatedText = useMemo(
+    () => (text.length > limit ? `${text.substring(0, limit)}...` : text),
+    [text, limit]
+  );
 
-  const text = typeof children === "string" ? children : "";
+  const shouldTruncate = text.length > limit;
 
-  const truncatedText =
-    text.length > limit ? text.substring(0, limit) + "..." : text;
+  const handleClick = () => setShouldOpen((prev) => !prev);
 
   return (
-    <Container
-      onClick={() => setIsHovered(!isHovered)}
-      onMouseLeave={handleMouseLeave}
-      onMouseEnter={handleMouseEnter}
-    >
-      <p className={className + " text-truncate"}>
-        <span className={`full-text ${isHovered ? "visible" : ""}`}>
-          {text}
-          <div>
-            <FontAwesomeIcon
-              size={iconSize}
-              color="gray"
-              icon={faMinusCircle}
-            />
-          </div>
-        </span>
-        <div>
-          <span className={`truncated-text ${isHovered ? "hidden" : ""}`}>
-            {truncatedText}
-            <div>
-              <FontAwesomeIcon
-                color="gray"
-                size={iconSize}
-                icon={faPlusCircle}
-              />
-            </div>
-          </span>
-        </div>
+    <Container>
+      <p className={`${className} text-truncate`}>
+        {shouldTruncate ? (
+          <>
+            <span className={`full-text ${shouldOpen ? "visible" : "hidden"}`}>
+              {text}
+            </span>
+            <span
+              className={`truncated-text ${shouldOpen ? "hidden" : "visible"}`}
+            >
+              {truncatedText}
+            </span>
+          </>
+        ) : (
+          <span className="full-text visible">{text}</span>
+        )}
       </p>
+      {shouldTruncate && (
+        <div
+          onClick={handleClick}
+          className="icon-truncate"
+          style={{ cursor: "pointer", padding: "0.3rem" }}
+        >
+          <FontAwesomeIcon
+            size="lg"
+            color="gray"
+            icon={shouldOpen ? faMinusCircle : faPlusCircle}
+          />
+        </div>
+      )}
     </Container>
   );
 };

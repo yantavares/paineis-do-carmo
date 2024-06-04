@@ -137,9 +137,7 @@ const ItemDetails = () => {
           <EngravingImage src={G2} alt="" />
           <EngravingDescription>
             <TextTruncate className="engraving-title">
-              La Vie de Ia séraphique Mère sainte Thérèse de Jesus, fondatrice
-              dês Carmes Déchaussez & dês Carmelites Déchaussées, en figures &
-              en vers François & Latins (Folha 209; Prancha 33)
+              La Vie de Ia séraphique
             </TextTruncate>
             <p className="engraving-author">Claudine Brunard.</p>
           </EngravingDescription>
