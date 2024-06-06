@@ -13,10 +13,12 @@ export const SearchContainer = styled.div`
 `;
 
 export const SearchResultsContainer = styled.div`
+  width: 100%;
+  align-items: center;
+  padding-left: 4rem;
   display: flex;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  gap: 6rem 3.6rem;
+  flex-wrap: wrap;
+  gap: 0 3.6rem;
   align-items: center;
   scrollbar-width: thin;
   display: flex;
@@ -38,9 +40,7 @@ export const SearchSubHeader = styled.h2`
 `;
 
 export const SearchResult = styled.div`
-  margin-bottom: 1.6rem;
   height: 30rem;
-
   img {
     height: 60%;
   }

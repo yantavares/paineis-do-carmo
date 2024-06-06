@@ -18,7 +18,7 @@ export interface Church {
   id: number;
   description?: string;
   bibliographyReference?: string;
-  painting?: Painting[];
+  paintings?: Painting[];
   name: string;
   images: Image[];
   street?: string;
@@ -89,6 +89,7 @@ export interface Painting {
   state: string;
   tag: Tag[];
   church?: Church;
+  placement?: string;
 }
 
 export const brazilianPaintings: Painting[] = [

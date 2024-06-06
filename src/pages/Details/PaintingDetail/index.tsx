@@ -93,9 +93,14 @@ const PaintingDetails = () => {
           <div className="topic-wrapper">
             <h3 className="topic-title">Referências</h3>
             <ul className="reference-list">
-              <li className="reference-item">
-                <sup>1 </sup> {data.bibliographyReference}
-              </li>
+              {data?.bibliographyReference &&
+                data?.bibliographyReference
+                  .split(";")
+                  .map((reference, index) => (
+                    <li key={index} className="reference-item">
+                      <sup>{index + 1} </sup> {reference}
+                    </li>
+                  ))}
             </ul>
           </div>
           <div className="topic-wrapper">
@@ -122,7 +127,7 @@ const PaintingDetails = () => {
               </p>
               <br />
               <p className="record-data">
-                <strong>Local na Igreja:</strong> Pintura Lateral
+                <strong>Local na Igreja:</strong> {data?.placement ?? "N/A"}
               </p>
               <br />
               <p className="record-data">

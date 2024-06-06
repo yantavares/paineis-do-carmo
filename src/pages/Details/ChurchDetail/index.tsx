@@ -47,6 +47,8 @@ const PaintingDetails = () => {
     fetchPaintings();
   }, [id]);
 
+  console.log(data.paintings);
+
   return (
     <Container>
       <div className="flex-group">
@@ -76,29 +78,32 @@ const PaintingDetails = () => {
           <div className="topic-wrapper">
             <h3 className="topic-title">Referências</h3>
             <ul className="reference-list">
-              <li className="reference-item">
-                <sup>1 </sup> {data?.bibliographyReference}
-              </li>
+              {data?.bibliographyReference &&
+                data?.bibliographyReference
+                  .split(";")
+                  .map((reference, index) => (
+                    <li key={index} className="reference-item">
+                      <sup>{index + 1} </sup> {reference}
+                    </li>
+                  ))}
             </ul>
-          </div>
-          <div className="topic-wrapper">
-            <h2 className="tags-title">Tags</h2>
-            <div className="tags-wrapper">
-              <Tags tags={data.tag} />
-            </div>
           </div>
         </div>
       </div>
-      <h2 className="topic-title">Gravuras</h2>
+      <h2 className="topic-title">Obras da Igreja</h2>
       <EngravingLayout>
-        {data.painting &&
-          data.painting.map((painting, index) => (
-            <Col key={index}>
+        {data.paintings &&
+          data.paintings.map((painting, index) => (
+            <Col
+              key={index}
+              onClick={() => navigate(`/item/paintings/${painting.id}`)}
+            >
               <EngravingImage src={painting?.images?.[0]?.url} alt="" />
               <EngravingDescription>
                 <TextTruncate className="engraving-title">
                   {painting.title}
                 </TextTruncate>
+                <p style={{ fontSize: "1.6rem" }}>{painting.dateOfCreation}</p>
               </EngravingDescription>
             </Col>
           ))}
