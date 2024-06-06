@@ -10,9 +10,9 @@ import ChurchState from "./pages/ChurchState";
 import TagDetail from "./pages/TagDetail";
 import AboutPage from "./pages/About";
 import { PreventRightClickProvider } from "./providers/PreventRightClickContext";
-import PaintingDetail from "./pages/Details/PaintingDetail";
-import ChurchDetail from "./pages/Details/ChurchDetail";
-import ArtistDetail from "./pages/Details/ArtistDetail";
+import PaintingDetail from "src/pages/Details/PaintingDetail";
+import ChurchDetail from "src/pages/Details/ChurchDetail";
+import ArtistDetail from "src/pages/Details/ArtistDetail";
 
 function App() {
   return (
