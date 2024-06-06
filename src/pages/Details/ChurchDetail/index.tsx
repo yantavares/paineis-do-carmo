@@ -47,8 +47,6 @@ const PaintingDetails = () => {
     fetchPaintings();
   }, [id]);
 
-  console.log(data.paintings);
-
   return (
     <Container>
       <div className="flex-group">
@@ -103,7 +101,9 @@ const PaintingDetails = () => {
                 <TextTruncate className="engraving-title">
                   {painting.title}
                 </TextTruncate>
-                <p style={{ fontSize: "1.6rem" }}>{painting.dateOfCreation}</p>
+                <p style={{ fontSize: "1.6rem" }}>
+                  {painting?.placement ?? "Sem localização"}
+                </p>
               </EngravingDescription>
             </Col>
           ))}

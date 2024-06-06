@@ -63,6 +63,7 @@ export const Container = styled.div`
     font-size: 1.6rem;
     font-weight: 500;
     margin: 0 0 2rem;
+    margin-bottom: 4rem;
   }
 
   .black {
