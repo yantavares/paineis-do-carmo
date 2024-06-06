@@ -139,15 +139,19 @@ const SearchPage = () => {
               </SearchBarContainer>
             </SearchHeader>
             <SearchResultsContainer>
-              {filteredData.map((item, index) => (
-                <SearchResult key={index}>
-                  <Item
-                    item={item}
-                    type={translateTopicType(selected)}
-                    fixedImgHeight
-                  />
-                </SearchResult>
-              ))}
+              {filteredData && filteredData.length > 0 ? (
+                filteredData.map((item, index) => (
+                  <SearchResult key={index}>
+                    <Item
+                      item={item}
+                      type={translateTopicType(selected)}
+                      fixedImgHeight
+                    />
+                  </SearchResult>
+                ))
+              ) : (
+                <p>Nenhum item encontrado na busca...</p>
+              )}
             </SearchResultsContainer>
           </>
         );
