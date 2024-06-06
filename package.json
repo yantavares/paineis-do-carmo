@@ -17,6 +17,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@mui/material": "^5.15.7",
+    "axios": "^1.7.2",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.378.0",
     "react": "^18.2.0",

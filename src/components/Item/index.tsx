@@ -31,8 +31,8 @@ const Item = ({
         onClick={() => navigate("/item/1")}
         height={fixedImgHeight ? "100%" : "auto"}
         width={fixedImgHeight ? "100%" : "100%"}
-        src={item.image}
-        alt={item.name}
+        src={item.images[0].url}
+        alt={"Item image"}
       />
       {getTypeInfo(type, item)}
       <Tags tagCount={tagCount} tags={item?.tags} />

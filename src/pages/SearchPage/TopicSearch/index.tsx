@@ -25,8 +25,8 @@ const TopicSearch = () => {
         }}
       >
         {tags.map((tag, index) => (
-          <BigTag onClick={() => navigate(`/topicos/${tag}`)} key={index}>
-            {tag}
+          <BigTag onClick={() => navigate(`/topicos/${tag.name}`)} key={index}>
+            {tag.name}
           </BigTag>
         ))}
       </div>

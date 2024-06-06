@@ -23,36 +23,28 @@ import {
   SearchResult,
   SearchResultsContainer,
 } from "./styles";
+import axios from "axios";
 
 const SearchPage = () => {
-  const navigate = useNavigate();
   const { selected } = useParams();
 
-  const [data, setData] = useState<Church[] | Artist[] | Painting[] | Tag[]>(
-    []
-  );
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    switch (selected) {
-      case "artifices":
-        setData(brazilianArtists.concat(brazilianArtists));
-        break;
-      case "igrejas":
-        setData(brazilianChurches.concat(brazilianChurches));
-        break;
-      case "obras":
-        setData(brazilianPaintings.concat(brazilianPaintings));
-        break;
+    const fetchPaintings = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/paintings`
+        );
+        console.log("Data fetched:", response.data);
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-      case "topicos":
-        setData(tags);
-        break;
-      default:
-        setData([]);
-        navigate("/pesquisa/obras");
-        break;
-    }
-  }, [selected]);
+    fetchPaintings();
+  }, []);
 
   const renderContent = () => {
     switch (selected) {
@@ -74,15 +66,18 @@ const SearchPage = () => {
             </SearchHeader>
 
             <SearchResultsContainer>
-              {data.map((item: any, index: number) => (
-                <SearchResult key={index}>
-                  <Item
-                    item={item}
-                    type={translateTopicType(selected)}
-                    fixedImgHeight
-                  />
-                </SearchResult>
-              ))}
+              {data.map((item: any, index: number) => {
+                console.log("Item:", item.title);
+                return (
+                  <SearchResult key={item?.id}>
+                    <Item
+                      item={item}
+                      type={translateTopicType(selected)}
+                      fixedImgHeight
+                    />
+                  </SearchResult>
+                );
+              })}
             </SearchResultsContainer>
           </>
         );
