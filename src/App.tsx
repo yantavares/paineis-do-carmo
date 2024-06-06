@@ -20,58 +20,63 @@ function App() {
   return (
     <PreventRightClickProvider>
       <BrowserRouter>
-        <ScrollToTop />
-        <Header />
-        <Suspense fallback={<CircularProgress />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/paineis-do-carmo" element={<Home />} />
-
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/paineis-do-carmo/login" element={<LoginPage />} />
-
-            <Route path="/pesquisa/:selected" element={<SearchPage />} />
-            <Route
-              path="/paineis-do-carmo/pesquisa/:selected"
-              element={<SearchPage />}
-            />
-            <Route
-              path="/paineis-do-carmo/pesquisa/igrejas/:state"
-              element={<ChurchState />}
-            />
-            <Route path="/pesquisa/igrejas/:state" element={<ChurchState />} />
-            <Route
-              path="/paineis-do-carmo/pesquisa/"
-              element={<Navigate to="/paineis-do-carmo/pesquisa/obras" />}
-            />
-            <Route path="/topicos/:tag" element={<TagDetail />} />
-            <Route
-              path="/paineis-do-carmo/topicos/:tag"
-              element={<TagDetail />}
-            />
-            <Route path="/item/:id" element={<PaintingDetail />} />
-            <Route
-              path="/paineis-do-carmo/item/paintings/:id"
-              element={<PaintingDetail />}
-            />
-            <Route path="/item/paintings/:id" element={<PaintingDetail />} />
-
-            <Route
-              path="/paineis-do-carmo/item/churches/:id"
-              element={<ChurchDetail />}
-            />
-            <Route path="/item/churches/:id" element={<ChurchDetail />} />
-
-            <Route
-              path="/paineis-do-carmo/item/artists/:id"
-              element={<ArtistDetail />}
-            />
-            <Route path="/item/artists/:id" element={<ArtistDetail />} />
-
-            <Route path="/sobre" element={<AboutPage />} />
-            <Route path="/paineis-do-carmo/sobre" element={<AboutPage />} />
-          </Routes>
-        </Suspense>
+        <div className="app-container">
+          <ScrollToTop />
+          <Header />
+          <main className="main-content">
+            <Suspense fallback={<CircularProgress />}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/paineis-do-carmo" element={<Home />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/paineis-do-carmo/login" element={<LoginPage />} />
+                <Route path="/pesquisa/:selected" element={<SearchPage />} />
+                <Route
+                  path="/paineis-do-carmo/pesquisa/:selected"
+                  element={<SearchPage />}
+                />
+                <Route
+                  path="/paineis-do-carmo/pesquisa/igrejas/:state"
+                  element={<ChurchState />}
+                />
+                <Route
+                  path="/pesquisa/igrejas/:state"
+                  element={<ChurchState />}
+                />
+                <Route
+                  path="/paineis-do-carmo/pesquisa/"
+                  element={<Navigate to="/paineis-do-carmo/pesquisa/obras" />}
+                />
+                <Route path="/topicos/:tag" element={<TagDetail />} />
+                <Route
+                  path="/paineis-do-carmo/topicos/:tag"
+                  element={<TagDetail />}
+                />
+                <Route path="/item/:id" element={<PaintingDetail />} />
+                <Route
+                  path="/paineis-do-carmo/item/paintings/:id"
+                  element={<PaintingDetail />}
+                />
+                <Route
+                  path="/item/paintings/:id"
+                  element={<PaintingDetail />}
+                />
+                <Route
+                  path="/paineis-do-carmo/item/churches/:id"
+                  element={<ChurchDetail />}
+                />
+                <Route path="/item/churches/:id" element={<ChurchDetail />} />
+                <Route
+                  path="/paineis-do-carmo/item/artists/:id"
+                  element={<ArtistDetail />}
+                />
+                <Route path="/item/artists/:id" element={<ArtistDetail />} />
+                <Route path="/sobre" element={<AboutPage />} />
+                <Route path="/paineis-do-carmo/sobre" element={<AboutPage />} />
+              </Routes>
+            </Suspense>
+          </main>
+        </div>
         <Footer />
       </BrowserRouter>
     </PreventRightClickProvider>
