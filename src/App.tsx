@@ -5,6 +5,7 @@ import Header from "src/components/Header";
 import Footer from "src/components/Footer";
 import { PreventRightClickProvider } from "./providers/PreventRightClickContext";
 import ScrollToTop from "./utils/scrollToTop";
+import colors from "./utils/colors";
 
 const Home = lazy(() => import("src/pages/Home"));
 const LoginPage = lazy(() => import("src/pages/LoginPage"));
@@ -26,7 +27,9 @@ function App() {
           <ScrollToTop />
           <Header />
           <main className="main-content">
-            <Suspense fallback={<CircularProgress />}>
+            <Suspense
+              fallback={<CircularProgress style={{ color: colors.green }} />}
+            >
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/paineis-do-carmo" element={<Home />} />
