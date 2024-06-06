@@ -62,7 +62,7 @@ const PaintingDetails = () => {
         Localizada em {data.city}
         <span
           onClick={() => navigate(`/pesquisa/igrejas/${data.state}`)}
-          className="black church"
+          className="black hoverable"
         >
           {" "}
           • {data.state}{" "}

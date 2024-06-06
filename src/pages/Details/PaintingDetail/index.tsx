@@ -80,13 +80,13 @@ const PaintingDetails = () => {
         Localizada em •
         <span
           onClick={() => navigate(`/item/churches/${data.church.id}`)}
-          className="black church"
+          className="black hoverable"
         >
           {" "}
           {data.church.name}{" "}
         </span>{" "}
         <span
-          className="black church"
+          className="black hoverable"
           onClick={() => navigate(`/pesquisa/igrejas/${data.church.state}`)}
         >
           • {data.church.state}

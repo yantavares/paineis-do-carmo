@@ -70,7 +70,7 @@ export const Container = styled.div`
     color: #000;
   }
 
-  .church {
+  .hoverable {
     transition: all 0.3s ease-in-out;
     cursor: pointer;
 
