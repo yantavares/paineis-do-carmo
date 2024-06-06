@@ -28,14 +28,14 @@ const Item = ({
   return (
     <Data style={width && { width }}>
       <DataImage
-        onClick={() => navigate("/item/1")}
+        onClick={() => navigate(`/item/${type}/${item.id}`)}
         height={fixedImgHeight ? "100%" : "auto"}
         width={fixedImgHeight ? "100%" : "100%"}
         src={item.images[0].url}
         alt={"Item image"}
       />
       {getTypeInfo(type, item)}
-      <Tags tagCount={tagCount} tags={item?.tags} />
+      <Tags tagCount={tagCount} tags={item?.tag} />
     </Data>
   );
 };

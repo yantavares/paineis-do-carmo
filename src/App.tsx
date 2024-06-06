@@ -9,9 +9,7 @@ import SearchPage from "./pages/SearchPage";
 import ChurchState from "./pages/ChurchState";
 import TagDetail from "./pages/TagDetail";
 import AboutPage from "./pages/About";
-import ItemDetails from "./pages/ItemDetails/index";
-import ItemDetails2 from "./pages/ItemDetails/index2";
-import ItemDetails3 from "./pages/ItemDetails/index3";
+import ItemDetails from "./pages/ItemDetails";
 import { PreventRightClickProvider } from "./providers/PreventRightClickContext";
 
 function App() {
@@ -47,9 +45,10 @@ function App() {
               element={<TagDetail />}
             />
             <Route path="/item/:id" element={<ItemDetails />} />
-            <Route path="/paineis-do-carmo/item/1" element={<ItemDetails />} />
-            <Route path="/paineis-do-carmo/item/2" element={<ItemDetails3 />} />
-            <Route path="/paineis-do-carmo/item/3" element={<ItemDetails2 />} />
+            <Route
+              path="/paineis-do-carmo/item/paintings/:id"
+              element={<ItemDetails />}
+            />
             <Route path="/sobre" element={<AboutPage />} />
             <Route path="/paineis-do-carmo/sobre" element={<AboutPage />} />
           </Routes>

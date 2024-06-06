@@ -5,10 +5,10 @@ import { Tag as TagType } from "src/utils/mockData";
 
 interface TagsProps {
   tags: TagType[] | undefined;
-  tagCount: number | undefined;
+  tagCount?: number | undefined;
 }
 
-const Tags = ({ tags, tagCount }: TagsProps) => {
+const Tags = ({ tags, tagCount = -1 }: TagsProps) => {
   const navigate = useNavigate();
   return (
     <TagsContainer>
