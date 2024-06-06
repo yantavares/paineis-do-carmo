@@ -1,13 +1,18 @@
 import React from "react";
 import SearchBar from "src/components/SearchBar";
-import { tags } from "src/utils/mockData";
+import { Tag, tags } from "src/utils/mockData";
 import { SearchHeader, SearchBarContainer } from "../styles";
 import colors from "src/utils/colors";
 import { BigTag } from "./styles";
 import { useNavigate } from "react-router-dom";
 
-const TopicSearch = () => {
+interface TopicSearchProps {
+  tags: Tag[];
+}
+
+const TopicSearch = ({ tags }: TopicSearchProps) => {
   const navigate = useNavigate();
+
   return (
     <>
       <SearchHeader>

@@ -9,8 +9,10 @@ import SearchPage from "./pages/SearchPage";
 import ChurchState from "./pages/ChurchState";
 import TagDetail from "./pages/TagDetail";
 import AboutPage from "./pages/About";
-import ItemDetails from "./pages/ItemDetails";
 import { PreventRightClickProvider } from "./providers/PreventRightClickContext";
+import PaintingDetail from "./pages/Details/PaintingDetail";
+import ChurchDetail from "./pages/Details/ChurchDetail";
+import ArtistDetail from "./pages/Details/ArtistDetail";
 
 function App() {
   return (
@@ -44,11 +46,25 @@ function App() {
               path="/paineis-do-carmo/topicos/:tag"
               element={<TagDetail />}
             />
-            <Route path="/item/:id" element={<ItemDetails />} />
+            <Route path="/item/:id" element={<PaintingDetail />} />
             <Route
               path="/paineis-do-carmo/item/paintings/:id"
-              element={<ItemDetails />}
+              element={<PaintingDetail />}
             />
+            <Route path="/item/paintings/:id" element={<PaintingDetail />} />
+
+            <Route
+              path="/paineis-do-carmo/item/churches/:id"
+              element={<ChurchDetail />}
+            />
+            <Route path="/item/churches/:id" element={<ChurchDetail />} />
+
+            <Route
+              path="/paineis-do-carmo/item/artists/:id"
+              element={<ArtistDetail />}
+            />
+            <Route path="/item/artists/:id" element={<ArtistDetail />} />
+
             <Route path="/sobre" element={<AboutPage />} />
             <Route path="/paineis-do-carmo/sobre" element={<AboutPage />} />
           </Routes>

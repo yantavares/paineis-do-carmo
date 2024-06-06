@@ -24,7 +24,7 @@ const translateSelected = (selected: string) => {
     case "igrejas":
       return "churches";
     case "topicos":
-      return "topics";
+      return "tags";
     default:
       return "wrong";
   }
@@ -116,7 +116,7 @@ const SearchPage = () => {
         );
 
       case "topicos":
-        return <TopicSearch />;
+        return <TopicSearch tags={data} />;
 
       default:
         return <p>Selecione uma categoria válida.</p>;

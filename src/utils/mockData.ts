@@ -16,6 +16,9 @@ export interface Tag {
 
 export interface Church {
   id: number;
+  description?: string;
+  bibliographyReference?: string;
+  painting?: Painting[];
   name: string;
   images: Image[];
   street?: string;

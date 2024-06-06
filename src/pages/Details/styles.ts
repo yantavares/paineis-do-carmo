@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import colors from "src/utils/colors";
 
 export const Container = styled.div`
   padding: 4rem 0;
@@ -66,6 +67,15 @@ export const Container = styled.div`
 
   .black {
     color: #000;
+  }
+
+  .church {
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      color: ${colors.green};
+    }
   }
 
   .description {

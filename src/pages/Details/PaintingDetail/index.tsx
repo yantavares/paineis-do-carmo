@@ -13,7 +13,7 @@ import {
   Col,
   EngravingImage,
   EngravingDescription,
-} from "./styles";
+} from "../styles";
 import Tags from "src/components/Tags";
 import { useNavigate, useParams } from "react-router-dom";
 import TextTruncate from "src/components/TextTruncate";
@@ -26,11 +26,16 @@ const defaultPainting: Painting = {
   images: [],
   dateOfCreation: 0,
   city: "",
+  church: {
+    id: 0,
+    name: "",
+    images: [],
+  },
   state: "",
   tag: [],
 };
 
-const ItemDetails = () => {
+const PaintingDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
 
@@ -51,8 +56,6 @@ const ItemDetails = () => {
     fetchPaintings();
   }, [id]);
 
-  console.log(data);
-
   return (
     <Container>
       <div className="flex-group">
@@ -62,7 +65,15 @@ const ItemDetails = () => {
       </div>
       <h1 className="item-name">{data.title} </h1>
       <p className="item-updater">
-        Por <span className="black">Pesquisador</span> • Rafael Santos
+        Localizada em •
+        <span
+          onClick={() => navigate(`/item/churches/${data.church.id}`)}
+          className="black church"
+        >
+          {" "}
+          {data.church.name}{" "}
+        </span>{" "}
+        • {data.church.state}
       </p>
       <div className="item-content">
         <div className="img-container">
@@ -156,4 +167,4 @@ const ItemDetails = () => {
   );
 };
 
-export default ItemDetails;
+export default PaintingDetails;

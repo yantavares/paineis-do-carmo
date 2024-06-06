@@ -31,7 +31,7 @@ const Item = ({
         onClick={() => navigate(`/item/${type}/${item.id}`)}
         height={fixedImgHeight ? "100%" : "auto"}
         width={fixedImgHeight ? "100%" : "100%"}
-        src={item.images[0].url}
+        src={item.images?.[0]?.url}
         alt={"Item image"}
       />
       {getTypeInfo(type, item)}
