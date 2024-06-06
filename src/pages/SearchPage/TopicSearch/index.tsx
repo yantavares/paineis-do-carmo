@@ -1,13 +1,18 @@
 import React from "react";
 import SearchBar from "src/components/SearchBar";
-import { tags } from "src/utils/mockData";
+import { Tag, tags } from "src/utils/mockData";
 import { SearchHeader, SearchBarContainer } from "../styles";
 import colors from "src/utils/colors";
 import { BigTag } from "./styles";
 import { useNavigate } from "react-router-dom";
 
-const TopicSearch = () => {
+interface TopicSearchProps {
+  tags: Tag[];
+}
+
+const TopicSearch = ({ tags }: TopicSearchProps) => {
   const navigate = useNavigate();
+
   return (
     <>
       <SearchHeader>
@@ -25,8 +30,11 @@ const TopicSearch = () => {
         }}
       >
         {tags.map((tag, index) => (
-          <BigTag onClick={() => navigate(`/topicos/${tag}`)} key={index}>
-            {tag}
+          <BigTag
+            onClick={() => navigate(`/topicos/${tag.name.toLocaleLowerCase()}`)}
+            key={index}
+          >
+            {tag.name}
           </BigTag>
         ))}
       </div>

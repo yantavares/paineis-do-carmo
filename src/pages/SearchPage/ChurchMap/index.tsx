@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import { MapContainer, GeoJSON, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -127,4 +127,4 @@ const ChurchMap = () => {
   );
 };
 
-export default ChurchMap;
+export default memo(ChurchMap);

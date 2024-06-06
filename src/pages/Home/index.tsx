@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import temp3 from "src/assets/artista1.jpg";
 import temp4 from "src/assets/baroque.jpg";
 import temp2 from "src/assets/baroque2.jpg";
@@ -31,6 +31,7 @@ import {
 } from "./styles";
 
 const Home = () => {
+  const [inputValue, setInputValue] = useState("");
   return (
     <div>
       <PaddingContainer>
@@ -67,6 +68,8 @@ const Home = () => {
           </div>
         </GreetingContainer>
         <HomeSearch
+          inputValue={inputValue}
+          setInputValue={setInputValue}
           placeHolder={"Busque por imagens, tópicos, pintores, igrejas..."}
         />
       </PaddingContainer>

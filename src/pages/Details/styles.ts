@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import colors from "src/utils/colors";
 
 export const Container = styled.div`
   padding: 4rem 0;
@@ -62,10 +63,20 @@ export const Container = styled.div`
     font-size: 1.6rem;
     font-weight: 500;
     margin: 0 0 2rem;
+    margin-bottom: 4rem;
   }
 
   .black {
     color: #000;
+  }
+
+  .hoverable {
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      color: ${colors.green};
+    }
   }
 
   .description {

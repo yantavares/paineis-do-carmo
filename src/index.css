@@ -15,6 +15,7 @@
 
 html {
   font-size: 62.5%;
+  overflow-x: hidden;
 }
 
 * {
@@ -96,4 +97,10 @@ button:focus {
 .leaflet-pane .leaflet-overlay-pane svg path {
   stroke: #3a5a40 !important;
   stroke-width: 3;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 85vh;
 }

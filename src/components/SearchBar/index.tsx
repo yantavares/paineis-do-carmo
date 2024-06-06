@@ -11,10 +11,17 @@ import {
   StyledIcon,
   SvgIcon,
 } from "./styles";
+import { useNavigate } from "react-router-dom";
 
-const SearchBar = ({ placeHolder = "", showButtons = true }) => {
-  const [inputValue, setInputValue] = useState("");
-  const [option, setOption] = useState("paintings");
+const SearchBar = ({
+  placeHolder = "",
+  showButtons = true,
+  inputValue = "",
+  setInputValue = null,
+  mode = "obras",
+}) => {
+  const [option, setOption] = useState(mode);
+  const navigate = useNavigate();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -24,32 +31,42 @@ const SearchBar = ({ placeHolder = "", showButtons = true }) => {
     <Container>
       <InputContainer>
         <SvgIcon src={magGlass} alt="Search" />
-        <HomeInput
-          type="text"
-          name="search"
-          placeholder={placeHolder}
-          value={inputValue}
-          onChange={handleInputChange}
+        <form
+          style={{ width: "100%" }}
+          onSubmit={() => navigate(`/pesquisa/${option}?search=${inputValue}`)}
+        >
+          <HomeInput
+            type="text"
+            name="search"
+            placeholder={placeHolder}
+            value={inputValue}
+            onChange={handleInputChange}
+          />
+        </form>
+        <StyledIcon
+          onClick={() => navigate(`/pesquisa/${option}?search=${inputValue}`)}
+          size="3x"
+          color={colors.lightGray}
+          icon={faArrowRight}
         />
-        <StyledIcon size="3x" color={colors.lightGray} icon={faArrowRight} />
       </InputContainer>
       {showButtons && (
         <SearchOptionContainer>
           <SearchOption
-            selected={option === "paintings"}
-            onClick={() => setOption("paintings")}
+            selected={option === "obras"}
+            onClick={() => setOption("obras")}
           >
             Obras
           </SearchOption>
           <SearchOption
-            selected={option === "churches"}
-            onClick={() => setOption("churches")}
+            selected={option === "igrejas"}
+            onClick={() => setOption("igrejas")}
           >
             Igrejas
           </SearchOption>
           <SearchOption
-            selected={option === "artists"}
-            onClick={() => setOption("artists")}
+            selected={option === "artifices"}
+            onClick={() => setOption("artifices")}
           >
             Artífices
           </SearchOption>

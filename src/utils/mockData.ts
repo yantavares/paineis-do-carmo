@@ -5,203 +5,225 @@ import pintura2 from "src/assets/pintura2.jpeg";
 import artista1 from "src/assets/artista1.jpg";
 import artista2 from "src/assets/artista2.jpg";
 
-export interface Painting {
-  id: number;
-  title: string;
-  image: string;
-  name?: string;
-  date?: string | number;
-  city?: string;
-  state?: string;
-  tags?: string[];
-}
+type Image = {
+  url: string;
+  photographer?: string;
+};
 
-export interface Artist {
-  id: number;
+export interface Tag {
   name: string;
-  image: string;
-  specialty?: string;
-  dateOfBirth?: string;
-  city?: string;
-  state?: string;
-  tags?: string[];
 }
 
 export interface Church {
   id: number;
+  description?: string;
+  bibliographyReference?: string;
+  paintings?: Painting[];
   name: string;
-  image: string;
+  images: Image[];
+  street?: string;
   city?: string;
   state?: string;
-  tags?: string[];
+  tag?: Tag[];
 }
 
 export const brazilianChurches: Church[] = [
   {
     id: 1,
     name: "Catedral Metropolitana de Brasília",
-    image: igreja1,
+    images: [{ url: igreja1 }],
     city: "Brasília",
     state: "DF",
-    tags: ["catedral", "moderna", "arquitetura"],
+    tag: [{ name: "catedral" }, { name: "moderna" }, { name: "arquitetura" }],
   },
   {
     id: 2,
     name: "Igreja de Nossa Senhora do Brasil",
-    image: igreja2,
+    images: [{ url: igreja2 }],
     city: "São Paulo",
     state: "SP",
-    tags: ["barroco", "igreja", "século 18"],
+    tag: [{ name: "barroco" }, { name: "igreja" }, { name: "século 18" }],
   },
   {
     id: 3,
     name: "Igreja da Candelária",
-    image: igreja1,
+    images: [{ url: igreja1 }],
     city: "Rio de Janeiro",
     state: "RJ",
-    tags: ["barroco", "igreja", "século 18"],
+    tag: [{ name: "barroco" }, { name: "igreja" }, { name: "século 18" }],
   },
   {
     id: 4,
     name: "Igreja de São Francisco de Assis",
-    image: igreja2,
+    images: [{ url: igreja2 }],
     city: "Ouro Preto",
     state: "MG",
-    tags: ["barroco", "igreja", "século 18"],
+    tag: [{ name: "barroco" }, { name: "igreja" }, { name: "século 18" }],
   },
   {
     id: 5,
     name: "Catedral da Sé",
-    image: igreja1,
+    images: [{ url: igreja1 }],
     city: "São Paulo",
     state: "SP",
-    tags: ["catedral", "moderna", "arquitetura"],
+    tag: [{ name: "catedral" }, { name: "moderna" }, { name: "arquitetura" }],
   },
 ];
+
+export interface Engraving {
+  name: string;
+  url: string;
+}
+
+export interface Painting {
+  id: number;
+  title: string;
+  images: Image[];
+  dateOfCreation: number;
+  artisan?: Artist[];
+  bibliographyReference?: string;
+  bibliographySource?: string;
+  engravings?: Engraving[];
+  description?: string;
+  city: string;
+  state: string;
+  tag: Tag[];
+  church?: Church;
+  placement?: string;
+}
 
 export const brazilianPaintings: Painting[] = [
   {
     id: 1,
     title: "A Primeira Missa no Brasil",
-    image: pintura1,
-    date: 1860,
+    images: [{ url: pintura1 }],
+    dateOfCreation: 1860,
     city: "Rio de Janeiro",
     state: "RJ",
-    tags: ["pintura", "história", "brasil"],
+    tag: [{ name: "pintura" }, { name: "história" }, { name: "brasil" }],
   },
   {
     id: 2,
     title: "Abaporu",
-    image: pintura2,
-    date: 1928,
+    images: [{ url: pintura2 }],
+    dateOfCreation: 1928,
     city: "São Paulo",
     state: "SP",
-    tags: ["pintura", "moderna", "brasil"],
+    tag: [{ name: "pintura" }, { name: "moderna" }, { name: "brasil" }],
   },
   {
     id: 3,
     title: "Retirantes",
-    image: pintura1,
-    date: 1944,
+    images: [{ url: pintura1 }],
+    dateOfCreation: 1944,
     city: "São Paulo",
     state: "SP",
-    tags: ["pintura", "social", "brasil"],
+    tag: [{ name: "pintura" }, { name: "social" }, { name: "brasil" }],
   },
   {
     id: 4,
     title: "Guerra e Paz",
-    image: pintura2,
-    date: 1956,
+    images: [{ url: pintura2 }],
+    dateOfCreation: 1956,
     city: "Rio de Janeiro",
     state: "RJ",
-    tags: ["pintura", "painel", "brasil"],
+    tag: [{ name: "pintura" }, { name: "painel" }, { name: "brasil" }],
   },
   {
     id: 5,
     title: "O Vendedor de Frutas",
-    image: pintura1,
-    date: 1893,
+    images: [{ url: pintura1 }],
+    dateOfCreation: 1893,
     city: "São Paulo",
     state: "SP",
-    tags: ["pintura", "realismo", "brasil"],
+    tag: [{ name: "pintura" }, { name: "realismo" }, { name: "brasil" }],
   },
 ];
+
+export interface Artist {
+  id: number;
+  name: string;
+  images: Image[];
+  specialty: string;
+  city: string;
+  state: string;
+  dateOfBirth: string;
+  tag: Tag[];
+}
 
 export const brazilianArtists: Artist[] = [
   {
     id: 1,
     name: "Tarsila do Amaral",
-    image: artista1,
+    images: [{ url: artista1 }],
     specialty: "Pintura Modernista",
     city: "São Paulo",
     state: "SP",
     dateOfBirth: "1886",
-    tags: ["artista", "moderna", "brasil"],
+    tag: [{ name: "artista" }, { name: "moderna" }, { name: "brasil" }],
   },
   {
     id: 2,
     name: "Cândido Portinari",
-    image: artista2,
+    images: [{ url: artista2 }],
     specialty: "Pintura Social",
     city: "Brodowski",
     state: "SP",
     dateOfBirth: "1886",
-    tags: ["artista", "social", "brasil"],
+    tag: [{ name: "artista" }, { name: "social" }, { name: "brasil" }],
   },
   {
     id: 3,
     name: "Di Cavalcanti",
-    image: artista1,
+    images: [{ url: artista1 }],
     specialty: "Pintura Modernista",
     city: "Rio de Janeiro",
     state: "RJ",
     dateOfBirth: "1886",
-    tags: ["artista", "moderna", "brasil"],
+    tag: [{ name: "artista" }, { name: "moderna" }, { name: "brasil" }],
   },
   {
     id: 4,
     name: "Anita Malfatti",
-    image: artista2,
+    images: [{ url: artista2 }],
     specialty: "Expressionismo",
     city: "São Paulo",
     state: "SP",
     dateOfBirth: "1886",
-    tags: ["artista", "expressionismo", "brasil"],
+    tag: [{ name: "artista" }, { name: "expressionismo" }, { name: "brasil" }],
   },
   {
     id: 5,
     name: "Lygia Clark",
-    image: artista1,
+    images: [{ url: artista1 }],
     specialty: "Escultura e Pintura",
     city: "Belo Horizonte",
     state: "MG",
     dateOfBirth: "1886",
-    tags: ["artista", "moderna", "brasil"],
+    tag: [{ name: "artista" }, { name: "moderna" }, { name: "brasil" }],
   },
 ];
 
-export type Tag = string;
-
 export const tags: Tag[] = [
-  "arte",
-  "barroco",
-  "igrejas",
-  "pinturas",
-  "artistas",
-  "história",
-  "cultura",
-  "brasil",
-  "moderna",
-  "século 18",
-  "social",
-  "realismo",
-  "expressionismo",
-  "escultura",
-  "painel",
-  "catedral",
-  "arquitetura",
-  "artista",
-  "pintura",
-  "cultural",
-  "arte-sacra",
+  { name: "arte" },
+  { name: "barroco" },
+  { name: "igrejas" },
+  { name: "pinturas" },
+  { name: "artistas" },
+  { name: "história" },
+  { name: "cultura" },
+  { name: "brasil" },
+  { name: "moderna" },
+  { name: "século 18" },
+  { name: "social" },
+  { name: "realismo" },
+  { name: "expressionismo" },
+  { name: "escultura" },
+  { name: "painel" },
+  { name: "catedral" },
+  { name: "arquitetura" },
+  { name: "artista" },
+  { name: "pintura" },
+  { name: "cultural" },
+  { name: "arte-sacra" },
 ];
