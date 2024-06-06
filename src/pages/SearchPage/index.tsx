@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Item from "src/components/Item";
 import SearchBar from "src/components/SearchBar";
 import colors from "src/utils/colors";
@@ -15,7 +15,7 @@ import {
   SearchResultsContainer,
 } from "./styles";
 
-const translateSelected = (selected) => {
+const translateSelected = (selected: string) => {
   switch (selected) {
     case "artifices":
       return "artisans";
@@ -33,13 +33,25 @@ const translateSelected = (selected) => {
 const SearchPage = () => {
   const { selected } = useParams();
 
+  const useQuery = () => {
+    return new URLSearchParams(useLocation().search)
+      .toString()
+      .replace("search=", "");
+  };
+
+  const query = useQuery();
+
   const [data, setData] = useState([]);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(query ? query : "");
 
   const translatedSelected = useMemo(
     () => translateSelected(selected),
     [selected]
   );
+
+  useEffect(() => {
+    setInputValue(query ? query : "");
+  }, [selected]);
 
   useEffect(() => {
     const fetchData = async () => {

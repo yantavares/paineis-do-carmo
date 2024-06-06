@@ -13,11 +13,13 @@ import { PreventRightClickProvider } from "./providers/PreventRightClickContext"
 import PaintingDetail from "src/pages/Details/PaintingDetail";
 import ChurchDetail from "src/pages/Details/ChurchDetail";
 import ArtistDetail from "src/pages/Details/ArtistDetail";
+import ScrollToTop from "./utils/scrollToTop";
 
 function App() {
   return (
     <PreventRightClickProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Header />
         <Suspense fallback={<CircularProgress />}>
           <Routes>
