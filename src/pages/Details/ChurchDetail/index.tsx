@@ -50,7 +50,7 @@ const PaintingDetails = () => {
   return (
     <Container>
       <div className="flex-group">
-        <a className="inner-link" onClick={() => navigate("/pesquisa/church")}>
+        <a className="inner-link" onClick={() => navigate("/pesquisa/igrejas")}>
           <ArrowLeft size={20} /> Igrejas
         </a>
       </div>

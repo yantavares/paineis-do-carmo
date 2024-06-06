@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Item from "src/components/Item";
 import SearchBar from "src/components/SearchBar";
 import colors from "src/utils/colors";
-import { brazilianChurches } from "src/utils/mockData";
+import { Church, brazilianChurches } from "src/utils/mockData";
 import { capitalize } from "src/utils/strings";
 import {
   SearchBarContainer,
@@ -12,9 +12,27 @@ import {
   SearchResult,
   SearchResultsContainer,
 } from "../SearchPage/styles";
+import axios from "axios";
 
 const ChurchState = () => {
   const { state } = useParams();
+  const [data, setData] = useState<Church[]>(null);
+
+  useEffect(() => {
+    const fetchPaintings = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/churches/state/${state}`
+        );
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchPaintings();
+  }, [state]);
+
   return (
     <SearchContainer>
       <SearchHeader>
@@ -29,7 +47,7 @@ const ChurchState = () => {
       </SearchHeader>
 
       <SearchResultsContainer>
-        {brazilianChurches.map((item: any, index: number) => (
+        {data?.map((item: any, index: number) => (
           <SearchResult key={index}>
             <Item item={item} type={"churches"} fixedImgHeight />
           </SearchResult>
