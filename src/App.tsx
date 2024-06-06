@@ -1,19 +1,20 @@
-import { CircularProgress } from "@mui/material";
-import React, { Suspense } from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Home from "src/pages/Home";
-import LoginPage from "src/pages/LoginPage";
+import { CircularProgress } from "@mui/material";
 import Header from "src/components/Header";
 import Footer from "src/components/Footer";
-import SearchPage from "./pages/SearchPage";
-import ChurchState from "./pages/ChurchState";
-import TagDetail from "./pages/TagDetail";
-import AboutPage from "./pages/About";
 import { PreventRightClickProvider } from "./providers/PreventRightClickContext";
-import PaintingDetail from "src/pages/Details/PaintingDetail";
-import ChurchDetail from "src/pages/Details/ChurchDetail";
-import ArtistDetail from "src/pages/Details/ArtistDetail";
 import ScrollToTop from "./utils/scrollToTop";
+
+const Home = lazy(() => import("src/pages/Home"));
+const LoginPage = lazy(() => import("src/pages/LoginPage"));
+const SearchPage = lazy(() => import("./pages/SearchPage"));
+const ChurchState = lazy(() => import("./pages/ChurchState"));
+const TagDetail = lazy(() => import("./pages/TagDetail"));
+const AboutPage = lazy(() => import("./pages/About"));
+const PaintingDetail = lazy(() => import("src/pages/Details/PaintingDetail"));
+const ChurchDetail = lazy(() => import("src/pages/Details/ChurchDetail"));
+const ArtistDetail = lazy(() => import("src/pages/Details/ArtistDetail"));
 
 function App() {
   return (
