@@ -1,18 +1,9 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Item from "src/components/Item";
 import SearchBar from "src/components/SearchBar";
 import colors from "src/utils/colors";
-import {
-  Artist,
-  Church,
-  Painting,
-  Tag,
-  brazilianArtists,
-  brazilianChurches,
-  brazilianPaintings,
-  tags,
-} from "src/utils/mockData";
 import { capitalize, translateTopicType } from "src/utils/strings";
 import ChurchMap from "./ChurchMap";
 import TopicSearch from "./TopicSearch";
@@ -23,7 +14,21 @@ import {
   SearchResult,
   SearchResultsContainer,
 } from "./styles";
-import axios from "axios";
+
+const translateSelected = (selected: string) => {
+  switch (selected) {
+    case "artifices":
+      return "artisans";
+    case "obras":
+      return "paintings";
+    case "igrejas":
+      return "churches";
+    case "topicos":
+      return "topics";
+    default:
+      return "wrong";
+  }
+};
 
 const SearchPage = () => {
   const { selected } = useParams();
@@ -34,9 +39,8 @@ const SearchPage = () => {
     const fetchPaintings = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/paintings`
+          `${import.meta.env.VITE_API_URL}/api/${translateSelected(selected)}`
         );
-        console.log("Data fetched:", response.data);
         setData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -44,7 +48,7 @@ const SearchPage = () => {
     };
 
     fetchPaintings();
-  }, []);
+  }, [selected]);
 
   const renderContent = () => {
     switch (selected) {
@@ -66,8 +70,7 @@ const SearchPage = () => {
             </SearchHeader>
 
             <SearchResultsContainer>
-              {data.map((item: any, index: number) => {
-                console.log("Item:", item.title);
+              {data.map((item: any) => {
                 return (
                   <SearchResult key={item?.id}>
                     <Item
