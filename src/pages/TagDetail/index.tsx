@@ -9,6 +9,7 @@ import {
   SearchHeader,
   SearchResult,
   SearchResultsContainer,
+  SearchSubHeader,
 } from "./styles";
 import axios from "axios";
 
@@ -20,9 +21,7 @@ const TagDetail = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${
-            import.meta.env.VITE_API_URL
-          }/api/paintings/tags${tag.toLocaleLowerCase()}`
+          `${import.meta.env.VITE_API_URL}/api/paintings/tag/${tag}`
         );
         setData(response.data);
       } catch (error) {
@@ -39,12 +38,15 @@ const TagDetail = () => {
         Tópico: <span style={{ color: colors.green }}>{parseTag(tag)}</span>
       </SearchHeader>
       <SearchResultsContainer>
-        {data &&
+        {data && data.length > 0 ? (
           data.map((item: any, index: number) => (
             <SearchResult key={index}>
               <Item tagCount={2} width="20rem" item={item} type={"paintings"} />
             </SearchResult>
-          ))}
+          ))
+        ) : (
+          <SearchSubHeader>Nenhuma pintura foi encontrada...</SearchSubHeader>
+        )}
       </SearchResultsContainer>
     </SearchContainer>
   );

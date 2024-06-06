@@ -15,6 +15,8 @@ import {
   Image,
   ImageContainer,
 } from "../styles";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse, faLocation } from "@fortawesome/free-solid-svg-icons";
 
 const defaultChurch: Church = {
   id: 0,
@@ -55,8 +57,16 @@ const PaintingDetails = () => {
         </a>
       </div>
       <h1 className="item-name">{data.name} </h1>
-      <p className="item-updater">
-        Por <span className="black">Pesquisador</span> • Rafael Santos
+      <p className="item-updater" style={{ display: "flex", gap: "1rem" }}>
+        <FontAwesomeIcon icon={faLocation} />
+        Localizada em {data.city}
+        <span
+          onClick={() => navigate(`/pesquisa/igrejas/${data.state}`)}
+          className="black church"
+        >
+          {" "}
+          • {data.state}{" "}
+        </span>{" "}
       </p>
       <div className="item-content">
         <div className="img-container">

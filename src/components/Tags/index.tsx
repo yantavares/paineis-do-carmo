@@ -16,7 +16,12 @@ const Tags = ({ tags, tagCount = -1 }: TagsProps) => {
         tags.map((tag, index) => {
           if (tagCount && tagCount !== -1 && index >= tagCount) return;
           return (
-            <Tag onClick={() => navigate(`/topicos/${tag.name}`)} key={index}>
+            <Tag
+              onClick={() =>
+                navigate(`/topicos/${tag.name.toLocaleLowerCase()}`)
+              }
+              key={index}
+            >
               {tag.name}
             </Tag>
           );

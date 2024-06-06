@@ -33,10 +33,11 @@ export const SearchHeader = styled.h1`
 
 export const SearchSubHeader = styled.h2`
   font-size: 4.8rem;
-  font-weight: 800;
+  font-weight: 500;
   padding: 0;
   padding-top: 3rem;
   margin: 0;
+  margin-bottom: 3rem;
 `;
 
 export const SearchResult = styled.div`

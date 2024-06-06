@@ -19,6 +19,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import TextTruncate from "src/components/TextTruncate";
 import { Painting } from "src/utils/mockData";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChurch } from "@fortawesome/free-solid-svg-icons";
 
 const defaultPainting: Painting = {
   id: 0,
@@ -40,6 +42,15 @@ const PaintingDetails = () => {
   const { id } = useParams<{ id: string }>();
 
   const [data, setData] = useState<Painting>(defaultPainting);
+
+  const downloadImage = (url: string) => {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = url.split("/").pop();
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   useEffect(() => {
     const fetchPaintings = async () => {
@@ -64,7 +75,8 @@ const PaintingDetails = () => {
         </a>
       </div>
       <h1 className="item-name">{data.title} </h1>
-      <p className="item-updater">
+      <p className="item-updater" style={{ display: "flex", gap: "1rem" }}>
+        <FontAwesomeIcon icon={faChurch} />
         Localizada em •
         <span
           onClick={() => navigate(`/item/churches/${data.church.id}`)}
@@ -81,7 +93,9 @@ const PaintingDetails = () => {
             data.images.map((image, index) => (
               <ImageContainer key={index}>
                 <Image src={image.url} alt="" />
-                <DownloadButton>Baixar</DownloadButton>
+                <DownloadButton onClick={() => downloadImage(image.url)}>
+                  Baixar
+                </DownloadButton>
               </ImageContainer>
             ))}
         </div>

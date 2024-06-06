@@ -30,7 +30,10 @@ const TopicSearch = ({ tags }: TopicSearchProps) => {
         }}
       >
         {tags.map((tag, index) => (
-          <BigTag onClick={() => navigate(`/topicos/${tag.name}`)} key={index}>
+          <BigTag
+            onClick={() => navigate(`/topicos/${tag.name.toLocaleLowerCase()}`)}
+            key={index}
+          >
             {tag.name}
           </BigTag>
         ))}
