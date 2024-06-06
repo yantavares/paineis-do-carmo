@@ -85,7 +85,12 @@ const PaintingDetails = () => {
           {" "}
           {data.church.name}{" "}
         </span>{" "}
-        • {data.church.state}
+        <span
+          className="black church"
+          onClick={() => navigate(`/pesquisa/igrejas/${data.church.state}`)}
+        >
+          • {data.church.state}
+        </span>
       </p>
       <div className="item-content">
         <div className="img-container">
