@@ -1,5 +1,5 @@
+import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Item from "src/components/Item";
 import SearchBar from "src/components/SearchBar";
@@ -15,7 +15,7 @@ import {
   SearchResultsContainer,
 } from "./styles";
 
-const translateSelected = (selected: string) => {
+const translateSelected = (selected) => {
   switch (selected) {
     case "artifices":
       return "artisans";
@@ -34,12 +34,18 @@ const SearchPage = () => {
   const { selected } = useParams();
 
   const [data, setData] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+
+  const translatedSelected = useMemo(
+    () => translateSelected(selected),
+    [selected]
+  );
 
   useEffect(() => {
-    const fetchPaintings = async () => {
+    const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/${translateSelected(selected)}`
+          `${import.meta.env.VITE_API_URL}/api/${translatedSelected}`
         );
         setData(response.data);
       } catch (error) {
@@ -47,8 +53,23 @@ const SearchPage = () => {
       }
     };
 
-    fetchPaintings();
-  }, [selected]);
+    if (translatedSelected !== "wrong") {
+      fetchData();
+    }
+  }, [translatedSelected]);
+
+  const filteredData = data.filter((item) => {
+    switch (selected) {
+      case "obras":
+        return item && item.title
+          ? item.title.toLowerCase().includes(inputValue.toLowerCase())
+          : false;
+      default:
+        return item && item.name
+          ? item.name.toLowerCase().includes(inputValue.toLowerCase())
+          : false;
+    }
+  });
 
   const renderContent = () => {
     switch (selected) {
@@ -65,12 +86,14 @@ const SearchPage = () => {
                 <SearchBar
                   placeHolder={`Busque por ${selected}`}
                   showButtons={false}
+                  inputValue={inputValue}
+                  setInputValue={setInputValue}
                 />
               </SearchBarContainer>
             </SearchHeader>
 
             <SearchResultsContainer>
-              {data.map((item: any) => {
+              {filteredData.map((item) => {
                 return (
                   <SearchResult key={item?.id}>
                     <Item
@@ -98,11 +121,13 @@ const SearchPage = () => {
                 <SearchBar
                   placeHolder={`Busque por ${selected}`}
                   showButtons={false}
+                  inputValue={inputValue}
+                  setInputValue={setInputValue}
                 />
               </SearchBarContainer>
             </SearchHeader>
             <SearchResultsContainer>
-              {data.map((item: any, index: number) => (
+              {filteredData.map((item, index) => (
                 <SearchResult key={index}>
                   <Item
                     item={item}
@@ -116,7 +141,7 @@ const SearchPage = () => {
         );
 
       case "topicos":
-        return <TopicSearch tags={data} />;
+        return <TopicSearch tags={filteredData} />;
 
       default:
         return <p>Selecione uma categoria válida.</p>;

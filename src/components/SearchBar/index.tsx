@@ -12,8 +12,12 @@ import {
   SvgIcon,
 } from "./styles";
 
-const SearchBar = ({ placeHolder = "", showButtons = true }) => {
-  const [inputValue, setInputValue] = useState("");
+const SearchBar = ({
+  placeHolder = "",
+  showButtons = true,
+  inputValue = "",
+  setInputValue = null,
+}) => {
   const [option, setOption] = useState("paintings");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
