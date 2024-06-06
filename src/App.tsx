@@ -15,6 +15,8 @@ const AboutPage = lazy(() => import("./pages/About"));
 const PaintingDetail = lazy(() => import("src/pages/Details/PaintingDetail"));
 const ChurchDetail = lazy(() => import("src/pages/Details/ChurchDetail"));
 const ArtistDetail = lazy(() => import("src/pages/Details/ArtistDetail"));
+const RegisterPage = lazy(() => import("src/pages/RegisterPage"));
+const SubmitPage = lazy(() => import("src/pages/SubmitPage"));
 
 function App() {
   return (
@@ -29,6 +31,19 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/paineis-do-carmo" element={<Home />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+
+                <Route
+                  path="/paineis-do-carmo/register"
+                  element={<RegisterPage />}
+                />
+
+                <Route path="/submit" element={<SubmitPage />} />
+                <Route
+                  path="/paineis-do-carmo/submit"
+                  element={<SubmitPage />}
+                />
+
                 <Route path="/paineis-do-carmo/login" element={<LoginPage />} />
                 <Route path="/pesquisa/:selected" element={<SearchPage />} />
                 <Route

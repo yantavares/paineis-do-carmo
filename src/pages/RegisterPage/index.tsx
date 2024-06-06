@@ -4,7 +4,8 @@ import { useState } from "react";
 import { Container, Content } from "./styles";
 import googleLogo from "../../assets/google_symbol.svg.png";
 
-const LoginPage = () => {
+const RegisterPage = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,9 +21,9 @@ const LoginPage = () => {
         justifyContent: "center",
       }}>
       <Container>
-        <h3 className="login-title">Login</h3>
+        <h3 className="login-title">Registro</h3>
         <p className="login-description">
-          Faça login para buscar obras <br /> no nosso banco de dados
+          Se registre para poder logar e buscar obras <br /> no nosso banco de dados
         </p>
         <button className="google-btn">
           <img
@@ -38,6 +39,15 @@ const LoginPage = () => {
             e.preventDefault();
             handleLogin();
           }}>
+          <label className="label-wrapper">
+            <p className="input-label">Nome</p>
+            <input
+              type="text"
+              placeholder="Insira seu nome"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
           <label className="label-wrapper">
             <p className="input-label">Email</p>
             <input
@@ -57,14 +67,14 @@ const LoginPage = () => {
             />
           </label>
           <div className="flex-group">
-            <button className="login-btn">Login</button>
+            <button className="login-btn">Registrar-se</button>
           </div>
         </form>
         <p className="register-cta">
-          Não tem uma conta ainda? <a href="register">Registre-se agora</a>
+          Já tem uma conta? <a href="login">Faça Login</a>
         </p>
       </Container>
     </div>
   );
 };
-export default LoginPage;
+export default RegisterPage;
