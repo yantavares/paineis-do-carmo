@@ -121,15 +121,6 @@ const Home = () => {
             </TopicHeader>
             <HomeTopic type={"churches"} data={brazilianChurches} />
           </Topic>
-          <Topic>
-            <TopicHeader>
-              <TopicTitle>Artífices</TopicTitle>
-              <TopicSubTitle>
-                Procure por artifices do barrroco brasileiro
-              </TopicSubTitle>
-            </TopicHeader>
-            <HomeTopic type={"artists"} data={brazilianArtists} />
-          </Topic>
         </TopicsContainer>
       </PaddingContainer>
     </div>
