@@ -1,15 +1,17 @@
 import React from "react";
 import { useState } from "react";
 
-import { Container, Content } from "./styles";
+import { Container } from "./styles";
 import googleLogo from "../../assets/google_symbol.svg.png";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = () => {
-    console.log(email, password);
+    navigate("/dashboard/1");
   };
 
   return (
@@ -18,18 +20,15 @@ const LoginPage = () => {
         paddingTop: "6rem",
         display: "flex",
         justifyContent: "center",
-      }}>
+      }}
+    >
       <Container>
         <h3 className="login-title">Login</h3>
         <p className="login-description">
           Faça login para buscar obras <br /> no nosso banco de dados
         </p>
         <button className="google-btn">
-          <img
-            src={googleLogo}
-            alt=""
-          />{" "}
-          Entrar com o Google
+          <img src={googleLogo} alt="" /> Entrar com o Google
         </button>
         <div className="divider"></div>
         <form
@@ -37,7 +36,8 @@ const LoginPage = () => {
           onSubmit={(e) => {
             e.preventDefault();
             handleLogin();
-          }}>
+          }}
+        >
           <label className="label-wrapper">
             <p className="input-label">Email</p>
             <input
