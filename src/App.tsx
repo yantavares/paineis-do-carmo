@@ -84,11 +84,7 @@ function App() {
                   element={<ChurchDetail />}
                 />
                 <Route path="/item/churches/:id" element={<ChurchDetail />} />
-                <Route
-                  path="/paineis-do-carmo/item/artists/:id"
-                  element={<ArtistDetail />}
-                />
-                <Route path="/item/artists/:id" element={<ArtistDetail />} />
+
                 <Route path="/sobre" element={<AboutPage />} />
                 <Route path="/paineis-do-carmo/sobre" element={<AboutPage />} />
               </Routes>
