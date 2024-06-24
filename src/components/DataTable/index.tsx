@@ -5,9 +5,8 @@ import { ptBR } from "@mui/material/locale";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
-import SubmitPage from "src/pages/SubmitPage";
-import "./styles.css";
 import DashForm from "../DashForm";
+import "./styles.css";
 
 const rows = [
   {
@@ -163,7 +162,12 @@ export default function DataTable() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div style={{ height: 500, width: "78rem" }}>
+      <div
+        style={{
+          height: 500,
+          width: "78rem",
+        }}
+      >
         <DataGrid
           className="data-grid"
           rows={rows}
