@@ -1,15 +1,15 @@
-import * as React from "react";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import "./styles.css";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { ptBR } from "@mui/material/locale";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faListDots,
-  faEdit,
-  faCheckCircle,
+  faListDots
 } from "@fortawesome/free-solid-svg-icons";
-import { Modal, Box, Button, IconButton } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Box, IconButton, Modal } from "@mui/material";
+import { ptBR } from "@mui/material/locale";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import * as React from "react";
+import SubmitPage from "src/pages/SubmitPage";
+import "./styles.css";
+import DashForm from "../DashForm";
 
 const rows = [
   {
@@ -144,39 +144,15 @@ export default function DataTable() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 400,
+            width: 800,
+            height: 600,
             bgcolor: "background.paper",
-            border: "2px solid #000",
-            boxShadow: 24,
+            overflowY: "scroll",
             p: 4,
+            borderRadius: 6,
           }}
         >
-          <h2>{rows.find((row) => row.id === selectedRowId)?.name}</h2>
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<FontAwesomeIcon icon={faEdit} />}
-            style={{ marginRight: "1rem" }}
-            onClick={() => {
-              // Lógica para editar
-              console.log("Editar", selectedRowId);
-              handleClose();
-            }}
-          >
-            Editar
-          </Button>
-          <Button
-            variant="contained"
-            color="success"
-            startIcon={<FontAwesomeIcon icon={faCheckCircle} />}
-            onClick={() => {
-              // Lógica para avaliar
-              console.log("Avaliar", selectedRowId);
-              handleClose();
-            }}
-          >
-            Avaliar
-          </Button>
+          <DashForm/>
         </Box>
       </Modal>
     </ThemeProvider>
