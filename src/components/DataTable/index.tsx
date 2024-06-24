@@ -1,6 +1,4 @@
-import {
-  faListDots
-} from "@fortawesome/free-solid-svg-icons";
+import { faListDots } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, IconButton, Modal } from "@mui/material";
 import { ptBR } from "@mui/material/locale";
@@ -83,9 +81,51 @@ export default function DataTable() {
   const [open, setOpen] = React.useState(false);
   const [selectedRowId, setSelectedRowId] = React.useState<number | null>(null);
 
+  const statusColors: { [key: string]: string } = {
+    Approved: "rgba(0, 128, 0, 0.3)", // green with opacity
+    Pending: "rgba(255, 255, 0, 0.3)", // yellow with opacity
+    Rejected: "rgba(255, 0, 0, 0.3)", // red with opacity
+  };
+
+  const textColor: { [key: string]: string } = {
+    Approved: "#006400", // dark green
+    Pending: "#FF8C00", // dark orange
+    Rejected: "#8B0000", // dark red
+  };
+
   const columns: GridColDef[] = [
     { field: "name", headerName: "Nome", flex: 2 },
-    { field: "status", headerName: "Status", flex: 1 },
+    {
+      field: "status",
+      headerName: "Status",
+      flex: 1,
+      renderCell: (params: any) => (
+        <div
+          style={{
+            height: "100%",
+            alignItems: "center",
+            width: "100%",
+            display: "flex",
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: statusColors[params.value],
+              color: textColor[params.value],
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "0.5rem",
+              borderRadius: "0.5rem",
+              width: "4.6rem",
+              height: "1.6rem",
+            }}
+          >
+            {params.value}
+          </div>
+        </div>
+      ),
+    },
     { field: "user", headerName: "Usuário", flex: 1 },
     {
       field: "date",
@@ -93,6 +133,8 @@ export default function DataTable() {
       type: "date",
       flex: 1,
       valueGetter: (params: any) => new Date(params.value),
+      valueFormatter: (params: any) =>
+        new Date(params.value).toLocaleDateString("pt-BR"),
     },
     {
       field: "options",
@@ -121,17 +163,17 @@ export default function DataTable() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div style={{ height: 400, width: "100%" }}>
+      <div style={{ height: 500, width: "78rem" }}>
         <DataGrid
           className="data-grid"
           rows={rows}
           columns={columns}
           initialState={{
             pagination: {
-              paginationModel: { page: 0, pageSize: 5 },
+              paginationModel: { page: 0, pageSize: 10 },
             },
           }}
-          pageSizeOptions={[5, 10]}
+          pageSizeOptions={[5, 10, 20]}
           disableColumnFilter
           disableColumnMenu
           disableRowSelectionOnClick
@@ -152,7 +194,7 @@ export default function DataTable() {
             borderRadius: 6,
           }}
         >
-          <DashForm/>
+          <DashForm />
         </Box>
       </Modal>
     </ThemeProvider>
