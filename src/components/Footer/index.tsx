@@ -1,6 +1,8 @@
 import React from "react";
 import {
+  Author,
   ContactContainer,
+  CreditsContainer,
   DashedLine,
   FinancingContainer,
   FooterButton,
@@ -39,6 +41,21 @@ const Footer = () => {
             <Text>Entre em contato para saber mais sobre o projeto</Text>
             <FooterButton>Entrar em contato</FooterButton>
           </ContactContainer>
+          <CreditsContainer>
+            <TitleText>Créditos</TitleText>
+            <Text>
+              <Author href="">Gabriel Farago</Author> UI/UX e Front End
+            </Text>
+            <Text>
+              <Author href="">Guilherme Gonçalves</Author> Back End
+            </Text>
+            <Text>
+              <Author href="https://github.com/yantavares" target="_blank">
+                Yan Tavares
+              </Author>
+              Front End e integração com IA
+            </Text>
+          </CreditsContainer>
           <FinancingContainer>
             <TitleText>
               Este projeto foi financiado pela Universidade de Brasília

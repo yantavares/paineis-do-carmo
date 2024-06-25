@@ -64,12 +64,6 @@ const SearchBar = ({
           >
             Igrejas
           </SearchOption>
-          <SearchOption
-            selected={option === "artifices"}
-            onClick={() => setOption("artifices")}
-          >
-            Artífices
-          </SearchOption>
         </SearchOptionContainer>
       )}
     </Container>
