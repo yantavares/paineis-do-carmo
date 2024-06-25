@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import axios from "axios";
 import openAISvg from "src/assets/OpenAI.svg";
+import { makeOpenAIRequest } from "src/api/chatBot.js";
 
 interface AssistantProps {
   setShowAssistant: (show: boolean) => void;
@@ -21,26 +21,17 @@ const Assistant: React.FC<AssistantProps> = ({
     e.preventDefault();
     setIsLoading(true);
 
-    if (!prompt) {
-      setResponse("Por favor, digite um prompt.");
-      setIsLoading(false);
-      return;
-    }
-
     try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_AI_API_URL}/openai`,
-        {
-          prompt: prompt,
-          igreja: church,
-          obra: painting,
-        }
-      );
-
-      setResponse(res.data.message.content);
+      if (!prompt) {
+        setResponse("Digite um prompt para enviar.");
+        setIsLoading(false);
+        return;
+      }
+      const result = await makeOpenAIRequest(prompt, painting, church);
+      setResponse(result.message.content);
       setIsLoading(false);
     } catch (error) {
-      console.error("Erro ao fazer a solicitação para o OpenAI:", error);
+      console.error("Erro:", error);
       setResponse("Ocorreu um erro ao buscar a resposta.");
       setIsLoading(false);
     }
