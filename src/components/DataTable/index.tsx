@@ -6,9 +6,8 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
 import DashForm from "../DashForm";
-import "./styles.css";
-import { dataTableRows } from "src/utils/mockData";
 import { DataTableContainer } from "./styles";
+import "./styles.css";
 
 const theme = createTheme({}, ptBR);
 

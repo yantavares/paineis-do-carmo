@@ -44,7 +44,7 @@ const index = () => {
           name: painting?.title,
           status: painting?.status ?? "Aprovada",
           user: painting?.registeredBy ?? "Desconhecido",
-          date: "Desconhecido",
+          date: painting.submittedAt ?? "Desconhecido",
         },
       ]);
     });
