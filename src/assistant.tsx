@@ -23,15 +23,19 @@ const Assistant: React.FC<AssistantProps> = ({
 
     if (!prompt) {
       setResponse("Por favor, digite um prompt.");
+      setIsLoading(false);
       return;
     }
 
     try {
-      const res = await axios.post("http://localhost:3000/openai", {
-        prompt: prompt,
-        igreja: church,
-        obra: painting,
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_AI_API_URL}/openai`,
+        {
+          prompt: prompt,
+          igreja: church,
+          obra: painting,
+        }
+      );
 
       setResponse(res.data.message.content);
       setIsLoading(false);
