@@ -12,7 +12,7 @@ export const Container = styled.div`
 
 export const HeaderContainer = styled.div`
   display: flex;
-  border-bottom: 1px solid ${colors.gray};
+  border-bottom: 1px solid #bbb;
   width: 100%;
   align-items: center;
   justify-content: space-between;

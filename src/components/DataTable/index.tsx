@@ -8,6 +8,7 @@ import * as React from "react";
 import DashForm from "../DashForm";
 import "./styles.css";
 import { dataTableRows } from "src/utils/mockData";
+import { DataTableContainer } from "./styles";
 
 const theme = createTheme({}, ptBR);
 
@@ -67,9 +68,21 @@ export default function DataTable() {
       type: "date",
       flex: 1,
       valueGetter: (params: any) => new Date(params),
-
       valueFormatter: (params: any) =>
         new Date(params).toLocaleDateString("pt-BR"),
+      renderCell: (params) => (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            height: "100%",
+          }}
+        >
+          <p style={{ fontSize: "0.9rem" }}>
+            {params.value.toLocaleDateString("pt-BR")}
+          </p>
+        </div>
+      ),
     },
     {
       field: "options",
@@ -98,12 +111,7 @@ export default function DataTable() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div
-        style={{
-          height: "32rem",
-          width: "78rem",
-        }}
-      >
+      <DataTableContainer>
         <DataGrid
           className="data-grid"
           rows={dataTableRows}
@@ -118,7 +126,7 @@ export default function DataTable() {
           disableColumnMenu
           disableRowSelectionOnClick
         />
-      </div>
+      </DataTableContainer>
       <Modal open={open} onClose={handleClose}>
         <Box
           sx={{

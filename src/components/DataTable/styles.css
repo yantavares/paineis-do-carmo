@@ -1,3 +1,11 @@
 html {
   font-size: 100%;
 }
+
+*:focus {
+  outline: none !important;
+}
+
+* {
+  outline: none !important;
+}

@@ -11,14 +11,16 @@ import {
   MainButton,
   SmallText,
 } from "./styles";
-import { useNavigate } from "react-router-dom";
+import PaintBucket from "src/assets/paint-bucket.svg";
 
 const index = () => {
-  const navigate = useNavigate();
   return (
     <Container>
       <HeaderContainer>
-        <Header href="/">Museu Barroco</Header>
+        <div style={{ display: "flex", gap: "1rem" }}>
+          <img src={PaintBucket} alt="icon" />
+          <Header href="/">Museu Barroco</Header>
+        </div>
         <ButtonContainer>
           <a href="/paineis-do-carmo/submit">
             <MainButton>Nova Obra</MainButton>
