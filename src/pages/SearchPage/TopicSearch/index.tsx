@@ -5,12 +5,14 @@ import { SearchHeader, SearchBarContainer } from "../styles";
 import colors from "src/utils/colors";
 import { BigTag } from "./styles";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 interface TopicSearchProps {
   tags: Tag[];
+  isLoading: boolean;
 }
 
-const TopicSearch = ({ tags }: TopicSearchProps) => {
+const TopicSearch = ({ tags, isLoading }: TopicSearchProps) => {
   const navigate = useNavigate();
 
   return (
@@ -29,14 +31,22 @@ const TopicSearch = ({ tags }: TopicSearchProps) => {
           gap: "4rem 2rem",
         }}
       >
-        {tags.map((tag, index) => (
-          <BigTag
-            onClick={() => navigate(`/topicos/${tag.name.toLocaleLowerCase()}`)}
-            key={index}
-          >
-            {tag.name}
-          </BigTag>
-        ))}
+        {isLoading ? (
+          <CircularProgress style={{ color: colors.green }} />
+        ) : tags && tags.length > 0 ? (
+          tags.map((tag, index) => (
+            <BigTag
+              onClick={() =>
+                navigate(`/topicos/${tag.name.toLocaleLowerCase()}`)
+              }
+              key={index}
+            >
+              {tag.name}
+            </BigTag>
+          ))
+        ) : (
+          <p>Nenhum tópico encontrado...</p>
+        )}
       </div>
     </>
   );

@@ -57,7 +57,10 @@ function App() {
                 justifyContent: "center",
               }}
             >
-              <CircularProgress style={{ color: colors.green }} />
+              <CircularProgress
+                size={"10rem"}
+                style={{ color: colors.green }}
+              />
             </div>
           }
         >

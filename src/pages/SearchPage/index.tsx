@@ -167,7 +167,7 @@ const SearchPage = () => {
         );
 
       case "topicos":
-        return <TopicSearch tags={filteredData} />;
+        return <TopicSearch isLoading={isLoading} tags={filteredData} />;
 
       default:
         return <p>Selecione uma categoria válida.</p>;
