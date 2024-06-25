@@ -1,7 +1,7 @@
 import { faGear, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
-import DataTable from "src/components/DataTable";
+import DataTable from "src/components/OldDataTable";
 import axios from "axios";
 import {
   Button,

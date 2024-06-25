@@ -5,7 +5,6 @@ import { ptBR } from "@mui/material/locale";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
-import DashForm from "../DashForm";
 import { DataTableContainer } from "./styles";
 import "./styles.css";
 
@@ -141,7 +140,7 @@ export default function DataTable({ data }) {
             borderRadius: 6,
           }}
         >
-          <DashForm />
+          <p>Test</p>
         </Box>
       </Modal>
     </ThemeProvider>
