@@ -66,9 +66,10 @@ export default function DataTable() {
       headerName: "Data de Submissão",
       type: "date",
       flex: 1,
-      valueGetter: (params: any) => new Date(params.value),
+      valueGetter: (params: any) => new Date(params),
+
       valueFormatter: (params: any) =>
-        new Date(params.value).toLocaleDateString("pt-BR"),
+        new Date(params).toLocaleDateString("pt-BR"),
     },
     {
       field: "options",
