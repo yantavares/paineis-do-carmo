@@ -1,28 +1,43 @@
+import { faGear, faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import DataTable from "src/components/DataTable";
-import colors from "src/utils/colors";
+import {
+  Button,
+  ButtonContainer,
+  Container,
+  Header,
+  HeaderContainer,
+  MainButton,
+  SmallText,
+} from "./styles";
+import PaintBucket from "src/assets/paint-bucket.svg";
 
 const index = () => {
   return (
-    <div
-      style={{
-        width: "100%",
-        padding: "4% 8%",
-        display: "flex",
-        flexDirection: "column",
-        gap: "5rem",
-        fontSize: "1.5rem",
-      }}
-    >
-      <div
-        style={{ display: "flex", borderBottom: `1px solid ${colors.gray}` }}
-      >
-        <h1>Museu Barroco</h1>
-      </div>
+    <Container>
+      <HeaderContainer>
+        <div style={{ display: "flex", gap: "1rem" }}>
+          <img src={PaintBucket} alt="icon" />
+          <Header href="/">Museu Barroco</Header>
+        </div>
+        <ButtonContainer>
+          <a href="/paineis-do-carmo/submit">
+            <MainButton>Nova Obra</MainButton>
+          </a>
+          <Button>
+            <FontAwesomeIcon icon={faGear} />
+          </Button>
+          <Button>
+            <FontAwesomeIcon icon={faUser} />
+          </Button>
+        </ButtonContainer>
+      </HeaderContainer>
       <div>
+        <SmallText>REQUISIÇÔES RECENTES</SmallText>
         <DataTable />
       </div>
-    </div>
+    </Container>
   );
 };
 

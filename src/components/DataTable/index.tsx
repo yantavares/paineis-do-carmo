@@ -7,72 +7,8 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
 import DashForm from "../DashForm";
 import "./styles.css";
-
-const rows = [
-  {
-    id: 1,
-    name: "Mona Lisa",
-    status: "Approved",
-    user: "Leonardo",
-    date: "2024-01-01",
-  },
-  {
-    id: 2,
-    name: "The Starry Night",
-    status: "Pending",
-    user: "Vincent",
-    date: "2024-02-01",
-  },
-  {
-    id: 3,
-    name: "The Persistence of Memory",
-    status: "Rejected",
-    user: "Salvador",
-    date: "2024-03-01",
-  },
-  {
-    id: 4,
-    name: "The Scream",
-    status: "Approved",
-    user: "Edvard",
-    date: "2024-04-01",
-  },
-  {
-    id: 5,
-    name: "Girl with a Pearl Earring",
-    status: "Pending",
-    user: "Johannes",
-    date: "2024-05-01",
-  },
-  {
-    id: 6,
-    name: "Guernica",
-    status: "Approved",
-    user: "Pablo",
-    date: "2024-06-01",
-  },
-  {
-    id: 7,
-    name: "The Birth of Venus",
-    status: "Rejected",
-    user: "Sandro",
-    date: "2024-07-01",
-  },
-  {
-    id: 8,
-    name: "The Night Watch",
-    status: "Pending",
-    user: "Rembrandt",
-    date: "2024-08-01",
-  },
-  {
-    id: 9,
-    name: "American Gothic",
-    status: "Approved",
-    user: "Grant",
-    date: "2024-09-01",
-  },
-];
+import { dataTableRows } from "src/utils/mockData";
+import { DataTableContainer } from "./styles";
 
 const theme = createTheme({}, ptBR);
 
@@ -81,15 +17,15 @@ export default function DataTable() {
   const [selectedRowId, setSelectedRowId] = React.useState<number | null>(null);
 
   const statusColors: { [key: string]: string } = {
-    Approved: "rgba(0, 128, 0, 0.3)", // green with opacity
-    Pending: "rgba(255, 255, 0, 0.3)", // yellow with opacity
-    Rejected: "rgba(255, 0, 0, 0.3)", // red with opacity
+    Approved: "rgba(0, 128, 0, 0.3)",
+    Pending: "rgba(255, 255, 0, 0.3)",
+    Rejected: "rgba(255, 0, 0, 0.3)",
   };
 
   const textColor: { [key: string]: string } = {
-    Approved: "#006400", // dark green
-    Pending: "#FF8C00", // dark orange
-    Rejected: "#8B0000", // dark red
+    Approved: "#006400",
+    Pending: "#FF8C00",
+    Rejected: "#8B0000",
   };
 
   const columns: GridColDef[] = [
@@ -131,9 +67,22 @@ export default function DataTable() {
       headerName: "Data de Submissão",
       type: "date",
       flex: 1,
-      valueGetter: (params: any) => new Date(params.value),
+      valueGetter: (params: any) => new Date(params),
       valueFormatter: (params: any) =>
-        new Date(params.value).toLocaleDateString("pt-BR"),
+        new Date(params).toLocaleDateString("pt-BR"),
+      renderCell: (params) => (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            height: "100%",
+          }}
+        >
+          <p style={{ fontSize: "0.9rem" }}>
+            {params.value.toLocaleDateString("pt-BR")}
+          </p>
+        </div>
+      ),
     },
     {
       field: "options",
@@ -162,15 +111,10 @@ export default function DataTable() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div
-        style={{
-          height: 500,
-          width: "78rem",
-        }}
-      >
+      <DataTableContainer>
         <DataGrid
           className="data-grid"
-          rows={rows}
+          rows={dataTableRows}
           columns={columns}
           initialState={{
             pagination: {
@@ -182,7 +126,7 @@ export default function DataTable() {
           disableColumnMenu
           disableRowSelectionOnClick
         />
-      </div>
+      </DataTableContainer>
       <Modal open={open} onClose={handleClose}>
         <Box
           sx={{
