@@ -1,4 +1,7 @@
-import React, { Suspense, lazy } from "react";
+import { faRobot } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { CircularProgress } from "@mui/material";
+import React, { Suspense, lazy, useState } from "react";
 import {
   BrowserRouter,
   Navigate,
@@ -6,13 +9,12 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
-import { CircularProgress } from "@mui/material";
-import Header from "src/components/Header";
 import Footer from "src/components/Footer";
+import Header from "src/components/Header";
+import Assistant from "./assistant";
 import { PreventRightClickProvider } from "./providers/PreventRightClickContext";
-import ScrollToTop from "./utils/scrollToTop";
 import colors from "./utils/colors";
-import { divIcon } from "leaflet";
+import ScrollToTop from "./utils/scrollToTop";
 
 const Home = lazy(() => import("src/pages/Home"));
 const LoginPage = lazy(() => import("src/pages/LoginPage"));
@@ -32,12 +34,33 @@ function Layout({ children }) {
     location.pathname.startsWith("/dashboard") ||
     location.pathname.startsWith("/paineis-do-carmo/dashboard");
 
+  const [showAssistant, setShowAssistant] = useState(false);
+
   return (
     <div className="app-container">
       <ScrollToTop />
       {!isDashboardRoute && <Header />}
       <main className="main-content">{children}</main>
       {!isDashboardRoute && <Footer />}
+      {!isDashboardRoute && (
+        <div
+          style={{
+            position: "fixed",
+            bottom: "2rem",
+            right: "2rem",
+          }}
+        >
+          {!showAssistant ? (
+            <button onClick={() => setShowAssistant(true)}>
+              <FontAwesomeIcon icon={faRobot} size="2x" />
+            </button>
+          ) : (
+            <div>
+              <Assistant setShowAssistant={setShowAssistant} />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
