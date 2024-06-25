@@ -5,6 +5,7 @@ import TagInput from "../TagInput";
 import Modal from "../../components/Modal";
 import { X } from "lucide-react";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const useFilePreview = (photographerName) => {
   const [files, setFiles] = useState<File[]>([]);
@@ -258,6 +259,36 @@ const SubmitPage: React.FC = () => {
     { name: "Author C", id: "3" },
   ]);
 
+  const brazilianStates = [
+    "AP",
+    "AC",
+    "AL",
+    "AM",
+    "BA",
+    "CE",
+    "DF",
+    "ES",
+    "GO",
+    "MA",
+    "MT",
+    "MS",
+    "MG",
+    "PA",
+    "PB",
+    "PR",
+    "PE",
+    "PI",
+    "RJ",
+    "RN",
+    "RS",
+    "RO",
+    "RR",
+    "SC",
+    "SP",
+    "SE",
+    "TO",
+  ];
+
   const [isAuthorModalOpen, setIsAuthorModalOpen] = useState(false);
   const [isChurchModalOpen, setIsChurchModalOpen] = useState(false);
 
@@ -342,6 +373,7 @@ const SubmitPage: React.FC = () => {
         setSelectedTags(updatedSelectedTags);
       } catch (error) {
         console.error(`Error creating tag "${newTag.name}":`, error);
+        toast.error(`Erro ao criar a tag "${newTag.name}": ${error.message}`);
       }
     }
 
@@ -388,10 +420,39 @@ const SubmitPage: React.FC = () => {
         payload
       );
       console.log("Success:", response.data);
-      // handle success actions, like user notifications or redirection
+      toast.success("Obra submetida com Sucesso", {
+        duration: 3000, // 5 seconds
+        style: {
+          fontSize: "16px", // Increase font size
+          padding: "20px", // Increase padding
+        },
+      });
+
+      // Reset form fields
+      setObra({
+        name: "",
+        description: "",
+        bibliographicReferences: "",
+        bibliographicSources: "",
+        dateOfCreation: "",
+        placement: "",
+        tags: [],
+        churchId: "",
+        authorId: "",
+        imagens: [],
+      });
+      setImages([]);
+      setSelectedTags([]);
+      setGravuras([]);
     } catch (error) {
       console.error("Error posting data:", error);
-      // handle error, like displaying error message to user
+      toast.error(`Erro ao submeter a obra: ${error.message}`, {
+        duration: 3000, // 5 seconds
+        style: {
+          fontSize: "16px", // Increase font size
+          padding: "20px", // Increase padding
+        },
+      });
     }
   };
 
@@ -471,10 +532,31 @@ const SubmitPage: React.FC = () => {
         payload
       );
       console.log("New Church Added:", response.data);
+      toast.success("Igreja adicionada com sucesso!", {
+        duration: 3000, // 5 seconds
+        style: {
+          fontSize: "16px", // Increase font size
+          padding: "20px", // Increase padding
+        },
+      });
+
       setIsChurchModalOpen(false);
       fetchAllChurches(); // Fetch the updated list of churches after adding the new one
+
+      // Reset church form fields
+      setChurch({
+        name: "",
+        description: "",
+        city: "",
+        state: "",
+        street: "",
+        bibliographicSources: "",
+        bibliographicReferences: "",
+      });
+      setChurchImages([]);
     } catch (error) {
       console.error("Error posting new church:", error);
+      toast.error(`Erro ao adicionar igreja: ${error.message}`);
     }
   };
 
@@ -490,6 +572,7 @@ const SubmitPage: React.FC = () => {
 
   return (
     <Container>
+      <Toaster />
       <div
         className="form-container"
         style={{ marginTop: "4rem", borderRadius: "2rem" }}>
@@ -740,12 +823,18 @@ const SubmitPage: React.FC = () => {
             <div className="grid-layout">
               <label className="label-wrapper">
                 <p className="input-label">Estado*</p>
-                <input
-                  type="text"
-                  placeholder="Insira o nome da igreja"
+                <select
                   value={church.state}
-                  onChange={(e) => setChurch({ ...church, state: e.target.value })}
-                />
+                  onChange={(e) => setChurch({ ...church, state: e.target.value })}>
+                  <option value="">Selecione um estado</option>
+                  {brazilianStates.map((state) => (
+                    <option
+                      key={state}
+                      value={state}>
+                      {state}
+                    </option>
+                  ))}
+                </select>
               </label>
               <label className="label-wrapper">
                 <p className="input-label">Rua</p>
