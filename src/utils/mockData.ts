@@ -227,3 +227,69 @@ export const tags: Tag[] = [
   { name: "cultural" },
   { name: "arte-sacra" },
 ];
+
+export const dataTableRows = [
+  {
+    id: 1,
+    name: "Mona Lisa",
+    status: "Approved",
+    user: "Leonardo",
+    date: "2024-01-01",
+  },
+  {
+    id: 2,
+    name: "The Starry Night",
+    status: "Pending",
+    user: "Vincent",
+    date: "2024-02-01",
+  },
+  {
+    id: 3,
+    name: "The Persistence of Memory",
+    status: "Rejected",
+    user: "Salvador",
+    date: "2024-03-01",
+  },
+  {
+    id: 4,
+    name: "The Scream",
+    status: "Approved",
+    user: "Edvard",
+    date: "2024-04-01",
+  },
+  {
+    id: 5,
+    name: "Girl with a Pearl Earring",
+    status: "Pending",
+    user: "Johannes",
+    date: "2024-05-01",
+  },
+  {
+    id: 6,
+    name: "Guernica",
+    status: "Approved",
+    user: "Pablo",
+    date: "2024-06-01",
+  },
+  {
+    id: 7,
+    name: "The Birth of Venus",
+    status: "Rejected",
+    user: "Sandro",
+    date: "2024-07-01",
+  },
+  {
+    id: 8,
+    name: "The Night Watch",
+    status: "Pending",
+    user: "Rembrandt",
+    date: "2024-08-01",
+  },
+  {
+    id: 9,
+    name: "American Gothic",
+    status: "Approved",
+    user: "Grant",
+    date: "2024-09-01",
+  },
+];
