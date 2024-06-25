@@ -14,6 +14,7 @@ import {
   SearchResult,
   SearchResultsContainer,
 } from "./styles";
+import { CircularProgress } from "@mui/material";
 
 const translateSelected = (selected: string) => {
   switch (selected) {
@@ -43,6 +44,7 @@ const SearchPage = () => {
 
   const [data, setData] = useState([]);
   const [inputValue, setInputValue] = useState(query ? query : "");
+  const [isLoading, setIsLoading] = useState(false);
 
   const translatedSelected = useMemo(
     () => translateSelected(selected),
@@ -55,6 +57,7 @@ const SearchPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_API_URL}/api/${translatedSelected}`
@@ -63,6 +66,7 @@ const SearchPage = () => {
       } catch (error) {
         console.error("Error fetching data:", error);
       }
+      setIsLoading(false);
     };
 
     if (translatedSelected !== "wrong") {
@@ -105,17 +109,23 @@ const SearchPage = () => {
             </SearchHeader>
 
             <SearchResultsContainer>
-              {filteredData.map((item) => {
-                return (
-                  <SearchResult key={item?.id}>
-                    <Item
-                      item={item}
-                      type={translateTopicType(selected)}
-                      fixedImgHeight
-                    />
-                  </SearchResult>
-                );
-              })}
+              {isLoading ? (
+                <CircularProgress style={{ color: colors.green }} />
+              ) : filteredData && filteredData.length > 0 ? (
+                filteredData.map((item) => {
+                  return (
+                    <SearchResult key={item?.id}>
+                      <Item
+                        item={item}
+                        type={translateTopicType(selected)}
+                        fixedImgHeight
+                      />
+                    </SearchResult>
+                  );
+                })
+              ) : (
+                <p>Nenhum item encontrado na busca...</p>
+              )}
             </SearchResultsContainer>
           </>
         );

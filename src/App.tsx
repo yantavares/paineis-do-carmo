@@ -12,6 +12,7 @@ import Footer from "src/components/Footer";
 import { PreventRightClickProvider } from "./providers/PreventRightClickContext";
 import ScrollToTop from "./utils/scrollToTop";
 import colors from "./utils/colors";
+import { divIcon } from "leaflet";
 
 const Home = lazy(() => import("src/pages/Home"));
 const LoginPage = lazy(() => import("src/pages/LoginPage"));
@@ -46,7 +47,19 @@ function App() {
     <PreventRightClickProvider>
       <BrowserRouter>
         <Suspense
-          fallback={<CircularProgress style={{ color: colors.green }} />}
+          fallback={
+            <div
+              style={{
+                height: "100vh",
+                width: "100vw",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <CircularProgress style={{ color: colors.green }} />
+            </div>
+          }
         >
           <Layout>
             <Routes>
