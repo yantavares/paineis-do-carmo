@@ -1,6 +1,5 @@
 import React, { useEffect, ReactNode } from "react";
-import { Container } from "./styles";
-import { X } from "lucide-react";
+import { Container, ModalContent } from "./styles";
 
 interface ModalProps {
   children: ReactNode;
@@ -8,14 +7,28 @@ interface ModalProps {
   onClose: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
-  if (!isOpen) {
-    return null;
-  }
+const lockScroll = () => {
+  document.body.style.overflow = "hidden";
+};
 
-  const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-  };
+const unlockScroll = () => {
+  document.body.style.overflow = "";
+};
+
+const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
+  useEffect(() => {
+    if (isOpen) {
+      lockScroll();
+      document.addEventListener("keydown", handleEscapeKey);
+    } else {
+      unlockScroll();
+      document.removeEventListener("keydown", handleEscapeKey);
+    }
+    return () => {
+      unlockScroll();
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [isOpen]);
 
   const handleEscapeKey = (e: KeyboardEvent) => {
     if (e.key === "Escape") {
@@ -23,23 +36,24 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
     }
   };
 
-  useEffect(() => {
-    document.addEventListener("keydown", handleEscapeKey);
-    return () => {
-      document.removeEventListener("keydown", handleEscapeKey);
-    };
-  }, []);
+  const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+  };
+
+  if (!isOpen) {
+    return null;
+  }
 
   return (
     <Container
       onClick={onClose}
       aria-modal="true"
       role="dialog">
-      <div
+      <ModalContent
         className="modal-content"
         onClick={handleContainerClick}>
         {children}
-      </div>
+      </ModalContent>
     </Container>
   );
 };

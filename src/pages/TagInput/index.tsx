@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, KeyboardEvent, useEffect } from "react";
+import React, { useState, ChangeEvent, KeyboardEvent } from "react";
 import Autosuggest, {
   ChangeEvent as AutosuggestChangeEvent,
   SuggestionSelectedEventData,

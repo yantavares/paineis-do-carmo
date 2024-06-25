@@ -34,11 +34,8 @@ export const Container = styled.div`
   .form-container {
     width: 600px;
     margin: 0 auto;
-    border: 1px solid #e0e0e0;
     padding: 2rem 4rem;
     background-color: #fff;
-    margin-top: 4rem;
-    border-radius: 2rem;
   }
 
   .input-label {
@@ -94,7 +91,6 @@ export const Container = styled.div`
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
     align-items: start;
-    margin-bottom: 1rem;
   }
 
   input[type="file"] {
@@ -134,7 +130,6 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin: 1rem 0;
   }
 
   .flex-layout {
@@ -146,6 +141,12 @@ export const Container = styled.div`
   .preview-container {
     display: flex;
     flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .form-fields-container {
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
   }
 
