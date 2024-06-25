@@ -12,20 +12,20 @@ import { DataTableContainer } from "./styles";
 
 const theme = createTheme({}, ptBR);
 
-export default function DataTable() {
+export default function DataTable({ data }) {
   const [open, setOpen] = React.useState(false);
   const [selectedRowId, setSelectedRowId] = React.useState<number | null>(null);
 
   const statusColors: { [key: string]: string } = {
-    Approved: "rgba(0, 128, 0, 0.3)",
-    Pending: "rgba(255, 255, 0, 0.3)",
-    Rejected: "rgba(255, 0, 0, 0.3)",
+    Aprovada: "rgba(0, 128, 0, 0.3)",
+    Pendente: "rgba(255, 255, 0, 0.3)",
+    Rejeitada: "rgba(255, 0, 0, 0.3)",
   };
 
   const textColor: { [key: string]: string } = {
-    Approved: "#006400",
-    Pending: "#FF8C00",
-    Rejected: "#8B0000",
+    Aprovada: "#006400",
+    Pendente: "#FF8C00",
+    Rejeitada: "#8B0000",
   };
 
   const columns: GridColDef[] = [
@@ -114,7 +114,7 @@ export default function DataTable() {
       <DataTableContainer>
         <DataGrid
           className="data-grid"
-          rows={dataTableRows}
+          rows={data}
           columns={columns}
           initialState={{
             pagination: {

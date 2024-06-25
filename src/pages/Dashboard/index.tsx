@@ -1,7 +1,8 @@
 import { faGear, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DataTable from "src/components/DataTable";
+import axios from "axios";
 import {
   Button,
   ButtonContainer,
@@ -14,6 +15,41 @@ import {
 import PaintBucket from "src/assets/paint-bucket.svg";
 
 const index = () => {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [formatedData, setFormatedData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/paintings`
+        );
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    data.forEach((painting) => {
+      setFormatedData((prev) => [
+        ...prev,
+        {
+          id: painting?.id,
+          name: painting?.title,
+          status: painting?.status ?? "Aprovada",
+          user: painting?.registeredBy ?? "Desconhecido",
+          date: "Desconhecido",
+        },
+      ]);
+    });
+  }, [data]);
+
   return (
     <Container>
       <HeaderContainer>
@@ -35,7 +71,7 @@ const index = () => {
       </HeaderContainer>
       <div>
         <SmallText>REQUISIÇÔES RECENTES</SmallText>
-        <DataTable />
+        <DataTable data={formatedData} />
       </div>
     </Container>
   );
