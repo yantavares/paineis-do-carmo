@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
+import openAISvg from "src/assets/OpenAI.svg";
 
 interface AssistantProps {
   setShowAssistant: (show: boolean) => void;
@@ -58,7 +59,10 @@ const Assistant: React.FC<AssistantProps> = ({
       }}
     >
       <button onClick={() => setShowAssistant(false)}>x</button>
-      <h1>Assistente OpenAI</h1>
+      <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
+        <h1>Museu Barroco IA</h1>
+        <img height={"15px"} src={openAISvg} alt="OpenAI logo" />
+      </div>
       <form onSubmit={handleSubmit}>
         <textarea
           value={prompt}
