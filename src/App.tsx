@@ -51,7 +51,14 @@ function Layout({ children }) {
           }}
         >
           {!showAssistant ? (
-            <button onClick={() => setShowAssistant(true)}>
+            <button
+              style={{
+                backgroundColor: "white",
+                opacity: 0.9,
+                borderRadius: "1.6rem",
+              }}
+              onClick={() => setShowAssistant(true)}
+            >
               <FontAwesomeIcon icon={faRobot} size="2x" />
             </button>
           ) : (
