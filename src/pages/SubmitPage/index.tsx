@@ -310,7 +310,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({ painting, 
       .catch((error) => {
         console.log(error);
       });
-  });
+  }, []);
 
   const brazilianStates = [
     "AP",
