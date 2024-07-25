@@ -945,7 +945,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
             </label>
           </div>
           <label className="label-wrapper">
-            <p className="input-label">Tags para indexação *</p>
+            <p className="input-label">Tags para indexação</p>
             <TagInput
               allTags={allTags}
               selectedTags={selectedTags}
