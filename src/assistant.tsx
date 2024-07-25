@@ -88,6 +88,15 @@ const Assistant: React.FC<AssistantProps> = ({
       </div>
       <form onSubmit={handleSubmit}>
         <textarea
+          style={{
+            width: "100%",
+            backgroundColor: "#f0f0f0",
+            fontFamily: "monospace",
+            color: "inherit",
+            padding: "0.5rem",
+            marginBottom: "1rem",
+            borderRadius: "0.5rem",
+          }}
           value={prompt}
           onChange={handlePromptChange}
           placeholder="Digite seu prompt aqui"
