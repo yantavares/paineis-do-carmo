@@ -343,9 +343,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
 
   useEffect(() => {
     axios
-      .get(
-        "https://api-museubarroco-east-dev.azurewebsites.net/api/paintings/artisans"
-      )
+      .get(`${import.meta.env.VITE_API_URL}/api/paintings/artisans`)
       .then((response) => {
         setArtifices(response.data);
       })
@@ -403,7 +401,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
   const fetchAllTags = async () => {
     try {
       const response = await axios.get(
-        "https://api-museubarroco-east-dev.azurewebsites.net/api/tags"
+        `${import.meta.env.VITE_API_URL}/api/tags`
       );
 
       setAllTags(response.data);
@@ -415,7 +413,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
   const fetchAllAuthors = async () => {
     try {
       const response = await axios.get(
-        "https://api-museubarroco-east-dev.azurewebsites.net/api/paintings/artisans"
+        `${import.meta.env.VITE_API_URL}/api/paintings/artisans`
       );
       setAuthors(response.data.artisans);
     } catch (error) {
@@ -426,7 +424,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
   const fetchAllChurches = async () => {
     try {
       const response = await axios.get(
-        "https://api-museubarroco-east-dev.azurewebsites.net/api/churches"
+        `${import.meta.env.VITE_API_URL}/api/churches`
       );
       setChurches(response.data);
     } catch (error) {
@@ -459,7 +457,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     for (const newTag of newTagsToCreate) {
       try {
         const response = await axios.post(
-          "https://api-museubarroco-east-dev.azurewebsites.net/api/tags",
+          `${import.meta.env.VITE_API_URL}/api/tags`,
           { name: newTag.name }
         );
 
@@ -511,7 +509,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
 
     try {
       const response = await axios.post(
-        "https://api-museubarroco-east-dev.azurewebsites.net/api/paintings",
+        `${import.meta.env.VITE_API_URL}/api/paintings`,
         payload
       );
       toast.success("Obra submetida com Sucesso", {
@@ -569,7 +567,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     for (const newTag of newTagsToCreate) {
       try {
         const response = await axios.post(
-          "https://api-museubarroco-east-dev.azurewebsites.net/api/tags",
+          `${import.meta.env.VITE_API_URL}/api/tags`,
           { name: newTag.name }
         );
 
@@ -645,7 +643,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
 
     try {
       const response = await axios.put(
-        `https://api-museubarroco-east-dev.azurewebsites.net/api/paintings/${painting.id}`,
+        `${import.meta.env.VITE_API_URL}/api/paintings/${painting.id}`,
         payload
       );
       toast.success("Obra atualizada com sucesso", {
@@ -762,7 +760,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
 
     try {
       const response = await axios.post(
-        "https://api-museubarroco-east-dev.azurewebsites.net/api/churches",
+        `${import.meta.env.VITE_API_URL}/api/churches`,
         payload
       );
       toast.success("Igreja adicionada com sucesso!", {
