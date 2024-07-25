@@ -13,30 +13,35 @@ import {
   SearchResultsContainer,
 } from "../SearchPage/styles";
 import axios from "axios";
+import { CircularProgress } from "@mui/material";
 
 const ChurchState = () => {
   const { state } = useParams();
   const [data, setData] = useState<Church[]>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchPaintings = async () => {
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_API_URL}/api/churches/state/${state}`
         );
         setData(response.data);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setIsLoading(false);
       }
     };
-
     fetchPaintings();
   }, [state]);
 
   return (
     <SearchContainer>
       <SearchHeader>
-        Igrejas por Estado: <span style={{ color: colors.green }}> {translateState(state)}</span>
+        Igrejas por Estado:{" "}
+        <span style={{ color: colors.green }}> {translateState(state)}</span>
         <SearchBarContainer>
           <SearchBar
             placeHolder={`Busque por igrejas em ${capitalize(state)}`}
@@ -46,15 +51,17 @@ const ChurchState = () => {
       </SearchHeader>
 
       <SearchResultsContainer>
-        {data?.map((item: any, index: number) => (
-          <SearchResult key={index}>
-            <Item
-              item={item}
-              type={"churches"}
-              fixedImgHeight
-            />
-          </SearchResult>
-        ))}
+        {isLoading ? (
+          <CircularProgress style={{ color: colors.green }} />
+        ) : data && data.length > 0 ? (
+          data?.map((item: any, index: number) => (
+            <SearchResult key={index}>
+              <Item item={item} type={"churches"} fixedImgHeight />
+            </SearchResult>
+          ))
+        ) : (
+          <p>Nenhuma igreja encontrada...</p>
+        )}
       </SearchResultsContainer>
     </SearchContainer>
   );

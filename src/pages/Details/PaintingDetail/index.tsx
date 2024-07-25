@@ -21,6 +21,8 @@ import { Painting } from "src/utils/mockData";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChurch } from "@fortawesome/free-solid-svg-icons";
+import { CircularProgress } from "@mui/material";
+import colors from "src/utils/colors";
 
 const defaultPainting: Painting = {
   id: 0,
@@ -42,6 +44,7 @@ const PaintingDetails = () => {
   const { id } = useParams<{ id: string }>();
 
   const [data, setData] = useState<Painting>(defaultPainting);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const downloadImage = (url: string) => {
     const link = document.createElement("a");
@@ -54,11 +57,13 @@ const PaintingDetails = () => {
 
   useEffect(() => {
     const fetchPaintings = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_API_URL}/api/paintings/${id}`
         );
         setData(response.data as Painting);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -66,6 +71,21 @@ const PaintingDetails = () => {
 
     fetchPaintings();
   }, [id]);
+
+  if (isLoading)
+    return (
+      <div
+        style={{
+          height: "100vh",
+          width: "100vw",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CircularProgress size="lg" style={{ color: colors.green }} />
+      </div>
+    );
 
   return (
     <Container>
@@ -136,6 +156,8 @@ const PaintingDetails = () => {
               <p className="record-data">
                 <strong>Artista: </strong>
                 {data.artisan &&
+                  data.artisan.length > 0 &&
+                  data.artisan[0].name &&
                   data.artisan.map((artisan, index) =>
                     index > 0 ? (
                       <span key={index}>, {artisan.name}</span>
@@ -177,7 +199,7 @@ const PaintingDetails = () => {
       <EngravingLayout>
         {data.engravings &&
           data.engravings.map((engraving, index) => (
-            <Col key={index}>
+            <Col key={index} style={{ cursor: "not-allowed" }}>
               <EngravingImage src={engraving.url} alt="" />
               <EngravingDescription>
                 <TextTruncate className="engraving-title">

@@ -48,7 +48,7 @@ export const AboutUs = styled.div`
 `;
 
 export const AboutUsHeader = styled.h3`
-  font-size: 3rem;
+  font-size: 2.4rem;
   font-weight: 800;
   padding: 0;
   padding-top: 1rem;
@@ -56,7 +56,7 @@ export const AboutUsHeader = styled.h3`
 `;
 
 export const AboutUsText = styled.h3`
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-weight: 350;
   padding: 0;
   padding-top: 1rem;

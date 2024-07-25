@@ -17,6 +17,8 @@ import {
 } from "../styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faLocation } from "@fortawesome/free-solid-svg-icons";
+import colors from "src/utils/colors";
+import { CircularProgress } from "@mui/material";
 
 const defaultChurch: Church = {
   id: 0,
@@ -33,14 +35,17 @@ const PaintingDetails = () => {
   const { id } = useParams<{ id: string }>();
 
   const [data, setData] = useState<Church>(defaultChurch);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchPaintings = async () => {
+      setIsLoading(true);
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_API_URL}/api/churches/${id}`
         );
         setData(response.data as Church);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -48,6 +53,21 @@ const PaintingDetails = () => {
 
     fetchPaintings();
   }, [id]);
+
+  if (isLoading)
+    return (
+      <div
+        style={{
+          height: "100vh",
+          width: "100vw",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CircularProgress size="lg" style={{ color: colors.green }} />
+      </div>
+    );
 
   return (
     <Container>
