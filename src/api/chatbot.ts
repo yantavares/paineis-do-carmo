@@ -8,7 +8,6 @@ export const makeOpenAIRequest = async (
   type: string,
   item: Painting | Church | null
 ) => {
-  console.log(item);
   let fullPrompt = `
     Você é um assistente útil que fala fluentemente português. 
     Seu objetivo é ajudar o usuário a aprender mais sobre o período Barroco da arte brasileira. 
@@ -19,14 +18,14 @@ export const makeOpenAIRequest = async (
 
   if (item && type === "paintings") {
     const painting = item as Painting;
-    fullPrompt += ` O usuário está vendo a obra "${painting.title}". Algumas informações: Nome do artista: ${painting.artisan}, ano de criação: ${painting.dateOfCreation}. A obra está localizada na Igreja ${painting.church.name}. Se tiver mais informações sobre a obra, você pode compartilhar.`;
+    fullPrompt += ` Você e o usuário está vendo a obra "${painting.title}". Algumas informações: Nome do artista: ${painting.artisan}, ano de criação: ${painting.dateOfCreation}. A obra está localizada na Igreja ${painting.church.name}. Se tiver mais informações sobre a obra, você pode compartilhar.`;
   } else if (type === "paintings") {
     fullPrompt += ` Diga que não há obras para falar e que o usuário pode perguntar sobre uma obra específica na seção Obras do site.`;
   }
 
   if (item && type === "churches") {
     const church = item as Church;
-    fullPrompt += ` O usuário está vendo a igreja "${church}". Algumas informações: Nome: ${church.name}, cidade: ${church.city}, estado: ${church.state}. Se tiver mais informações sobre a igreja, você pode compartilhar.`;
+    fullPrompt += ` Você e o usuário está vendo a igreja "${church}". Algumas informações: Nome: ${church.name}, cidade: ${church.city}, estado: ${church.state}. Se tiver mais informações sobre a igreja, você pode compartilhar.`;
   } else if (type === "churches") {
     fullPrompt += ` Diga que não há igrejas para falar e que o usuário pode perguntar sobre uma igreja específica na seção Igrejas do site.`;
   }

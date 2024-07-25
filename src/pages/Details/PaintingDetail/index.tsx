@@ -199,7 +199,7 @@ const PaintingDetails = () => {
       <EngravingLayout>
         {data.engravings &&
           data.engravings.map((engraving, index) => (
-            <Col key={index}>
+            <Col key={index} style={{ cursor: "not-allowed" }}>
               <EngravingImage src={engraving.url} alt="" />
               <EngravingDescription>
                 <TextTruncate className="engraving-title">
