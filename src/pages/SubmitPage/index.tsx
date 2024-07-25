@@ -1076,7 +1076,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
           <div className="form-fields-container">
             <div className="grid-layout">
               <label className="label-wrapper">
-                <p className="input-label">Nome da Igreja</p>
+                <p className="input-label">Nome da Igreja *</p>
                 <input
                   type="text"
                   placeholder="Insira o nome da igreja"
@@ -1087,7 +1087,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
                 />
               </label>
               <label className="label-wrapper">
-                <p className="input-label">Cidade*</p>
+                <p className="input-label">Cidade *</p>
                 <input
                   type="text"
                   placeholder="Insira o nome da igreja"
@@ -1100,7 +1100,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
             </div>
             <div className="grid-layout">
               <label className="label-wrapper">
-                <p className="input-label">Estado*</p>
+                <p className="input-label">Estado *</p>
                 <select
                   value={church.state}
                   onChange={(e) =>
@@ -1166,7 +1166,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
               </label>
             </div>
             <div className="input-container">
-              <p className="input-label">Imagens da Igreja</p>
+              <p className="input-label">Imagens da Igreja *</p>
               {churchImages.map((image, index) => (
                 <DynamicImageInput
                   key={index}
