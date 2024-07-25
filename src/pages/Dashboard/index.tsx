@@ -7,11 +7,13 @@ import OptionButton from "src/components/OptionButton";
 import SubmitPage from "src/pages/SubmitPage"; // Import your SubmitPage component here
 import { Container, ExitButton, ExitContainer } from "./styles";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
+import colors from "src/utils/colors";
 
 const fetchPaintings = async () => {
   try {
     const response = await axios.get(
-      "https://api-museubarroco-east-dev.azurewebsites.net/api/paintings"
+      `${import.meta.env.VITE_API_URL}/api/paintings`
     );
     return response.data;
   } catch (error) {
@@ -28,6 +30,7 @@ export default function Dashboard() {
   const [paintingToDelete, setPaintingToDelete] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [paintingToEdit, setPaintingToEdit] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -38,12 +41,14 @@ export default function Dashboard() {
 
   useEffect(() => {
     const getPaintings = async () => {
+      setIsLoading(true);
       const data = await fetchPaintings();
       setPaintings(data);
       console.log("Paintings fetched:", data);
     };
 
     getPaintings();
+    setIsLoading(false);
   }, []);
 
   const handleDateArrow = (e) => {
@@ -71,7 +76,7 @@ export default function Dashboard() {
   const handleEdit = async (id) => {
     try {
       const response = await axios.get(
-        `https://api-museubarroco-east-dev.azurewebsites.net/api/paintings/${id}`
+        `${import.meta.env.VITE_API_URL}/api/paintings/${id}`
       );
       setPaintingToEdit(response.data);
       setIsEditModalOpen(true);
@@ -89,7 +94,7 @@ export default function Dashboard() {
   const confirmDelete = async () => {
     try {
       await axios.delete(
-        `https://api-museubarroco-east-dev.azurewebsites.net/api/paintings/${paintingToDelete}`
+        `${import.meta.env.VITE_API_URL}/api/paintings/${paintingToDelete}`
       );
       toast.success("Painting deleted successfully");
       setPaintings(
@@ -168,6 +173,7 @@ export default function Dashboard() {
           </table>
         </section>
       </main>
+
       <ExitContainer>
         <ExitButton onClick={handleExit}>Sair</ExitButton>
       </ExitContainer>
