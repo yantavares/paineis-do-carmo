@@ -12,7 +12,10 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    if (email == "admin" && password == "admin") {
+    if (
+      email == import.meta.env.VITE_ADMIN_USER &&
+      password == import.meta.env.VITE_ADMIN_PASSWORD
+    ) {
       localStorage.setItem("user", JSON.stringify(email));
       navigate("/paineis-do-carmo/admin");
     } else {

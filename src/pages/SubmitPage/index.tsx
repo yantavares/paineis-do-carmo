@@ -8,15 +8,15 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 function formatErrorMessages(errors: any): string {
-  let formattedMessages: string[] = [];
+  let formattedMessages: string[] = [""];
 
   errors &&
     errors.length > 0 &&
     errors.forEach((error: any) => {
-      formattedMessages.push(error?.errorMessage);
+      formattedMessages.push("- " + error?.errorMessage);
     });
 
-  return formattedMessages.join("\n");
+  return formattedMessages.join("\n\n");
 }
 
 // Custom hooks
@@ -808,8 +808,9 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
         <p className="submit-description">
           {isEdit
             ? "Edite a obra selecionada"
-            : "Submeta uma obra para ser adicionada ao nosso banco de dados"}
+            : "Os campos marcados com * são obrigatórios."}
         </p>
+
         <div className="form-fields-container">
           <label className="label-wrapper">
             <p className="input-label">Nome da Obra *</p>
