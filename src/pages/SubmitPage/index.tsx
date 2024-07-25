@@ -7,6 +7,16 @@ import { X } from "lucide-react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
+function formatErrorMessages(errors: any): string {
+  let formattedMessages: string[] = [];
+
+  errors.forEach((error: any) => {
+    formattedMessages.push(error?.errorMessage);
+  });
+
+  return formattedMessages.join("\n");
+}
+
 // Custom hooks
 const useFilePreview = (initialPreviews = [], initialPhotographers = []) => {
   const [files, setFiles] = useState<File[]>([]);
@@ -538,8 +548,11 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       setSelectedTags([]);
       setGravuras([]);
     } catch (error) {
+      const errorResponse = error?.response?.data?.errors || null;
+
+      const formattedErrorMessages = formatErrorMessages(errorResponse);
       console.error("Error posting data:", error);
-      toast.error(`Erro ao submeter a obra: ${error.message}`, {
+      toast.error(`Erro ao submeter a obra: ${formattedErrorMessages}`, {
         duration: 3000,
         style: {
           fontSize: "16px",
