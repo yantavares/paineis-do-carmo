@@ -1,6 +1,9 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import openAISvg from "src/assets/OpenAI.svg";
 import { makeOpenAIRequest } from "src/api/chatBot.js";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { Church, Painting } from "./utils/mockData";
 
 interface AssistantProps {
   setShowAssistant: (show: boolean) => void;
@@ -16,6 +19,32 @@ const Assistant: React.FC<AssistantProps> = ({
   const [prompt, setPrompt] = useState<string>("");
   const [response, setResponse] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [id, setId] = useState<string>("");
+  const [type, setType] = useState<string>("");
+  const [item, setItem] = useState<Painting | Church>(null);
+
+  const location = useLocation().pathname.split("/");
+
+  useEffect(() => {
+    if (location.length > 4 && location[2] === "pesquisa") {
+      setType(location[3]);
+      setId(location[4]);
+    }
+  }, [location]);
+
+  useEffect(() => {
+    if (type === "igreja") {
+      axios
+        .get(`${import.meta.env.VITE_API_URL}/api/churches/${id}`)
+        .then((res) => setItem(res.data))
+        .catch((err) => console.error(err));
+    } else if (type === "obra") {
+      axios
+        .get(`${import.meta.env.VITE_API_URL}/api/paintings/${id}`)
+        .then((res) => setItem(res.data))
+        .catch((err) => console.error(err));
+    }
+  }, []);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -27,7 +56,7 @@ const Assistant: React.FC<AssistantProps> = ({
         setIsLoading(false);
         return;
       }
-      const result = await makeOpenAIRequest(prompt, painting, church);
+      const result = await makeOpenAIRequest(prompt, type, item);
       setResponse(result.message.content);
       setIsLoading(false);
     } catch (error) {
