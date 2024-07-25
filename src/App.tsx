@@ -1,7 +1,13 @@
-import { faRobot } from "@fortawesome/free-solid-svg-icons";
+import {
+  faLaptop,
+  faPhone,
+  faPhoneSquare,
+  faPhoneSquareAlt,
+  faRobot,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CircularProgress } from "@mui/material";
-import React, { Suspense, lazy, useState } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import {
   BrowserRouter,
   Navigate,
@@ -35,6 +41,27 @@ function Layout({ children }) {
     location.pathname.startsWith("/paineis-do-carmo/dashboard");
 
   const [showAssistant, setShowAssistant] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 860);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  if (isMobile) {
+    return (
+      <div className="mobile-warning">
+        <FontAwesomeIcon icon={faLaptop} />
+        <h2>Por enquanto, este site só funciona em laptops e computadores.</h2>
+        <p>Volte em breve para conferir a versão para celulares!</p>
+      </div>
+    );
+  }
 
   return (
     <div className="app-container">
@@ -44,6 +71,7 @@ function Layout({ children }) {
       {!isDashboardRoute && <Footer />}
       {!isDashboardRoute && (
         <div
+          className="assistant-button"
           style={{
             position: "fixed",
             bottom: "2rem",

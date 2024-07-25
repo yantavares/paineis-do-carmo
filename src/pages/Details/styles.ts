@@ -263,7 +263,7 @@ export const Col = styled.div`
 `;
 
 export const EngravingImage = styled.img`
-  max-height: 40rem;
+  max-height: 30rem;
   max-width: 100%;
   border-radius: 10px;
   transition: filter 0.3s ease;
