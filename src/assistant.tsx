@@ -122,7 +122,14 @@ const Assistant: React.FC<AssistantProps> = ({
         </div>
         <button onClick={() => setShowAssistant(false)}>x</button>
       </div>
-      <div style={{ flex: 1, overflowY: "auto", marginBottom: "1rem" }}>
+      <div
+        style={{
+          flex: 1,
+          overflowY: "auto",
+          marginBottom: "1rem",
+          scrollbarWidth: "thin",
+        }}
+      >
         {conversation.map((message, index) => (
           <div
             key={index}
