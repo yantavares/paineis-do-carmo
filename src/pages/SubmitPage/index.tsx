@@ -10,9 +10,11 @@ import toast, { Toaster } from "react-hot-toast";
 function formatErrorMessages(errors: any): string {
   let formattedMessages: string[] = [];
 
-  errors.forEach((error: any) => {
-    formattedMessages.push(error?.errorMessage);
-  });
+  errors &&
+    errors.length > 0 &&
+    errors.forEach((error: any) => {
+      formattedMessages.push(error?.errorMessage);
+    });
 
   return formattedMessages.join("\n");
 }
@@ -538,7 +540,13 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     } catch (error) {
       const errorResponse = error?.response?.data?.errors || null;
 
-      const formattedErrorMessages = formatErrorMessages(errorResponse);
+      let formattedErrorMessages = formatErrorMessages(errorResponse);
+
+      if (formattedErrorMessages === "") {
+        formattedErrorMessages =
+          "Por favor, adicione os campos necessários indicados com *";
+      }
+
       console.error("Error posting data:", error);
       toast.error(`Erro ao submeter a obra: ${formattedErrorMessages}`, {
         duration: 3000,
