@@ -70,7 +70,11 @@ const Footer = () => {
               <FontAwesomeIcon icon={faWhatsapp} color="white" size="2xl" />
               <span className="tooltip-social">WhatsApp</span>
             </a>
-            <a>
+            <a
+              href="https://www.instagram.com/museu_barroco/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FontAwesomeIcon icon={faInstagram} color="white" size="2xl" />
               <span className="tooltip-social">Instagram</span>
             </a>
