@@ -32,7 +32,7 @@ const PaintingDetail = lazy(() => import("src/pages/Details/PaintingDetail"));
 const ChurchDetail = lazy(() => import("src/pages/Details/ChurchDetail"));
 const RegisterPage = lazy(() => import("src/pages/RegisterPage"));
 const SubmitPage = lazy(() => import("src/pages/SubmitPage"));
-const DashbordPage = lazy(() => import("src/pages/OldDashboard"));
+const DashbordPage = lazy(() => import("src/pages/Dashboard"));
 
 interface Message {
   sender: "user" | "bot";
