@@ -52,7 +52,7 @@ const TagDetail = () => {
             </SearchResult>
           ))
         ) : (
-          <SearchSubHeader>Nenhuma pintura foi encontrada...</SearchSubHeader>
+          <SearchSubHeader>Nenhuma obra foi encontrada...</SearchSubHeader>
         )}
       </SearchResultsContainer>
     </SearchContainer>

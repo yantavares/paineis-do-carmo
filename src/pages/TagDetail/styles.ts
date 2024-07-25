@@ -14,6 +14,7 @@ export const SearchContainer = styled.div`
 
 export const SearchResultsContainer = styled.div`
   width: 100%;
+  min-height: 30rem;
   align-items: center;
   padding-left: 4rem;
   display: flex;
@@ -32,7 +33,7 @@ export const SearchHeader = styled.h1`
 `;
 
 export const SearchSubHeader = styled.h2`
-  font-size: 4.8rem;
+  font-size: 2rem;
   font-weight: 500;
   padding: 0;
   padding-top: 3rem;

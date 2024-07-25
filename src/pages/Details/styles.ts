@@ -56,6 +56,7 @@ export const Container = styled.div`
     justify-content: center;
     gap: 2rem;
     margin: 0 0 2rem;
+    min-height: 30rem;
   }
 
   .item-updater {
