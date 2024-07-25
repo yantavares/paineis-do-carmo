@@ -34,6 +34,11 @@ const RegisterPage = lazy(() => import("src/pages/RegisterPage"));
 const SubmitPage = lazy(() => import("src/pages/SubmitPage"));
 const DashbordPage = lazy(() => import("src/pages/OldDashboard"));
 
+interface Message {
+  sender: "user" | "bot";
+  text: string;
+}
+
 function Layout({ children }) {
   const location = useLocation();
   const isDashboardRoute =
@@ -41,6 +46,9 @@ function Layout({ children }) {
     location.pathname.startsWith("/paineis-do-carmo/dashboard");
 
   const [showAssistant, setShowAssistant] = useState(false);
+  const [conversation, setConversaation] = useState<Message[]>([
+    { sender: "bot", text: "Olá! Como posso te ajudar?" },
+  ]);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -91,7 +99,11 @@ function Layout({ children }) {
             </button>
           ) : (
             <div>
-              <Assistant setShowAssistant={setShowAssistant} />
+              <Assistant
+                setShowAssistant={setShowAssistant}
+                conversation={conversation}
+                setConversation={setConversaation}
+              />
             </div>
           )}
         </div>
