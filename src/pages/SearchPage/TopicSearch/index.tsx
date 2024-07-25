@@ -32,7 +32,15 @@ const TopicSearch = ({ tags, isLoading }: TopicSearchProps) => {
         }}
       >
         {isLoading ? (
-          <CircularProgress style={{ color: colors.green }} />
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <CircularProgress style={{ color: colors.green }} />
+          </div>
         ) : tags && tags.length > 0 ? (
           tags.map((tag, index) => (
             <BigTag

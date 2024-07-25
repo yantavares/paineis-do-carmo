@@ -110,7 +110,15 @@ const SearchPage = () => {
 
             <SearchResultsContainer>
               {isLoading ? (
-                <CircularProgress style={{ color: colors.green }} />
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <CircularProgress style={{ color: colors.green }} />
+                </div>
               ) : filteredData && filteredData.length > 0 ? (
                 filteredData.map((item) => {
                   return (

@@ -37,6 +37,15 @@ const PaintingDetails = () => {
   const [data, setData] = useState<Church>(defaultChurch);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const downloadImage = (url: string) => {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = url.split("/").pop();
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   useEffect(() => {
     const fetchPaintings = async () => {
       setIsLoading(true);
@@ -94,7 +103,9 @@ const PaintingDetails = () => {
             data.images.map((image, index) => (
               <ImageContainer key={index}>
                 <Image src={image.url} alt="" />
-                <DownloadButton>Baixar</DownloadButton>
+                <DownloadButton onClick={() => downloadImage(image.url)}>
+                  Baixar
+                </DownloadButton>
               </ImageContainer>
             ))}
         </div>
