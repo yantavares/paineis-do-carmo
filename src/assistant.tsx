@@ -1,21 +1,62 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import { faCircleArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { makeOpenAIRequest } from "src/api/chatbot";
 import openAISvg from "src/assets/OpenAI.svg";
-import { makeOpenAIRequest } from "src/api/chatBot.js";
+import { Church, Painting } from "./utils/mockData";
 
 interface AssistantProps {
   setShowAssistant: (show: boolean) => void;
-  church?: string;
-  painting?: string;
+  conversation: Message[];
+  setConversation: any;
+}
+
+interface Message {
+  sender: "user" | "bot";
+  text: string;
 }
 
 const Assistant: React.FC<AssistantProps> = ({
   setShowAssistant,
-  church = "",
-  painting = "",
+  conversation,
+  setConversation,
 }) => {
   const [prompt, setPrompt] = useState<string>("");
-  const [response, setResponse] = useState<string>("");
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [id, setId] = useState<string>("");
+  const [type, setType] = useState<string>("");
+  const [item, setItem] = useState<Painting | Church | null>(null);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const pathSegments = location.pathname.split("/");
+    if (pathSegments.length == 5 && pathSegments[2] === "item") {
+      setType(pathSegments[3]);
+      setId(pathSegments[4]);
+    }
+    if (pathSegments.length == 4 && pathSegments[1] === "item") {
+      setType(pathSegments[2]);
+      setId(pathSegments[3]);
+    }
+  }, [location]);
+
+  useEffect(() => {
+    if (type === "churches" && id) {
+      axios
+        .get(`${import.meta.env.VITE_API_URL}/api/churches/${id}`)
+        .then((res) => setItem(res.data as Church))
+        .catch((err) => console.error(err));
+    } else if (type === "paintings" && id) {
+      axios
+        .get(`${import.meta.env.VITE_API_URL}/api/paintings/${id}`)
+        .then((res) => setItem(res.data as Painting))
+        .catch((err) => console.error(err));
+    }
+  }, [type, id, location]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -23,16 +64,28 @@ const Assistant: React.FC<AssistantProps> = ({
 
     try {
       if (!prompt) {
-        setResponse("Digite um prompt para enviar.");
+        setConversation([
+          ...conversation,
+          { sender: "bot", text: "Digite um prompt para enviar." },
+        ]);
         setIsLoading(false);
         return;
       }
-      const result = await makeOpenAIRequest(prompt, painting, church);
-      setResponse(result.message.content);
+      setConversation([...conversation, { sender: "user", text: prompt }]);
+      setPrompt("");
+
+      const result = await makeOpenAIRequest(prompt, type, item);
+      setConversation((prev: Message[]) => [
+        ...prev,
+        { sender: "bot", text: result.message.content },
+      ]);
       setIsLoading(false);
     } catch (error) {
       console.error("Erro:", error);
-      setResponse("Ocorreu um erro ao buscar a resposta.");
+      setConversation([
+        ...conversation,
+        { sender: "bot", text: "Ocorreu um erro ao buscar a resposta." },
+      ]);
       setIsLoading(false);
     }
   };
@@ -51,34 +104,71 @@ const Assistant: React.FC<AssistantProps> = ({
         width: "45rem",
         height: "40rem",
         overflowY: "auto",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
-      <button onClick={() => setShowAssistant(false)}>x</button>
-      <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
-        <h1>Museu Barroco IA</h1>
-        <img height={"15px"} src={openAISvg} alt="OpenAI logo" />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div
+          style={{
+            display: "flex",
+            gap: "2rem",
+            alignItems: "center",
+            paddingLeft: "1rem",
+          }}
+        >
+          <h1>Museu Barroco IA</h1>
+          <img height={"15px"} src={openAISvg} alt="OpenAI logo" />
+        </div>
+        <button onClick={() => setShowAssistant(false)}>x</button>
       </div>
-      <form onSubmit={handleSubmit}>
+      <div style={{ flex: 1, overflowY: "auto", marginBottom: "1rem" }}>
+        {conversation.map((message, index) => (
+          <div
+            key={index}
+            style={{
+              display: "flex",
+              fontSize: "1.4rem",
+              justifyContent:
+                message.sender === "user" ? "flex-end" : "flex-start",
+              marginBottom: "1rem",
+            }}
+          >
+            <div
+              style={{
+                maxWidth: "70%",
+                padding: "0.5rem 1rem",
+                borderRadius: "1rem",
+                backgroundColor:
+                  message.sender === "user" ? "#dcf8c6" : "#f0f0f0",
+              }}
+            >
+              {message.text}
+            </div>
+          </div>
+        ))}
+        {isLoading && <p style={{ fontSize: "1rem" }}>Carregando...</p>}
+      </div>
+      <form onSubmit={handleSubmit} style={{ display: "flex" }}>
         <textarea
+          style={{
+            width: "100%",
+            backgroundColor: "#f0f0f0",
+            fontFamily: "monospace",
+            color: "inherit",
+            padding: "0.5rem",
+            borderRadius: "0.5rem",
+            marginRight: "0.5rem",
+          }}
           value={prompt}
           onChange={handlePromptChange}
           placeholder="Digite seu prompt aqui"
-          rows={4}
-          cols={50}
+          rows={2}
         ></textarea>
-        <br />
-        <button type="submit">Enviar</button>
+        <button type="submit" style={{ padding: "0.5rem 1rem" }}>
+          <FontAwesomeIcon icon={faCircleArrowRight} />
+        </button>
       </form>
-      {isLoading ? (
-        <p>Carregando...</p>
-      ) : (
-        response && (
-          <div>
-            <h2>Resposta:</h2>
-            <p>{response}</p>
-          </div>
-        )
-      )}
     </div>
   );
 };
