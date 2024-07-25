@@ -138,10 +138,10 @@ const Assistant: React.FC<AssistantProps> = ({
               }}
             >
               {message.text}
-              {isLoading && <p style={{ fontSize: "1rem" }}>Carregando...</p>}
             </div>
           </div>
         ))}
+        {isLoading && <p style={{ fontSize: "1rem" }}>Carregando...</p>}
       </div>
       <form onSubmit={handleSubmit} style={{ display: "flex" }}>
         <textarea
