@@ -8,6 +8,8 @@ export const makeOpenAIRequest = async (
   type: string,
   item: Painting | Church | null
 ) => {
+  console.log(type);
+
   let fullPrompt = `
     Você é um assistente útil que fala fluentemente português. 
     Seu objetivo é ajudar o usuário a aprender mais sobre o período Barroco da arte brasileira. 
@@ -28,6 +30,11 @@ export const makeOpenAIRequest = async (
     fullPrompt += ` Você e o usuário está vendo a igreja "${church.name}". Algumas informações: Nome: ${church.name}, cidade: ${church.city}, estado: ${church.state}. Se tiver mais informações sobre a igreja, você pode compartilhar.`;
   } else if (type === "churches") {
     fullPrompt += ` Diga que não há igrejas para falar e que o usuário pode perguntar sobre uma igreja específica na seção Igrejas do site.`;
+  }
+
+  if (type === "submit") {
+    fullPrompt += ` Diga que o usuário pode adicionar uma nova obra! Os campos necessários são: Nome da Obra, Igreja e imagens. O usuário também pode adicionar novas igrejas, artífices e tópicos de indexação. Importante: As fontes bibliográficas deve, ser separadas por ponto e vírgula (;). Exemplo: "ref1; ref2; ref3".`;
+    fullPrompt += ` O usuário também pode conferir o status da submissão na seção do dashboard de usuário após o login.`;
   }
 
   fullPrompt += ` Aqui está o prompt do usuário: ${prompt}`;

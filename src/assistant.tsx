@@ -42,6 +42,12 @@ const Assistant: React.FC<AssistantProps> = ({
       setType(pathSegments[2]);
       setId(pathSegments[3]);
     }
+    if (pathSegments.length == 3 && pathSegments[2] === "submit") {
+      setType(pathSegments[2]);
+    }
+    if (pathSegments.length == 2 && pathSegments[1] === "submit") {
+      setType(pathSegments[1]);
+    }
   }, [location]);
 
   useEffect(() => {
