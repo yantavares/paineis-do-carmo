@@ -25,7 +25,7 @@ export const makeOpenAIRequest = async (
 
   if (item && type === "churches") {
     const church = item as Church;
-    fullPrompt += ` Você e o usuário está vendo a igreja "${church}". Algumas informações: Nome: ${church.name}, cidade: ${church.city}, estado: ${church.state}. Se tiver mais informações sobre a igreja, você pode compartilhar.`;
+    fullPrompt += ` Você e o usuário está vendo a igreja "${church.name}". Algumas informações: Nome: ${church.name}, cidade: ${church.city}, estado: ${church.state}. Se tiver mais informações sobre a igreja, você pode compartilhar.`;
   } else if (type === "churches") {
     fullPrompt += ` Diga que não há igrejas para falar e que o usuário pode perguntar sobre uma igreja específica na seção Igrejas do site.`;
   }

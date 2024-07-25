@@ -28,29 +28,35 @@ const Assistant: React.FC<AssistantProps> = ({
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [id, setId] = useState<string>("");
   const [type, setType] = useState<string>("");
-  const [item, setItem] = useState<Painting | Church>(null);
+  const [item, setItem] = useState<Painting | Church | null>(null);
 
-  const location = useLocation().pathname.split("/");
+  const location = useLocation();
+
   useEffect(() => {
-    if (location.length >= 5 && location[2] === "item") {
-      setType(location[3]);
-      setId(location[4]);
+    const pathSegments = location.pathname.split("/");
+    if (pathSegments.length == 5 && pathSegments[2] === "item") {
+      setType(pathSegments[3]);
+      setId(pathSegments[4]);
+    }
+    if (pathSegments.length == 4 && pathSegments[1] === "item") {
+      setType(pathSegments[2]);
+      setId(pathSegments[3]);
     }
   }, [location]);
 
   useEffect(() => {
-    if (type === "churches") {
+    if (type === "churches" && id) {
       axios
         .get(`${import.meta.env.VITE_API_URL}/api/churches/${id}`)
         .then((res) => setItem(res.data as Church))
         .catch((err) => console.error(err));
-    } else if (type === "paintings") {
+    } else if (type === "paintings" && id) {
       axios
         .get(`${import.meta.env.VITE_API_URL}/api/paintings/${id}`)
         .then((res) => setItem(res.data as Painting))
         .catch((err) => console.error(err));
     }
-  }, [location]);
+  }, [type, id, location]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
