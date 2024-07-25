@@ -403,7 +403,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       const response = await axios.get(
         "https://api-museubarroco-east-dev.azurewebsites.net/api/tags"
       );
-      console.log("Fetched tags:", response.data);
+
       setAllTags(response.data);
     } catch (error) {
       console.error("Error fetching tags:", error);
@@ -415,7 +415,6 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       const response = await axios.get(
         "https://api-museubarroco-east-dev.azurewebsites.net/api/paintings/artisans"
       );
-      console.log("Fetched authors:", response.data);
       setAuthors(response.data.artisans);
     } catch (error) {
       console.error("Error fetching authors:", error);
@@ -427,7 +426,6 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       const response = await axios.get(
         "https://api-museubarroco-east-dev.azurewebsites.net/api/churches"
       );
-      console.log("Fetched churches:", response.data);
       setChurches(response.data);
     } catch (error) {
       console.error("Error fetching churches:", error);
@@ -454,8 +452,6 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       (tag) => !existingTagNames.includes(tag.name.toLowerCase())
     );
 
-    console.log("New tags to create:", newTagsToCreate);
-
     const newTagIds = [];
 
     for (const newTag of newTagsToCreate) {
@@ -464,7 +460,6 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
           "https://api-museubarroco-east-dev.azurewebsites.net/api/tags",
           { name: newTag.name }
         );
-        console.log("Created tag:", response.data);
 
         const createdTagId = response.data;
         newTagIds.push(createdTagId.toString());
@@ -481,8 +476,6 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       }
     }
 
-    console.log("New tag IDs:", newTagIds);
-
     const allTagIds = [
       ...selectedTags.map((tag) => tag.id).filter((id) => id),
       ...newTagIds,
@@ -492,8 +485,6 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       ...prevObra,
       tags: allTagIds,
     }));
-
-    console.log("Obra with all tags:", allTagIds);
 
     const payload = {
       title: obra.name,
@@ -516,14 +507,11 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       tagIds: allTagIds,
     };
 
-    console.log("Payload:", payload);
-
     try {
       const response = await axios.post(
         "https://api-museubarroco-east-dev.azurewebsites.net/api/paintings",
         payload
       );
-      console.log("Success:", response.data);
       toast.success("Obra submetida com Sucesso", {
         duration: 3000,
         style: {
@@ -568,8 +556,6 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       (tag) => !existingTagNames.includes(tag.name.toLowerCase())
     );
 
-    console.log("New tags to create:", newTagsToCreate);
-
     const newTagIds = [];
 
     for (const newTag of newTagsToCreate) {
@@ -578,7 +564,6 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
           "https://api-museubarroco-east-dev.azurewebsites.net/api/tags",
           { name: newTag.name }
         );
-        console.log("Created tag:", response.data);
 
         const createdTagId = response.data;
         newTagIds.push(createdTagId.toString());
@@ -595,8 +580,6 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       }
     }
 
-    console.log("New tag IDs:", newTagIds);
-
     const allTagIds = [
       ...selectedTags.map((tag) => tag.id).filter((id) => id),
       ...newTagIds,
@@ -606,9 +589,6 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       ...prevObra,
       tags: allTagIds,
     }));
-
-    console.log(originalImages);
-    console.log(images);
 
     const containsObjectWithKey = (array, key, value) => {
       return array.some((item) => item[key] === value);
@@ -655,14 +635,11 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       tagIds: allTagIds,
     };
 
-    console.log("Payload:", JSON.stringify(payload));
-
     try {
       const response = await axios.put(
         `https://api-museubarroco-east-dev.azurewebsites.net/api/paintings/${painting.id}`,
         payload
       );
-      console.log("Success:", response.data);
       toast.success("Obra atualizada com sucesso", {
         duration: 3000,
         style: {
@@ -775,14 +752,11 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       bibliographyReference: [church.bibliographicReferences],
     };
 
-    console.log("New Church Payload:", payload);
-
     try {
       const response = await axios.post(
         "https://api-museubarroco-east-dev.azurewebsites.net/api/churches",
         payload
       );
-      console.log("New Church Added:", response.data);
       toast.success("Igreja adicionada com sucesso!", {
         duration: 3000,
         style: {
@@ -811,7 +785,6 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
   };
 
   const handleNewAuthor = (newAuthor: string) => {
-    console.log("New Author", newAuthor);
     setAuthors((prevAuthors) => [...prevAuthors, newAuthor]);
     setIsAuthorModalOpen(false);
   };
