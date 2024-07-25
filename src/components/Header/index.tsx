@@ -42,8 +42,8 @@ const Header = () => {
         <LoginButton onClick={() => navigate("/paineis-do-carmo/login")}>
           Log In
         </LoginButton>
-        <ContribButton onClick={() => navigate("/paineis-do-carmo/register")}>
-          Fazer Parte
+        <ContribButton onClick={() => navigate("/paineis-do-carmo/submit")}>
+          Nova Obra
         </ContribButton>
       </Col2>
     </HeaderContainer>

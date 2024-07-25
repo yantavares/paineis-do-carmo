@@ -7,12 +7,12 @@ import { X } from "lucide-react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
-const useFilePreview = (photographerName) => {
+// Custom hooks
+const useFilePreview = (initialPreviews = [], initialPhotographers = []) => {
   const [files, setFiles] = useState<File[]>([]);
-  const [previews, setPreviews] = useState<string[]>([]);
-  const [imageObjects, setImageObjects] = useState<
-    { Base64Image: string; Photographer: string | null }[]
-  >([]);
+  const [previews, setPreviews] = useState<string[]>(initialPreviews);
+  const [imageObjects, setImageObjects] =
+    useState<{ Base64Image: string; Photographer: string | null }[]>(initialPhotographers);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -33,12 +33,12 @@ const useFilePreview = (photographerName) => {
       });
 
       Promise.all(base64Promises).then((results) => {
-        const imageObjects = results.map((result) => ({
+        const newImageObjects = results.map((result) => ({
           Base64Image: result,
-          Photographer: photographerName || null,
+          Photographer: null,
         }));
-        setImageObjects(imageObjects);
-        setPreviews(results.filter((result) => typeof result === "string") as string[]);
+        setImageObjects((prev) => [...prev, ...newImageObjects]);
+        setPreviews((prev) => [...prev, ...results]);
       });
     }
   };
@@ -46,14 +46,18 @@ const useFilePreview = (photographerName) => {
   return { files, previews, imageObjects, handleFileChange };
 };
 
-const useSingleFilePreview = (photographerName, gravuraName) => {
+const useSingleFilePreview = (initialPreview = "", initialPhotographer = "", initialName = "") => {
   const [file, setFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
+  const [preview, setPreview] = useState<string | null>(initialPreview);
   const [imageObject, setImageObject] = useState<{
     Base64Image: string;
     Photographer: string | null;
     Name: string | null;
-  } | null>(null);
+  }>({
+    Base64Image: initialPreview,
+    Photographer: initialPhotographer,
+    Name: initialName,
+  });
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -66,8 +70,8 @@ const useSingleFilePreview = (photographerName, gravuraName) => {
           const base64Image = reader.result.toString();
           setImageObject({
             Base64Image: base64Image,
-            Photographer: photographerName || null,
-            Name: gravuraName || null,
+            Photographer: initialPhotographer,
+            Name: initialName,
           });
           setPreview(base64Image);
         }
@@ -79,16 +83,19 @@ const useSingleFilePreview = (photographerName, gravuraName) => {
   return { file, preview, imageObject, handleFileChange };
 };
 
+// Components
 const GravuraInput: React.FC<{
   index: number;
   gravura: any;
   onGravuraChange: (index: number, gravura: any) => void;
   onRemove: (index: number) => void;
-}> = ({ index, gravura, onGravuraChange, onRemove }) => {
-  const [gravuraName, setGravuraName] = useState(gravura.Name || "");
-  const [gravuraPhotographer, setGravuraPhotographer] = useState(gravura.Photographer || "");
+  painting?: any;
+}> = ({ index, gravura, onGravuraChange, onRemove, painting }) => {
+  const [gravuraName, setGravuraName] = useState(painting?.name || gravura.Name || "");
+  const [gravuraPhotographer, setGravuraPhotographer] = useState(gravura.createdBy || "");
 
   const { preview, imageObject, handleFileChange } = useSingleFilePreview(
+    gravura?.url || "",
     gravuraPhotographer,
     gravuraName
   );
@@ -122,7 +129,7 @@ const GravuraInput: React.FC<{
             <img
               src={preview}
               alt="Gravura Preview"
-              style={{ maxWidth: "100%", maxHeight: "100px" }}
+              className="preview-image"
             />
           </div>
         ) : (
@@ -174,9 +181,17 @@ const GravuraInput: React.FC<{
   );
 };
 
-const DynamicImageInput = ({ index, image, onImageChange, onRemove }) => {
-  const [photographer, setPhotographer] = useState(image.Photographer || "");
-  const { preview, handleFileChange } = useSingleFilePreview(photographer, "");
+const DynamicImageInput: React.FC<{
+  index: number;
+  image: any;
+  onImageChange: (index: number, image: any) => void;
+  onRemove: (index: number) => void;
+  painting?: any;
+}> = ({ index, image, onImageChange, onRemove, painting }) => {
+  const [photographer, setPhotographer] = useState(
+    painting?.photographer || image.Photographer || ""
+  );
+  const { preview, handleFileChange } = useSingleFilePreview(image.url || "", photographer, "");
 
   useEffect(() => {
     if (preview && (image.Base64Image !== preview || image.Photographer !== photographer)) {
@@ -203,7 +218,7 @@ const DynamicImageInput = ({ index, image, onImageChange, onRemove }) => {
             <img
               src={preview}
               alt={`Preview ${index}`}
-              style={{ maxWidth: "100%", maxHeight: "100px" }}
+              className="preview-image"
             />
           </div>
         ) : (
@@ -223,41 +238,79 @@ const DynamicImageInput = ({ index, image, onImageChange, onRemove }) => {
           type="text"
           placeholder="Insira o nome do fotógrafo"
           value={photographer}
-          onChange={(e) => setPhotographer(e.target.value)}
+          onChange={(e) => {
+            setPhotographer(e.target.value);
+            onImageChange(index, { Base64Image: preview, Photographer: e.target.value });
+          }}
         />
       </label>
     </div>
   );
 };
 
-const SubmitPage: React.FC = () => {
-  const [photographer, setPhotographer] = useState("");
-  const [gravuras, setGravuras] = useState<any[]>([]);
-  const [images, setImages] = useState<any[]>([]);
-  const [churchImages, setChurchImages] = useState<any[]>([]);
+// Main Form Component
+const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({ painting, isEdit }) => {
+  const [photographer, setPhotographer] = useState(painting?.Photographer || "");
+  const [gravuras, setGravuras] = useState<any[]>(
+    painting?.engravings.map((eng) => ({ ...eng, Base64Image: eng.url })) || []
+  );
+  const [images, setImages] = useState<any[]>(
+    painting?.images.map((img) => ({ ...img, Base64Image: img.url })) || []
+  );
+  const [churchImages, setChurchImages] = useState<any[]>(
+    painting?.church?.images.map((img) => ({ ...img, Base64Image: img.url })) || []
+  );
   const [allTags, setAllTags] = useState<{ id: string; name: string }[]>([]);
-  const [selectedTags, setSelectedTags] = useState<{ id: string; name: string }[]>([]);
+  const [selectedTags, setSelectedTags] = useState<{ id: string; name: string }[]>(
+    painting?.tag || []
+  );
   const [newTags, setNewTags] = useState<{ id: string; name: string }[]>([]);
   const [artifices, setArtifices] = useState<any[]>([]);
-  const [newAuthor, setNewAuthor] = useState({ name: "", biography: "" });
+  const [authors, setAuthors] = useState<string[]>([]);
+  const [newAuthor, setNewAuthor] = useState<string>();
 
   const [church, setChurch] = useState({
-    name: "",
-    description: "",
-    city: "",
-    state: "",
-    street: "",
-    bibliographicSources: "",
-    bibliographicReferences: "",
+    name: painting?.church?.name || "",
+    description: painting?.church?.description || "",
+    city: painting?.church?.city || "",
+    state: painting?.church?.state || "",
+    street: painting?.church?.street || "",
+    bibliographicSources: painting?.church?.bibliographicSources || "",
+    bibliographicReferences: painting?.church?.bibliographicReferences || "",
   });
 
   const [churches, setChurches] = useState([]);
 
-  const [authors, setAuthors] = useState([
-    { name: "Author A", id: "1" },
-    { name: "Author B", id: "2" },
-    { name: "Author C", id: "3" },
-  ]);
+  const [originalImages, setOriginalImages] = useState<any[]>(
+    painting?.images.map((image) => {
+      return {
+        Base64Image: image.url,
+        Photographer: image.photographer,
+      };
+    }) || []
+  );
+  const [originalEngravings, setOriginalEngravings] = useState<any[]>(
+    painting?.engravings.map((engraving) => {
+      return {
+        Name: engraving.name,
+        Base64Image: engraving.url,
+        Photographer: engraving.createdBy,
+      };
+    }) || []
+  );
+  const [removedImages, setRemovedImages] = useState<string[]>([]);
+  const [removedEngravings, setRemovedEngravings] = useState<string[]>([]);
+
+  useEffect(() => {
+    axios
+      .get("https://api-museubarroco-east-dev.azurewebsites.net/api/paintings/artisans")
+      .then((response) => {
+        setArtifices(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
 
   const brazilianStates = [
     "AP",
@@ -293,16 +346,16 @@ const SubmitPage: React.FC = () => {
   const [isChurchModalOpen, setIsChurchModalOpen] = useState(false);
 
   const [obra, setObra] = useState({
-    name: "",
-    description: "",
-    bibliographicReferences: "",
-    bibliographicSources: "",
-    dateOfCreation: "",
-    placement: "",
-    tags: [],
-    churchId: "",
-    authorId: "",
-    imagens: [],
+    name: painting?.title || "",
+    description: painting?.description || "",
+    bibliographicReferences: painting?.bibliographyReference || "",
+    bibliographicSources: painting?.bibliographySource || "",
+    dateOfCreation: painting?.dateOfCreation || "",
+    placement: painting?.placement || "",
+    tags: painting?.tag?.map((tag) => tag.id) || [],
+    churchId: painting?.church?.id || "",
+    authorId: painting?.artisan || "",
+    imagens: painting?.images || [],
   });
 
   const fetchAllTags = async () => {
@@ -314,6 +367,18 @@ const SubmitPage: React.FC = () => {
       setAllTags(response.data);
     } catch (error) {
       console.error("Error fetching tags:", error);
+    }
+  };
+
+  const fetchAllAuthors = async () => {
+    try {
+      const response = await axios.get(
+        "https://api-museubarroco-east-dev.azurewebsites.net/api/paintings/artisans"
+      );
+      console.log("Fetched authors:", response.data);
+      setAuthors(response.data.artisans);
+    } catch (error) {
+      console.error("Error fetching authors:", error);
     }
   };
 
@@ -332,13 +397,14 @@ const SubmitPage: React.FC = () => {
   useEffect(() => {
     fetchAllTags();
     fetchAllChurches();
+    fetchAllAuthors();
   }, []);
 
   useEffect(() => {
     setObra((prevObra) => ({
       ...prevObra,
       imagens: images,
-      tags: selectedTags.map((tag) => tag.id), // Adjusted to use tag IDs
+      tags: selectedTags.map((tag) => tag.id),
     }));
   }, [images, selectedTags]);
 
@@ -352,7 +418,6 @@ const SubmitPage: React.FC = () => {
 
     const newTagIds = [];
 
-    // Create new tags in the database individually
     for (const newTag of newTagsToCreate) {
       try {
         const response = await axios.post(
@@ -361,10 +426,9 @@ const SubmitPage: React.FC = () => {
         );
         console.log("Created tag:", response.data);
 
-        const createdTagId = response.data; // Adjusted to get the id from response
+        const createdTagId = response.data;
         newTagIds.push(createdTagId.toString());
 
-        // Update selectedTags with the new ID
         const updatedSelectedTags = selectedTags.map((tag) =>
           tag.name.toLowerCase() === newTag.name.toLowerCase()
             ? { ...tag, id: createdTagId.toString() }
@@ -379,10 +443,8 @@ const SubmitPage: React.FC = () => {
 
     console.log("New tag IDs:", newTagIds);
 
-    // Combine the existing tags' IDs with the new tag IDs
     const allTagIds = [...selectedTags.map((tag) => tag.id).filter((id) => id), ...newTagIds];
 
-    // Update obra with all tag IDs
     setObra((prevObra) => ({
       ...prevObra,
       tags: allTagIds,
@@ -390,7 +452,6 @@ const SubmitPage: React.FC = () => {
 
     console.log("Obra with all tags:", allTagIds);
 
-    // Construct the payload for obra submission
     const payload = {
       title: obra.name,
       description: obra.description,
@@ -409,7 +470,7 @@ const SubmitPage: React.FC = () => {
       placement: obra.placement,
       artisan: obra.authorId.toString(),
       churchId: obra.churchId.toString(),
-      tagIds: allTagIds, // Ensure tags are strings
+      tagIds: allTagIds,
     };
 
     console.log("Payload:", payload);
@@ -421,14 +482,13 @@ const SubmitPage: React.FC = () => {
       );
       console.log("Success:", response.data);
       toast.success("Obra submetida com Sucesso", {
-        duration: 3000, // 5 seconds
+        duration: 3000,
         style: {
-          fontSize: "16px", // Increase font size
-          padding: "20px", // Increase padding
+          fontSize: "16px",
+          padding: "20px",
         },
       });
 
-      // Reset form fields
       setObra({
         name: "",
         description: "",
@@ -447,10 +507,132 @@ const SubmitPage: React.FC = () => {
     } catch (error) {
       console.error("Error posting data:", error);
       toast.error(`Erro ao submeter a obra: ${error.message}`, {
-        duration: 3000, // 5 seconds
+        duration: 3000,
         style: {
-          fontSize: "16px", // Increase font size
-          padding: "20px", // Increase padding
+          fontSize: "16px",
+          padding: "20px",
+        },
+      });
+    }
+  };
+
+  const handleUpdateObra = async () => {
+    const existingTagNames = allTags.map((tag) => tag.name.toLowerCase());
+    const newTagsToCreate = selectedTags.filter(
+      (tag) => !existingTagNames.includes(tag.name.toLowerCase())
+    );
+
+    console.log("New tags to create:", newTagsToCreate);
+
+    const newTagIds = [];
+
+    for (const newTag of newTagsToCreate) {
+      try {
+        const response = await axios.post(
+          "https://api-museubarroco-east-dev.azurewebsites.net/api/tags",
+          { name: newTag.name }
+        );
+        console.log("Created tag:", response.data);
+
+        const createdTagId = response.data;
+        newTagIds.push(createdTagId.toString());
+
+        const updatedSelectedTags = selectedTags.map((tag) =>
+          tag.name.toLowerCase() === newTag.name.toLowerCase()
+            ? { ...tag, id: createdTagId.toString() }
+            : tag
+        );
+        setSelectedTags(updatedSelectedTags);
+      } catch (error) {
+        console.error(`Error creating tag "${newTag.name}":`, error);
+        toast.error(`Erro ao criar a tag "${newTag.name}": ${error.message}`);
+      }
+    }
+
+    console.log("New tag IDs:", newTagIds);
+
+    const allTagIds = [...selectedTags.map((tag) => tag.id).filter((id) => id), ...newTagIds];
+
+    setObra((prevObra) => ({
+      ...prevObra,
+      tags: allTagIds,
+    }));
+
+    console.log(originalImages);
+    console.log(images);
+
+    const containsObjectWithKey = (array, key, value) => {
+      return array.some((item) => item[key] === value);
+    };
+
+    const payload = {
+      churchId: obra.churchId,
+      title: obra.name,
+      description: obra.description,
+      dateOfCreation: obra.dateOfCreation,
+      bibliographySource: obra.bibliographicSources,
+      bibliographyReference: [obra.bibliographicReferences],
+      placement: obra.placement,
+      artisan: obra.authorId.toString(),
+      images: images
+        .filter((img) => !containsObjectWithKey(originalImages, "Base64Image", img.Base64Image)) // Only include new images
+        .map((img) => ({
+          base64Image: img.Base64Image,
+          photographer: img.Photographer,
+        })),
+      engravings: gravuras
+        .filter(
+          (gravura) =>
+            !containsObjectWithKey(originalEngravings, "Base64Image", gravura.Base64Image)
+        ) // Only include new engravings
+        .map((gravura) => ({
+          name: gravura.Name,
+          base64Image: gravura.Base64Image,
+          createdBy: gravura.Photographer,
+        })),
+      urlImagesToRemove: removedImages,
+      urlEngravingsToRemove: removedEngravings,
+      tagIds: allTagIds,
+    };
+
+    console.log("Payload:", JSON.stringify(payload));
+
+    try {
+      const response = await axios.put(
+        `https://api-museubarroco-east-dev.azurewebsites.net/api/paintings/${painting.id}`,
+        payload
+      );
+      console.log("Success:", response.data);
+      toast.success("Obra atualizada com sucesso", {
+        duration: 3000,
+        style: {
+          fontSize: "16px",
+          padding: "20px",
+        },
+      });
+
+      setObra({
+        name: "",
+        description: "",
+        bibliographicReferences: "",
+        bibliographicSources: "",
+        dateOfCreation: "",
+        placement: "",
+        tags: [],
+        churchId: "",
+        authorId: "",
+        imagens: [],
+      });
+      setImages([]);
+      setSelectedTags([]);
+      setGravuras([]);
+    } catch (error) {
+      console.error("Error updating data:", error);
+      toast.error(`Erro ao atualizar a obra: ${error.message}`, {
+        duration: 3000,
+        style: {
+          fontSize: "16px",
+          padding: "20px",
         },
       });
     }
@@ -472,6 +654,8 @@ const SubmitPage: React.FC = () => {
   }, []);
 
   const handleRemoveGravura = (index: number) => {
+    const gravura = gravuras[index];
+    setRemovedEngravings((prev) => [...prev, gravura.Base64Image]); // Add URL to removedEngravings array
     setGravuras((prevGravuras) => prevGravuras.filter((_, i) => i !== index));
   };
 
@@ -488,6 +672,8 @@ const SubmitPage: React.FC = () => {
   };
 
   const handleRemoveImage = (index) => {
+    const image = images[index];
+    setRemovedImages((prev) => [...prev, image.Base64Image]); // Add URL to removedImages array
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
 
@@ -533,17 +719,16 @@ const SubmitPage: React.FC = () => {
       );
       console.log("New Church Added:", response.data);
       toast.success("Igreja adicionada com sucesso!", {
-        duration: 3000, // 5 seconds
+        duration: 3000,
         style: {
-          fontSize: "16px", // Increase font size
-          padding: "20px", // Increase padding
+          fontSize: "16px",
+          padding: "20px",
         },
       });
 
       setIsChurchModalOpen(false);
-      fetchAllChurches(); // Fetch the updated list of churches after adding the new one
+      fetchAllChurches();
 
-      // Reset church form fields
       setChurch({
         name: "",
         description: "",
@@ -560,13 +745,9 @@ const SubmitPage: React.FC = () => {
     }
   };
 
-  const handleNewAuthor = () => {
+  const handleNewAuthor = (newAuthor: string) => {
     console.log("New Author", newAuthor);
-    setAuthors((prevAuthors) => [
-      ...prevAuthors,
-      { name: newAuthor.name, id: (prevAuthors.length + 1).toString() },
-    ]);
-    setNewAuthor({ name: "", biography: "" });
+    setAuthors((prevAuthors) => [...prevAuthors, newAuthor]);
     setIsAuthorModalOpen(false);
   };
 
@@ -576,9 +757,11 @@ const SubmitPage: React.FC = () => {
       <div
         className="form-container"
         style={{ marginTop: "4rem", borderRadius: "2rem" }}>
-        <h1 className="submit-title">Submeta uma Obra</h1>
+        <h1 className="submit-title">{isEdit ? "Editar Obra" : "Submeta uma Obra"}</h1>
         <p className="submit-description">
-          Submeta uma obra para ser adicionada ao nosso banco de dados
+          {isEdit
+            ? "Edite a obra selecionada"
+            : "Submeta uma obra para ser adicionada ao nosso banco de dados"}
         </p>
         <div className="form-fields-container">
           <label className="label-wrapper">
@@ -623,9 +806,9 @@ const SubmitPage: React.FC = () => {
                   <option value="">Selecione um Artíficie</option>
                   {authors.map((author) => (
                     <option
-                      key={author.id}
-                      value={author.id}>
-                      {author.name}
+                      key={author}
+                      value={author}>
+                      {author}
                     </option>
                   ))}
                 </select>
@@ -703,6 +886,7 @@ const SubmitPage: React.FC = () => {
                 image={image}
                 onImageChange={handleImageChange}
                 onRemove={handleRemoveImage}
+                painting={image}
               />
             ))}
             <button
@@ -720,6 +904,7 @@ const SubmitPage: React.FC = () => {
             gravura={gravura}
             onGravuraChange={handleGravuraChange}
             onRemove={handleRemoveGravura}
+            painting={gravura}
           />
         ))}
         <button
@@ -729,9 +914,9 @@ const SubmitPage: React.FC = () => {
           Adicionar Gravura
         </button>
         <button
-          onClick={handleNewObra}
+          onClick={isEdit ? handleUpdateObra : handleNewObra}
           className="submit-btn">
-          Submeter
+          {isEdit ? "Atualizar" : "Submeter"}
         </button>
       </div>
 
@@ -753,29 +938,18 @@ const SubmitPage: React.FC = () => {
           </div>
           <p className="submit-description">Adicione um novo artíficie ao banco de dados</p>
           <div className="form-fields-container">
-            <div className="grid-layout">
-              <label className="label-wrapper">
-                <p className="input-label">Nome do Artífice</p>
-                <input
-                  type="text"
-                  placeholder="Insira o nome do Artífice"
-                  value={newAuthor.name}
-                  onChange={(e) => setNewAuthor({ ...newAuthor, name: e.target.value })}
-                />
-              </label>
-              <label className="label-wrapper">
-                <p className="input-label">Biografia</p>
-                <input
-                  type="text"
-                  placeholder="Insira a Biografia do artífice"
-                  value={newAuthor.biography}
-                  onChange={(e) => setNewAuthor({ ...newAuthor, biography: e.target.value })}
-                />
-              </label>
-            </div>
+            <label className="label-wrapper">
+              <p className="input-label">Nome do Artífice</p>
+              <input
+                type="text"
+                placeholder="Insira o nome do Artífice"
+                value={newAuthor}
+                onChange={(e) => setNewAuthor(e.target.value)}
+              />
+            </label>
           </div>
           <button
-            onClick={handleNewAuthor}
+            onClick={() => handleNewAuthor(newAuthor)}
             className="submit-btn">
             Adicionar Artífice
           </button>

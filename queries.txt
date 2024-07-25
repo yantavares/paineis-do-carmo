@@ -1,7 +1,0 @@
-- Buscar todas as obras, pinturas, igrejas -> (tudo) [3]
-- Buscar tags [1]
-- Buscar por tag (tudo) [3]
-- Buscar Igreja por localidade (Estado) [1]
-- Buscar (tudo) específico [3]
-- Listar todas as obras relacionadas à igreja/Artista [0]
-- Listar todas as gravuras relacinadas à obra [0]

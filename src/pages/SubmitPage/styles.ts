@@ -144,6 +144,12 @@ export const Container = styled.div`
     gap: 1rem;
   }
 
+  .preview-image {
+    min-height: 200px;
+    min-width: 200px;
+    max-width: 200px;
+  }
+
   .form-fields-container {
     display: flex;
     flex-direction: column;
