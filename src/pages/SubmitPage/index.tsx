@@ -820,7 +820,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
         </p>
         <div className="form-fields-container">
           <label className="label-wrapper">
-            <p className="input-label">Nome da Obra</p>
+            <p className="input-label">Nome da Obra *</p>
             <input
               type="text"
               placeholder="Insira o nome da obra"
@@ -830,7 +830,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
           </label>
           <div className="grid-layout">
             <label className="label-wrapper">
-              <p className="input-label">Igreja</p>
+              <p className="input-label">Igreja *</p>
               <div className="flex-layout">
                 <select
                   value={obra.churchId}
@@ -945,7 +945,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
             </label>
           </div>
           <label className="label-wrapper">
-            <p className="input-label">Tags para indexação</p>
+            <p className="input-label">Tags para indexação *</p>
             <TagInput
               allTags={allTags}
               selectedTags={selectedTags}
@@ -953,7 +953,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
             />
           </label>
           <div className="input-container">
-            <p className="input-label">Imagens da Obra</p>
+            <p className="input-label">Imagens da Obra *</p>
             {images.map((image, index) => (
               <DynamicImageInput
                 key={index}
