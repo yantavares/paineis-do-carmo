@@ -1,11 +1,5 @@
 import React, { Suspense, lazy } from "react";
-import {
-  BrowserRouter,
-  Navigate,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import Header from "src/components/Header";
 import Footer from "src/components/Footer";
@@ -45,29 +39,55 @@ function App() {
   return (
     <PreventRightClickProvider>
       <BrowserRouter>
-        <Suspense
-          fallback={<CircularProgress style={{ color: colors.green }} />}
-        >
+        <Suspense fallback={<CircularProgress style={{ color: colors.green }} />}>
           <Layout>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/paineis-do-carmo" element={<Home />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
+              <Route
+                path="/"
+                element={<Home />}
+              />
+              <Route
+                path="/paineis-do-carmo"
+                element={<Home />}
+              />
+              <Route
+                path="/login"
+                element={<LoginPage />}
+              />
+              <Route
+                path="/register"
+                element={<RegisterPage />}
+              />
 
               <Route
                 path="/paineis-do-carmo/register"
                 element={<RegisterPage />}
               />
 
-              <Route path="/submit" element={<SubmitPage />} />
-              <Route path="/paineis-do-carmo/submit" element={<SubmitPage />} />
+              <Route
+                path="/submit"
+                element={<SubmitPage />}
+              />
+              <Route
+                path="/paineis-do-carmo/submit"
+                element={<SubmitPage />}
+              />
 
-              <Route path="/paineis-do-carmo/login" element={<LoginPage />} />
-              <Route path="/pesquisa/:selected" element={<SearchPage />} />
+              <Route
+                path="/paineis-do-carmo/login"
+                element={<LoginPage />}
+              />
+              <Route
+                path="/pesquisa/:selected"
+                element={<SearchPage />}
+              />
               <Route
                 path="/paineis-do-carmo/pesquisa/:selected"
                 element={<SearchPage />}
+              />
+              <Route
+                path="/paineis-do-carmo/admin"
+                element={<DashbordPage />}
               />
               <Route
                 path="/paineis-do-carmo/pesquisa/igrejas/:state"
@@ -81,27 +101,48 @@ function App() {
                 path="/paineis-do-carmo/pesquisa/"
                 element={<Navigate to="/paineis-do-carmo/pesquisa/obras" />}
               />
-              <Route path="/topicos/:tag" element={<TagDetail />} />
+              <Route
+                path="/topicos/:tag"
+                element={<TagDetail />}
+              />
               <Route
                 path="/paineis-do-carmo/topicos/:tag"
                 element={<TagDetail />}
               />
-              <Route path="/item/:id" element={<PaintingDetail />} />
+              <Route
+                path="/item/:id"
+                element={<PaintingDetail />}
+              />
               <Route
                 path="/paineis-do-carmo/item/paintings/:id"
                 element={<PaintingDetail />}
               />
-              <Route path="/item/paintings/:id" element={<PaintingDetail />} />
+              <Route
+                path="/item/paintings/:id"
+                element={<PaintingDetail />}
+              />
               <Route
                 path="/paineis-do-carmo/item/churches/:id"
                 element={<ChurchDetail />}
               />
-              <Route path="/item/churches/:id" element={<ChurchDetail />} />
+              <Route
+                path="/item/churches/:id"
+                element={<ChurchDetail />}
+              />
 
-              <Route path="/sobre" element={<AboutPage />} />
-              <Route path="/paineis-do-carmo/sobre" element={<AboutPage />} />
+              <Route
+                path="/sobre"
+                element={<AboutPage />}
+              />
+              <Route
+                path="/paineis-do-carmo/sobre"
+                element={<AboutPage />}
+              />
 
-              <Route path="/dashboard/:page" element={<DashbordPage />} />
+              <Route
+                path="/dashboard/:page"
+                element={<DashbordPage />}
+              />
               <Route
                 path="/paineis-do-carmo/dashboard/:page"
                 element={<DashbordPage />}

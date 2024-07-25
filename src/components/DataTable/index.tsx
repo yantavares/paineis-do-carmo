@@ -5,7 +5,7 @@ import { ptBR } from "@mui/material/locale";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import * as React from "react";
-import DashForm from "../DashForm";
+import DashForm from "../SubmitPage";
 import "./styles.css";
 
 const rows = [
@@ -105,8 +105,7 @@ export default function DataTable() {
             alignItems: "center",
             width: "100%",
             display: "flex",
-          }}
-        >
+          }}>
           <div
             style={{
               backgroundColor: statusColors[params.value],
@@ -118,8 +117,7 @@ export default function DataTable() {
               borderRadius: "0.5rem",
               width: "4.6rem",
               height: "1.6rem",
-            }}
-          >
+            }}>
             {params.value}
           </div>
         </div>
@@ -132,8 +130,7 @@ export default function DataTable() {
       type: "date",
       flex: 1,
       valueGetter: (params: any) => new Date(params.value),
-      valueFormatter: (params: any) =>
-        new Date(params.value).toLocaleDateString("pt-BR"),
+      valueFormatter: (params: any) => new Date(params.value).toLocaleDateString("pt-BR"),
     },
     {
       field: "options",
@@ -166,8 +163,7 @@ export default function DataTable() {
         style={{
           height: 500,
           width: "78rem",
-        }}
-      >
+        }}>
         <DataGrid
           className="data-grid"
           rows={rows}
@@ -183,7 +179,9 @@ export default function DataTable() {
           disableRowSelectionOnClick
         />
       </div>
-      <Modal open={open} onClose={handleClose}>
+      <Modal
+        open={open}
+        onClose={handleClose}>
         <Box
           sx={{
             position: "absolute",
@@ -196,8 +194,7 @@ export default function DataTable() {
             overflowY: "scroll",
             p: 4,
             borderRadius: 6,
-          }}
-        >
+          }}>
           <DashForm />
         </Box>
       </Modal>

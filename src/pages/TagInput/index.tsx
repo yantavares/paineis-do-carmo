@@ -67,6 +67,11 @@ const TagInput: React.FC<TagInputProps> = ({ allTags, selectedTags, onTagsChange
     setTag("");
   };
 
+  const removeTag = (tagToRemove: Tag) => {
+    const updatedTags = selectedTags.filter((tag) => tag.name !== tagToRemove.name);
+    onTagsChange(updatedTags);
+  };
+
   const onSuggestionSelected = (
     event: React.FormEvent,
     { suggestion }: SuggestionSelectedEventData<Tag>
@@ -98,7 +103,11 @@ const TagInput: React.FC<TagInputProps> = ({ allTags, selectedTags, onTagsChange
         />
         <ul className="selected-tags-list">
           {selectedTags.map((tag, index) => (
-            <li key={index}>{tag.name}</li>
+            <li
+              key={index}
+              onClick={() => removeTag(tag)}>
+              {tag.name}
+            </li>
           ))}
         </ul>
       </div>

@@ -36,8 +36,7 @@ const ChurchState = () => {
   return (
     <SearchContainer>
       <SearchHeader>
-        Igrejas por Estado:{" "}
-        <span style={{ color: colors.green }}> {translateState(state)}</span>
+        Igrejas por Estado: <span style={{ color: colors.green }}> {translateState(state)}</span>
         <SearchBarContainer>
           <SearchBar
             placeHolder={`Busque por igrejas em ${capitalize(state)}`}
@@ -49,7 +48,11 @@ const ChurchState = () => {
       <SearchResultsContainer>
         {data?.map((item: any, index: number) => (
           <SearchResult key={index}>
-            <Item item={item} type={"churches"} fixedImgHeight />
+            <Item
+              item={item}
+              type={"churches"}
+              fixedImgHeight
+            />
           </SearchResult>
         ))}
       </SearchResultsContainer>

@@ -10,7 +10,6 @@ export const Container = styled.div`
     border-radius: 0.75rem;
     padding: 1rem;
     margin: 0.5rem 0;
-
     transition: all ease-in 0.2s;
 
     &:focus {
@@ -31,7 +30,6 @@ export const Container = styled.div`
     background-color: #fff;
     padding: 0;
     margin: 0;
-    /* make this same border with a box shadow */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     border-radius: 0.75rem;
   }
@@ -46,13 +44,13 @@ export const Container = styled.div`
     border-radius: 0.75rem;
   }
 
-  /* Remove list item dots from the selected tags */
   .selected-tags-list {
     max-width: 400px;
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
     padding: 0;
+    list-style: none;
   }
 
   ul {
@@ -61,8 +59,31 @@ export const Container = styled.div`
   }
 
   .selected-tags-list li {
+    font-size: 1.5rem;
+    position: relative;
     padding: 5px 10px;
     background-color: #e0e0e0;
-    border-radius: 6px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  .selected-tags-list li:hover {
+    padding-right: 25px;
+  }
+
+  .selected-tags-list li:hover::after {
+    content: "x";
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #dc3545;
+    color: white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;

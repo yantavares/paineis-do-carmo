@@ -20,29 +20,26 @@ const Header = () => {
     <HeaderContainer>
       <Col1>
         <TitleContainer onClick={() => navigate("/paineis-do-carmo/")}>
-          <img src={PaintBucket} alt="Museu Barroco" />
+          <img
+            src={PaintBucket}
+            alt="Museu Barroco"
+          />
           <Title>Museu Barroco</Title>
         </TitleContainer>
 
         <ButtonsContainer>
-          <HeaderButton onClick={() => navigate("/pesquisa/obras")}>
-            Galeria de Obras
-          </HeaderButton>
-          <HeaderButton onClick={() => navigate("/pesquisa/igrejas")}>
-            Igrejas
-          </HeaderButton>
-          <HeaderButton onClick={() => navigate("/pesquisa/topicos")}>
-            Tópicos
-          </HeaderButton>
+          <HeaderButton onClick={() => navigate("/pesquisa/obras")}>Galeria de Obras</HeaderButton>
+          <HeaderButton onClick={() => navigate("/pesquisa/igrejas")}>Igrejas</HeaderButton>
+          <HeaderButton onClick={() => navigate("/pesquisa/topicos")}>Tópicos</HeaderButton>
           <HeaderButton onClick={() => navigate("/sobre")}>Sobre</HeaderButton>
         </ButtonsContainer>
       </Col1>
 
       <Col2>
-        <LoginButton onClick={() => navigate("/paineis-do-carmo/login")}>
-          Log In
-        </LoginButton>
-        <ContribButton>Fazer Parte</ContribButton>
+        <LoginButton onClick={() => navigate("/paineis-do-carmo/login")}>Log In</LoginButton>
+        <ContribButton onClick={() => navigate("/paineis-do-carmo/submit")}>
+          Nova Obra
+        </ContribButton>
       </Col2>
     </HeaderContainer>
   );
