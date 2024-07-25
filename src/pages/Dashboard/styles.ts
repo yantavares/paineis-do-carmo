@@ -40,7 +40,7 @@ export const Container = styled.div`
   }
 
   .table {
-    border: 1px solid var(--clr-outlines);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 1rem;
     padding: 1rem 2.5rem 1rem;
   }
@@ -147,4 +147,18 @@ export const Container = styled.div`
       }
     }
   }
+`;
+
+export const ExitContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 5rem;
+`;
+
+export const ExitButton = styled.button`
+  border: 1px solid #bbb;
+  padding-right: 5rem;
+  color: #777;
+  padding: 0.5rem;
 `;

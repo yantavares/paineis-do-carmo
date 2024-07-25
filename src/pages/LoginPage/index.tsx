@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Container } from "./styles";
 import googleLogo from "../../assets/google_symbol.svg.png";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -11,7 +12,12 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    navigate("/dashboard/1");
+    if (email == "admin" && password == "admin") {
+      localStorage.setItem("user", JSON.stringify(email));
+      navigate("/paineis-do-carmo/admin");
+    } else {
+      toast.error("Usuário ou senha incorretos");
+    }
   };
 
   return (
@@ -23,6 +29,9 @@ const LoginPage = () => {
       }}
     >
       <Container>
+        <div style={{ fontSize: "1.6rem" }}>
+          <Toaster />
+        </div>
         <h3 className="login-title">Login</h3>
         <p className="login-description">
           Faça login para buscar obras <br /> no nosso banco de dados

@@ -1,16 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { Container } from "./styles";
-import OptionButton from "src/components/OptionButton";
-import DeleteConfirmationModal from "src/components/DeleteModal";
-import SubmitPage from "src/pages/SubmitPage"; // Import your SubmitPage component here
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { Ellipsis } from "lucide-react";
+import DeleteConfirmationModal from "src/components/DeleteModal";
 import Modal from "src/components/Modal"; // Import a modal component for displaying the form
-
-const mockPaintings = [
-  // Your mock data here
-];
+import OptionButton from "src/components/OptionButton";
+import SubmitPage from "src/pages/SubmitPage"; // Import your SubmitPage component here
+import { Container, ExitButton, ExitContainer } from "./styles";
+import { useNavigate } from "react-router-dom";
 
 const fetchPaintings = async () => {
   try {
@@ -25,13 +21,20 @@ const fetchPaintings = async () => {
 };
 
 export default function Dashboard() {
-  const [paintings, setPaintings] = useState(mockPaintings);
+  const [paintings, setPaintings] = useState([]);
   const [selectedType, setSelectedType] = useState("all");
   const [dateSort, setDateSort] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [paintingToDelete, setPaintingToDelete] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [paintingToEdit, setPaintingToEdit] = useState(null);
+
+  const navigate = useNavigate();
+
+  const handleExit = () => {
+    localStorage.removeItem("user");
+    navigate("/");
+  };
 
   useEffect(() => {
     const getPaintings = async () => {
@@ -46,7 +49,8 @@ export default function Dashboard() {
   const handleDateArrow = (e) => {
     e.currentTarget.classList.toggle("rotate");
     const dateSorted = [...paintings].sort(
-      (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      (a, b) =>
+        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
     );
     if (!dateSort) setPaintings([...dateSorted].reverse());
     else setPaintings(dateSorted);
@@ -88,7 +92,9 @@ export default function Dashboard() {
         `https://api-museubarroco-east-dev.azurewebsites.net/api/paintings/${paintingToDelete}`
       );
       toast.success("Painting deleted successfully");
-      setPaintings(paintings.filter((painting) => painting.id !== paintingToDelete));
+      setPaintings(
+        paintings.filter((painting) => painting.id !== paintingToDelete)
+      );
       setIsDeleteModalOpen(false);
     } catch (error) {
       toast.error("Error deleting painting: " + error.message);
@@ -102,31 +108,33 @@ export default function Dashboard() {
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={confirmDelete}
       />
-      <Modal
-        isOpen={isEditModalOpen}
-        onClose={() => setIsEditModalOpen(false)}>
-        <SubmitPage
-          painting={paintingToEdit}
-          isEdit={true}
-        />
+      <Modal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>
+        <SubmitPage painting={paintingToEdit} isEdit={true} />
       </Modal>
-      <h2>SUBMISSÕES RECENTES</h2>
+
+      <h2>Submissões Recentes</h2>
+
       <main className="table">
         <section className="table-header">
           <div className="flex-group">
             <a
               onClick={() => handleClick("all")}
-              className={(selectedType === "all" && "active") || "all"}>
+              className={(selectedType === "all" && "active") || "all"}
+            >
               Todas
             </a>
             <a
               onClick={() => handleClick("published")}
-              className={(selectedType === "published" && "active") || "published"}>
+              className={
+                (selectedType === "published" && "active") || "published"
+              }
+            >
               Publicadas
             </a>
             <a
               onClick={() => handleClick("pending")}
-              className={(selectedType === "pending" && "active") || "pending"}>
+              className={(selectedType === "pending" && "active") || "pending"}
+            >
               Pendentes
             </a>
           </div>
@@ -135,15 +143,16 @@ export default function Dashboard() {
           <table className="content-table">
             <thead>
               <tr>
-                <th>Name</th>
+                <th>Nome</th>
                 <th>Status</th>
-                <th>User</th>
+                <th>Usuário</th>
                 <th>
                   <div className="flex-flow">
-                    Submission Date <button onClick={handleDateArrow}></button>
+                    Data de Submissão{" "}
+                    <button onClick={handleDateArrow}></button>
                   </div>
                 </th>
-                <th>Options</th>
+                <th>Opções</th>
               </tr>
             </thead>
             <tbody>
@@ -159,6 +168,9 @@ export default function Dashboard() {
           </table>
         </section>
       </main>
+      <ExitContainer>
+        <ExitButton onClick={handleExit}>Sair</ExitButton>
+      </ExitContainer>
     </Container>
   );
 }
@@ -181,10 +193,7 @@ function PaintingRow({ painting, onEdit, onDelete }) {
         })}
       </td>
       <td style={{ display: "flex" }}>
-        <OptionButton
-          onEdit={onEdit}
-          onDelete={onDelete}
-        />
+        <OptionButton onEdit={onEdit} onDelete={onDelete} />
       </td>
     </tr>
   );
