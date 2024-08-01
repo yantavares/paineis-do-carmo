@@ -9,6 +9,7 @@ import Assistant from "./assistant";
 import { PreventRightClickProvider } from "./providers/PreventRightClickContext";
 import colors from "./utils/colors";
 import ScrollToTop from "./utils/scrollToTop";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const Home = lazy(() => import("src/pages/Home"));
 const LoginPage = lazy(() => import("src/pages/LoginPage"));
@@ -126,11 +127,25 @@ function App() {
               <Route path="login" element={<LoginPage />} />
               <Route path="register" element={<RegisterPage />} />
 
-              <Route path="submit" element={<SubmitPage />} />
+              <Route
+                path="submit"
+                element={
+                  <ProtectedRoute>
+                    <SubmitPage />
+                  </ProtectedRoute>
+                }
+              />
 
               <Route path="pesquisa/:selected" element={<SearchPage />} />
 
-              <Route path="admin" element={<DashbordPage />} />
+              <Route
+                path="admin"
+                element={
+                  <ProtectedRoute>
+                    <DashbordPage />
+                  </ProtectedRoute>
+                }
+              />
 
               <Route path="pesquisa/igrejas/:state" element={<ChurchState />} />
 
@@ -144,7 +159,14 @@ function App() {
 
               <Route path="sobre" element={<AboutPage />} />
 
-              <Route path="dashboard/:page" element={<DashbordPage />} />
+              <Route
+                path="dashboard/:page"
+                element={
+                  <ProtectedRoute>
+                    <DashbordPage />
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
           </Layout>
         </Suspense>

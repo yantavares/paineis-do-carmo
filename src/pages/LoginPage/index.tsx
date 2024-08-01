@@ -16,7 +16,7 @@ const LoginPage = () => {
       email == import.meta.env.VITE_ADMIN_USER &&
       password == import.meta.env.VITE_ADMIN_PASSWORD
     ) {
-      localStorage.setItem("user", JSON.stringify(email));
+      localStorage.setItem("token", JSON.stringify(email));
       navigate("/admin");
     } else {
       toast.error("Usuário ou senha incorretos");

@@ -15,7 +15,7 @@ import {
 
 const Header = () => {
   const navigate = useNavigate();
-  const isLoggedin = localStorage.getItem("user");
+  const isLoggedin = localStorage.getItem("token");
 
   return (
     <HeaderContainer>
