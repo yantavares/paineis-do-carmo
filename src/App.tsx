@@ -41,9 +41,7 @@ interface Message {
 
 function Layout({ children }) {
   const location = useLocation();
-  const isDashboardRoute =
-    location.pathname.startsWith("/dashboard") ||
-    location.pathname.startsWith("/paineis-do-carmo/dashboard");
+  const isDashboardRoute = location.pathname.startsWith("/dashboard");
 
   const [showAssistant, setShowAssistant] = useState(false);
   const [conversation, setConversaation] = useState<Message[]>([
@@ -137,65 +135,31 @@ function App() {
           <Layout>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/paineis-do-carmo" element={<Home />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
 
-              <Route
-                path="/paineis-do-carmo/register"
-                element={<RegisterPage />}
-              />
-
               <Route path="/submit" element={<SubmitPage />} />
-              <Route path="/paineis-do-carmo/submit" element={<SubmitPage />} />
 
-              <Route path="/paineis-do-carmo/login" element={<LoginPage />} />
               <Route path="/pesquisa/:selected" element={<SearchPage />} />
-              <Route
-                path="/paineis-do-carmo/pesquisa/:selected"
-                element={<SearchPage />}
-              />
-              <Route
-                path="/paineis-do-carmo/admin"
-                element={<DashbordPage />}
-              />
-              <Route
-                path="/paineis-do-carmo/pesquisa/igrejas/:state"
-                element={<ChurchState />}
-              />
+
+              <Route path="/admin" element={<DashbordPage />} />
+
               <Route
                 path="/pesquisa/igrejas/:state"
                 element={<ChurchState />}
               />
-              <Route
-                path="/paineis-do-carmo/pesquisa/"
-                element={<Navigate to="/paineis-do-carmo/pesquisa/obras" />}
-              />
+
               <Route path="/topicos/:tag" element={<TagDetail />} />
-              <Route
-                path="/paineis-do-carmo/topicos/:tag"
-                element={<TagDetail />}
-              />
+
               <Route path="/item/:id" element={<PaintingDetail />} />
-              <Route
-                path="/paineis-do-carmo/item/paintings/:id"
-                element={<PaintingDetail />}
-              />
+
               <Route path="/item/paintings/:id" element={<PaintingDetail />} />
-              <Route
-                path="/paineis-do-carmo/item/churches/:id"
-                element={<ChurchDetail />}
-              />
+
               <Route path="/item/churches/:id" element={<ChurchDetail />} />
 
               <Route path="/sobre" element={<AboutPage />} />
-              <Route path="/paineis-do-carmo/sobre" element={<AboutPage />} />
 
               <Route path="/dashboard/:page" element={<DashbordPage />} />
-              <Route
-                path="/paineis-do-carmo/dashboard/:page"
-                element={<DashbordPage />}
-              />
             </Routes>
           </Layout>
         </Suspense>
