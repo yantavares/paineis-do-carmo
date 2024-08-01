@@ -808,8 +808,16 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       });
       setChurchImages([]);
     } catch (error) {
+      const errorResponse = error?.response?.data?.errors || null;
+      let formattedErrorMessages = formatErrorMessages(errorResponse);
+
       console.error("Error posting new church:", error);
-      toast.error(`Erro ao adicionar igreja: ${error.message}`);
+      toast.error(`Erro ao adicionar igreja: ${formattedErrorMessages}`, {
+        style: {
+          fontSize: "16px",
+          padding: "20px",
+        },
+      });
     }
   };
 
@@ -915,12 +923,12 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
             />
           </label>
           <p style={{ fontSize: 12 }}>
-            Observação: Fontes bibliográficas devem ser separadas por ponto e
+            Observação: Fontes historiográfica devem ser separadas por ponto e
             vírgula.
           </p>
           <div className="grid-layout">
             <label className="label-wrapper">
-              <p className="input-label">Fontes Bibliográficas</p>
+              <p className="input-label">Fontes Historiográfica</p>
               <textarea
                 placeholder="Exemplo: fonte1; fonte2; fonte3"
                 value={obra.bibliographicSources}
