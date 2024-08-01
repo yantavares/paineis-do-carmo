@@ -22,7 +22,7 @@ const fetchPaintings = async () => {
   }
 };
 
-export default function Dashboard() {
+export default function Dashboard({ user }) {
   const [paintings, setPaintings] = useState([]);
   const [selectedType, setSelectedType] = useState("all");
   const [dateSort, setDateSort] = useState(false);
@@ -108,6 +108,9 @@ export default function Dashboard() {
 
   return (
     <Container>
+      <h1 style={{ color: colors.darkGreen, fontWeight: 400 }}>
+        Bem vindo(a) {user?.name ?? "Admin"}!
+      </h1>
       <DeleteConfirmationModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
