@@ -808,8 +808,16 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       });
       setChurchImages([]);
     } catch (error) {
+      const errorResponse = error?.response?.data?.errors || null;
+      let formattedErrorMessages = formatErrorMessages(errorResponse);
+
       console.error("Error posting new church:", error);
-      toast.error(`Erro ao adicionar igreja: ${error.message}`);
+      toast.error(`Erro ao adicionar igreja: ${formattedErrorMessages}`, {
+        style: {
+          fontSize: "16px",
+          padding: "20px",
+        },
+      });
     }
   };
 
