@@ -2,7 +2,7 @@ import { createContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import React from "react";
 
-const PreventRightClickContext = createContext(null);
+export const PreventRightClickContext = createContext(null);
 
 export function PreventRightClickProvider({ children }) {
   useEffect(() => {
