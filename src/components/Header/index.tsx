@@ -15,6 +15,7 @@ import {
 
 const Header = () => {
   const navigate = useNavigate();
+  const isLoggedin = localStorage.getItem("user");
 
   return (
     <HeaderContainer>
@@ -39,12 +40,25 @@ const Header = () => {
       </Col1>
 
       <Col2>
-        <LoginButton onClick={() => navigate("/paineis-do-carmo/login")}>
-          Log In
-        </LoginButton>
-        <ContribButton onClick={() => navigate("/paineis-do-carmo/submit")}>
-          Nova Obra
-        </ContribButton>
+        {isLoggedin ? (
+          <LoginButton onClick={() => navigate("/paineis-do-carmo/admin")}>
+            Dashboard
+          </LoginButton>
+        ) : (
+          <LoginButton onClick={() => navigate("/paineis-do-carmo/login")}>
+            Log In
+          </LoginButton>
+        )}
+
+        {isLoggedin ? (
+          <ContribButton onClick={() => navigate("/paineis-do-carmo/submit")}>
+            Nova Obra
+          </ContribButton>
+        ) : (
+          <ContribButton onClick={() => navigate("/paineis-do-carmo/register")}>
+            Faça parte
+          </ContribButton>
+        )}
       </Col2>
     </HeaderContainer>
   );
