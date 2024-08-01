@@ -11,6 +11,8 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  console.log(import.meta.env);
+
   const handleLogin = () => {
     if (
       email == import.meta.env.VITE_ADMIN_USER &&
