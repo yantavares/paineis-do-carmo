@@ -121,10 +121,14 @@ const AboutPage = () => {
             (Bolsista Engenharia da Computação)
           </AboutUsText>
           <AboutUsText>
-            Guilherme Soares (Bolsista Engenharia da Computação)
+            <Us href="https://github.com/GuilhermeGonSoares">
+              Guilherme Soares{" "}
+            </Us>
+            (Bolsista Engenharia da Computação){" "}
           </AboutUsText>
           <AboutUsText>
-            Gabriel Farago (Voluntário Engenharia da Computação)
+            <Us href="https://github.com/gabrielccac">Gabriel Farago </Us>
+            (Voluntário Engenharia da Computação){" "}
           </AboutUsText>
         </AboutUs>
       </AboutUsContainer>
