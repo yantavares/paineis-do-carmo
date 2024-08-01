@@ -555,7 +555,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
 
       if (formattedErrorMessages === "") {
         formattedErrorMessages =
-          "Por favor, adicione os campos necessários indicados com *";
+          "Imagem muito grande ou inválida. Por favor, tente novamente com uma imagem menor.";
       }
 
       console.error("Error posting data:", error);
@@ -689,7 +689,9 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       setGravuras([]);
     } catch (error) {
       console.error("Error updating data:", error);
-      toast.error(`Erro ao atualizar a obra: ${error.message}`, {
+
+      // TODO fix error handling
+      toast.error(`Erro ao atualizar a obra: ${error.response.data.detail}`, {
         duration: 3000,
         style: {
           fontSize: "16px",
@@ -810,6 +812,11 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     } catch (error) {
       const errorResponse = error?.response?.data?.errors || null;
       let formattedErrorMessages = formatErrorMessages(errorResponse);
+
+      if (formattedErrorMessages === "") {
+        formattedErrorMessages =
+          "Imagem muito grande ou inválida. Por favor, tente novamente com uma imagem menor.";
+      }
 
       console.error("Error posting new church:", error);
       toast.error(`Erro ao adicionar igreja: ${formattedErrorMessages}`, {
