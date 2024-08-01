@@ -6,6 +6,7 @@ import React, {
   ReactNode,
   useEffect,
 } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface AuthContextType {
   token: string | null;
@@ -35,7 +36,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const login = (newToken: string) => {
     setToken(newToken);
     localStorage.setItem("token", newToken);
-    setUser(jwtDecode(newToken));
+    //setUser(jwtDecode(newToken));
   };
 
   const logout = () => {
@@ -48,7 +49,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const savedToken = localStorage.getItem("token");
     if (savedToken) {
       setToken(savedToken);
-      setUser(jwtDecode(savedToken));
+      //setUser(jwtDecode(savedToken));
     }
   }, []);
 
