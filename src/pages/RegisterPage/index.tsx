@@ -3,14 +3,25 @@ import { useState } from "react";
 
 import { Container, Content } from "./styles";
 import googleLogo from "../../assets/google_symbol.svg.png";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    console.log(email, password);
+  const handleRegister = () => {
+    axios
+      .post(`${import.meta.env.VITE_API_URL}/api/users/register`, {
+        name,
+        email,
+        password,
+      })
+      .catch((error) => {
+        console.error("Error registering user:", error);
+        toast.error("Erro ao registrar usuário: " + error.message);
+      });
   };
 
   return (
@@ -19,26 +30,28 @@ const RegisterPage = () => {
         paddingTop: "6rem",
         display: "flex",
         justifyContent: "center",
-      }}>
+      }}
+    >
       <Container>
+        <div style={{ fontSize: "1.6rem" }}>
+          <Toaster />
+        </div>
         <h3 className="login-title">Registro</h3>
         <p className="login-description">
-          Se registre para poder logar e buscar obras <br /> no nosso banco de dados
+          Se registre para poder logar e buscar obras <br /> no nosso banco de
+          dados
         </p>
         <button className="google-btn">
-          <img
-            src={googleLogo}
-            alt=""
-          />{" "}
-          Entrar com o Google
+          <img src={googleLogo} alt="" /> Entrar com o Google
         </button>
         <div className="divider"></div>
         <form
           className="form-container"
           onSubmit={(e) => {
             e.preventDefault();
-            handleLogin();
-          }}>
+            handleRegister();
+          }}
+        >
           <label className="label-wrapper">
             <p className="input-label">Nome</p>
             <input
