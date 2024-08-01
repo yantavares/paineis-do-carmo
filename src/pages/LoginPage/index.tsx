@@ -17,7 +17,7 @@ const LoginPage = () => {
       password == import.meta.env.VITE_ADMIN_PASSWORD
     ) {
       localStorage.setItem("user", JSON.stringify(email));
-      navigate("/paineis-do-carmo/admin");
+      navigate("/admin");
     } else {
       toast.error("Usuário ou senha incorretos");
     }

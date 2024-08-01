@@ -20,7 +20,7 @@ const Header = () => {
   return (
     <HeaderContainer>
       <Col1>
-        <TitleContainer onClick={() => navigate("/paineis-do-carmo/")}>
+        <TitleContainer onClick={() => navigate("/")}>
           <img src={PaintBucket} alt="Museu Barroco" />
           <Title>Museu Barroco</Title>
         </TitleContainer>
@@ -41,21 +41,19 @@ const Header = () => {
 
       <Col2>
         {isLoggedin ? (
-          <LoginButton onClick={() => navigate("/paineis-do-carmo/admin")}>
+          <LoginButton onClick={() => navigate("/admin")}>
             Dashboard
           </LoginButton>
         ) : (
-          <LoginButton onClick={() => navigate("/paineis-do-carmo/login")}>
-            Log In
-          </LoginButton>
+          <LoginButton onClick={() => navigate("/login")}>Log In</LoginButton>
         )}
 
         {isLoggedin ? (
-          <ContribButton onClick={() => navigate("/paineis-do-carmo/submit")}>
+          <ContribButton onClick={() => navigate("/submit")}>
             Nova Obra
           </ContribButton>
         ) : (
-          <ContribButton onClick={() => navigate("/paineis-do-carmo/register")}>
+          <ContribButton onClick={() => navigate("/register")}>
             Faça parte
           </ContribButton>
         )}
