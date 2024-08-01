@@ -5,21 +5,38 @@ import { Container } from "./styles";
 import googleLogo from "../../assets/google_symbol.svg.png";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import { useAuth } from "src/context/AuthContext";
+import axios from "axios";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
+
+  const { login } = useAuth();
 
   const handleLogin = () => {
     if (
       email == import.meta.env.VITE_ADMIN_USER &&
       password == import.meta.env.VITE_ADMIN_PASSWORD
     ) {
-      localStorage.setItem("user", JSON.stringify(email));
+      login(email);
       navigate("/admin");
     } else {
-      toast.error("Usuário ou senha incorretos");
+      axios
+        .post(`${import.meta.env.VITE_API_URL}/api/users/login`, {
+          email,
+          password,
+        })
+        .then((response) => {
+          login(response.data.token);
+          navigate("/admin");
+        })
+        .catch((error) => {
+          console.error("Error logging in:", error);
+          toast.error("Usuário ou senha incorretos");
+        });
     }
   };
 

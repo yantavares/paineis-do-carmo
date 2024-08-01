@@ -6,6 +6,7 @@ import Modal from "../../components/Modal";
 import { X } from "lucide-react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { useAuth } from "src/context/AuthContext";
 
 function formatErrorMessages(errors: any): string {
   let formattedMessages: string[] = [""];
@@ -287,6 +288,8 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
   painting,
   isEdit,
 }) => {
+  const { token } = useAuth();
+
   const [photographer, setPhotographer] = useState(
     painting?.Photographer || ""
   );
@@ -458,7 +461,12 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       try {
         const response = await axios.post(
           `${import.meta.env.VITE_API_URL}/api/tags`,
-          { name: newTag.name }
+          { name: newTag.name },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
 
         const createdTagId = response.data;
@@ -510,7 +518,12 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/paintings`,
-        payload
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       toast.success("Obra submetida com Sucesso", {
         duration: 3000,
@@ -568,7 +581,12 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       try {
         const response = await axios.post(
           `${import.meta.env.VITE_API_URL}/api/tags`,
-          { name: newTag.name }
+          { name: newTag.name },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
 
         const createdTagId = response.data;
@@ -761,7 +779,12 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/churches`,
-        payload
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       toast.success("Igreja adicionada com sucesso!", {
         duration: 3000,
