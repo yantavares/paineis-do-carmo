@@ -915,12 +915,12 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
             />
           </label>
           <p style={{ fontSize: 12 }}>
-            Observação: Fontes bibliográficas devem ser separadas por ponto e
+            Observação: Fontes historiográfica devem ser separadas por ponto e
             vírgula.
           </p>
           <div className="grid-layout">
             <label className="label-wrapper">
-              <p className="input-label">Fontes Bibliográficas</p>
+              <p className="input-label">Fontes Historiográfica</p>
               <textarea
                 placeholder="Exemplo: fonte1; fonte2; fonte3"
                 value={obra.bibliographicSources}
