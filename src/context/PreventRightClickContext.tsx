@@ -1,12 +1,12 @@
-// PreventRightClickContext.jsx
 import { createContext, useEffect } from "react";
 import PropTypes from "prop-types";
+import React from "react";
 
-const PreventRightClickContext = createContext();
+const PreventRightClickContext = createContext(null);
 
 export function PreventRightClickProvider({ children }) {
   useEffect(() => {
-    const preventRightClick = (event) => {
+    const preventRightClick = (event: any) => {
       if (event.target.nodeName === "IMG") {
         event.preventDefault();
       }
