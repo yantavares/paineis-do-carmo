@@ -123,31 +123,28 @@ function App() {
           <Layout>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
+              <Route path="login" element={<LoginPage />} />
+              <Route path="register" element={<RegisterPage />} />
 
-              <Route path="/submit" element={<SubmitPage />} />
+              <Route path="submit" element={<SubmitPage />} />
 
-              <Route path="/pesquisa/:selected" element={<SearchPage />} />
+              <Route path="pesquisa/:selected" element={<SearchPage />} />
 
-              <Route path="/admin" element={<DashbordPage />} />
+              <Route path="admin" element={<DashbordPage />} />
 
-              <Route
-                path="/pesquisa/igrejas/:state"
-                element={<ChurchState />}
-              />
+              <Route path="pesquisa/igrejas/:state" element={<ChurchState />} />
 
-              <Route path="/topicos/:tag" element={<TagDetail />} />
+              <Route path="topicos/:tag" element={<TagDetail />} />
 
-              <Route path="/item/:id" element={<PaintingDetail />} />
+              <Route path="item/:id" element={<PaintingDetail />} />
 
-              <Route path="/item/paintings/:id" element={<PaintingDetail />} />
+              <Route path="item/paintings/:id" element={<PaintingDetail />} />
 
-              <Route path="/item/churches/:id" element={<ChurchDetail />} />
+              <Route path="item/churches/:id" element={<ChurchDetail />} />
 
-              <Route path="/sobre" element={<AboutPage />} />
+              <Route path="sobre" element={<AboutPage />} />
 
-              <Route path="/dashboard/:page" element={<DashbordPage />} />
+              <Route path="dashboard/:page" element={<DashbordPage />} />
             </Routes>
           </Layout>
         </Suspense>
