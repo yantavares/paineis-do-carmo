@@ -8,6 +8,7 @@ import {
   ContribButton,
   HeaderButton,
   HeaderContainer,
+  Icon,
   LoginButton,
   Title,
   TitleContainer,
@@ -21,7 +22,7 @@ const Header = () => {
     <HeaderContainer>
       <Col1>
         <TitleContainer onClick={() => navigate("/")}>
-          <img src={PaintBucket} alt="Museu Barroco" />
+          <Icon src={PaintBucket} alt="Museu Barroco" />
           <Title>Museu Barroco</Title>
         </TitleContainer>
 

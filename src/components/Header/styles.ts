@@ -81,3 +81,7 @@ export const LoginButton = styled.button`
     background-color: #eeeeee;
   }
 `;
+
+export const Icon = styled.img`
+  height: 100%;
+`;
