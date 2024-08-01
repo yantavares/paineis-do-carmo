@@ -689,7 +689,9 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       setGravuras([]);
     } catch (error) {
       console.error("Error updating data:", error);
-      toast.error(`Erro ao atualizar a obra: ${error.message}`, {
+
+      // TODO fix error handling
+      toast.error(`Erro ao atualizar a obra: ${error.response.data.detail}`, {
         duration: 3000,
         style: {
           fontSize: "16px",
