@@ -1,28 +1,24 @@
-import React, { useEffect, useState } from "react";
-import G1 from "../../assets/g1.jpeg";
-import G2 from "../../assets/g2.png";
-import G3 from "../../assets/g3.jpg";
-import Foto1 from "../../assets/teresa.jpg";
-import { ArrowLeft } from "lucide-react";
-import {
-  Container,
-  ImageContainer,
-  DownloadButton,
-  Image,
-  EngravingLayout,
-  Col,
-  EngravingImage,
-  EngravingDescription,
-} from "../styles";
-import Tags from "src/components/Tags";
-import { useNavigate, useParams } from "react-router-dom";
-import TextTruncate from "src/components/TextTruncate";
-import { Painting } from "src/utils/mockData";
-import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChurch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CircularProgress } from "@mui/material";
+import axios from "axios";
+import { ArrowLeft } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Tags from "src/components/Tags";
+import TextTruncate from "src/components/TextTruncate";
 import colors from "src/utils/colors";
+import { Painting } from "src/utils/mockData";
+import {
+  Col,
+  Container,
+  DownloadButton,
+  EngravingDescription,
+  EngravingImage,
+  EngravingLayout,
+  Image,
+  ImageContainer,
+} from "../styles";
 
 const defaultPainting: Painting = {
   id: 0,
@@ -155,16 +151,7 @@ const PaintingDetails = () => {
               <br />
               <p className="record-data">
                 <strong>Artista: </strong>
-                {data.artisan &&
-                  data.artisan.length > 0 &&
-                  data.artisan[0].name &&
-                  data.artisan.map((artisan, index) =>
-                    index > 0 ? (
-                      <span key={index}>, {artisan.name}</span>
-                    ) : (
-                      <span key={index}>{artisan.name}</span>
-                    )
-                  )}
+                {data?.artisan || "N/A"}
               </p>
               <br />
               <p className="record-data">
@@ -175,15 +162,16 @@ const PaintingDetails = () => {
                 <strong>Autoria das fotos: </strong>
                 {data.images.map((image, index) =>
                   index > 0 ? (
-                    <span key={index}>, {image.photographer} </span>
+                    <span key={index}>, {image?.photographer ?? "N/A"} </span>
                   ) : (
-                    <span key={index}>{image.photographer}</span>
+                    <span key={index}>{image?.photographer ?? "N/A"}</span>
                   )
                 )}
               </p>
               <br />
               <p className="record-data">
-                <strong>Fonte Bibliográfica:</strong> {data.bibliographySource}
+                <strong>Fonte Bibliográfica:</strong>{" "}
+                {data?.bibliographySource ?? "N/A"}
               </p>
             </div>
           </div>

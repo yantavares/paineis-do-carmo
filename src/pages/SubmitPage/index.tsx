@@ -396,7 +396,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     dateOfCreation: painting?.dateOfCreation || "",
     placement: painting?.placement || "",
     tags: painting?.tag?.map((tag) => tag.id) || [],
-    churchId: painting?.church?.id || "",
+    churchId: painting?.church?.id || "00000000-0000-0000-0000-000000000000",
     authorId: painting?.artisan || "",
     imagens: painting?.images || [],
   });
@@ -914,11 +914,15 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
               }
             />
           </label>
+          <p style={{ fontSize: 12 }}>
+            Observação: Fontes bibliográficas devem ser separadas por ponto e
+            vírgula.
+          </p>
           <div className="grid-layout">
             <label className="label-wrapper">
               <p className="input-label">Fontes Bibliográficas</p>
               <textarea
-                placeholder="Insira as fontes"
+                placeholder="Exemplo: fonte1; fonte2; fonte3"
                 value={obra.bibliographicSources}
                 onChange={(e) =>
                   setObra({ ...obra, bibliographicSources: e.target.value })

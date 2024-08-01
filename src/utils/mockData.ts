@@ -80,7 +80,7 @@ export interface Painting {
   title: string;
   images: Image[];
   dateOfCreation: number;
-  artisan?: Artist[];
+  artisan?: string;
   bibliographyReference?: string;
   bibliographySource?: string;
   engravings?: Engraving[];
