@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import Footer from "src/components/Footer";
 import Header from "src/components/Header";
 import Assistant from "./assistant";
-import { PreventRightClickProvider } from "./providers/PreventRightClickContext";
+import { PreventRightClickProvider } from "./context/PreventRightClickContext";
 import colors from "./utils/colors";
 import ScrollToTop from "./utils/scrollToTop";
 import ProtectedRoute from "./components/ProtectedRoute";
