@@ -1,20 +1,8 @@
-import {
-  faLaptop,
-  faPhone,
-  faPhoneSquare,
-  faPhoneSquareAlt,
-  faRobot,
-} from "@fortawesome/free-solid-svg-icons";
+import { faLaptop, faRobot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CircularProgress } from "@mui/material";
 import React, { Suspense, lazy, useEffect, useState } from "react";
-import {
-  BrowserRouter,
-  Navigate,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import Footer from "src/components/Footer";
 import Header from "src/components/Header";
 import Assistant from "./assistant";
