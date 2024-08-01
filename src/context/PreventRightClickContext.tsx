@@ -6,7 +6,7 @@ const PreventRightClickContext = createContext(null);
 
 export function PreventRightClickProvider({ children }) {
   useEffect(() => {
-    const preventRightClick = (event) => {
+    const preventRightClick = (event: any) => {
       if (event.target.nodeName === "IMG") {
         event.preventDefault();
       }
