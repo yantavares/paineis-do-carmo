@@ -164,14 +164,29 @@ export default function Dashboard({ user }) {
               </tr>
             </thead>
             <tbody>
-              {filteredPaintings.map((painting) => (
-                <PaintingRow
-                  painting={painting}
-                  key={painting.id}
-                  onEdit={() => handleEdit(painting.id)}
-                  onDelete={() => handleDelete(painting.id)}
-                />
-              ))}
+              {!isLoading ? (
+                filteredPaintings.map((painting) => (
+                  <PaintingRow
+                    painting={painting}
+                    key={painting.id}
+                    onEdit={() => handleEdit(painting.id)}
+                    onDelete={() => handleDelete(painting.id)}
+                  />
+                ))
+              ) : (
+                <div
+                  style={{
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "center",
+                  }}
+                >
+                  <CircularProgress
+                    size={"md"}
+                    style={{ color: colors.green }}
+                  />
+                </div>
+              )}
             </tbody>
           </table>
         </section>
