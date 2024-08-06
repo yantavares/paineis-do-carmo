@@ -10,18 +10,6 @@ import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import colors from "src/utils/colors";
 
-const fetchPaintings = async () => {
-  try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/paintings`
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching paintings:", error);
-    throw error;
-  }
-};
-
 export default function Dashboard({ user }) {
   const [paintings, setPaintings] = useState([]);
   const [selectedType, setSelectedType] = useState("all");
@@ -34,6 +22,21 @@ export default function Dashboard({ user }) {
 
   const navigate = useNavigate();
 
+  const fetchPaintings = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/paintings`
+      );
+      setIsLoading(false);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching paintings:", error);
+      setIsLoading(false);
+      throw error;
+    }
+  };
+
   const handleExit = () => {
     localStorage.removeItem("token");
     navigate("/");
@@ -41,14 +44,11 @@ export default function Dashboard({ user }) {
 
   useEffect(() => {
     const getPaintings = async () => {
-      setIsLoading(true);
       const data = await fetchPaintings();
       setPaintings(data);
-      console.log("Paintings fetched:", data);
     };
 
     getPaintings();
-    setIsLoading(false);
   }, []);
 
   const handleDateArrow = (e) => {
