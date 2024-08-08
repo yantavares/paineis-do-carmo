@@ -1,17 +1,17 @@
 import axios from "axios";
+import { X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import DeleteConfirmationModal from "src/components/DeleteModal";
-import Modal from "src/components/Modal"; // Import a modal component for displaying the form
-import OptionButton from "src/components/OptionButton";
-import SubmitPage from "src/pages/SubmitPage"; // Import your SubmitPage component here
-import { Container, ExitButton, ExitContainer, ChurchForm } from "./styles";
 import { useNavigate } from "react-router-dom";
-import { X, Upload } from "lucide-react";
-import { stringify } from "querystring";
+import DeleteConfirmationModal from "src/components/DeleteModal";
+import Modal from "src/components/Modal";
+import OptionButton from "src/components/OptionButton";
+import SubmitPage from "src/pages/SubmitPage";
 import colors from "src/utils/colors";
+import { ChurchForm, Container, ExitButton, ExitContainer } from "./styles";
+import { useAuth } from "src/context/AuthContext";
 
-export default function Dashboard({ user }) {
+export default function Dashboard() {
   const [paintings, setPaintings] = useState([]);
   const [churches, setChurches] = useState([]);
   const [selectedType, setSelectedType] = useState("all");
@@ -57,6 +57,8 @@ export default function Dashboard({ user }) {
     "SE",
     "TO",
   ];
+
+  const { user } = useAuth();
 
   const fetchChurches = async () => {
     try {
