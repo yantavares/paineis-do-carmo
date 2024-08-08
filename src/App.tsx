@@ -23,7 +23,6 @@ const ChurchDetail = lazy(() => import("src/pages/Details/ChurchDetail"));
 const RegisterPage = lazy(() => import("src/pages/RegisterPage"));
 const SubmitPage = lazy(() => import("src/pages/SubmitPage"));
 const DashbordPage = lazy(() => import("src/pages/Dashboard"));
-const UserDashPage = lazy(() => import("src/pages/UserDash"));
 
 interface Message {
   sender: "user" | "bot";
@@ -32,7 +31,6 @@ interface Message {
 
 function Layout({ children }) {
   const location = useLocation();
-  const isDashboardRoute = location.pathname.startsWith("/dashboard");
 
   const [showAssistant, setShowAssistant] = useState(false);
   const [conversation, setConversaation] = useState<Message[]>([
@@ -63,40 +61,39 @@ function Layout({ children }) {
   return (
     <div className="app-container">
       <ScrollToTop />
-      {!isDashboardRoute && <Header />}
+      <Header />
       <main className="main-content">{children}</main>
-      {!isDashboardRoute && <Footer />}
-      {!isDashboardRoute && (
-        <div
-          className="assistant-button"
-          style={{
-            position: "fixed",
-            bottom: "2rem",
-            right: "2rem",
-          }}
-        >
-          {!showAssistant ? (
-            <button
-              style={{
-                backgroundColor: "white",
-                opacity: 0.9,
-                borderRadius: "1.6rem",
-              }}
-              onClick={() => setShowAssistant(true)}
-            >
-              <FontAwesomeIcon icon={faRobot} size="2x" />
-            </button>
-          ) : (
-            <div>
-              <Assistant
-                setShowAssistant={setShowAssistant}
-                conversation={conversation}
-                setConversation={setConversaation}
-              />
-            </div>
-          )}
-        </div>
-      )}
+      <Footer />
+
+      <div
+        className="assistant-button"
+        style={{
+          position: "fixed",
+          bottom: "2rem",
+          right: "2rem",
+        }}
+      >
+        {!showAssistant ? (
+          <button
+            style={{
+              backgroundColor: "white",
+              opacity: 0.9,
+              borderRadius: "1.6rem",
+            }}
+            onClick={() => setShowAssistant(true)}
+          >
+            <FontAwesomeIcon icon={faRobot} size="2x" />
+          </button>
+        ) : (
+          <div>
+            <Assistant
+              setShowAssistant={setShowAssistant}
+              conversation={conversation}
+              setConversation={setConversaation}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -142,15 +139,13 @@ function App() {
                 <Route path="pesquisa/:selected" element={<SearchPage />} />
 
                 <Route
-                  path="admin"
+                  path="dashboard"
                   element={
                     <ProtectedRoute>
                       <DashbordPage />
                     </ProtectedRoute>
                   }
                 />
-
-                <Route path="user" element={<UserDashPage />} />
 
                 <Route
                   path="pesquisa/igrejas/:state"
@@ -166,15 +161,6 @@ function App() {
                 <Route path="item/churches/:id" element={<ChurchDetail />} />
 
                 <Route path="sobre" element={<AboutPage />} />
-
-                <Route
-                  path="dashboard/:page"
-                  element={
-                    <ProtectedRoute>
-                      <DashbordPage />
-                    </ProtectedRoute>
-                  }
-                />
               </Routes>
             </Layout>
           </Suspense>

@@ -1,17 +1,22 @@
 import axios from "axios";
+import { Plus, Trash } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import DeleteConfirmationModal from "src/components/DeleteModal";
 import Modal from "src/components/Modal"; // Import the modal component
 import { Container, ExitButton, ExitContainer, FormContainer } from "./styles";
-import { useNavigate } from "react-router-dom";
-import { CircularProgress, Button, TextField, IconButton } from "@mui/material";
-import { Plus, Trash } from "lucide-react";
-import colors from "src/utils/colors";
 
 const fetchPaintings = async () => {
   try {
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/paintings`);
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_URL}/api/paintings/authorized`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error("Error fetching paintings:", error);
@@ -33,7 +38,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   const handleExit = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("token");
     navigate("/");
   };
 
@@ -52,7 +57,8 @@ export default function Dashboard() {
   const handleDateArrow = (e) => {
     e.currentTarget.classList.toggle("rotate");
     const dateSorted = [...paintings].sort(
-      (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      (a, b) =>
+        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
     );
     if (!dateSort) setPaintings([...dateSorted].reverse());
     else setPaintings(dateSorted);
@@ -77,9 +83,13 @@ export default function Dashboard() {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/api/paintings/${paintingToDelete}`);
+      await axios.delete(
+        `${import.meta.env.VITE_API_URL}/api/paintings/${paintingToDelete}`
+      );
       toast.success("Painting deleted successfully");
-      setPaintings(paintings.filter((painting) => painting.id !== paintingToDelete));
+      setPaintings(
+        paintings.filter((painting) => painting.id !== paintingToDelete)
+      );
       setIsDeleteModalOpen(false);
     } catch (error) {
       toast.error("Error deleting painting: " + error.message);
@@ -95,7 +105,9 @@ export default function Dashboard() {
   };
 
   const handleImageChange = (index, field, value) => {
-    const newImages = images.map((img, i) => (i === index ? { ...img, [field]: value } : img));
+    const newImages = images.map((img, i) =>
+      i === index ? { ...img, [field]: value } : img
+    );
     setImages(newImages);
   };
 
@@ -120,7 +132,8 @@ export default function Dashboard() {
 
       <Modal
         isOpen={isSuggestionModalOpen}
-        onClose={() => setIsSuggestionModalOpen(false)}>
+        onClose={() => setIsSuggestionModalOpen(false)}
+      >
         <FormContainer>
           <h2>Submit Suggestion</h2>
           <textarea
@@ -131,15 +144,20 @@ export default function Dashboard() {
           {images.map((image, index) => (
             <div
               key={index}
-              style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+              style={{ display: "flex", gap: "10px", marginTop: "10px" }}
+            >
               <input
                 type="file"
-                onChange={(e) => handleImageChange(index, "url", e.target.value)}
+                onChange={(e) =>
+                  handleImageChange(index, "url", e.target.value)
+                }
               />
               <input
                 placeholder="Fotógrafo"
                 value={image.photographer}
-                onChange={(e) => handleImageChange(index, "photographer", e.target.value)}
+                onChange={(e) =>
+                  handleImageChange(index, "photographer", e.target.value)
+                }
               />
               <button onClick={() => handleRemoveImage(index)}>
                 <Trash />
@@ -149,13 +167,15 @@ export default function Dashboard() {
           <button
             className="secondary"
             style={{ display: "flex", alignItems: "center", marginTop: "10px" }}
-            onClick={handleAddImage}>
+            onClick={handleAddImage}
+          >
             <Plus />
             Adicionar Imagem
           </button>
           <button
             onClick={handleSubmitSuggestion}
-            style={{ marginTop: "20px" }}>
+            style={{ marginTop: "20px" }}
+          >
             Enviar Sugestão
           </button>
         </FormContainer>
@@ -168,17 +188,22 @@ export default function Dashboard() {
           <div className="flex-group">
             <a
               onClick={() => handleClick("all")}
-              className={(selectedType === "all" && "active") || "all"}>
+              className={(selectedType === "all" && "active") || "all"}
+            >
               Todas
             </a>
             <a
               onClick={() => handleClick("published")}
-              className={(selectedType === "published" && "active") || "published"}>
+              className={
+                (selectedType === "published" && "active") || "published"
+              }
+            >
               Publicadas
             </a>
             <a
               onClick={() => handleClick("pending")}
-              className={(selectedType === "pending" && "active") || "pending"}>
+              className={(selectedType === "pending" && "active") || "pending"}
+            >
               Pendentes
             </a>
           </div>
@@ -192,7 +217,8 @@ export default function Dashboard() {
                 <th>Usuário</th>
                 <th>
                   <div className="flex-flow">
-                    Data de Submissão <button onClick={handleDateArrow}></button>
+                    Data de Submissão{" "}
+                    <button onClick={handleDateArrow}></button>
                   </div>
                 </th>
                 <th>Opções</th>
@@ -237,9 +263,7 @@ function PaintingRow({ painting, onDelete, onSuggestionClick }) {
         })}
       </td>
       <td style={{ display: "flex" }}>
-        <button
-          className="secondary"
-          onClick={onSuggestionClick}>
+        <button className="secondary" onClick={onSuggestionClick}>
           Sugestão
         </button>
       </td>

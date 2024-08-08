@@ -87,7 +87,7 @@ export interface Painting {
   description?: string;
   city: string;
   state: string;
-  tag: Tag[];
+  tags: Tag[];
   church?: Church;
   placement?: string;
 }
@@ -100,7 +100,7 @@ export const brazilianPaintings: Painting[] = [
     dateOfCreation: 1860,
     city: "Rio de Janeiro",
     state: "RJ",
-    tag: [{ name: "pintura" }, { name: "história" }, { name: "brasil" }],
+    tags: [{ name: "pintura" }, { name: "história" }, { name: "brasil" }],
   },
   {
     id: 2,
@@ -109,7 +109,7 @@ export const brazilianPaintings: Painting[] = [
     dateOfCreation: 1928,
     city: "São Paulo",
     state: "SP",
-    tag: [{ name: "pintura" }, { name: "moderna" }, { name: "brasil" }],
+    tags: [{ name: "pintura" }, { name: "moderna" }, { name: "brasil" }],
   },
   {
     id: 3,
@@ -118,7 +118,7 @@ export const brazilianPaintings: Painting[] = [
     dateOfCreation: 1944,
     city: "São Paulo",
     state: "SP",
-    tag: [{ name: "pintura" }, { name: "social" }, { name: "brasil" }],
+    tags: [{ name: "pintura" }, { name: "social" }, { name: "brasil" }],
   },
   {
     id: 4,
@@ -127,7 +127,7 @@ export const brazilianPaintings: Painting[] = [
     dateOfCreation: 1956,
     city: "Rio de Janeiro",
     state: "RJ",
-    tag: [{ name: "pintura" }, { name: "painel" }, { name: "brasil" }],
+    tags: [{ name: "pintura" }, { name: "painel" }, { name: "brasil" }],
   },
   {
     id: 5,
@@ -136,7 +136,7 @@ export const brazilianPaintings: Painting[] = [
     dateOfCreation: 1893,
     city: "São Paulo",
     state: "SP",
-    tag: [{ name: "pintura" }, { name: "realismo" }, { name: "brasil" }],
+    tags: [{ name: "pintura" }, { name: "realismo" }, { name: "brasil" }],
   },
 ];
 

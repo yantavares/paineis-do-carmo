@@ -42,7 +42,7 @@ const Header = () => {
 
       <Col2>
         {isLoggedin ? (
-          <LoginButton onClick={() => navigate("/admin")}>
+          <LoginButton onClick={() => navigate("/dashboard")}>
             Dashboard
           </LoginButton>
         ) : (
