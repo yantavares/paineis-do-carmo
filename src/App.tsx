@@ -23,6 +23,7 @@ const ChurchDetail = lazy(() => import("src/pages/Details/ChurchDetail"));
 const RegisterPage = lazy(() => import("src/pages/RegisterPage"));
 const SubmitPage = lazy(() => import("src/pages/SubmitPage"));
 const DashbordPage = lazy(() => import("src/pages/Dashboard"));
+const UserDashPage = lazy(() => import("src/pages/UserDash"));
 
 interface Message {
   sender: "user" | "bot";
@@ -148,6 +149,8 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
+
+                <Route path="user" element={<UserDashPage />} />
 
                 <Route
                   path="pesquisa/igrejas/:state"

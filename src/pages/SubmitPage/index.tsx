@@ -311,7 +311,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
   const [artifices, setArtifices] = useState<any[]>([]);
   const [authors, setAuthors] = useState<string[]>([]);
   const [newAuthor, setNewAuthor] = useState<string>();
-
+  const [artisan, setArtisan] = useState(painting?.artisan || "");
   const [church, setChurch] = useState({
     name: painting?.church?.name || "",
     description: painting?.church?.description || "",
@@ -900,7 +900,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
                 >
                   <option value="">Selecione um Artíficie</option>
                   {authors.map((author) => (
-                    <option key={author} value={author}>
+                    <option key={author.toString()} value={author.toString()}>
                       {author}
                     </option>
                   ))}
