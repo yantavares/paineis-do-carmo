@@ -25,6 +25,8 @@ export const Col2 = styled.div`
 
 export const TitleContainer = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 1.4rem;
   cursor: pointer;
   transition: color 0.3s;
@@ -80,4 +82,8 @@ export const LoginButton = styled.button`
   &:hover {
     background-color: #eeeeee;
   }
+`;
+
+export const Icon = styled.img`
+  max-height: 3rem;
 `;

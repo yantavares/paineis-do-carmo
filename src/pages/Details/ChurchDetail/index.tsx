@@ -111,7 +111,7 @@ const PaintingDetails = () => {
         </div>
         <div className="item-info">
           <div className="topic-wrapper">
-            <h2 className="topic-title">Sobre esta Obra</h2>
+            <h2 className="topic-title">Sobre esta Igreja</h2>
             <p className="topic-text">{data.description}</p>
           </div>
           <div className="topic-wrapper">

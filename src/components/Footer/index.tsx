@@ -50,10 +50,16 @@ const Footer = () => {
           <CreditsContainer>
             <TitleText>Créditos</TitleText>
             <Text>
-              <Author href="">Gabriel Farago</Author> UI/UX e Front End
+              <Author href="https://github.com/gabrielccac">
+                Gabriel Farago
+              </Author>{" "}
+              UI/UX e Front End
             </Text>
             <Text>
-              <Author href="">Guilherme Gonçalves</Author> Back End
+              <Author href="https://github.com/GuilhermeGonSoares">
+                Guilherme Gonçalves
+              </Author>{" "}
+              Back End
             </Text>
             <Text>
               <Author href="https://github.com/yantavares" target="_blank">

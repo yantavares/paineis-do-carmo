@@ -40,6 +40,9 @@ jobs:
       - name: Inject Environment Variables
         run: |
           echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> $GITHUB_ENV
+          echo "VITE_OPENAI_API_KEY=${{ secrets.VITE_OPENAI_API_KEY }}" >> $GITHUB_ENV
+          echo "VITE_ADMIN_USER=${{ secrets.VITE_ADMIN_USER }}" >> $GITHUB_ENV
+          echo "VITE_ADMIN_PASSWORD=${{ secrets.VITE_ADMIN_PASSWORD }}" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: npm install

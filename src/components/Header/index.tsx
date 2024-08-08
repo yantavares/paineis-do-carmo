@@ -8,6 +8,7 @@ import {
   ContribButton,
   HeaderButton,
   HeaderContainer,
+  Icon,
   LoginButton,
   Title,
   TitleContainer,
@@ -15,13 +16,13 @@ import {
 
 const Header = () => {
   const navigate = useNavigate();
-  const isLoggedin = localStorage.getItem("user");
+  const isLoggedin = localStorage.getItem("token");
 
   return (
     <HeaderContainer>
       <Col1>
         <TitleContainer onClick={() => navigate("/")}>
-          <img src={PaintBucket} alt="Museu Barroco" />
+          <Icon src={PaintBucket} alt="Museu Barroco" />
           <Title>Museu Barroco</Title>
         </TitleContainer>
 

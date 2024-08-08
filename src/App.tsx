@@ -6,9 +6,11 @@ import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import Footer from "src/components/Footer";
 import Header from "src/components/Header";
 import Assistant from "./assistant";
-import { PreventRightClickProvider } from "./providers/PreventRightClickContext";
+import { PreventRightClickProvider } from "./context/PreventRightClickContext";
 import colors from "./utils/colors";
 import ScrollToTop from "./utils/scrollToTop";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { AuthProvider } from "./context/AuthContext";
 
 const Home = lazy(() => import("src/pages/Home"));
 const LoginPage = lazy(() => import("src/pages/LoginPage"));
@@ -71,7 +73,8 @@ function Layout({ children }) {
             position: "fixed",
             bottom: "2rem",
             right: "2rem",
-          }}>
+          }}
+        >
           {!showAssistant ? (
             <button
               style={{
@@ -79,11 +82,9 @@ function Layout({ children }) {
                 opacity: 0.9,
                 borderRadius: "1.6rem",
               }}
-              onClick={() => setShowAssistant(true)}>
-              <FontAwesomeIcon
-                icon={faRobot}
-                size="2x"
-              />
+              onClick={() => setShowAssistant(true)}
+            >
+              <FontAwesomeIcon icon={faRobot} size="2x" />
             </button>
           ) : (
             <div>
@@ -102,98 +103,84 @@ function Layout({ children }) {
 
 function App() {
   return (
-    <PreventRightClickProvider>
-      <BrowserRouter>
-        <Suspense
-          fallback={
-            <div
-              style={{
-                height: "100vh",
-                width: "100vw",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-              <CircularProgress
-                size={"10rem"}
-                style={{ color: colors.green }}
-              />
-            </div>
-          }>
-          <Layout>
-            <Routes>
-              <Route
-                path="/"
-                element={<Home />}
-              />
-              <Route
-                path="login"
-                element={<LoginPage />}
-              />
-              <Route
-                path="register"
-                element={<RegisterPage />}
-              />
+    <AuthProvider>
+      <PreventRightClickProvider>
+        <BrowserRouter>
+          <Suspense
+            fallback={
+              <div
+                style={{
+                  height: "100vh",
+                  width: "100vw",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <CircularProgress
+                  size={"10rem"}
+                  style={{ color: colors.green }}
+                />
+              </div>
+            }
+          >
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="login" element={<LoginPage />} />
+                <Route path="register" element={<RegisterPage />} />
 
-              <Route
-                path="submit"
-                element={<SubmitPage />}
-              />
+                <Route
+                  path="submit"
+                  element={
+                    <ProtectedRoute>
+                      <SubmitPage />
+                    </ProtectedRoute>
+                  }
+                />
 
-              <Route
-                path="pesquisa/:selected"
-                element={<SearchPage />}
-              />
+                <Route path="pesquisa/:selected" element={<SearchPage />} />
 
-              <Route
-                path="admin"
-                element={<DashbordPage />}
-              />
+                <Route
+                  path="admin"
+                  element={
+                    <ProtectedRoute>
+                      <DashbordPage />
+                    </ProtectedRoute>
+                  }
+                />
 
-              <Route
-                path="user"
-                element={<UserDashPage />}
-              />
+                <Route path="user" element={<UserDashPage />} />
 
-              <Route
-                path="pesquisa/igrejas/:state"
-                element={<ChurchState />}
-              />
+                <Route
+                  path="pesquisa/igrejas/:state"
+                  element={<ChurchState />}
+                />
 
-              <Route
-                path="topicos/:tag"
-                element={<TagDetail />}
-              />
+                <Route path="topicos/:tag" element={<TagDetail />} />
 
-              <Route
-                path="item/:id"
-                element={<PaintingDetail />}
-              />
+                <Route path="item/:id" element={<PaintingDetail />} />
 
-              <Route
-                path="item/paintings/:id"
-                element={<PaintingDetail />}
-              />
+                <Route path="item/paintings/:id" element={<PaintingDetail />} />
 
-              <Route
-                path="item/churches/:id"
-                element={<ChurchDetail />}
-              />
+                <Route path="item/churches/:id" element={<ChurchDetail />} />
 
-              <Route
-                path="sobre"
-                element={<AboutPage />}
-              />
+                <Route path="sobre" element={<AboutPage />} />
 
-              <Route
-                path="dashboard/:page"
-                element={<DashbordPage />}
-              />
-            </Routes>
-          </Layout>
-        </Suspense>
-      </BrowserRouter>
-    </PreventRightClickProvider>
+                <Route
+                  path="dashboard/:page"
+                  element={
+                    <ProtectedRoute>
+                      <DashbordPage />
+                    </ProtectedRoute>
+                  }
+                />
+              </Routes>
+            </Layout>
+          </Suspense>
+        </BrowserRouter>
+      </PreventRightClickProvider>
+    </AuthProvider>
   );
 }
 
