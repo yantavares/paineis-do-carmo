@@ -14,7 +14,7 @@ function formatErrorMessages(errors: any): string {
   errors &&
     errors.length > 0 &&
     errors.forEach((error: any) => {
-      formattedMessages.push("- " + error?.errorMessage);
+      formattedMessages.push("- " + error?.message);
     });
 
   return formattedMessages.join("\n\n");
@@ -396,7 +396,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     dateOfCreation: painting?.dateOfCreation || "",
     placement: painting?.placement || "",
     tags: painting?.tag?.map((tag) => tag.id) || [],
-    churchId: painting?.church?.id || "00000000-0000-0000-0000-000000000000",
+    churchId: painting?.church?.id || "",
     authorId: painting?.artisan || "",
     imagens: painting?.images || [],
   });
@@ -549,13 +549,13 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       setSelectedTags([]);
       setGravuras([]);
     } catch (error) {
-      const errorResponse = error?.response?.data?.errors || null;
+      const errorResponse = error?.response?.data?.violations || null;
 
       let formattedErrorMessages = formatErrorMessages(errorResponse);
 
       if (formattedErrorMessages === "") {
         formattedErrorMessages =
-          "Imagem muito grande ou inválida. Por favor, tente novamente com uma imagem menor.";
+          "Erro desconhecido. Por favor, tente novamente mais tarde.";
       }
 
       console.error("Error posting data:", error);
@@ -810,12 +810,12 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       });
       setChurchImages([]);
     } catch (error) {
-      const errorResponse = error?.response?.data?.errors || null;
+      const errorResponse = error?.response?.data?.violations || null;
       let formattedErrorMessages = formatErrorMessages(errorResponse);
 
       if (formattedErrorMessages === "") {
         formattedErrorMessages =
-          "Imagem muito grande ou inválida. Por favor, tente novamente com uma imagem menor.";
+          "Erro desconhecido. Por favor, tente novamente mais tarde.";
       }
 
       console.error("Error posting new church:", error);
@@ -838,7 +838,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       <Toaster />
       <div
         className="form-container"
-        style={{ marginTop: "4rem", borderRadius: "2rem", paddingTop: "3rem" }}
+        style={{ marginTop: "4rem", borderRadius: "2rem", paddingTop: "2rem" }}
       >
         <h1 className="submit-title">
           {isEdit ? "Editar Obra" : "Submeta uma Obra"}

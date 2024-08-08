@@ -2,7 +2,13 @@ import { faLaptop, faRobot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CircularProgress } from "@mui/material";
 import React, { Suspense, lazy, useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import Footer from "src/components/Footer";
 import Header from "src/components/Header";
 import Assistant from "./assistant";
@@ -30,8 +36,6 @@ interface Message {
 }
 
 function Layout({ children }) {
-  const location = useLocation();
-
   const [showAssistant, setShowAssistant] = useState(false);
   const [conversation, setConversaation] = useState<Message[]>([
     { sender: "bot", text: "Olá! Como posso te ajudar?" },
@@ -161,6 +165,8 @@ function App() {
                 <Route path="item/churches/:id" element={<ChurchDetail />} />
 
                 <Route path="sobre" element={<AboutPage />} />
+
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </Layout>
           </Suspense>

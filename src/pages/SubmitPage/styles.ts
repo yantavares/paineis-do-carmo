@@ -34,8 +34,8 @@ export const Container = styled.div`
   .form-container {
     width: 800px;
     margin: 0 auto;
-    padding: 0 4rem 4rem;
-    padding-top: 4rem;
+    padding: 0 4rem 2rem;
+    padding-top: 2rem;
     background-color: #fff;
   }
 
