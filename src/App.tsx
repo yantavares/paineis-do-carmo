@@ -21,6 +21,7 @@ const ChurchDetail = lazy(() => import("src/pages/Details/ChurchDetail"));
 const RegisterPage = lazy(() => import("src/pages/RegisterPage"));
 const SubmitPage = lazy(() => import("src/pages/SubmitPage"));
 const DashbordPage = lazy(() => import("src/pages/Dashboard"));
+const UserDashPage = lazy(() => import("src/pages/UserDash"));
 
 interface Message {
   sender: "user" | "bot";
@@ -70,8 +71,7 @@ function Layout({ children }) {
             position: "fixed",
             bottom: "2rem",
             right: "2rem",
-          }}
-        >
+          }}>
           {!showAssistant ? (
             <button
               style={{
@@ -79,9 +79,11 @@ function Layout({ children }) {
                 opacity: 0.9,
                 borderRadius: "1.6rem",
               }}
-              onClick={() => setShowAssistant(true)}
-            >
-              <FontAwesomeIcon icon={faRobot} size="2x" />
+              onClick={() => setShowAssistant(true)}>
+              <FontAwesomeIcon
+                icon={faRobot}
+                size="2x"
+              />
             </button>
           ) : (
             <div>
@@ -111,40 +113,82 @@ function App() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-              }}
-            >
+              }}>
               <CircularProgress
                 size={"10rem"}
                 style={{ color: colors.green }}
               />
             </div>
-          }
-        >
+          }>
           <Layout>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="login" element={<LoginPage />} />
-              <Route path="register" element={<RegisterPage />} />
+              <Route
+                path="/"
+                element={<Home />}
+              />
+              <Route
+                path="login"
+                element={<LoginPage />}
+              />
+              <Route
+                path="register"
+                element={<RegisterPage />}
+              />
 
-              <Route path="submit" element={<SubmitPage />} />
+              <Route
+                path="submit"
+                element={<SubmitPage />}
+              />
 
-              <Route path="pesquisa/:selected" element={<SearchPage />} />
+              <Route
+                path="pesquisa/:selected"
+                element={<SearchPage />}
+              />
 
-              <Route path="admin" element={<DashbordPage />} />
+              <Route
+                path="admin"
+                element={<DashbordPage />}
+              />
 
-              <Route path="pesquisa/igrejas/:state" element={<ChurchState />} />
+              <Route
+                path="user"
+                element={<UserDashPage />}
+              />
 
-              <Route path="topicos/:tag" element={<TagDetail />} />
+              <Route
+                path="pesquisa/igrejas/:state"
+                element={<ChurchState />}
+              />
 
-              <Route path="item/:id" element={<PaintingDetail />} />
+              <Route
+                path="topicos/:tag"
+                element={<TagDetail />}
+              />
 
-              <Route path="item/paintings/:id" element={<PaintingDetail />} />
+              <Route
+                path="item/:id"
+                element={<PaintingDetail />}
+              />
 
-              <Route path="item/churches/:id" element={<ChurchDetail />} />
+              <Route
+                path="item/paintings/:id"
+                element={<PaintingDetail />}
+              />
 
-              <Route path="sobre" element={<AboutPage />} />
+              <Route
+                path="item/churches/:id"
+                element={<ChurchDetail />}
+              />
 
-              <Route path="dashboard/:page" element={<DashbordPage />} />
+              <Route
+                path="sobre"
+                element={<AboutPage />}
+              />
+
+              <Route
+                path="dashboard/:page"
+                element={<DashbordPage />}
+              />
             </Routes>
           </Layout>
         </Suspense>

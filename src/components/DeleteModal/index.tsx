@@ -19,7 +19,7 @@ const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm }) => {
             </button>
           </div>
           <div className="modal-content">
-            <p style={{ fontSize: "2rem" }}>Tem certeza que quer deletar essa pintura?</p>
+            <p style={{ fontSize: "2rem" }}>Tem certeza que quer deletar este item?</p>
           </div>
           <div className="modal-actions">
             <button

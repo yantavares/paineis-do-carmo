@@ -2,7 +2,7 @@ import styled from "styled-components";
 import colors from "src/utils/colors";
 
 export const Container = styled.div`
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 0 auto;
 
   h1,
@@ -32,9 +32,9 @@ export const Container = styled.div`
   }
 
   .form-container {
-    width: 600px;
+    width: 800px;
     margin: 0 auto;
-    padding: 2rem 4rem;
+    padding: 0 4rem 4rem;
     background-color: #fff;
   }
 
