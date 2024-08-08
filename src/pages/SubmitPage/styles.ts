@@ -35,6 +35,7 @@ export const Container = styled.div`
     width: 800px;
     margin: 0 auto;
     padding: 0 4rem 4rem;
+    padding-top: 4rem;
     background-color: #fff;
   }
 

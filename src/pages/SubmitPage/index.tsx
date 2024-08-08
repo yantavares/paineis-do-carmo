@@ -838,7 +838,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       <Toaster />
       <div
         className="form-container"
-        style={{ marginTop: "4rem", borderRadius: "2rem" }}
+        style={{ marginTop: "4rem", borderRadius: "2rem", paddingTop: "3rem" }}
       >
         <h1 className="submit-title">
           {isEdit ? "Editar Obra" : "Submeta uma Obra"}
