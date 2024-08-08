@@ -58,12 +58,17 @@ export default function Dashboard() {
     "TO",
   ];
 
-  const { user } = useAuth();
+  const { user, token } = useAuth();
 
   const fetchChurches = async () => {
     try {
       const response = await axios.get(
-        "https://api-museubarroco-east-dev.azurewebsites.net/api/churches?IsPublishedFilter=true"
+        `${import.meta.env.VITE_API_URL}/api/churches`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       return response.data;
     } catch (error) {
@@ -169,7 +174,7 @@ export default function Dashboard() {
     setChurchToEdit(church);
     setImages(church.images);
     setChurchImages(
-      church.images.map((image) => ({ ...image, base64Image: "" }))
+      church?.images?.map((image) => ({ ...image, base64Image: "" }))
     );
     setIsChurchModalOpen(true);
   };
@@ -204,7 +209,12 @@ export default function Dashboard() {
     try {
       // Proceed with deletion
       await axios.delete(
-        `https://api-museubarroco-east-dev.azurewebsites.net/api/churches/${deleteChurchId}`
+        `https://api-museubarroco-east-dev.azurewebsites.net/api/churches/${deleteChurchId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       toast.success("Igreja deletada com sucesso");
       setChurches(churches.filter((church) => church.id !== deleteChurchId));

@@ -300,8 +300,10 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     painting?.images.map((img) => ({ ...img, Base64Image: img.url })) || []
   );
   const [churchImages, setChurchImages] = useState<any[]>(
-    painting?.church?.images.map((img) => ({ ...img, Base64Image: img.url })) ||
-      []
+    painting?.church?.images?.map((img) => ({
+      ...img,
+      Base64Image: img.url,
+    })) || []
   );
   const [allTags, setAllTags] = useState<{ id: string; name: string }[]>([]);
   const [selectedTags, setSelectedTags] = useState<
@@ -930,12 +932,12 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
             />
           </label>
           <p style={{ fontSize: 12 }}>
-            Observação: Fontes historiográfica devem ser separadas por ponto e
+            Observação: Fontes historiográficas devem ser separadas por ponto e
             vírgula.
           </p>
           <div className="grid-layout">
             <label className="label-wrapper">
-              <p className="input-label">Fontes Historiográfica</p>
+              <p className="input-label">Fontes Historiográficas</p>
               <textarea
                 placeholder="Exemplo: fonte1; fonte2; fonte3"
                 value={obra.bibliographicSources}
