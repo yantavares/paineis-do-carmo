@@ -158,7 +158,12 @@ export default function Dashboard() {
   const confirmDelete = async () => {
     try {
       await axios.delete(
-        `${import.meta.env.VITE_API_URL}/api/paintings/${paintingToDelete}`
+        `${import.meta.env.VITE_API_URL}/api/paintings/${paintingToDelete}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       toast.success("Painting deleted successfully");
       setPaintings(
@@ -183,7 +188,7 @@ export default function Dashboard() {
     try {
       // Fetch all paintings
       const response = await axios.get(
-        "https://api-museubarroco-east-dev.azurewebsites.net/api/paintings"
+        `${import.meta.env.VITE_API_URL}/api/paintings`
       );
       const paintings = response.data;
       // Check if any painting is associated with the church
@@ -209,7 +214,7 @@ export default function Dashboard() {
     try {
       // Proceed with deletion
       await axios.delete(
-        `https://api-museubarroco-east-dev.azurewebsites.net/api/churches/${deleteChurchId}`,
+        `${import.meta.env.VITE_API_URL}/api/churches/${deleteChurchId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -267,7 +272,7 @@ export default function Dashboard() {
         ...image,
         base64Image: image.base64Image || image.url, // Use URL if base64 is not available
       })),
-      bibliographyReference: churchToEdit.bibliographyReference.split(";"),
+      bibliographyReference: churchToEdit?.bibliographyReference?.split(";"),
       imageUrlsToRemove: [],
     };
     console.log(churchData);
@@ -303,7 +308,7 @@ export default function Dashboard() {
       street: churchToEdit.street,
       city: churchToEdit.city,
       state: churchToEdit.state,
-      bibliographyReference: churchToEdit.bibliographyReference.split(";"),
+      bibliographyReference: churchToEdit?.bibliographyReference?.split(";"),
       images: newImages.map((image) => ({
         base64Image: image.url,
         photographer: image.photographer,
@@ -315,8 +320,13 @@ export default function Dashboard() {
 
     try {
       await axios.put(
-        `https://api-museubarroco-east-dev.azurewebsites.net/api/churches/${churchToEdit.id}`,
-        updatedChurch
+        `${import.meta.env.VITE_API_URL}/api/churches/${churchToEdit.id}`,
+        updatedChurch,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       toast.success("Igreja atualizada com sucesso");
       setIsChurchModalOpen(false);
@@ -335,8 +345,6 @@ export default function Dashboard() {
     setUrlsToRemove([...urlsToRemove, images[index].url]);
     setImages(updatedImages);
   };
-
-  console.log(churchToEdit);
 
   return (
     <Container>
