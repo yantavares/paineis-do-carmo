@@ -26,7 +26,7 @@ const HomeTopic = ({ data, type }) => {
       </SeeMoreButton>
       <DataContainer>
         {data.map((item: Church | Artist | Painting, index: number) => (
-          <div style={{ width: "18%" }}>
+          <div style={{ width: "18%" }} key={index + 1}>
             <Item item={item} type={type} key={index} />
           </div>
         ))}
@@ -38,7 +38,7 @@ const HomeTopic = ({ data, type }) => {
 const getTypeText = (type: string) => {
   switch (type) {
     case "artists":
-      return "Ver todos os artistas";
+      return "Ver todos os artifices";
     case "churches":
       return "Ver todas as igrejas";
     case "paintings":

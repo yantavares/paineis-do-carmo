@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import temp3 from "src/assets/artista1.jpg";
 import temp4 from "src/assets/baroque.jpg";
 import temp2 from "src/assets/baroque2.jpg";
 import temp from "src/assets/baroque3.jpg";
 import temp6 from "src/assets/igreja2.jpg";
 import temp5 from "src/assets/pintura2.jpeg";
-import ImageCarousel from "src/components/ImageCarousel";
 import ImageCarousel2 from "src/components/ImageCarousel2";
 import HomeSearch from "src/components/SearchBar";
 import colors from "src/utils/colors";
@@ -17,7 +16,6 @@ import {
 import HomeTopic from "./HomeTopic";
 import RoundBox from "./RoundBox";
 import {
-  CarouselContainer,
   GreetingContainer,
   MainText,
   MainTextContainer,
@@ -33,6 +31,7 @@ import {
 } from "./styles";
 
 const Home = () => {
+  const [inputValue, setInputValue] = useState("");
   return (
     <div>
       <PaddingContainer>
@@ -51,7 +50,7 @@ const Home = () => {
             </MainTextHeader>
             <MainText>
               Bem-vindo ao nosso site! Aqui você pode encontrar informações
-              sobre igrejas, pinturas e artistas do período barroco brasileiro.
+              sobre igrejas, pinturas e artifices do período barroco brasileiro.
               O barroco foi um período de grande efervescência artística no
               Brasil, com a chegada dos colonizadores portugueses e a influência
               da igreja católica.
@@ -69,12 +68,14 @@ const Home = () => {
           </div>
         </GreetingContainer>
         <HomeSearch
+          inputValue={inputValue}
+          setInputValue={setInputValue}
           placeHolder={"Busque por imagens, tópicos, pintores, igrejas..."}
         />
       </PaddingContainer>
-      <CarouselContainer>
+      {/* <CarouselContainer>
         <ImageCarousel images={[temp, temp2, temp3, temp4, temp5, temp6]} />
-      </CarouselContainer>
+      </CarouselContainer> */}
       <PaddingContainer>
         <TopicsContainer>
           <Topic>
@@ -86,18 +87,18 @@ const Home = () => {
             </TopicHeader>
             <TopicBody>
               <RoundBox
-                text={"Utilizar como visitante"}
-                buttonText={"Como utilizar"}
+                text={"Apresentação do projeto"}
+                buttonText={"Sobre nós"}
                 color={"#3A5A40"}
               />
               <RoundBox
-                text={"Fazer parte do projeto"}
-                buttonText={"Fazer parte"}
+                text={"Como navegar pelo site"}
+                buttonText={"Como utilizar"}
                 color={colors.green}
               />
               <RoundBox
-                text={"Entrar em contato conosco"}
-                buttonText={"Entrar em contato"}
+                text={"Faça parte do projeto!"}
+                buttonText={"Fazer parte"}
                 color={"#A3B18A"}
               />
             </TopicBody>
@@ -119,15 +120,6 @@ const Home = () => {
               </TopicSubTitle>
             </TopicHeader>
             <HomeTopic type={"churches"} data={brazilianChurches} />
-          </Topic>
-          <Topic>
-            <TopicHeader>
-              <TopicTitle>Artistas</TopicTitle>
-              <TopicSubTitle>
-                Procure por artistas do barrroco brasileiro
-              </TopicSubTitle>
-            </TopicHeader>
-            <HomeTopic type={"artists"} data={brazilianArtists} />
           </Topic>
         </TopicsContainer>
       </PaddingContainer>

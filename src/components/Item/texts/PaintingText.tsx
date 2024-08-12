@@ -5,21 +5,23 @@ import { Painting } from "src/utils/mockData";
 const PaintingText = ({ painting }: { painting: Painting }) => {
   return (
     <>
-      {painting.date ? (
+      {painting.dateOfCreation ? (
         <DataTitle>
-          {painting.title} <PaintingDate>({painting.date})</PaintingDate>
+          {painting.title}{" "}
+          {<PaintingDate>({painting.dateOfCreation})</PaintingDate>}
         </DataTitle>
       ) : (
         <DataTitle>{painting.title}</DataTitle>
       )}
 
       <DataInfoContainer>
-        {painting.city && <DataInfo>{painting.city}</DataInfo>}
+        {/* {painting.city && <DataInfo>{painting.city}</DataInfo>}
         {painting.state && painting.city ? (
           <DataInfo>, {painting.state}</DataInfo>
         ) : (
           <DataInfo>{painting.state}</DataInfo>
-        )}
+        )} */}
+        <DataInfo>{painting?.church?.name}</DataInfo>
       </DataInfoContainer>
     </>
   );

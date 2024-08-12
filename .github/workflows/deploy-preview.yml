@@ -30,22 +30,37 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: "npm"
+
+      - name: Inject Environment Variables
+        run: |
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> $GITHUB_ENV
+          echo "VITE_OPENAI_API_KEY=${{ secrets.VITE_OPENAI_API_KEY }}" >> $GITHUB_ENV
+          echo "VITE_ADMIN_USER=${{ secrets.VITE_ADMIN_USER }}" >> $GITHUB_ENV
+          echo "VITE_ADMIN_PASSWORD=${{ secrets.VITE_ADMIN_PASSWORD }}" >> $GITHUB_ENV
+
       - name: Install dependencies
         run: npm install
+
       - name: Build
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
         run: npm run build
+
       - name: Setup Pages
         uses: actions/configure-pages@v3
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
           # Upload dist repository
           path: "./dist"
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2

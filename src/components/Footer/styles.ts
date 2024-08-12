@@ -42,6 +42,20 @@ export const ContactContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.8rem;
+  width: 25%;
+`;
+
+export const CreditsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  width: 25%;
+`;
+
+export const Author = styled.a`
+  color: white;
+  font-weight: 550;
+  transition: all 0.3s;
 `;
 
 export const TitleText = styled.h3`
@@ -52,6 +66,8 @@ export const TitleText = styled.h3`
 `;
 
 export const Text = styled.p`
+  display: flex;
+  gap: 1rem;
   padding: 0;
   margin: 0;
 `;

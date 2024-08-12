@@ -19,7 +19,11 @@ const ArtistText = ({ artist }: { artist: Artist }) => {
           <></>
         )}
       </DataInfoContainer>
-      {artist.dateOfBirth && <DataInfo>{artist.dateOfBirth}</DataInfo>}
+      {artist.dateOfBirth ? (
+        <DataInfo>{artist.dateOfBirth}</DataInfo>
+      ) : (
+        <DataInfo>Local de nascimento desconhecido</DataInfo>
+      )}
     </>
   );
 };

@@ -1,4 +1,4 @@
-# Painéis do Carmo
+# Painéis do Carmo - Museu Barroco
 
 [![GitHub stars](https://img.shields.io/github/stars/yantavares/paineis-do-carmo)](https://shields.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
@@ -23,13 +23,13 @@ Um preview do Front End do projeto pode ser encontrado em https://yantavares.git
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/yantavares/paineis-do-carmo-front
+git clone https://github.com/yantavares/paineis-do-carmo
 ```
 
 2. Navegue até a pasta do projeto:
 
 ```bash
-cd paineis-do-carmo-front/art-gallery-pibic
+cd paineis-do-carmo
 ```
 
 3. Instale as dependências:

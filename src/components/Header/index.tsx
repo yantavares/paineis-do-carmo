@@ -8,6 +8,7 @@ import {
   ContribButton,
   HeaderButton,
   HeaderContainer,
+  Icon,
   LoginButton,
   Title,
   TitleContainer,
@@ -15,12 +16,13 @@ import {
 
 const Header = () => {
   const navigate = useNavigate();
+  const isLoggedin = localStorage.getItem("token");
 
   return (
     <HeaderContainer>
       <Col1>
-        <TitleContainer onClick={() => navigate("/paineis-do-carmo/")}>
-          <img src={PaintBucket} alt="Museu Barroco" />
+        <TitleContainer onClick={() => navigate("/")}>
+          <Icon src={PaintBucket} alt="Museu Barroco" />
           <Title>Museu Barroco</Title>
         </TitleContainer>
 
@@ -31,19 +33,31 @@ const Header = () => {
           <HeaderButton onClick={() => navigate("/pesquisa/igrejas")}>
             Igrejas
           </HeaderButton>
-          <HeaderButton onClick={() => navigate("/pesquisa/artistas")}>
-            Artistas
+          <HeaderButton onClick={() => navigate("/pesquisa/topicos")}>
+            Tópicos
           </HeaderButton>
-          <HeaderButton>Como utilizar</HeaderButton>
-          <HeaderButton>Sobre</HeaderButton>
+          <HeaderButton onClick={() => navigate("/sobre")}>Sobre</HeaderButton>
         </ButtonsContainer>
       </Col1>
 
       <Col2>
-        <LoginButton onClick={() => navigate("/paineis-do-carmo/login")}>
-          Log In
-        </LoginButton>
-        <ContribButton>Fazer Parte</ContribButton>
+        {isLoggedin ? (
+          <LoginButton onClick={() => navigate("/dashboard")}>
+            Dashboard
+          </LoginButton>
+        ) : (
+          <LoginButton onClick={() => navigate("/login")}>Log In</LoginButton>
+        )}
+
+        {isLoggedin ? (
+          <ContribButton onClick={() => navigate("/submit")}>
+            Nova Obra
+          </ContribButton>
+        ) : (
+          <ContribButton onClick={() => navigate("/register")}>
+            Faça parte
+          </ContribButton>
+        )}
       </Col2>
     </HeaderContainer>
   );

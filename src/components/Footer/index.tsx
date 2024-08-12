@@ -1,6 +1,8 @@
 import React from "react";
 import {
+  Author,
   ContactContainer,
+  CreditsContainer,
   DashedLine,
   FinancingContainer,
   FooterButton,
@@ -20,6 +22,7 @@ import {
   faGithub,
 } from "@fortawesome/free-brands-svg-icons";
 import "./social-media.css";
+import { useNavigate } from "react-router-dom";
 
 const wppMessage =
   "Olá, gostaria de saber mais sobre o projeto Paineis do Carmo!";
@@ -29,6 +32,7 @@ const wppMessageFormatted = wppMessage.replace(" ", "%20");
 const wppLink = `https://wa.me/${phoneNumber}?text=${wppMessageFormatted}`;
 
 const Footer = () => {
+  const navigate = useNavigate();
   return (
     <FooterContainer>
       <PaintBucket src={paintBucket} alt="Paint Bucket" />
@@ -37,13 +41,40 @@ const Footer = () => {
           <ContactContainer>
             <TitleText>Ficou curioso?</TitleText>
             <Text>Entre em contato para saber mais sobre o projeto</Text>
-            <FooterButton>Entrar em contato</FooterButton>
+            <FooterButton>
+              <a href="mailto:yantdo1@gmail.com" style={{ all: "unset" }}>
+                Entrar em contato
+              </a>
+            </FooterButton>
           </ContactContainer>
+          <CreditsContainer>
+            <TitleText>Créditos</TitleText>
+            <Text>
+              <Author href="https://github.com/gabrielccac">
+                Gabriel Farago
+              </Author>{" "}
+              UI/UX e Front End
+            </Text>
+            <Text>
+              <Author href="https://github.com/GuilhermeGonSoares">
+                Guilherme Gonçalves
+              </Author>{" "}
+              Back End
+            </Text>
+            <Text>
+              <Author href="https://github.com/yantavares" target="_blank">
+                Yan Tavares
+              </Author>
+              Front End e integração com IA
+            </Text>
+          </CreditsContainer>
           <FinancingContainer>
             <TitleText>
               Este projeto foi financiado pela Universidade de Brasília
             </TitleText>
-            <FooterButton>Saber mais</FooterButton>
+            <FooterButton onClick={() => navigate("/sobre")}>
+              Saber mais
+            </FooterButton>
           </FinancingContainer>
         </TextContainer>
         <SocialsContainer>
@@ -53,12 +84,16 @@ const Footer = () => {
               <FontAwesomeIcon icon={faWhatsapp} color="white" size="2xl" />
               <span className="tooltip-social">WhatsApp</span>
             </a>
-            <a>
+            <a
+              href="https://www.instagram.com/museu_barroco/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FontAwesomeIcon icon={faInstagram} color="white" size="2xl" />
               <span className="tooltip-social">Instagram</span>
             </a>
             <a
-              href="https://github.com/yantavares/paineis-do-carmo"
+              href="https://museubarroco.com"
               target="_blank"
               rel="noopener noreferrer"
             >

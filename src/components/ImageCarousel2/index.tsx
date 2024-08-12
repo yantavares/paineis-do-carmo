@@ -8,11 +8,11 @@ const ImageCarousel2 = ({ images }: { images: string[] }) => {
   const settings = {
     dots: false,
     infinite: true,
-    speed: 2000,
+    speed: 3000,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 6000,
+    autoplaySpeed: 2000,
     cssEase: "linear",
     fade: true,
     arrows: false,
