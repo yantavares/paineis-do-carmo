@@ -22,7 +22,7 @@ const LoginPage = () => {
       password == import.meta.env.VITE_ADMIN_PASSWORD
     ) {
       login(email);
-      navigate("/admin");
+      navigate("/dashboard");
     } else {
       axios
         .post(`${import.meta.env.VITE_API_URL}/api/users/login`, {
@@ -31,7 +31,7 @@ const LoginPage = () => {
         })
         .then((response) => {
           login(response.data.token);
-          navigate("/admin");
+          navigate("/dashboard");
         })
         .catch((error) => {
           console.error("Error logging in:", error);

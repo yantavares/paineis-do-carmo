@@ -32,7 +32,7 @@ const defaultPainting: Painting = {
     images: [],
   },
   state: "",
-  tag: [],
+  tags: [],
 };
 
 const PaintingDetails = () => {
