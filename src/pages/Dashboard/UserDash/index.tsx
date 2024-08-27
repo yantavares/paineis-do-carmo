@@ -55,7 +55,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   const handleExit = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("token");
     navigate("/");
   };
 
