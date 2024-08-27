@@ -2,7 +2,7 @@
 
 [![GitHub stars](https://img.shields.io/github/stars/yantavares/paineis-do-carmo)](https://shields.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Status](https://img.shields.io/badge/status-em_desenvolvimento-red)](https://opensource.org/licenses/MIT)
+[![Status](https://img.shields.io/badge/status-online-green)](https://opensource.org/licenses/MIT)
 
 ## Descrição
 
