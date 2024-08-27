@@ -8,11 +8,7 @@ import temp5 from "src/assets/pintura2.jpeg";
 import ImageCarousel2 from "src/components/ImageCarousel2";
 import HomeSearch from "src/components/SearchBar";
 import colors from "src/utils/colors";
-import {
-  brazilianArtists,
-  brazilianChurches,
-  brazilianPaintings,
-} from "../../utils/mockData";
+import { brazilianChurches, brazilianPaintings } from "../../utils/mockData";
 import HomeTopic from "./HomeTopic";
 import RoundBox from "./RoundBox";
 import {

@@ -1,4 +1,4 @@
-import igreja1 from "src/assets/igreja1.jpeg";
+import igreja1 from "src/assets/igreja1.jpg";
 import igreja2 from "src/assets/igreja2.jpg";
 import pintura1 from "src/assets/pintura1.jpeg";
 import pintura2 from "src/assets/pintura2.jpeg";
@@ -30,11 +30,11 @@ export interface Church {
 export const brazilianChurches: Church[] = [
   {
     id: 1,
-    name: "Catedral Metropolitana de Brasília",
+    name: "Igreja de Santa Teresa de Jesus da Ordem Terceira do Carmo do Recife",
     images: [{ url: igreja1 }],
-    city: "Brasília",
-    state: "DF",
-    tag: [{ name: "catedral" }, { name: "moderna" }, { name: "arquitetura" }],
+    city: "Recife",
+    state: "PE",
+    tag: [],
   },
   {
     id: 2,
@@ -42,7 +42,7 @@ export const brazilianChurches: Church[] = [
     images: [{ url: igreja2 }],
     city: "São Paulo",
     state: "SP",
-    tag: [{ name: "barroco" }, { name: "igreja" }, { name: "século 18" }],
+    tag: [],
   },
   {
     id: 3,
@@ -50,7 +50,7 @@ export const brazilianChurches: Church[] = [
     images: [{ url: igreja1 }],
     city: "Rio de Janeiro",
     state: "RJ",
-    tag: [{ name: "barroco" }, { name: "igreja" }, { name: "século 18" }],
+    tag: [],
   },
   {
     id: 4,
@@ -58,7 +58,7 @@ export const brazilianChurches: Church[] = [
     images: [{ url: igreja2 }],
     city: "Ouro Preto",
     state: "MG",
-    tag: [{ name: "barroco" }, { name: "igreja" }, { name: "século 18" }],
+    tag: [],
   },
   {
     id: 5,
@@ -66,7 +66,7 @@ export const brazilianChurches: Church[] = [
     images: [{ url: igreja1 }],
     city: "São Paulo",
     state: "SP",
-    tag: [{ name: "catedral" }, { name: "moderna" }, { name: "arquitetura" }],
+    tag: [],
   },
 ];
 
