@@ -55,7 +55,9 @@ const PaintingDetails = () => {
     const fetchPaintings = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/paintings/${id}`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/paintings/${id}`
+        );
         setData(response.data as Painting);
         setIsLoading(false);
       } catch (error) {
@@ -75,38 +77,34 @@ const PaintingDetails = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-        }}>
-        <CircularProgress
-          size="lg"
-          style={{ color: colors.green }}
-        />
+        }}
+      >
+        <CircularProgress size="lg" style={{ color: colors.green }} />
       </div>
     );
 
   return (
     <Container>
       <div className="flex-group">
-        <a
-          className="inner-link"
-          onClick={() => navigate("/pesquisa/obras")}>
+        <a className="inner-link" onClick={() => navigate("/pesquisa/obras")}>
           <ArrowLeft size={20} /> Obras
         </a>
       </div>
       <h1 className="item-name">{data.title} </h1>
-      <p
-        className="item-updater"
-        style={{ display: "flex", gap: "1rem" }}>
+      <p className="item-updater" style={{ display: "flex", gap: "1rem" }}>
         <FontAwesomeIcon icon={faChurch} />
         Localizada em •
         <span
           onClick={() => navigate(`/item/churches/${data.church.id}`)}
-          className="black hoverable">
+          className="black hoverable"
+        >
           {" "}
           {data.church.name}{" "}
         </span>{" "}
         <span
           className="black hoverable"
-          onClick={() => navigate(`/pesquisa/igrejas/${data.church.state}`)}>
+          onClick={() => navigate(`/pesquisa/igrejas/${data.church.state}`)}
+        >
           • {data.church.state}
         </span>
       </p>
@@ -115,11 +113,10 @@ const PaintingDetails = () => {
           {data.images &&
             data.images.map((image, index) => (
               <ImageContainer key={index}>
-                <Image
-                  src={image.url}
-                  alt=""
-                />
-                <DownloadButton onClick={() => downloadImage(image.url)}>Baixar</DownloadButton>
+                <Image src={image.url} alt="" />
+                <DownloadButton onClick={() => downloadImage(image.url)}>
+                  Baixar
+                </DownloadButton>
               </ImageContainer>
             ))}
         </div>
@@ -129,17 +126,20 @@ const PaintingDetails = () => {
             <p className="topic-text">{data.description}</p>
           </div>
           <div className="topic-wrapper">
-            <h3 className="topic-title">Referências</h3>
-            <ul className="reference-list">
-              {data?.bibliographyReference &&
-                data?.bibliographyReference.map((reference, index) => (
-                  <li
-                    key={index}
-                    className="reference-item">
-                    <sup>{index + 1} </sup> {reference}
-                  </li>
-                ))}
-            </ul>
+            {(data?.bibliographyReference?.length > 1 ||
+              (data?.bibliographyReference?.length == 1 &&
+                data.bibliographyReference[0] !== "")) && (
+              <>
+                <h3 className="topic-title">Referências</h3>
+                <ul className="reference-list">
+                  {data?.bibliographyReference.map((reference, index) => (
+                    <li key={index} className="reference-item">
+                      <sup>{index + 1} </sup> {reference}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
           <div className="topic-wrapper">
             <h2 className="topic-title">Ficha da Obra</h2>
@@ -173,7 +173,8 @@ const PaintingDetails = () => {
               </p>
               <br />
               <p className="record-data">
-                <strong>Fonte Historiográfica:</strong> {data?.bibliographySource ?? "N/A"}
+                <strong>Fonte Historiográfica:</strong>{" "}
+                {data?.bibliographySource ?? "N/A"}
               </p>
             </div>
           </div>
@@ -189,15 +190,12 @@ const PaintingDetails = () => {
       <EngravingLayout>
         {data.engravings &&
           data.engravings.map((engraving, index) => (
-            <Col
-              key={index}
-              style={{ cursor: "not-allowed" }}>
-              <EngravingImage
-                src={engraving.url}
-                alt=""
-              />
+            <Col key={index} style={{ cursor: "not-allowed" }}>
+              <EngravingImage src={engraving.url} alt="" />
               <EngravingDescription>
-                <TextTruncate className="engraving-title">{engraving.name}</TextTruncate>
+                <TextTruncate className="engraving-title">
+                  {engraving.name}
+                </TextTruncate>
               </EngravingDescription>
             </Col>
           ))}

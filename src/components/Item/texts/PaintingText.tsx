@@ -2,6 +2,10 @@ import React from "react";
 import { DataTitle, DataInfoContainer, DataInfo, PaintingDate } from "./styles";
 import { Painting } from "src/utils/mockData";
 
+const trimString = (str: string, length: number) => {
+  return str?.length > length ? str?.substring(0, length) + "..." : str;
+};
+
 const PaintingText = ({ painting }: { painting: Painting }) => {
   return (
     <>
@@ -21,7 +25,7 @@ const PaintingText = ({ painting }: { painting: Painting }) => {
         ) : (
           <DataInfo>{painting.state}</DataInfo>
         )} */}
-        <DataInfo>{painting?.church?.name}</DataInfo>
+        <DataInfo>{trimString(painting?.church?.name, 35)}</DataInfo>
       </DataInfoContainer>
     </>
   );

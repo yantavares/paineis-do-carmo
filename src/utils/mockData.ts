@@ -24,25 +24,25 @@ export interface Church {
   street?: string;
   city?: string;
   state?: string;
-  tag?: Tag[];
+  tags?: Tag[];
 }
 
 export const brazilianChurches: Church[] = [
   {
-    id: 1,
+    id: 158,
     name: "Igreja de Santa Teresa de Jesus da Ordem Terceira do Carmo do Recife",
     images: [{ url: igreja1 }],
     city: "Recife",
     state: "PE",
-    tag: [],
+    tags: [],
   },
   {
-    id: 2,
+    id: 162,
     name: "Basílica de Nossa Senhora do Carmo",
     images: [{ url: igreja2 }],
     city: "Recife",
     state: "PE",
-    tag: [],
+    tags: [],
   },
 ];
 
@@ -63,20 +63,20 @@ export interface Painting {
   description?: string;
   city: string;
   state: string;
-  tag: Tag[];
+  tags: Tag[];
   church?: Church;
   placement?: string;
 }
 
 export const brazilianPaintings: Painting[] = [
   {
-    id: 1,
+    id: 152,
     title: "A monja Teresa é protegida por Jesus",
     images: [{ url: pintura1 }],
     dateOfCreation: "Século XVIII ",
     city: "Recife",
     state: "PE",
-    tag: [
+    tags: [
       { name: "teresa" },
       { name: "jesus" },
       { name: "anjo" },
@@ -84,22 +84,22 @@ export const brazilianPaintings: Painting[] = [
     ],
   },
   {
-    id: 2,
+    id: 156,
     title: "Visão: Santo Eduardo, rei da Inglaterra ",
     images: [{ url: pintura2 }],
     dateOfCreation: "Século XIX",
     city: "Recife",
     state: "PE",
-    tag: [{ name: "eduardo" }, { name: "crucifixo" }, { name: "coroa" }],
+    tags: [{ name: "eduardo" }, { name: "crucifixo" }, { name: "coroa" }],
   },
   {
-    id: 3,
+    id: 153,
     title: "O Nascimento do Profeta Elias",
     images: [{ url: pintura3 }],
     dateOfCreation: "Segunda metade do século XVIII ",
     city: "Recife",
     state: "PE",
-    tag: [
+    tags: [
       { name: "santo elias" },
       { name: "profeta" },
       { name: "fogo" },
@@ -107,13 +107,13 @@ export const brazilianPaintings: Painting[] = [
     ],
   },
   {
-    id: 4,
+    id: 154,
     title: "O Profeta Elias e o Profeta Eliseu",
     images: [{ url: pintura4 }],
     dateOfCreation: "Segunda metade do século XVIII  ",
     city: "Recife",
     state: "PE",
-    tag: [
+    tags: [
       { name: "santo elias" },
       { name: "profeta" },
       { name: "santo eliseu" },

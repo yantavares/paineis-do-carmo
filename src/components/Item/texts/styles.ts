@@ -16,6 +16,7 @@ export const DataInfo = styled.span`
   padding: 0;
   margin: 0;
   font-size: 1.4rem;
+  height: "100%";
 `;
 
 export const DataInfoContainer = styled.div`

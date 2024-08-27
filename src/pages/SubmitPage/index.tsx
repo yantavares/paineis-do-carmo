@@ -562,7 +562,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
 
       if (formattedErrorMessages === "") {
         formattedErrorMessages =
-          "Erro desconhecido. Por favor, tente novamente mais tarde.";
+          "Erro desconhecido. Por favor, adicione os campos necessários.";
       }
 
       console.error("Error posting data:", error);
@@ -951,15 +951,15 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
               }
             />
           </label>
-          <p style={{ fontSize: 12 }}>
-            Observação: Fontes historiográfica devem ser separadas por ponto e
-            vírgula.
-          </p>
+          {/* <p style={{ fontSize: 12 }}>
+            Observação: Referências Bibliográficas devem ser separadas por Enter
+            (uma linha por referência)
+          </p> */}
           <div className="grid-layout">
             <label className="label-wrapper">
-              <p className="input-label">Fontes Historiográficas</p>
+              <p className="input-label">Fonte Historiográfica</p>
               <textarea
-                placeholder="Exemplo: fonte1; fonte2; fonte3"
+                placeholder="Exemplo: fonte1"
                 value={obra.bibliographicSources}
                 onChange={(e) =>
                   setObra({ ...obra, bibliographicSources: e.target.value })
@@ -967,9 +967,9 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
               />
             </label>
             <label className="label-wrapper">
-              <p className="input-label">Referência Bibliográfica</p>
+              <p className="input-label">Referências Bibliográficas</p>
               <textarea
-                placeholder="Insira as fontes"
+                placeholder="Insira as referências (uma por linha)"
                 value={obra.bibliographicReferences}
                 onChange={(e) =>
                   setObra({ ...obra, bibliographicReferences: e.target.value })
@@ -993,7 +993,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
               <p className="input-label">Onde está Posicionada</p>
               <input
                 type="text"
-                placeholder="No teto"
+                placeholder="Teto da igreja"
                 value={obra.placement}
                 onChange={(e) =>
                   setObra({ ...obra, placement: e.target.value })
