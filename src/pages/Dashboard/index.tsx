@@ -362,13 +362,7 @@ export default function Dashboard() {
           <div className="form-container">
             <div className="modal-header">
               <div className="flex-group">
-                <h1 className="submit-title">Crie uma nova Igreja</h1>
-                <button
-                  onClick={() => setIsChurchModalOpen(false)}
-                  aria-label="Close modal"
-                  className="close-btn">
-                  <X />
-                </button>
+                <h1 className="submit-title">Edite a Igreja</h1>
               </div>
             </div>
             <p className="submit-description">Adicione uma igreja ao banco de dados</p>

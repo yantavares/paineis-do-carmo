@@ -1,5 +1,6 @@
 import React, { useEffect, ReactNode } from "react";
 import { Container, ModalContent } from "./styles";
+import { X } from "lucide-react";
 
 interface ModalProps {
   children: ReactNode;
@@ -51,6 +52,21 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
       <ModalContent
         className="modal-content"
         onClick={handleContainerClick}>
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="close-btn"
+          style={{
+            position: "absolute",
+            top: "96px",
+            right: "396px",
+            backgroundColor: "transparent",
+            border: "none",
+            fontSize: "16px",
+            cursor: "pointer",
+          }}>
+          <X />
+        </button>
         {children}
       </ModalContent>
     </Container>
