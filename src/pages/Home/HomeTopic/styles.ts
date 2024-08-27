@@ -26,5 +26,6 @@ export const SeeMoreButton = styled.button`
 
 export const DataContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  gap: 10rem;
+  // justify-content: space-between;
 `;

@@ -9,6 +9,7 @@ import { CircularProgress, Button, TextField, IconButton } from "@mui/material";
 import { Plus, Trash, X } from "lucide-react";
 import { useAuth } from "src/context/AuthContext";
 import SubmitPage from "../../SubmitPage";
+import colors from "src/utils/colors";
 
 // const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/paintings`, payload, {
 //   headers: {
@@ -59,7 +60,7 @@ export default function Dashboard() {
     navigate("/");
   };
 
-  const { token } = useAuth();
+  const { token, user } = useAuth();
 
   useEffect(() => {
     const getPaintings = async () => {
@@ -205,6 +206,9 @@ export default function Dashboard() {
 
   return (
     <Container>
+      <h1 style={{ color: colors.darkGreen, fontWeight: 400 }}>
+        Bem vindo(a) {user?.name ?? "Admin"}!
+      </h1>
       <Toaster />
       <Modal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>
         <SubmitPage painting={paintingToEdit} isEdit={true} />
