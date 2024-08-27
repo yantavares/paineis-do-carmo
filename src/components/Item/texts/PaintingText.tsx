@@ -1,10 +1,7 @@
 import React from "react";
 import { DataTitle, DataInfoContainer, DataInfo, PaintingDate } from "./styles";
 import { Painting } from "src/utils/mockData";
-
-const trimString = (str: string, length: number) => {
-  return str?.length > length ? str?.substring(0, length) + "..." : str;
-};
+import { trimString } from "src/utils/strings";
 
 const PaintingText = ({ painting }: { painting: Painting }) => {
   return (
