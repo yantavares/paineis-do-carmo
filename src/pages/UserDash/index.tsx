@@ -155,7 +155,7 @@ export default function Dashboard() {
       const updatedImages = [...images];
       updatedImages[index] = {
         ...updatedImages[index],
-        base64Image: reader.result,
+        base64Image: reader.result.toString(),
       };
       setImages(updatedImages);
     };
@@ -165,15 +165,11 @@ export default function Dashboard() {
 
   const handleSubmitSuggestion = async () => {
     // Logic to handle the submission of the suggestion
-    console.log("Suggestion Text:", suggestionText);
 
-    console.log("Base64 Converted Images:", images);
     const payload = {
       reason: suggestionText,
       images,
     };
-
-    console.log(payload);
 
     // Send the suggestion to the API: http://museubarroco-vm.eastus.cloudapp.azure.com/paintings/id/add-suggestion
     try {
@@ -186,7 +182,6 @@ export default function Dashboard() {
           },
         }
       );
-      console.log("Suggestion submitted successfully:", response.data);
       toast.success("Suggestion submitted successfully!");
     } catch (error) {
       console.error("Error submitting suggestion:", error);
@@ -199,8 +194,6 @@ export default function Dashboard() {
     setIsSuggestionModalOpen(false);
     toast.success("Suggestion submitted successfully!");
   };
-
-  console.log(paintingToEdit);
 
   return (
     <Container>

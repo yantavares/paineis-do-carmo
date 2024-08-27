@@ -73,8 +73,7 @@ function Layout({ children }) {
             position: "fixed",
             bottom: "2rem",
             right: "2rem",
-          }}
-        >
+          }}>
           {!showAssistant ? (
             <button
               style={{
@@ -82,9 +81,11 @@ function Layout({ children }) {
                 opacity: 0.9,
                 borderRadius: "1.6rem",
               }}
-              onClick={() => setShowAssistant(true)}
-            >
-              <FontAwesomeIcon icon={faRobot} size="2x" />
+              onClick={() => setShowAssistant(true)}>
+              <FontAwesomeIcon
+                icon={faRobot}
+                size="2x"
+              />
             </button>
           ) : (
             <div>
@@ -115,20 +116,27 @@ function App() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                }}
-              >
+                }}>
                 <CircularProgress
                   size={"10rem"}
                   style={{ color: colors.green }}
                 />
               </div>
-            }
-          >
+            }>
             <Layout>
               <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="login" element={<LoginPage />} />
-                <Route path="register" element={<RegisterPage />} />
+                <Route
+                  path="/"
+                  element={<Home />}
+                />
+                <Route
+                  path="login"
+                  element={<LoginPage />}
+                />
+                <Route
+                  path="register"
+                  element={<RegisterPage />}
+                />
 
                 <Route
                   path="submit"
@@ -139,7 +147,10 @@ function App() {
                   }
                 />
 
-                <Route path="pesquisa/:selected" element={<SearchPage />} />
+                <Route
+                  path="pesquisa/:selected"
+                  element={<SearchPage />}
+                />
 
                 <Route
                   path="admin"
@@ -150,22 +161,40 @@ function App() {
                   }
                 />
 
-                <Route path="user" element={<UserDashPage />} />
+                <Route
+                  path="user"
+                  element={<UserDashPage />}
+                />
 
                 <Route
                   path="pesquisa/igrejas/:state"
                   element={<ChurchState />}
                 />
 
-                <Route path="topicos/:tag" element={<TagDetail />} />
+                <Route
+                  path="topicos/:tag"
+                  element={<TagDetail />}
+                />
 
-                <Route path="item/:id" element={<PaintingDetail />} />
+                <Route
+                  path="item/:id"
+                  element={<PaintingDetail />}
+                />
 
-                <Route path="item/paintings/:id" element={<PaintingDetail />} />
+                <Route
+                  path="item/paintings/:id"
+                  element={<PaintingDetail />}
+                />
 
-                <Route path="item/churches/:id" element={<ChurchDetail />} />
+                <Route
+                  path="item/churches/:id"
+                  element={<ChurchDetail />}
+                />
 
-                <Route path="sobre" element={<AboutPage />} />
+                <Route
+                  path="sobre"
+                  element={<AboutPage />}
+                />
 
                 <Route
                   path="dashboard/:page"

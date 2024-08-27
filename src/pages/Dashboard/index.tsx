@@ -139,7 +139,6 @@ export default function Dashboard() {
           },
         }
       );
-      console.log(response.data);
       setPaintingToEdit(response.data);
       setIsEditModalOpen(true);
     } catch (error) {
@@ -263,13 +262,11 @@ export default function Dashboard() {
       bibliographyReference: churchToEdit.bibliographyReference,
       imageUrlsToRemove: [],
     };
-    console.log(churchData);
     setIsChurchModalOpen(false);
   };
 
   const handleRemoveImage = (index) => {
     const updatedImages = images.filter((_, i) => i !== index);
-    console.log(images[index].url);
     setUrlsToRemove([...urlsToRemove, images[index].url]);
     setImages(updatedImages);
   };
@@ -294,8 +291,6 @@ export default function Dashboard() {
       imageUrlsToBeRemoved: urlsToRemove,
     };
 
-    console.log(JSON.stringify(updatedChurch));
-
     try {
       await axios.put(
         `${import.meta.env.VITE_API_URL}/api/churches/${churchToEdit.id}`,
@@ -319,13 +314,11 @@ export default function Dashboard() {
 
   const handleDeleteImage = (index) => {
     const updatedImages = images.filter((_, i) => i !== index);
-    console.log(images[index].url);
     setUrlsToRemove([...urlsToRemove, images[index].url]);
     setImages(updatedImages);
   };
 
   const handlePublish = async (painting) => {
-    console.log(painting.id);
     try {
       await axios.patch(
         `${import.meta.env.VITE_API_URL}/api/paintings/${painting.id}/publish`,
@@ -342,8 +335,6 @@ export default function Dashboard() {
       toast.error("Erro ao publicar a obra: " + error.message);
     }
   };
-
-  console.log(churchToEdit);
 
   return (
     <Container>
