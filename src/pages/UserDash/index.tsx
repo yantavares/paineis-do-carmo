@@ -1,20 +1,39 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import DeleteConfirmationModal from "src/components/DeleteModal";
 import Modal from "src/components/Modal"; // Import the modal component
 import { Container, ExitButton, ExitContainer, FormContainer } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress, Button, TextField, IconButton } from "@mui/material";
-import { Plus, Trash } from "lucide-react";
-import colors from "src/utils/colors";
+import { Plus, Trash, X } from "lucide-react";
+import { useAuth } from "src/context/AuthContext";
+import SubmitPage from "../SubmitPage";
 
-const fetchPaintings = async () => {
+// const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/paintings`, payload, {
+//   headers: {
+//     Authorization: `Bearer ${token}`,
+//   },
+// });
+
+export const fetchPaintings = async ({ token, filter = "all" }) => {
+  let url = `${import.meta.env.VITE_API_URL}/api/paintings/authorized`;
+
+  if (filter === "published") {
+    url += "?filter=published";
+  } else if (filter === "unpublished") {
+    url += "?filter=unpublished";
+  }
+
   try {
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/paintings`);
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
-    console.error("Error fetching paintings:", error);
+    console.error(`Error fetching ${filter} paintings:`, error);
     throw error;
   }
 };
@@ -27,8 +46,11 @@ export default function Dashboard() {
   const [paintingToDelete, setPaintingToDelete] = useState(null);
   const [isSuggestionModalOpen, setIsSuggestionModalOpen] = useState(false);
   const [suggestionText, setSuggestionText] = useState("");
-  const [images, setImages] = useState([{ url: "", photographer: "" }]);
+  const [images, setImages] = useState([{ base64Image: "", photographer: "" }]);
   const [isLoading, setIsLoading] = useState(false); // Add this line to define the isLoading state
+  const [selectedPainting, setSelectedPainting] = useState(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [paintingToEdit, setPaintingToEdit] = useState(null);
 
   const navigate = useNavigate();
 
@@ -37,12 +59,13 @@ export default function Dashboard() {
     navigate("/");
   };
 
+  const { token } = useAuth();
+
   useEffect(() => {
     const getPaintings = async () => {
       setIsLoading(true);
-      const data = await fetchPaintings();
+      const data = await fetchPaintings({ token, filter: "all" });
       setPaintings(data);
-      console.log("Paintings fetched:", data);
     };
 
     getPaintings();
@@ -77,7 +100,11 @@ export default function Dashboard() {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/api/paintings/${paintingToDelete}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/paintings/${paintingToDelete}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       toast.success("Painting deleted successfully");
       setPaintings(paintings.filter((painting) => painting.id !== paintingToDelete));
       setIsDeleteModalOpen(false);
@@ -87,31 +114,105 @@ export default function Dashboard() {
   };
 
   const handleAddImage = () => {
-    setImages([...images, { url: "", photographer: "" }]);
+    setImages([...images, { base64Image: "", photographer: "" }]);
+  };
+
+  const handleEdit = async (id) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/paintings/authorized/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setPaintingToEdit(response.data);
+      setIsEditModalOpen(true);
+    } catch (error) {
+      console.error("Error fetching painting:", error);
+      toast.error("Error fetching painting data: " + error.message);
+    }
   };
 
   const handleRemoveImage = (index) => {
     setImages(images.filter((_, i) => i !== index));
   };
 
-  const handleImageChange = (index, field, value) => {
-    const newImages = images.map((img, i) => (i === index ? { ...img, [field]: value } : img));
-    setImages(newImages);
+  const handlePhotographerChange = (index, value) => {
+    const updatedImages = [...images];
+    updatedImages[index] = { ...updatedImages[index], photographer: value };
+    setImages(updatedImages);
   };
 
-  const handleSubmitSuggestion = () => {
+  const handleImageChange = (index, e) => {
+    const file = e.target.files[0];
+    if (!file) return; // Exit if no file is selected
+
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const updatedImages = [...images];
+      updatedImages[index] = {
+        ...updatedImages[index],
+        base64Image: reader.result,
+      };
+      setImages(updatedImages);
+    };
+
+    reader.readAsDataURL(file); // Start reading the file
+  };
+
+  const handleSubmitSuggestion = async () => {
     // Logic to handle the submission of the suggestion
     console.log("Suggestion Text:", suggestionText);
-    console.log("Images:", images);
+
+    console.log("Base64 Converted Images:", images);
+    const payload = {
+      reason: suggestionText,
+      images,
+    };
+
+    console.log(payload);
+
+    // Send the suggestion to the API: http://museubarroco-vm.eastus.cloudapp.azure.com/paintings/id/add-suggestion
+    try {
+      const response = await axios.patch(
+        `${import.meta.env.VITE_API_URL}/api/paintings/${selectedPainting}/add-suggestion`,
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Suggestion submitted successfully:", response.data);
+      toast.success("Suggestion submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting suggestion:", error);
+      toast.error("Error submitting suggestion: " + error.message);
+    }
+
     // Reset form fields
     setSuggestionText("");
-    setImages([{ url: "", photographer: "" }]);
+    setImages([{ base64Image: "", photographer: "" }]);
     setIsSuggestionModalOpen(false);
     toast.success("Suggestion submitted successfully!");
   };
 
+  console.log(paintingToEdit);
+
   return (
     <Container>
+      <Toaster />
+      <Modal
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}>
+        <SubmitPage
+          painting={paintingToEdit}
+          isEdit={true}
+        />
+      </Modal>
       <DeleteConfirmationModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
@@ -122,7 +223,14 @@ export default function Dashboard() {
         isOpen={isSuggestionModalOpen}
         onClose={() => setIsSuggestionModalOpen(false)}>
         <FormContainer>
-          <h2>Submit Suggestion</h2>
+          <div className="flex-between">
+            <h2>Envie uma Sugestão</h2>
+            <a
+              className="close-btn"
+              onClick={() => setIsSuggestionModalOpen(false)}>
+              <X />
+            </a>
+          </div>
           <textarea
             placeholder="Digite sua sugestão de edição aqui..."
             value={suggestionText}
@@ -134,12 +242,12 @@ export default function Dashboard() {
               style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
               <input
                 type="file"
-                onChange={(e) => handleImageChange(index, "url", e.target.value)}
+                onChange={(e) => handleImageChange(index, e)}
               />
               <input
                 placeholder="Fotógrafo"
                 value={image.photographer}
-                onChange={(e) => handleImageChange(index, "photographer", e.target.value)}
+                onChange={(e) => handlePhotographerChange(index, e.target.value)}
               />
               <button onClick={() => handleRemoveImage(index)}>
                 <Trash />
@@ -204,7 +312,11 @@ export default function Dashboard() {
                   painting={painting}
                   key={painting.id}
                   onDelete={() => handleDelete(painting.id)}
-                  onSuggestionClick={() => setIsSuggestionModalOpen(true)} // Trigger modal
+                  onEdit={() => handleEdit(painting.id)}
+                  onSuggestionClick={() => {
+                    setIsSuggestionModalOpen(true);
+                    setSelectedPainting(painting.id);
+                  }}
                 />
               ))}
             </tbody>
@@ -219,13 +331,13 @@ export default function Dashboard() {
   );
 }
 
-function PaintingRow({ painting, onDelete, onSuggestionClick }) {
+function PaintingRow({ painting, onDelete, onSuggestionClick, onEdit }) {
   return (
     <tr>
       <td>{painting.title}</td>
       <td>
-        <span className={painting.isPublished ? "Published" : "Published"}>
-          {painting.isPublished ? "Publicada" : "Publicada"}
+        <span className={painting.isPublished ? "Published" : "Pending"}>
+          {painting.isPublished ? "Publicada" : "Pendente"}
         </span>
       </td>
       <td>{painting.registeredBy}</td>
@@ -237,11 +349,20 @@ function PaintingRow({ painting, onDelete, onSuggestionClick }) {
         })}
       </td>
       <td style={{ display: "flex" }}>
-        <button
-          className="secondary"
-          onClick={onSuggestionClick}>
-          Sugestão
-        </button>
+        {painting.isPublished && (
+          <button
+            className="secondary"
+            onClick={onSuggestionClick}>
+            Sugestão
+          </button>
+        )}
+        {!painting.isPublished && (
+          <button
+            className="secondary"
+            onClick={onEdit}>
+            Editar
+          </button>
+        )}
       </td>
     </tr>
   );

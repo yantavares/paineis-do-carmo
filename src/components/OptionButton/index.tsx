@@ -4,10 +4,14 @@ import { Ellipsis } from "lucide-react";
 const DropdownMenu = ({ onEdit, onDelete }) => {
   return (
     <div className="dropdown-menu">
-      <button style={{ fontSize: "1.4rem" }} onClick={onEdit}>
+      <button
+        style={{ fontSize: "1.4rem", border: "none" }}
+        onClick={onEdit}>
         Editar
       </button>
-      <button style={{ fontSize: "1.4rem" }} onClick={onDelete}>
+      <button
+        style={{ fontSize: "1.4rem", border: "none" }}
+        onClick={onDelete}>
         Deletar
       </button>
     </div>
@@ -42,11 +46,27 @@ const OptionButton = ({ onEdit, onDelete }) => {
   }, []);
 
   return (
-    <div className="option-button" ref={dropdownRef}>
-      <button ref={buttonRef} onClick={toggleDropdown}>
+    <div
+      className="option-button"
+      ref={dropdownRef}>
+      <button
+        ref={buttonRef}
+        onClick={toggleDropdown}
+        style={{
+          display: "grid",
+          placeContent: "center",
+          width: "2rem",
+          height: "2rem",
+          borderRadius: ".75rem",
+        }}>
         <Ellipsis />
       </button>
-      {showDropdown && <DropdownMenu onEdit={onEdit} onDelete={onDelete} />}
+      {showDropdown && (
+        <DropdownMenu
+          onEdit={onEdit}
+          onDelete={onDelete}
+        />
+      )}
     </div>
   );
 };

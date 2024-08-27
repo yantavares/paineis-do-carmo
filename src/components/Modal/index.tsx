@@ -46,7 +46,6 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
 
   return (
     <Container
-      onClick={onClose}
       aria-modal="true"
       role="dialog">
       <ModalContent
