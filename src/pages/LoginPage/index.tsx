@@ -17,27 +17,19 @@ const LoginPage = () => {
   const { login } = useAuth();
 
   const handleLogin = () => {
-    if (
-      email == import.meta.env.VITE_ADMIN_USER &&
-      password == import.meta.env.VITE_ADMIN_PASSWORD
-    ) {
-      login(email);
-      navigate("/dashboard");
-    } else {
-      axios
-        .post(`${import.meta.env.VITE_API_URL}/api/users/login`, {
-          email,
-          password,
-        })
-        .then((response) => {
-          login(response.data.token);
-          navigate("/dashboard");
-        })
-        .catch((error) => {
-          console.error("Error logging in:", error);
-          toast.error("Usuário ou senha incorretos");
-        });
-    }
+    axios
+      .post(`${import.meta.env.VITE_API_URL}/api/users/login`, {
+        email,
+        password,
+      })
+      .then((response) => {
+        login(response.data.token);
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        console.error("Error logging in:", error);
+        toast.error("Usuário ou senha incorretos");
+      });
   };
 
   return (

@@ -29,7 +29,13 @@ const RegisterPage = () => {
       })
       .catch((error) => {
         console.error("Error registering user:", error);
-        toast.error("Erro ao registrar usuário: " + error.message);
+        const errorMessages = error?.response?.data?.violations?.map(
+          (violation: any) => violation.message
+        );
+        toast.error(
+          "Erro ao registrar usuário: " + errorMessages.join(", ") ||
+            "Erro desconhecido"
+        );
       });
   };
 

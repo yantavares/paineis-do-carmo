@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const login = (newToken: string) => {
     setToken(newToken);
     localStorage.setItem("token", newToken);
-    if (newToken !== "admin" && newToken) setUser(jwtDecode(newToken));
+    if (newToken) setUser(jwtDecode(newToken));
   };
 
   const logout = () => {
