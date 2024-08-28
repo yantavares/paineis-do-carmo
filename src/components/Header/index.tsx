@@ -27,6 +27,10 @@ const isLoggedIn = (token: string) => {
     }
     return true;
   }
+  if (token === "admin") {
+    localStorage.removeItem("token");
+    alert("Sessão expirada. Por favor, faça login novamente.");
+  }
   return false;
 };
 
