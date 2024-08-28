@@ -17,11 +17,6 @@ export const Container = styled.div`
     background-color: #d3f9d8;
   }
 
-  .Pending {
-    color: #513c06;
-    background-color: #fbf0db;
-  }
-
   .flex-group {
     margin-left: 1rem;
     display: flex;
@@ -111,10 +106,9 @@ export const Container = styled.div`
 
   button {
     background: none;
-    border: none;
 
     &:hover {
-      filter: brightness(1.25);
+      background-color: #c1c1c1;
     }
   }
 

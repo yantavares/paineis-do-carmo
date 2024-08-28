@@ -12,6 +12,8 @@ import { ChurchForm, Container, ExitButton, ExitContainer } from "./styles";
 import { useAuth } from "src/context/AuthContext";
 
 export default function Dashboard() {
+  const { token } = useAuth();
+
   const [paintings, setPaintings] = useState([]);
   const [churches, setChurches] = useState([]);
   const [selectedType, setSelectedType] = useState("all");
@@ -58,12 +60,14 @@ export default function Dashboard() {
     "TO",
   ];
 
-  const { user, token } = useAuth();
+  // ENDPOINTS P/ /AUTHORIZED
+
+  const { user } = useAuth();
 
   const fetchChurches = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/churches`,
+        `${import.meta.env.VITE_API_URL}/api/churches/authorized`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -83,7 +87,12 @@ export default function Dashboard() {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/paintings`
+        `${import.meta.env.VITE_API_URL}/api/paintings/authorized`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setIsLoading(false);
       return response.data;
@@ -115,17 +124,6 @@ export default function Dashboard() {
     getChurches();
   }, []);
 
-  const handleDateArrow = (e) => {
-    e.currentTarget.classList.toggle("rotate");
-    const dateSorted = [...paintings].sort(
-      (a, b) =>
-        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-    );
-    if (!dateSort) setPaintings([...dateSorted].reverse());
-    else setPaintings(dateSorted);
-    setDateSort(!dateSort);
-  };
-
   const handleClick = (typeName) => {
     setSelectedType(typeName);
   };
@@ -140,7 +138,12 @@ export default function Dashboard() {
   const handleEdit = async (id) => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/paintings/${id}`
+        `${import.meta.env.VITE_API_URL}/api/paintings/authorized/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setPaintingToEdit(response.data);
       setIsEditModalOpen(true);
@@ -179,7 +182,7 @@ export default function Dashboard() {
     setChurchToEdit(church);
     setImages(church.images);
     setChurchImages(
-      church?.images?.map((image) => ({ ...image, base64Image: "" }))
+      church.images.map((image) => ({ ...image, base64Image: "" }))
     );
     setIsChurchModalOpen(true);
   };
@@ -188,7 +191,12 @@ export default function Dashboard() {
     try {
       // Fetch all paintings
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/paintings`
+        `${import.meta.env.VITE_API_URL}/api/paintings/authorized`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       const paintings = response.data;
       // Check if any painting is associated with the church
@@ -217,7 +225,7 @@ export default function Dashboard() {
         `${import.meta.env.VITE_API_URL}/api/churches/${deleteChurchId}`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -272,28 +280,17 @@ export default function Dashboard() {
         ...image,
         base64Image: image.base64Image || image.url, // Use URL if base64 is not available
       })),
-      bibliographyReference: churchToEdit?.bibliographyReference?.split(";"),
+      bibliographyReference: churchToEdit.bibliographyReference,
       imageUrlsToRemove: [],
     };
-    console.log(churchData);
     setIsChurchModalOpen(false);
   };
 
   const handleRemoveImage = (index) => {
     const updatedImages = images.filter((_, i) => i !== index);
-    console.log(images[index].url);
     setUrlsToRemove([...urlsToRemove, images[index].url]);
     setImages(updatedImages);
   };
-
-  // Promise.all(base64Promises).then((results) => {
-  //   const newImageObjects = results.map((result) => ({
-  //     Base64Image: result,
-  //     Photographer: null,
-  //   }));
-  //   setImageObjects((prev) => [...prev, ...newImageObjects]);
-  //   setPreviews((prev) => [...prev, ...results]);
-  // });
 
   const handleUpdateChurch = async () => {
     const newImages = images.filter((image) => {
@@ -308,15 +305,14 @@ export default function Dashboard() {
       street: churchToEdit.street,
       city: churchToEdit.city,
       state: churchToEdit.state,
-      bibliographyReference: churchToEdit?.bibliographyReference?.split(";"),
+      bibliographyReference: [...churchToEdit.bibliographyReferences],
+      bibliographySource: [...churchToEdit.bibliographySource],
       images: newImages.map((image) => ({
         base64Image: image.url,
         photographer: image.photographer,
       })),
-      imageUrlsToRemove: urlsToRemove,
+      imageUrlsToBeRemoved: urlsToRemove,
     };
-
-    console.log(JSON.stringify(updatedChurch));
 
     try {
       await axios.put(
@@ -341,9 +337,30 @@ export default function Dashboard() {
 
   const handleDeleteImage = (index) => {
     const updatedImages = images.filter((_, i) => i !== index);
-    console.log(images[index].url);
     setUrlsToRemove([...urlsToRemove, images[index].url]);
     setImages(updatedImages);
+  };
+
+  const handlePublish = async (painting) => {
+    try {
+      await axios.patch(
+        `${import.meta.env.VITE_API_URL}/api/paintings/${painting.id}/publish`,
+        {}, // Empty object since there is no request body
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success("A Obra foi publicada com sucesso!");
+      setPaintings(
+        paintings.map((p) =>
+          p.id === painting.id ? { ...p, isPublished: true } : p
+        )
+      );
+    } catch (error) {
+      toast.error("Erro ao publicar a obra: " + error.message);
+    }
   };
 
   return (
@@ -368,14 +385,7 @@ export default function Dashboard() {
           <div className="form-container">
             <div className="modal-header">
               <div className="flex-group">
-                <h1 className="submit-title">Crie uma nova Igreja</h1>
-                <button
-                  onClick={() => setIsChurchModalOpen(false)}
-                  aria-label="Close modal"
-                  className="close-btn"
-                >
-                  <X />
-                </button>
+                <h1 className="submit-title">Edite a Igreja</h1>
               </div>
             </div>
             <p className="submit-description">
@@ -459,11 +469,11 @@ export default function Dashboard() {
                   <p className="input-label">Fontes Bibliográficas</p>
                   <textarea
                     placeholder="Insira as fontes"
-                    value={churchToEdit?.bibliographySource}
+                    value={churchToEdit?.bibliographySource || ""}
                     onChange={(e) =>
                       setChurchToEdit({
                         ...churchToEdit,
-                        bibliographicSources: e.target.value,
+                        bibliographySource: e.target.value, // Corrected this line
                       })
                     }
                   />
@@ -472,7 +482,7 @@ export default function Dashboard() {
                   <p className="input-label">Referências Bibliográficas</p>
                   <textarea
                     placeholder="Insira as fontes"
-                    value={churchToEdit?.bibliographyReference}
+                    value={churchToEdit?.bibliographyReferences}
                     onChange={(e) =>
                       setChurchToEdit({
                         ...churchToEdit,
@@ -603,10 +613,7 @@ export default function Dashboard() {
                   <th>Status</th>
                   <th>Usuário</th>
                   <th>
-                    <div className="flex-flow">
-                      Data de Submissão{" "}
-                      <button onClick={handleDateArrow}></button>
-                    </div>
+                    <div className="flex-flow">Data de Submissão</div>
                   </th>
                   <th>Opções</th>
                 </tr>
@@ -618,6 +625,7 @@ export default function Dashboard() {
                     key={painting.id}
                     onEdit={() => handleEdit(painting.id)}
                     onDelete={() => handleDelete(painting.id)}
+                    onPublish={() => handlePublish(painting)}
                   />
                 ))}
               </tbody>
@@ -633,13 +641,17 @@ export default function Dashboard() {
   );
 }
 
-function PaintingRow({ painting, onEdit, onDelete }) {
+function PaintingRow({ painting, onEdit, onDelete, onPublish }) {
   return (
     <tr>
       <td>{painting.title}</td>
       <td>
-        <span className={painting.isPublished ? "Published" : "Published"}>
-          {painting.isPublished ? "Publicada" : "Publicada"}
+        <span className={painting.isPublished ? "Published" : "Publish-btn"}>
+          {painting.isPublished ? (
+            "Publicada"
+          ) : (
+            <button onClick={onPublish}>Publicar</button>
+          )}
         </span>
       </td>
       <td>{painting.registeredBy}</td>

@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 type ItemType = "artists" | "churches" | "paintings" | "";
 
 interface ItemProps {
-  item: Church | Artist | Painting;
+  item: Church | Painting;
   type: ItemType;
   fixedImgHeight?: boolean;
   width?: string | null;
@@ -22,7 +22,7 @@ const Item = ({
   type,
   fixedImgHeight = false,
   width = null,
-  tagCount = -1, // -1 -> All tags
+  tagCount = 3, // -1 -> All tags
 }: ItemProps) => {
   const navigate = useNavigate();
   return (
@@ -35,7 +35,7 @@ const Item = ({
         alt={"Item image"}
       />
       {getTypeInfo(type, item)}
-      <Tags tagCount={tagCount} tags={item?.tag} />
+      <Tags tagCount={tagCount} tags={item?.tags} />
     </Data>
   );
 };

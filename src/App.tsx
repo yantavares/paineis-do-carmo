@@ -160,6 +160,8 @@ function App() {
 
                 <Route path="sobre" element={<AboutPage />} />
 
+                <Route path="sobre" element={<AboutPage />} />
+
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </Layout>
