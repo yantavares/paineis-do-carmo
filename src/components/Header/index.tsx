@@ -22,6 +22,7 @@ const isLoggedIn = (token: string) => {
 
     if (decodedToken.exp < currentTime) {
       localStorage.removeItem("token");
+      alert("Sessão expirada. Por favor, faça login novamente.");
       return false;
     }
     return true;
