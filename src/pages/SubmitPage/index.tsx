@@ -14,7 +14,7 @@ function formatErrorMessages(errors: any): string {
   errors &&
     errors.length > 0 &&
     errors.forEach((error: any) => {
-      formattedMessages.push("- " + error?.message);
+      formattedMessages.push("- " + error?.errorMessage);
     });
 
   return formattedMessages.join("\n\n");
@@ -434,9 +434,15 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
   const fetchAllChurches = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/churches`
+        `${import.meta.env.VITE_API_URL}/api/churches/authorized`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setChurches(response.data);
+      console.log("Churches:", churches);
     } catch (error) {
       console.error("Error fetching churches:", error);
     }
@@ -556,13 +562,13 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       setSelectedTags([]);
       setGravuras([]);
     } catch (error) {
-      const errorResponse = error?.response?.data?.violations || null;
+      const errorResponse = error?.response?.data?.errors || null;
 
       let formattedErrorMessages = formatErrorMessages(errorResponse);
 
       if (formattedErrorMessages === "") {
         formattedErrorMessages =
-          "Erro desconhecido. Por favor, adicione os campos necessários.";
+          "Imagem muito grande ou inválida. Por favor, tente novamente com uma imagem menor.";
       }
 
       console.error("Error posting data:", error);
@@ -809,6 +815,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
         },
       });
 
+      setChurches((prevChurches) => [...prevChurches, response.data]);
       setObra((prevObra) => ({ ...prevObra, churchId: response.data }));
       setIsChurchModalOpen(false);
       fetchAllChurches();
@@ -824,12 +831,13 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       });
       setChurchImages([]);
     } catch (error) {
-      const errorResponse = error?.response?.data?.violations || null;
+      console.log(error);
+      const errorResponse = error?.response?.data?.errors || null;
       let formattedErrorMessages = formatErrorMessages(errorResponse);
 
       if (formattedErrorMessages === "") {
         formattedErrorMessages =
-          "Erro desconhecido. Por favor, tente novamente mais tarde.";
+          "Imagem muito grande ou inválida. Por favor, tente novamente com uma imagem menor.";
       }
 
       console.error("Error posting new church:", error);

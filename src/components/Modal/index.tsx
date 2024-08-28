@@ -46,25 +46,21 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
   }
 
   return (
-    <Container
-      aria-modal="true"
-      role="dialog">
-      <ModalContent
-        className="modal-content"
-        onClick={handleContainerClick}>
-        {/* Close Button */}
+    <Container aria-modal="true" role="dialog">
+      <ModalContent className="modal-content" onClick={handleContainerClick}>
         <button
           onClick={onClose}
           className="close-btn"
           style={{
             position: "absolute",
-            top: "96px",
-            right: "396px",
+            top: "32px",
+            right: "32px",
             backgroundColor: "transparent",
             border: "none",
             fontSize: "16px",
             cursor: "pointer",
-          }}>
+          }}
+        >
           <X />
         </button>
         {children}
