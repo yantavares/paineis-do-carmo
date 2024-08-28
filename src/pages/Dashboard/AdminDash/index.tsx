@@ -341,6 +341,10 @@ export default function Dashboard() {
     setImages(updatedImages);
   };
 
+  const handlePublishChurch = async (church) => {
+    console.log("Publish Church", church);
+  };
+
   const handlePublish = async (painting) => {
     try {
       await axios.patch(
@@ -604,6 +608,7 @@ export default function Dashboard() {
               churches={churches}
               onEdit={handleEditChurch}
               onDelete={handleDeleteChurch}
+              onPublish={handlePublishChurch}
             />
           ) : (
             <table className="content-table">
@@ -669,12 +674,13 @@ function PaintingRow({ painting, onEdit, onDelete, onPublish }) {
   );
 }
 
-function ChurchesTable({ churches, onEdit, onDelete }) {
+function ChurchesTable({ churches, onEdit, onDelete, onPublish }) {
   return (
     <table className="content-table">
       <thead>
         <tr>
           <th>Nome</th>
+          <th>Status</th>
           <th>Cidade</th>
           <th>Estado</th>
           <th>Opções</th>
@@ -684,6 +690,15 @@ function ChurchesTable({ churches, onEdit, onDelete }) {
         {churches.map((church) => (
           <tr key={church.id}>
             <td>{church.name}</td>
+            <td>
+              <span className={church.isPublished ? "Published" : "Pending"}>
+                {church.isPublished ? (
+                  "Publicada"
+                ) : (
+                  <button onClick={() => onPublish(church)}>Publicar</button>
+                )}
+              </span>
+            </td>
             <td>{church.city}</td>
             <td>{church.state}</td>
             <td>
