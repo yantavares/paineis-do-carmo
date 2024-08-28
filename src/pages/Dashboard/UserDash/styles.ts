@@ -22,12 +22,23 @@ export const Container = styled.div`
     background-color: #fbf0db;
   }
 
+  .flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .flex-group {
     margin-left: 1rem;
     display: flex;
     gap: 2.5rem;
     margin-bottom: 0;
     padding: 0;
+  }
+
+  .close-btn {
+    padding: 0.5rem;
+    margin: 0;
   }
 
   .flex-flow {

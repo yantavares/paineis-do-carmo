@@ -10,6 +10,7 @@ import React, {
 interface AuthContextType {
   token: string | null;
   user: any;
+  role: string | null;
   login: (newToken: string) => void;
   logout: () => void;
 }
@@ -19,6 +20,7 @@ const AuthContext = createContext<AuthContextType>({
   user: null,
   login: () => {},
   logout: () => {},
+  role: null,
 });
 
 interface AuthProviderProps {
@@ -31,11 +33,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   );
 
   const [user, setUser] = useState<any>(null);
+  const [role, setRole] = useState<string | null>(null);
 
   const login = (newToken: string) => {
     setToken(newToken);
     localStorage.setItem("token", newToken);
-    if (newToken !== "admin" && newToken) setUser(jwtDecode(newToken));
+    if (newToken) setUser(jwtDecode(newToken));
   };
 
   const logout = () => {
@@ -43,6 +46,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     localStorage.removeItem("token");
     setUser(null);
   };
+
+  useEffect(() => {
+    setRole(user?.groups[0]);
+  }, [user]);
 
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
@@ -53,7 +60,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ token, user, login, logout }}>
+    <AuthContext.Provider value={{ token, user, role, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

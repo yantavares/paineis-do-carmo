@@ -13,10 +13,27 @@ import {
   Title,
   TitleContainer,
 } from "./styles";
+import { jwtDecode } from "jwt-decode";
+
+const isLoggedIn = (token: string) => {
+  if (token) {
+    const decodedToken = jwtDecode(token);
+    const currentTime = Date.now() / 1000;
+
+    if (decodedToken.exp < currentTime) {
+      localStorage.removeItem("token");
+      return false;
+    }
+    return true;
+  }
+  return false;
+};
 
 const Header = () => {
   const navigate = useNavigate();
-  const isLoggedin = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
+
+  const isLoggedin = isLoggedIn(token);
 
   return (
     <HeaderContainer>
@@ -42,7 +59,7 @@ const Header = () => {
 
       <Col2>
         {isLoggedin ? (
-          <LoginButton onClick={() => navigate("/admin")}>
+          <LoginButton onClick={() => navigate("/dashboard")}>
             Dashboard
           </LoginButton>
         ) : (

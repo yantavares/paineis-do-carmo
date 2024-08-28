@@ -24,7 +24,7 @@ const TagDetail = () => {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/paintings/tag/${tag}`
+          `${import.meta.env.VITE_API_URL}/api/paintings/tags/${tag}`
         );
         setData(response.data);
         setIsLoading(false);

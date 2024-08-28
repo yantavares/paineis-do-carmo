@@ -294,19 +294,21 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     painting?.Photographer || ""
   );
   const [gravuras, setGravuras] = useState<any[]>(
-    painting?.engravings.map((eng) => ({ ...eng, Base64Image: eng.url })) || []
+    painting?.engravings?.map((eng) => ({ ...eng, Base64Image: eng.url })) || []
   );
   const [images, setImages] = useState<any[]>(
-    painting?.images.map((img) => ({ ...img, Base64Image: img.url })) || []
+    painting?.images?.map((img) => ({ ...img, Base64Image: img.url })) || []
   );
   const [churchImages, setChurchImages] = useState<any[]>(
-    painting?.church?.images.map((img) => ({ ...img, Base64Image: img.url })) ||
-      []
+    painting?.church?.images?.map((img) => ({
+      ...img,
+      Base64Image: img.url,
+    })) || []
   );
   const [allTags, setAllTags] = useState<{ id: string; name: string }[]>([]);
   const [selectedTags, setSelectedTags] = useState<
     { id: string; name: string }[]
-  >(painting?.tag || []);
+  >(painting?.tags || []);
   const [newTags, setNewTags] = useState<{ id: string; name: string }[]>([]);
   const [artifices, setArtifices] = useState<any[]>([]);
   const [authors, setAuthors] = useState<string[]>([]);
@@ -351,7 +353,12 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
         setArtifices(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        toast.error("Erro ao buscar os artífices", {
+          style: {
+            fontSize: "16px",
+            padding: "20px",
+          },
+        });
       });
   }, []);
 
@@ -395,7 +402,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     bibliographicSources: painting?.bibliographySource || "",
     dateOfCreation: painting?.dateOfCreation || "",
     placement: painting?.placement || "",
-    tags: painting?.tag?.map((tag) => tag.id) || [],
+    tags: painting?.tags ? painting.tags.map((tag) => tag.name) : [],
     churchId: painting?.church?.id || "00000000-0000-0000-0000-000000000000",
     authorId: painting?.artisan || "",
     imagens: painting?.images || [],
@@ -427,9 +434,15 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
   const fetchAllChurches = async () => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/churches`
+        `${import.meta.env.VITE_API_URL}/api/churches/authorized`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setChurches(response.data);
+      console.log("Churches:", churches);
     } catch (error) {
       console.error("Error fetching churches:", error);
     }
@@ -502,7 +515,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
         photographer: img.Photographer,
       })),
       dateOfCreation: obra.dateOfCreation,
-      bibliographySource: obra.bibliographicSources,
+      bibliographySource: [obra.bibliographicSources],
       bibliographyReference: [obra.bibliographicReferences],
       engravingRequests: gravuras.map((gravura) => ({
         name: gravura.Name,
@@ -590,11 +603,11 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
         );
 
         const createdTagId = response.data;
-        newTagIds.push(createdTagId.toString());
+        newTagIds.push(createdTagId);
 
         const updatedSelectedTags = selectedTags.map((tag) =>
           tag.name.toLowerCase() === newTag.name.toLowerCase()
-            ? { ...tag, id: createdTagId.toString() }
+            ? { ...tag, id: createdTagId }
             : tag
         );
         setSelectedTags(updatedSelectedTags);
@@ -624,7 +637,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       description: obra.description,
       dateOfCreation: obra.dateOfCreation,
       bibliographySource: obra.bibliographicSources,
-      bibliographyReference: [obra.bibliographicReferences],
+      bibliographyReference: [...obra.bibliographicReferences],
       placement: obra.placement,
       artisan: obra.authorId.toString(),
       images: images
@@ -648,7 +661,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
               "Base64Image",
               gravura.Base64Image
             )
-        ) // Only include new engravings
+        )
         .map((gravura) => ({
           name: gravura.Name,
           base64Image: gravura.Base64Image,
@@ -662,7 +675,12 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     try {
       const response = await axios.put(
         `${import.meta.env.VITE_API_URL}/api/paintings/${painting.id}`,
-        payload
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       toast.success("Obra atualizada com sucesso", {
         duration: 3000,
@@ -776,6 +794,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
         photographer: img.Photographer,
       })),
       bibliographyReference: [church.bibliographicReferences],
+      bibliographySource: [church.bibliographicSources],
     };
 
     try {
@@ -796,6 +815,8 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
         },
       });
 
+      setChurches((prevChurches) => [...prevChurches, response.data]);
+      setObra((prevObra) => ({ ...prevObra, churchId: response.data }));
       setIsChurchModalOpen(false);
       fetchAllChurches();
 
@@ -810,6 +831,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       });
       setChurchImages([]);
     } catch (error) {
+      console.log(error);
       const errorResponse = error?.response?.data?.errors || null;
       let formattedErrorMessages = formatErrorMessages(errorResponse);
 
@@ -830,16 +852,14 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
 
   const handleNewAuthor = (newAuthor: string) => {
     setAuthors((prevAuthors) => [...prevAuthors, newAuthor]);
+    setObra((prevObra) => ({ ...prevObra, authorId: newAuthor }));
     setIsAuthorModalOpen(false);
   };
 
   return (
     <Container>
       <Toaster />
-      <div
-        className="form-container"
-        style={{ marginTop: "4rem", borderRadius: "2rem" }}
-      >
+      <div className="form-container">
         <h1 className="submit-title">
           {isEdit ? "Editar Obra" : "Submeta uma Obra"}
         </h1>
@@ -848,7 +868,6 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
             ? "Edite a obra selecionada"
             : "Os campos marcados com * são obrigatórios."}
         </p>
-
         <div className="form-fields-container">
           <label className="label-wrapper">
             <p className="input-label">Nome da Obra *</p>
@@ -883,7 +902,18 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
                     display: "grid",
                     placeContent: "center",
                   }}
-                  onClick={() => setIsChurchModalOpen(true)}
+                  onClick={() => {
+                    setIsChurchModalOpen(true);
+                    setChurch({
+                      name: "",
+                      description: "",
+                      city: "",
+                      state: "",
+                      street: "",
+                      bibliographicSources: "",
+                      bibliographicReferences: "",
+                    });
+                  }}
                 >
                   <PlusCircle size={20} />
                 </button>
@@ -929,15 +959,15 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
               }
             />
           </label>
-          <p style={{ fontSize: 12 }}>
-            Observação: Fontes historiográfica devem ser separadas por ponto e
-            vírgula.
-          </p>
+          {/* <p style={{ fontSize: 12 }}>
+            Observação: Referências Bibliográficas devem ser separadas por Enter
+            (uma linha por referência)
+          </p> */}
           <div className="grid-layout">
             <label className="label-wrapper">
-              <p className="input-label">Fontes Historiográfica</p>
+              <p className="input-label">Fonte Historiográfica</p>
               <textarea
-                placeholder="Exemplo: fonte1; fonte2; fonte3"
+                placeholder="Exemplo: fonte1"
                 value={obra.bibliographicSources}
                 onChange={(e) =>
                   setObra({ ...obra, bibliographicSources: e.target.value })
@@ -945,9 +975,9 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
               />
             </label>
             <label className="label-wrapper">
-              <p className="input-label">Referência Bibliográfica</p>
+              <p className="input-label">Referências Bibliográficas</p>
               <textarea
-                placeholder="Insira as fontes"
+                placeholder="Insira as referências (uma por linha)"
                 value={obra.bibliographicReferences}
                 onChange={(e) =>
                   setObra({ ...obra, bibliographicReferences: e.target.value })
@@ -971,7 +1001,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
               <p className="input-label">Onde está Posicionada</p>
               <input
                 type="text"
-                placeholder="No teto"
+                placeholder="Teto da igreja"
                 value={obra.placement}
                 onChange={(e) =>
                   setObra({ ...obra, placement: e.target.value })
@@ -1083,13 +1113,6 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
           <div className="modal-header">
             <div className="flex-group">
               <h1 className="submit-title">Crie uma nova Igreja</h1>
-              <button
-                onClick={() => setIsChurchModalOpen(false)}
-                aria-label="Close modal"
-                className="close-btn"
-              >
-                <X />
-              </button>
             </div>
           </div>
           <p className="submit-description">

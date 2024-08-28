@@ -32,7 +32,7 @@ const defaultPainting: Painting = {
     images: [],
   },
   state: "",
-  tag: [],
+  tags: [],
 };
 
 const PaintingDetails = () => {
@@ -126,17 +126,20 @@ const PaintingDetails = () => {
             <p className="topic-text">{data.description}</p>
           </div>
           <div className="topic-wrapper">
-            <h3 className="topic-title">Referências</h3>
-            <ul className="reference-list">
-              {data?.bibliographyReference &&
-                data?.bibliographyReference
-                  .split(";")
-                  .map((reference, index) => (
+            {(data?.bibliographyReference?.length > 1 ||
+              (data?.bibliographyReference?.length == 1 &&
+                data.bibliographyReference[0] !== "")) && (
+              <>
+                <h3 className="topic-title">Referências</h3>
+                <ul className="reference-list">
+                  {data?.bibliographyReference.map((reference, index) => (
                     <li key={index} className="reference-item">
                       <sup>{index + 1} </sup> {reference}
                     </li>
                   ))}
-            </ul>
+                </ul>
+              </>
+            )}
           </div>
           <div className="topic-wrapper">
             <h2 className="topic-title">Ficha da Obra</h2>
@@ -178,7 +181,7 @@ const PaintingDetails = () => {
           <div className="topic-wrapper">
             <h2 className="tags-title">Tags</h2>
             <div className="tags-wrapper">
-              <Tags tags={data.tag} />
+              <Tags tags={data.tags} />
             </div>
           </div>
         </div>

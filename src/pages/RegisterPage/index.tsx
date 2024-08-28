@@ -5,11 +5,13 @@ import { Container, Content } from "./styles";
 import googleLogo from "../../assets/google_symbol.svg.png";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleRegister = () => {
     axios
@@ -18,9 +20,22 @@ const RegisterPage = () => {
         email,
         password,
       })
+      .then((response) => {
+        console.log("User registered:", response.data);
+        toast.success("Usuário registrado com sucesso!");
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
+      })
       .catch((error) => {
         console.error("Error registering user:", error);
-        toast.error("Erro ao registrar usuário: " + error.message);
+        const errorMessages = error?.response?.data?.violations?.map(
+          (violation: any) => violation.message
+        );
+        toast.error(
+          "Erro ao registrar usuário: " + errorMessages.join(", ") ||
+            "Erro desconhecido"
+        );
       });
   };
 

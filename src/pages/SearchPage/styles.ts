@@ -21,7 +21,7 @@ export const SearchResultsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 4rem 3.6rem;
-  align-items: center;
+  //align-items: center;
 `;
 
 export const SearchHeader = styled.h1`

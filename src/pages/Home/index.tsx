@@ -4,15 +4,11 @@ import temp4 from "src/assets/baroque.jpg";
 import temp2 from "src/assets/baroque2.jpg";
 import temp from "src/assets/baroque3.jpg";
 import temp6 from "src/assets/igreja2.jpg";
-import temp5 from "src/assets/pintura2.jpeg";
+import temp5 from "src/assets/pintura2.jpg";
 import ImageCarousel2 from "src/components/ImageCarousel2";
 import HomeSearch from "src/components/SearchBar";
 import colors from "src/utils/colors";
-import {
-  brazilianArtists,
-  brazilianChurches,
-  brazilianPaintings,
-} from "../../utils/mockData";
+import { brazilianChurches, brazilianPaintings } from "../../utils/mockData";
 import HomeTopic from "./HomeTopic";
 import RoundBox from "./RoundBox";
 import {
