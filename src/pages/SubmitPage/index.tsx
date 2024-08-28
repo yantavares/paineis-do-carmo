@@ -534,7 +534,9 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
         photographer: img.Photographer,
       })),
       dateOfCreation: obra.dateOfCreation,
-      bibliographySource: [obra.bibliographicSources],
+      bibliographySource: obra.bibliographicSources
+        .split("\n")
+        .filter((source) => source.trim() !== ""),
       bibliographyReference: [obra.bibliographicReferences],
       engravingRequests: gravuras.map((gravura) => ({
         name: gravura.Name,
