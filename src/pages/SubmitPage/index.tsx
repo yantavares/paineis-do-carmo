@@ -7,6 +7,7 @@ import { X } from "lucide-react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuth } from "src/context/AuthContext";
+import { Church } from "src/utils/mockData";
 
 function formatErrorMessages(errors: any): string {
   let formattedMessages: string[] = [""];
@@ -441,7 +442,25 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
           },
         }
       );
-      setChurches(response.data);
+
+      const response2 = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/churches`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const allChurches = response.data.concat(response2.data);
+
+      const uniqueChurches = allChurches.filter(
+        (church: Church, index: number, self: any) =>
+          index === self.findIndex((c: Church) => c.id === church.id)
+      );
+
+      setChurches(uniqueChurches);
+
       console.log("Churches:", churches);
     } catch (error) {
       console.error("Error fetching churches:", error);

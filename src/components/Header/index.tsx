@@ -15,25 +15,26 @@ import {
 } from "./styles";
 import { jwtDecode } from "jwt-decode";
 
-const isLoggedIn = (token: string) => {
-  if (token) {
-    const decodedToken = jwtDecode(token);
-    const currentTime = Date.now() / 1000;
+// const isLoggedIn = (token: string) => {
+//   if (token) {
+//     const decodedToken = jwtDecode(token);
+//     const currentTime = Date.now() / 1000;
 
-    if (decodedToken.exp < currentTime) {
-      localStorage.removeItem("token");
-      return false;
-    }
-    return true;
-  }
-  return false;
-};
+//     if (decodedToken.exp < currentTime) {
+//       localStorage.removeItem("token");
+//       alert("Sessão expirada. Por favor, faça login novamente.");
+//       return false;
+//     }
+//     return true;
+//   }
+//   return false;
+// };
 
 const Header = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  //const token = localStorage.getItem("token");
 
-  const isLoggedin = isLoggedIn(token);
+  const isLoggedin = localStorage.getItem("token") ? true : false;
 
   return (
     <HeaderContainer>
