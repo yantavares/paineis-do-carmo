@@ -52,14 +52,13 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
       <ModalContent
         className="modal-content"
         onClick={handleContainerClick}>
-        {/* Close Button */}
         <button
           onClick={onClose}
           className="close-btn"
           style={{
             position: "absolute",
-            top: "96px",
-            right: "396px",
+            top: "32px",
+            right: "32px",
             backgroundColor: "transparent",
             border: "none",
             fontSize: "16px",

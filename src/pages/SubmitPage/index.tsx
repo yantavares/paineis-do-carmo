@@ -386,7 +386,11 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({ painting, 
 
   const fetchAllTags = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/tags`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/tags/available`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       setAllTags(response.data);
     } catch (error) {
@@ -405,8 +409,13 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({ painting, 
 
   const fetchAllChurches = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/churches`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/churches/available`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setChurches(response.data);
+      console.log("Churches:", churches);
     } catch (error) {
       console.error("Error fetching churches:", error);
     }
@@ -747,6 +756,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({ painting, 
         },
       });
 
+      setChurches((prevChurches) => [...prevChurches, response.data]);
       setObra((prevObra) => ({ ...prevObra, churchId: response.data }));
       setIsChurchModalOpen(false);
       fetchAllChurches();
@@ -762,6 +772,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({ painting, 
       });
       setChurchImages([]);
     } catch (error) {
+      console.log(error);
       const errorResponse = error?.response?.data?.errors || null;
       let formattedErrorMessages = formatErrorMessages(errorResponse);
 

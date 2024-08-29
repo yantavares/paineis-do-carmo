@@ -71,6 +71,7 @@ export default function Dashboard() {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log("Churches fetched:", response.data);
       return response.data;
     } catch (error) {
       console.error("Error fetching churches:", error);
@@ -318,6 +319,24 @@ export default function Dashboard() {
     setImages(updatedImages);
   };
 
+  const handlePublishChurch = async (church) => {
+    try {
+      axios.patch(
+        `${import.meta.env.VITE_API_URL}/api/churches/${church.id}/publish`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success("Igreja publicada com sucesso");
+      setChurches(churches.map((c) => (c.id === church.id ? { ...c, isPublished: true } : c)));
+    } catch (error) {
+      toast.error("Erro ao publicar igreja: " + error.message);
+    }
+  };
+
   const handlePublish = async (painting) => {
     try {
       await axios.patch(
@@ -563,6 +582,7 @@ export default function Dashboard() {
               churches={churches}
               onEdit={handleEditChurch}
               onDelete={handleDeleteChurch}
+              onPublish={handlePublishChurch}
             />
           ) : (
             <table className="content-table">
@@ -627,12 +647,13 @@ function PaintingRow({ painting, onEdit, onDelete, onPublish }) {
   );
 }
 
-function ChurchesTable({ churches, onEdit, onDelete }) {
+function ChurchesTable({ churches, onEdit, onDelete, onPublish }) {
   return (
     <table className="content-table">
       <thead>
         <tr>
           <th>Nome</th>
+          <th>Status</th>
           <th>Cidade</th>
           <th>Estado</th>
           <th>Opções</th>
@@ -642,6 +663,15 @@ function ChurchesTable({ churches, onEdit, onDelete }) {
         {churches.map((church) => (
           <tr key={church.id}>
             <td>{church.name}</td>
+            <td>
+              <span className={church.isPublished ? "Published" : "Pending"}>
+                {church.isPublished ? (
+                  "Publicada"
+                ) : (
+                  <button onClick={() => onPublish(church)}>Publicar</button>
+                )}
+              </span>
+            </td>
             <td>{church.city}</td>
             <td>{church.state}</td>
             <td>

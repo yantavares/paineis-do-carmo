@@ -17,6 +17,11 @@ export const Container = styled.div`
     background-color: #d3f9d8;
   }
 
+  .Pending {
+    color: #4c4c4c;
+    background-color: #f2f2f2;
+  }
+
   .flex-group {
     margin-left: 1rem;
     display: flex;
@@ -38,6 +43,15 @@ export const Container = styled.div`
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 1rem;
     padding: 1rem 2.5rem 1rem;
+
+    border-collapse: separate;
+    border-spacing: 0;
+    column-gap: 24px;
+  }
+
+  td:first-child {
+    min-width: 200px;
+    padding-right: 40px;
   }
 
   a {

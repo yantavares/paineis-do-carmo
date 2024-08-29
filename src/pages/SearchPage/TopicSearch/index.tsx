@@ -20,7 +20,10 @@ const TopicSearch = ({ tags, isLoading }: TopicSearchProps) => {
       <SearchHeader>
         Nossos <span style={{ color: colors.green }}>Tópicos</span>
         <SearchBarContainer>
-          <SearchBar placeHolder={"Busque por Tópico"} showButtons={false} />
+          <SearchBar
+            placeHolder={"Busque por Tópico"}
+            showButtons={false}
+          />
         </SearchBarContainer>
       </SearchHeader>
       <div
@@ -29,26 +32,21 @@ const TopicSearch = ({ tags, isLoading }: TopicSearchProps) => {
           flex: 1,
           flexWrap: "wrap",
           gap: "4rem 2rem",
-        }}
-      >
+        }}>
         {isLoading ? (
           <div
             style={{
               width: "100%",
               display: "flex",
               justifyContent: "center",
-            }}
-          >
+            }}>
             <CircularProgress style={{ color: colors.green }} />
           </div>
         ) : tags && tags.length > 0 ? (
           tags.map((tag, index) => (
             <BigTag
-              onClick={() =>
-                navigate(`/topicos/${tag.name.toLocaleLowerCase()}`)
-              }
-              key={index}
-            >
+              onClick={() => navigate(`/topicos/${tag.name.toLocaleLowerCase()}`)}
+              key={index}>
               {tag.name}
             </BigTag>
           ))
