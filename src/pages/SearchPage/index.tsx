@@ -35,9 +35,7 @@ const SearchPage = () => {
   const { selected } = useParams();
 
   const useQuery = () => {
-    return new URLSearchParams(useLocation().search)
-      .toString()
-      .replace("search=", "");
+    return new URLSearchParams(useLocation().search).toString().replace("search=", "");
   };
 
   const query = useQuery();
@@ -46,10 +44,7 @@ const SearchPage = () => {
   const [inputValue, setInputValue] = useState(query ? query : "");
   const [isLoading, setIsLoading] = useState(false);
 
-  const translatedSelected = useMemo(
-    () => translateSelected(selected),
-    [selected]
-  );
+  const translatedSelected = useMemo(() => translateSelected(selected), [selected]);
 
   useEffect(() => {
     setInputValue(query ? query : "");
@@ -94,10 +89,7 @@ const SearchPage = () => {
         return (
           <>
             <SearchHeader>
-              Nossa Coleção de{" "}
-              <span style={{ color: colors.green }}>
-                {capitalize(selected)}
-              </span>
+              Nossa Coleção de <span style={{ color: colors.green }}>{capitalize(selected)}</span>
               <SearchBarContainer>
                 <SearchBar
                   placeHolder={`Busque por ${selected}`}
@@ -115,8 +107,7 @@ const SearchPage = () => {
                     width: "100%",
                     display: "flex",
                     justifyContent: "center",
-                  }}
-                >
+                  }}>
                   <CircularProgress style={{ color: colors.green }} />
                 </div>
               ) : filteredData && filteredData.length > 0 ? (
@@ -143,10 +134,7 @@ const SearchPage = () => {
           <>
             <ChurchMap />
             <SearchHeader>
-              Todas as{" "}
-              <span style={{ color: colors.green }}>
-                {capitalize(selected)}
-              </span>
+              Todas as <span style={{ color: colors.green }}>{capitalize(selected)}</span>
               <SearchBarContainer>
                 <SearchBar
                   placeHolder={`Busque por ${selected}`}
@@ -175,7 +163,12 @@ const SearchPage = () => {
         );
 
       case "topicos":
-        return <TopicSearch isLoading={isLoading} tags={filteredData} />;
+        return (
+          <TopicSearch
+            isLoading={isLoading}
+            tags={filteredData}
+          />
+        );
 
       default:
         return <p>Selecione uma categoria válida.</p>;

@@ -26,9 +26,7 @@ const useFilePreview = (initialPreviews = [], initialPhotographers = []) => {
   const [files, setFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>(initialPreviews);
   const [imageObjects, setImageObjects] =
-    useState<{ Base64Image: string; Photographer: string | null }[]>(
-      initialPhotographers
-    );
+    useState<{ Base64Image: string; Photographer: string | null }[]>(initialPhotographers);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -62,11 +60,7 @@ const useFilePreview = (initialPreviews = [], initialPhotographers = []) => {
   return { files, previews, imageObjects, handleFileChange };
 };
 
-const useSingleFilePreview = (
-  initialPreview = "",
-  initialPhotographer = "",
-  initialName = ""
-) => {
+const useSingleFilePreview = (initialPreview = "", initialPhotographer = "", initialName = "") => {
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(initialPreview);
   const [imageObject, setImageObject] = useState<{
@@ -111,12 +105,8 @@ const GravuraInput: React.FC<{
   onRemove: (index: number) => void;
   painting?: any;
 }> = ({ index, gravura, onGravuraChange, onRemove, painting }) => {
-  const [gravuraName, setGravuraName] = useState(
-    painting?.name || gravura.Name || ""
-  );
-  const [gravuraPhotographer, setGravuraPhotographer] = useState(
-    gravura.createdBy || ""
-  );
+  const [gravuraName, setGravuraName] = useState(painting?.name || gravura.Name || "");
+  const [gravuraPhotographer, setGravuraPhotographer] = useState(gravura.createdBy || "");
 
   const { preview, imageObject, handleFileChange } = useSingleFilePreview(
     gravura?.url || "",
@@ -135,14 +125,15 @@ const GravuraInput: React.FC<{
   }, [imageObject, gravuraName, gravuraPhotographer, index, onGravuraChange]);
 
   return (
-    <div className="input-container" style={{ marginBottom: "2rem" }}>
+    <div
+      className="input-container"
+      style={{ marginBottom: "2rem" }}>
       <div className="flex-group">
         <p className="input-label">Gravura {index + 1}</p>
         <button
           onClick={() => onRemove(index)}
           className="close-btn"
-          aria-label="Remove Gravura"
-        >
+          aria-label="Remove Gravura">
           <CloseIcon size={20} />
         </button>
       </div>
@@ -161,7 +152,10 @@ const GravuraInput: React.FC<{
             <p>Clique para fazer o upload ou arraste e solte</p>
           </>
         )}
-        <input type="file" onChange={handleFileChange} />
+        <input
+          type="file"
+          onChange={handleFileChange}
+        />
       </label>
       <div className="grid-layout">
         <label className="label-wrapper">
@@ -211,40 +205,27 @@ const DynamicImageInput: React.FC<{
   const [photographer, setPhotographer] = useState(
     painting?.photographer || image.Photographer || ""
   );
-  const { preview, handleFileChange } = useSingleFilePreview(
-    image.url || "",
-    photographer,
-    ""
-  );
+  const { preview, handleFileChange } = useSingleFilePreview(image.url || "", photographer, "");
 
   useEffect(() => {
-    if (
-      preview &&
-      (image.Base64Image !== preview || image.Photographer !== photographer)
-    ) {
+    if (preview && (image.Base64Image !== preview || image.Photographer !== photographer)) {
       onImageChange(index, {
         Base64Image: preview,
         Photographer: photographer,
       });
     }
-  }, [
-    preview,
-    photographer,
-    index,
-    image.Base64Image,
-    image.Photographer,
-    onImageChange,
-  ]);
+  }, [preview, photographer, index, image.Base64Image, image.Photographer, onImageChange]);
 
   return (
-    <div className="input-container" style={{ marginBottom: "2rem" }}>
+    <div
+      className="input-container"
+      style={{ marginBottom: "2rem" }}>
       <div className="flex-group">
         <p className="input-label">Imagem {index + 1}</p>
         <button
           onClick={() => onRemove(index)}
           className="close-btn"
-          aria-label="Remove Image"
-        >
+          aria-label="Remove Image">
           <CloseIcon size={20} />
         </button>
       </div>
@@ -263,7 +244,10 @@ const DynamicImageInput: React.FC<{
             <p>Clique para fazer o upload ou arraste e solte</p>
           </>
         )}
-        <input type="file" onChange={handleFileChange} />
+        <input
+          type="file"
+          onChange={handleFileChange}
+        />
       </label>
       <label className="label-wrapper">
         <p className="input-label">Fotógrafo</p>
@@ -285,15 +269,10 @@ const DynamicImageInput: React.FC<{
 };
 
 // Main Form Component
-const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
-  painting,
-  isEdit,
-}) => {
+const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({ painting, isEdit }) => {
   const { token } = useAuth();
 
-  const [photographer, setPhotographer] = useState(
-    painting?.Photographer || ""
-  );
+  const [photographer, setPhotographer] = useState(painting?.Photographer || "");
   const [gravuras, setGravuras] = useState<any[]>(
     painting?.engravings?.map((eng) => ({ ...eng, Base64Image: eng.url })) || []
   );
@@ -307,9 +286,9 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     })) || []
   );
   const [allTags, setAllTags] = useState<{ id: string; name: string }[]>([]);
-  const [selectedTags, setSelectedTags] = useState<
-    { id: string; name: string }[]
-  >(painting?.tags || []);
+  const [selectedTags, setSelectedTags] = useState<{ id: string; name: string }[]>(
+    painting?.tags || []
+  );
   const [newTags, setNewTags] = useState<{ id: string; name: string }[]>([]);
   const [artifices, setArtifices] = useState<any[]>([]);
   const [authors, setAuthors] = useState<string[]>([]);
@@ -411,9 +390,11 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
 
   const fetchAllTags = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/tags`
-      );
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/tags/available`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       setAllTags(response.data);
     } catch (error) {
@@ -423,9 +404,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
 
   const fetchAllAuthors = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/paintings/artisans`
-      );
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/paintings/artisans`);
       setAuthors(response.data.artisans);
     } catch (error) {
       console.error("Error fetching authors:", error);
@@ -434,23 +413,17 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
 
   const fetchAllChurches = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/churches/authorized`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/churches/authorized`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-      const response2 = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/churches`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response2 = await axios.get(`${import.meta.env.VITE_API_URL}/api/churches`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const allChurches = response.data.concat(response2.data);
 
@@ -516,10 +489,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       }
     }
 
-    const allTagIds = [
-      ...selectedTags.map((tag) => tag.id).filter((id) => id),
-      ...newTagIds,
-    ];
+    const allTagIds = [...selectedTags.map((tag) => tag.id).filter((id) => id), ...newTagIds];
 
     setObra((prevObra) => ({
       ...prevObra,
@@ -550,15 +520,11 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     };
 
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/paintings`,
-        payload,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/paintings`, payload, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       toast.success("Obra submetida com Sucesso", {
         duration: 3000,
         style: {
@@ -627,9 +593,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
         newTagIds.push(createdTagId);
 
         const updatedSelectedTags = selectedTags.map((tag) =>
-          tag.name.toLowerCase() === newTag.name.toLowerCase()
-            ? { ...tag, id: createdTagId }
-            : tag
+          tag.name.toLowerCase() === newTag.name.toLowerCase() ? { ...tag, id: createdTagId } : tag
         );
         setSelectedTags(updatedSelectedTags);
       } catch (error) {
@@ -638,10 +602,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       }
     }
 
-    const allTagIds = [
-      ...selectedTags.map((tag) => tag.id).filter((id) => id),
-      ...newTagIds,
-    ];
+    const allTagIds = [...selectedTags.map((tag) => tag.id).filter((id) => id), ...newTagIds];
 
     setObra((prevObra) => ({
       ...prevObra,
@@ -662,14 +623,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       placement: obra.placement,
       artisan: obra.authorId.toString(),
       images: images
-        .filter(
-          (img) =>
-            !containsObjectWithKey(
-              originalImages,
-              "Base64Image",
-              img.Base64Image
-            )
-        ) // Only include new images
+        .filter((img) => !containsObjectWithKey(originalImages, "Base64Image", img.Base64Image)) // Only include new images
         .map((img) => ({
           base64Image: img.Base64Image,
           photographer: img.Photographer,
@@ -677,11 +631,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       engravings: gravuras
         .filter(
           (gravura) =>
-            !containsObjectWithKey(
-              originalEngravings,
-              "Base64Image",
-              gravura.Base64Image
-            )
+            !containsObjectWithKey(originalEngravings, "Base64Image", gravura.Base64Image)
         )
         .map((gravura) => ({
           name: gravura.Name,
@@ -762,10 +712,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
   };
 
   const handleAddImage = () => {
-    setImages((prevImages) => [
-      ...prevImages,
-      { Base64Image: "", Photographer: "" },
-    ]);
+    setImages((prevImages) => [...prevImages, { Base64Image: "", Photographer: "" }]);
   };
 
   const handleImageChange = (index, image) => {
@@ -798,9 +745,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
   };
 
   const handleRemoveChurchImage = (index) => {
-    setChurchImages((prevChurchImages) =>
-      prevChurchImages.filter((_, i) => i !== index)
-    );
+    setChurchImages((prevChurchImages) => prevChurchImages.filter((_, i) => i !== index));
   };
 
   const handleNewChurch = async () => {
@@ -819,15 +764,11 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     };
 
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/churches`,
-        payload,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/churches`, payload, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       toast.success("Igreja adicionada com sucesso!", {
         duration: 3000,
         style: {
@@ -852,7 +793,6 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       });
       setChurchImages([]);
     } catch (error) {
-      console.log(error);
       const errorResponse = error?.response?.data?.errors || null;
       let formattedErrorMessages = formatErrorMessages(errorResponse);
 
@@ -881,13 +821,9 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     <Container>
       <Toaster />
       <div className="form-container">
-        <h1 className="submit-title">
-          {isEdit ? "Editar Obra" : "Submeta uma Obra"}
-        </h1>
+        <h1 className="submit-title">{isEdit ? "Editar Obra" : "Submeta uma Obra"}</h1>
         <p className="submit-description">
-          {isEdit
-            ? "Edite a obra selecionada"
-            : "Os campos marcados com * são obrigatórios."}
+          {isEdit ? "Edite a obra selecionada" : "Os campos marcados com * são obrigatórios."}
         </p>
         <div className="form-fields-container">
           <label className="label-wrapper">
@@ -905,13 +841,12 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
               <div className="flex-layout">
                 <select
                   value={obra.churchId}
-                  onChange={(e) =>
-                    setObra({ ...obra, churchId: e.target.value })
-                  }
-                >
+                  onChange={(e) => setObra({ ...obra, churchId: e.target.value })}>
                   <option value="">Selecione uma igreja</option>
                   {churches.map((church) => (
-                    <option key={church.id} value={church.id}>
+                    <option
+                      key={church.id}
+                      value={church.id}>
                       {church.name}
                     </option>
                   ))}
@@ -934,8 +869,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
                       bibliographicSources: "",
                       bibliographicReferences: "",
                     });
-                  }}
-                >
+                  }}>
                   <PlusCircle size={20} />
                 </button>
               </div>
@@ -945,13 +879,12 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
               <div className="flex-layout">
                 <select
                   value={obra.authorId}
-                  onChange={(e) =>
-                    setObra({ ...obra, authorId: e.target.value })
-                  }
-                >
+                  onChange={(e) => setObra({ ...obra, authorId: e.target.value })}>
                   <option value="">Selecione um Artíficie</option>
                   {authors.map((author) => (
-                    <option key={author.toString()} value={author.toString()}>
+                    <option
+                      key={author.toString()}
+                      value={author.toString()}>
                       {author}
                     </option>
                   ))}
@@ -963,21 +896,20 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
                     display: "grid",
                     placeContent: "center",
                   }}
-                  onClick={() => setIsAuthorModalOpen(true)}
-                >
+                  onClick={() => setIsAuthorModalOpen(true)}>
                   <PlusCircle size={20} />
                 </button>
               </div>
             </label>
           </div>
-          <label className="label-wrapper" style={{ marginBottom: "1rem" }}>
+          <label
+            className="label-wrapper"
+            style={{ marginBottom: "1rem" }}>
             <p className="input-label">Descrição</p>
             <textarea
               placeholder="Insira uma descrição da obra"
               value={obra.description}
-              onChange={(e) =>
-                setObra({ ...obra, description: e.target.value })
-              }
+              onChange={(e) => setObra({ ...obra, description: e.target.value })}
             />
           </label>
           {/* <p style={{ fontSize: 12 }}>
@@ -990,9 +922,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
               <textarea
                 placeholder="Exemplo: fonte1"
                 value={obra.bibliographicSources}
-                onChange={(e) =>
-                  setObra({ ...obra, bibliographicSources: e.target.value })
-                }
+                onChange={(e) => setObra({ ...obra, bibliographicSources: e.target.value })}
               />
             </label>
             <label className="label-wrapper">
@@ -1000,9 +930,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
               <textarea
                 placeholder="Insira as referências (uma por linha)"
                 value={obra.bibliographicReferences}
-                onChange={(e) =>
-                  setObra({ ...obra, bibliographicReferences: e.target.value })
-                }
+                onChange={(e) => setObra({ ...obra, bibliographicReferences: e.target.value })}
               />
             </label>
           </div>
@@ -1013,9 +941,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
                 type="text"
                 placeholder="Século XVII, 1918, etc."
                 value={obra.dateOfCreation}
-                onChange={(e) =>
-                  setObra({ ...obra, dateOfCreation: e.target.value })
-                }
+                onChange={(e) => setObra({ ...obra, dateOfCreation: e.target.value })}
               />
             </label>
             <label className="label-wrapper">
@@ -1024,9 +950,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
                 type="text"
                 placeholder="Teto da igreja"
                 value={obra.placement}
-                onChange={(e) =>
-                  setObra({ ...obra, placement: e.target.value })
-                }
+                onChange={(e) => setObra({ ...obra, placement: e.target.value })}
               />
             </label>
           </div>
@@ -1053,8 +977,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
             <button
               onClick={handleAddImage}
               className="add-gravura-btn"
-              style={{ marginBottom: "2rem" }}
-            >
+              style={{ marginBottom: "2rem" }}>
               Adicionar Imagem
             </button>
           </div>
@@ -1072,14 +995,12 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
         <button
           style={{ display: "block", width: "100%" }}
           onClick={handleAddGravura}
-          className="add-gravura-btn"
-        >
+          className="add-gravura-btn">
           Adicionar Gravura
         </button>
         <button
           onClick={isEdit ? handleUpdateObra : handleNewObra}
-          className="submit-btn"
-        >
+          className="submit-btn">
           {isEdit ? "Atualizar" : "Submeter"}
         </button>
       </div>
@@ -1087,8 +1008,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       {/* Modal for Author Form */}
       <Modal
         isOpen={isAuthorModalOpen}
-        onClose={() => setIsAuthorModalOpen(false)}
-      >
+        onClose={() => setIsAuthorModalOpen(false)}>
         <div className="form-container">
           <div className="modal-header">
             <div className="flex-group">
@@ -1096,15 +1016,12 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
               <button
                 onClick={() => setIsAuthorModalOpen(false)}
                 aria-label="Close modal"
-                className="close-btn"
-              >
+                className="close-btn">
                 <X />
               </button>
             </div>
           </div>
-          <p className="submit-description">
-            Adicione um novo artíficie ao banco de dados
-          </p>
+          <p className="submit-description">Adicione um novo artíficie ao banco de dados</p>
           <div className="form-fields-container">
             <label className="label-wrapper">
               <p className="input-label">Nome do Artífice</p>
@@ -1118,8 +1035,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
           </div>
           <button
             onClick={() => handleNewAuthor(newAuthor)}
-            className="submit-btn"
-          >
+            className="submit-btn">
             Adicionar Artífice
           </button>
         </div>
@@ -1128,17 +1044,14 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       {/* Modal for Church Form */}
       <Modal
         isOpen={isChurchModalOpen}
-        onClose={() => setIsChurchModalOpen(false)}
-      >
+        onClose={() => setIsChurchModalOpen(false)}>
         <div className="form-container">
           <div className="modal-header">
             <div className="flex-group">
               <h1 className="submit-title">Crie uma nova Igreja</h1>
             </div>
           </div>
-          <p className="submit-description">
-            Adicione uma igreja ao banco de dados
-          </p>
+          <p className="submit-description">Adicione uma igreja ao banco de dados</p>
           <div className="form-fields-container">
             <div className="grid-layout">
               <label className="label-wrapper">
@@ -1147,9 +1060,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
                   type="text"
                   placeholder="Insira o nome da igreja"
                   value={church.name}
-                  onChange={(e) =>
-                    setChurch({ ...church, name: e.target.value })
-                  }
+                  onChange={(e) => setChurch({ ...church, name: e.target.value })}
                 />
               </label>
               <label className="label-wrapper">
@@ -1158,9 +1069,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
                   type="text"
                   placeholder="Insira o nome da igreja"
                   value={church.city}
-                  onChange={(e) =>
-                    setChurch({ ...church, city: e.target.value })
-                  }
+                  onChange={(e) => setChurch({ ...church, city: e.target.value })}
                 />
               </label>
             </div>
@@ -1169,13 +1078,12 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
                 <p className="input-label">Estado *</p>
                 <select
                   value={church.state}
-                  onChange={(e) =>
-                    setChurch({ ...church, state: e.target.value })
-                  }
-                >
+                  onChange={(e) => setChurch({ ...church, state: e.target.value })}>
                   <option value="">Selecione um estado</option>
                   {brazilianStates.map((state) => (
-                    <option key={state} value={state}>
+                    <option
+                      key={state}
+                      value={state}>
                       {state}
                     </option>
                   ))}
@@ -1187,9 +1095,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
                   type="text"
                   placeholder="Insira o nome da igreja"
                   value={church.street}
-                  onChange={(e) =>
-                    setChurch({ ...church, street: e.target.value })
-                  }
+                  onChange={(e) => setChurch({ ...church, street: e.target.value })}
                 />
               </label>
             </div>
@@ -1198,9 +1104,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
               <textarea
                 placeholder="Insira uma descrição da obra"
                 value={church.description}
-                onChange={(e) =>
-                  setChurch({ ...church, description: e.target.value })
-                }
+                onChange={(e) => setChurch({ ...church, description: e.target.value })}
               />
             </label>
             <div className="grid-layout">
@@ -1244,13 +1148,14 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
               ))}
               <button
                 onClick={handleAddChurchImage}
-                className="add-gravura-btn"
-              >
+                className="add-gravura-btn">
                 Adicionar Imagem
               </button>
             </div>
           </div>
-          <button onClick={handleNewChurch} className="submit-btn">
+          <button
+            onClick={handleNewChurch}
+            className="submit-btn">
             Submeter
           </button>
         </div>

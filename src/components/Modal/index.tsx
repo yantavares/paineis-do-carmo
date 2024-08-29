@@ -46,8 +46,12 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
   }
 
   return (
-    <Container aria-modal="true" role="dialog">
-      <ModalContent className="modal-content" onClick={handleContainerClick}>
+    <Container
+      aria-modal="true"
+      role="dialog">
+      <ModalContent
+        className="modal-content"
+        onClick={handleContainerClick}>
         <button
           onClick={onClose}
           className="close-btn"
@@ -59,8 +63,7 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
             border: "none",
             fontSize: "16px",
             cursor: "pointer",
-          }}
-        >
+          }}>
           <X />
         </button>
         {children}
