@@ -132,11 +132,15 @@ const PaintingDetails = () => {
               <>
                 <h3 className="topic-title">Referências</h3>
                 <ul className="reference-list">
-                  {data?.bibliographyReference.map((reference, index) => (
-                    <li key={index} className="reference-item">
-                      <sup>{index + 1} </sup> {reference}
-                    </li>
-                  ))}
+                  {data?.bibliographyReference &&
+                    data?.bibliographyReference.map((reference, index) => {
+                      if (reference && reference !== " ")
+                        return (
+                          <li key={index} className="reference-item">
+                            <sup>{index + 1} </sup> {reference}
+                          </li>
+                        );
+                    })}
                 </ul>
               </>
             )}
