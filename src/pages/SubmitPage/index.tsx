@@ -7,6 +7,7 @@ import { X } from "lucide-react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuth } from "src/context/AuthContext";
+import { Church } from "src/utils/mockData";
 
 function formatErrorMessages(errors: any): string {
   let formattedMessages: string[] = [""];
@@ -412,12 +413,13 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({ painting, 
 
   const fetchAllChurches = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/churches/available`, {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/churches/authorized`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       setChurches(response.data);
+      console.log("Churches:", churches);
     } catch (error) {
       console.error("Error fetching churches:", error);
     }
@@ -487,7 +489,9 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({ painting, 
         photographer: img.Photographer,
       })),
       dateOfCreation: obra.dateOfCreation,
-      bibliographySource: [obra.bibliographicSources],
+      bibliographySource: obra.bibliographicSources
+        .split("\n")
+        .filter((source) => source.trim() !== ""),
       bibliographyReference: [obra.bibliographicReferences],
       engravingRequests: gravuras.map((gravura) => ({
         name: gravura.Name,

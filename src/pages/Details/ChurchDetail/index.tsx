@@ -27,7 +27,7 @@ const defaultChurch: Church = {
   street: "",
   city: "",
   state: "",
-  tag: [],
+  tags: [],
 };
 
 const PaintingDetails = () => {
@@ -50,7 +50,9 @@ const PaintingDetails = () => {
     const fetchPaintings = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/churches/${id}`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/churches/${id}`
+        );
         setData(response.data as Church);
         setIsLoading(false);
       } catch (error) {
@@ -70,32 +72,27 @@ const PaintingDetails = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-        }}>
-        <CircularProgress
-          size="lg"
-          style={{ color: colors.green }}
-        />
+        }}
+      >
+        <CircularProgress size="lg" style={{ color: colors.green }} />
       </div>
     );
 
   return (
     <Container>
       <div className="flex-group">
-        <a
-          className="inner-link"
-          onClick={() => navigate("/pesquisa/igrejas")}>
+        <a className="inner-link" onClick={() => navigate("/pesquisa/igrejas")}>
           <ArrowLeft size={20} /> Igrejas
         </a>
       </div>
       <h1 className="item-name">{data.name} </h1>
-      <p
-        className="item-updater"
-        style={{ display: "flex", gap: "1rem" }}>
+      <p className="item-updater" style={{ display: "flex", gap: "1rem" }}>
         <FontAwesomeIcon icon={faLocation} />
         Localizada em {data.city}
         <span
           onClick={() => navigate(`/pesquisa/igrejas/${data.state}`)}
-          className="black hoverable">
+          className="black hoverable"
+        >
           {" "}
           • {data.state}{" "}
         </span>{" "}
@@ -105,11 +102,10 @@ const PaintingDetails = () => {
           {data.images &&
             data.images.map((image, index) => (
               <ImageContainer key={index}>
-                <Image
-                  src={image.url}
-                  alt=""
-                />
-                <DownloadButton onClick={() => downloadImage(image.url)}>Baixar</DownloadButton>
+                <Image src={image.url} alt="" />
+                <DownloadButton onClick={() => downloadImage(image.url)}>
+                  Baixar
+                </DownloadButton>
               </ImageContainer>
             ))}
         </div>
@@ -122,13 +118,14 @@ const PaintingDetails = () => {
             <h3 className="topic-title">Referências</h3>
             <ul className="reference-list">
               {data?.bibliographyReference &&
-                data?.bibliographyReference.map((reference, index) => (
-                  <li
-                    key={index}
-                    className="reference-item">
-                    <sup>{index + 1} </sup> {reference}
-                  </li>
-                ))}
+                data?.bibliographyReference.map((reference, index) => {
+                  if (reference && reference !== " ")
+                    return (
+                      <li key={index} className="reference-item">
+                        <sup>{index + 1} </sup> {reference}
+                      </li>
+                    );
+                })}
             </ul>
           </div>
         </div>
@@ -139,14 +136,16 @@ const PaintingDetails = () => {
           data.paintings.map((painting, index) => (
             <Col
               key={index}
-              onClick={() => navigate(`/item/paintings/${painting.id}`)}>
-              <EngravingImage
-                src={painting?.images?.[0]?.url}
-                alt=""
-              />
+              onClick={() => navigate(`/item/paintings/${painting.id}`)}
+            >
+              <EngravingImage src={painting?.images?.[0]?.url} alt="" />
               <EngravingDescription>
-                <TextTruncate className="engraving-title">{painting.title}</TextTruncate>
-                <p style={{ fontSize: "1.6rem" }}>{painting?.placement ?? "Sem localização"}</p>
+                <TextTruncate className="engraving-title">
+                  {painting.title}
+                </TextTruncate>
+                <p style={{ fontSize: "1.6rem" }}>
+                  {painting?.placement ?? "Sem localização"}
+                </p>
               </EngravingDescription>
             </Col>
           ))}

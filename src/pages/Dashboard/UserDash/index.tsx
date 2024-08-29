@@ -110,13 +110,13 @@ export default function Dashboard() {
           },
         }
       );
-      toast.success("Painting deleted successfully");
+      toast.success("Pintura deletada com sucesso!");
       setPaintings(
         paintings.filter((painting) => painting.id !== paintingToDelete)
       );
       setIsDeleteModalOpen(false);
     } catch (error) {
-      toast.error("Error deleting painting: " + error.message);
+      toast.error("Erro ao deletar pintura: " + error.message);
     }
   };
 
@@ -138,7 +138,7 @@ export default function Dashboard() {
       setIsEditModalOpen(true);
     } catch (error) {
       console.error("Error fetching painting:", error);
-      toast.error("Error fetching painting data: " + error.message);
+      toast.error("Erro ao buscar pintura: " + error.message);
     }
   };
 
@@ -194,7 +194,7 @@ export default function Dashboard() {
       toast.success("Suggestion submitted successfully!");
     } catch (error) {
       console.error("Error submitting suggestion:", error);
-      toast.error("Error submitting suggestion: " + error.message);
+      toast.error("Erro ao submeter sugestão: " + error.message);
     }
 
     // Reset form fields
