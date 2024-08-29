@@ -66,14 +66,11 @@ export default function Dashboard() {
 
   const fetchChurches = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/churches/authorized`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/churches/authorized`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return response.data;
     } catch (error) {
       console.error("Error fetching churches:", error);
@@ -86,14 +83,11 @@ export default function Dashboard() {
   const fetchPaintings = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/paintings/authorized`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/paintings/authorized`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setIsLoading(false);
       return response.data;
     } catch (error) {
@@ -160,18 +154,13 @@ export default function Dashboard() {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(
-        `${import.meta.env.VITE_API_URL}/api/paintings/${paintingToDelete}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/paintings/${paintingToDelete}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       toast.success("Pintura deletada com sucesso");
-      setPaintings(
-        paintings.filter((painting) => painting.id !== paintingToDelete)
-      );
+      setPaintings(paintings.filter((painting) => painting.id !== paintingToDelete));
       setIsDeleteModalOpen(false);
     } catch (error) {
       toast.error("Erro ao deletar pintura: " + error.message);
@@ -181,28 +170,21 @@ export default function Dashboard() {
   const handleEditChurch = (church) => {
     setChurchToEdit(church);
     setImages(church.images);
-    setChurchImages(
-      church.images.map((image) => ({ ...image, base64Image: "" }))
-    );
+    setChurchImages(church.images.map((image) => ({ ...image, base64Image: "" })));
     setIsChurchModalOpen(true);
   };
 
   const handleDeleteChurch = async (id) => {
     try {
       // Fetch all paintings
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/paintings/authorized`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/paintings/authorized`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const paintings = response.data;
       // Check if any painting is associated with the church
-      const isPaintingAssociated = paintings.some(
-        (painting) => painting.church.id === id
-      );
+      const isPaintingAssociated = paintings.some((painting) => painting.church.id === id);
 
       if (isPaintingAssociated) {
         toast.error(
@@ -221,14 +203,11 @@ export default function Dashboard() {
   const confirmDeleteChurch = async () => {
     try {
       // Proceed with deletion
-      await axios.delete(
-        `${import.meta.env.VITE_API_URL}/api/churches/${deleteChurchId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/churches/${deleteChurchId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       toast.success("Igreja deletada com sucesso");
       setChurches(churches.filter((church) => church.id !== deleteChurchId));
       setIsModalOpen(false);
@@ -294,9 +273,7 @@ export default function Dashboard() {
 
   const handleUpdateChurch = async () => {
     const newImages = images.filter((image) => {
-      return !churchToEdit.images.some(
-        (existingImage) => existingImage.url === image.url
-      );
+      return !churchToEdit.images.some((existingImage) => existingImage.url === image.url);
     });
 
     const updatedChurch = {
@@ -342,7 +319,21 @@ export default function Dashboard() {
   };
 
   const handlePublishChurch = async (church) => {
-    console.log("Publish Church", church);
+    try {
+      await axios.patch(
+        `${import.meta.env.VITE_API_URL}/api/churches/${church.id}/publish`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success("Igreja publicada com sucesso");
+      setChurches(churches.map((c) => (c.id === church.id ? { ...c, isPublished: true } : c)));
+    } catch (error) {
+      toast.error("Erro ao publicar a igreja: " + error.message);
+    }
   };
 
   const handlePublish = async (painting) => {
@@ -357,11 +348,7 @@ export default function Dashboard() {
         }
       );
       toast.success("A Obra foi publicada com sucesso!");
-      setPaintings(
-        paintings.map((p) =>
-          p.id === painting.id ? { ...p, isPublished: true } : p
-        )
-      );
+      setPaintings(paintings.map((p) => (p.id === painting.id ? { ...p, isPublished: true } : p)));
     } catch (error) {
       toast.error("Erro ao publicar a obra: " + error.message);
     }
@@ -378,13 +365,17 @@ export default function Dashboard() {
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={confirmDelete}
       />
-      <Modal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>
-        <SubmitPage painting={paintingToEdit} isEdit={true} />
+      <Modal
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}>
+        <SubmitPage
+          painting={paintingToEdit}
+          isEdit={true}
+        />
       </Modal>
       <Modal
         isOpen={isChurchModalOpen}
-        onClose={() => setIsChurchModalOpen(false)}
-      >
+        onClose={() => setIsChurchModalOpen(false)}>
         <ChurchForm>
           <div className="form-container">
             <div className="modal-header">
@@ -392,9 +383,7 @@ export default function Dashboard() {
                 <h1 className="submit-title">Edite a Igreja</h1>
               </div>
             </div>
-            <p className="submit-description">
-              Adicione uma igreja ao banco de dados
-            </p>
+            <p className="submit-description">Adicione uma igreja ao banco de dados</p>
             <div className="form-fields-container">
               <div className="grid-layout">
                 <label className="label-wrapper">
@@ -403,9 +392,7 @@ export default function Dashboard() {
                     type="text"
                     placeholder="Insira o nome da igreja"
                     value={churchToEdit?.name}
-                    onChange={(e) =>
-                      setChurchToEdit({ ...churchToEdit, name: e.target.value })
-                    }
+                    onChange={(e) => setChurchToEdit({ ...churchToEdit, name: e.target.value })}
                   />
                 </label>
                 <label className="label-wrapper">
@@ -414,9 +401,7 @@ export default function Dashboard() {
                     type="text"
                     placeholder="Insira o nome da igreja"
                     value={churchToEdit?.city}
-                    onChange={(e) =>
-                      setChurchToEdit({ ...churchToEdit, city: e.target.value })
-                    }
+                    onChange={(e) => setChurchToEdit({ ...churchToEdit, city: e.target.value })}
                   />
                 </label>
               </div>
@@ -430,11 +415,12 @@ export default function Dashboard() {
                         ...churchToEdit,
                         state: e.target.value,
                       })
-                    }
-                  >
+                    }>
                     <option value="">Selecione um estado</option>
                     {brazilianStates.map((state) => (
-                      <option key={state} value={state}>
+                      <option
+                        key={state}
+                        value={state}>
                         {state}
                       </option>
                     ))}
@@ -505,12 +491,9 @@ export default function Dashboard() {
                         display: "flex",
                         justifyContent: "space-between",
                         marginBottom: "1rem",
-                      }}
-                    >
+                      }}>
                       <div>Image {index + 1}</div>
-                      <button onClick={() => handleDeleteImage(index)}>
-                        Remover
-                      </button>
+                      <button onClick={() => handleDeleteImage(index)}>Remover</button>
                     </div>
                     <div>
                       <label className="file-input-wrapper">
@@ -525,9 +508,7 @@ export default function Dashboard() {
                             }}
                           />
                         ) : (
-                          <span>
-                            Arraste ou Clique para adicionar um arquivo
-                          </span>
+                          <span>Arraste ou Clique para adicionar um arquivo</span>
                         )}
                         <input
                           type="file"
@@ -536,27 +517,27 @@ export default function Dashboard() {
                       </label>
                     </div>
                     <div>
-                      <label htmlFor={`photographer-name-${index}`}>
-                        Fótografo:
-                      </label>
+                      <label htmlFor={`photographer-name-${index}`}>Fótografo:</label>
                       <input
                         type="text"
                         placeholder="Yan Tavares"
                         id={`photographer-name-${index}`}
                         value={image.photographer || ""}
-                        onChange={(e) =>
-                          handlePhotographerChange(index, e.target.value)
-                        }
+                        onChange={(e) => handlePhotographerChange(index, e.target.value)}
                       />
                     </div>
                   </div>
                 ))}
-                <button onClick={handleAddImage} className="add-gravura-btn">
+                <button
+                  onClick={handleAddImage}
+                  className="add-gravura-btn">
                   Adicionar Imagem
                 </button>
               </div>
             </div>
-            <button onClick={() => handleUpdateChurch()} className="submit-btn">
+            <button
+              onClick={() => handleUpdateChurch()}
+              className="submit-btn">
               Atualizar
             </button>
           </div>
@@ -574,30 +555,22 @@ export default function Dashboard() {
           <div className="flex-group">
             <a
               onClick={() => handleClick("all")}
-              className={(selectedType === "all" && "active") || "all"}
-            >
+              className={(selectedType === "all" && "active") || "all"}>
               Todas
             </a>
             <a
               onClick={() => handleClick("published")}
-              className={
-                (selectedType === "published" && "active") || "published"
-              }
-            >
+              className={(selectedType === "published" && "active") || "published"}>
               Publicadas
             </a>
             <a
               onClick={() => handleClick("pending")}
-              className={(selectedType === "pending" && "active") || "pending"}
-            >
+              className={(selectedType === "pending" && "active") || "pending"}>
               Pendentes
             </a>
             <a
               onClick={() => handleClick("churches")}
-              className={
-                (selectedType === "churches" && "active") || "churches"
-              }
-            >
+              className={(selectedType === "churches" && "active") || "churches"}>
               Igrejas
             </a>
           </div>
@@ -652,11 +625,7 @@ function PaintingRow({ painting, onEdit, onDelete, onPublish }) {
       <td>{painting.title}</td>
       <td>
         <span className={painting.isPublished ? "Published" : "Publish-btn"}>
-          {painting.isPublished ? (
-            "Publicada"
-          ) : (
-            <button onClick={onPublish}>Publicar</button>
-          )}
+          {painting.isPublished ? "Publicada" : <button onClick={onPublish}>Publicar</button>}
         </span>
       </td>
       <td>{painting.registeredBy}</td>
@@ -668,7 +637,10 @@ function PaintingRow({ painting, onEdit, onDelete, onPublish }) {
         })}
       </td>
       <td style={{ display: "flex" }}>
-        <OptionButton onEdit={onEdit} onDelete={onDelete} />
+        <OptionButton
+          onEdit={onEdit}
+          onDelete={onDelete}
+        />
       </td>
     </tr>
   );

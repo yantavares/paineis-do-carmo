@@ -418,7 +418,22 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({ painting, 
           Authorization: `Bearer ${token}`,
         },
       });
-      setChurches(response.data);
+
+      const response2 = await axios.get(`${import.meta.env.VITE_API_URL}/api/churches`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const allChurches = response.data.concat(response2.data);
+
+      const uniqueChurches = allChurches.filter(
+        (church: Church, index: number, self: any) =>
+          index === self.findIndex((c: Church) => c.id === church.id)
+      );
+
+      setChurches(uniqueChurches);
+
       console.log("Churches:", churches);
     } catch (error) {
       console.error("Error fetching churches:", error);
