@@ -1,9 +1,9 @@
-import igreja1 from "src/assets/igreja1.jpeg";
+import igreja1 from "src/assets/igreja1.jpg";
 import igreja2 from "src/assets/igreja2.jpg";
-import pintura1 from "src/assets/pintura1.jpeg";
-import pintura2 from "src/assets/pintura2.jpeg";
-import artista1 from "src/assets/artista1.jpg";
-import artista2 from "src/assets/artista2.jpg";
+import pintura1 from "src/assets/pintura1.jpg";
+import pintura2 from "src/assets/pintura2.jpg";
+import pintura3 from "src/assets/pintura3.jpg";
+import pintura4 from "src/assets/pintura4.jpg";
 
 type Image = {
   url: string;
@@ -24,49 +24,25 @@ export interface Church {
   street?: string;
   city?: string;
   state?: string;
-  tag?: Tag[];
+  tags?: Tag[];
 }
 
 export const brazilianChurches: Church[] = [
   {
-    id: 1,
-    name: "Catedral Metropolitana de Brasília",
+    id: 158,
+    name: "Igreja de Santa Teresa de Jesus da Ordem Terceira do Carmo do Recife",
     images: [{ url: igreja1 }],
-    city: "Brasília",
-    state: "DF",
-    tag: [{ name: "catedral" }, { name: "moderna" }, { name: "arquitetura" }],
+    city: "Recife",
+    state: "PE",
+    tags: [],
   },
   {
-    id: 2,
-    name: "Igreja de Nossa Senhora do Brasil",
+    id: 162,
+    name: "Basílica de Nossa Senhora do Carmo",
     images: [{ url: igreja2 }],
-    city: "São Paulo",
-    state: "SP",
-    tag: [{ name: "barroco" }, { name: "igreja" }, { name: "século 18" }],
-  },
-  {
-    id: 3,
-    name: "Igreja da Candelária",
-    images: [{ url: igreja1 }],
-    city: "Rio de Janeiro",
-    state: "RJ",
-    tag: [{ name: "barroco" }, { name: "igreja" }, { name: "século 18" }],
-  },
-  {
-    id: 4,
-    name: "Igreja de São Francisco de Assis",
-    images: [{ url: igreja2 }],
-    city: "Ouro Preto",
-    state: "MG",
-    tag: [{ name: "barroco" }, { name: "igreja" }, { name: "século 18" }],
-  },
-  {
-    id: 5,
-    name: "Catedral da Sé",
-    images: [{ url: igreja1 }],
-    city: "São Paulo",
-    state: "SP",
-    tag: [{ name: "catedral" }, { name: "moderna" }, { name: "arquitetura" }],
+    city: "Recife",
+    state: "PE",
+    tags: [],
   },
 ];
 
@@ -79,7 +55,7 @@ export interface Painting {
   id: number;
   title: string;
   images: Image[];
-  dateOfCreation: number;
+  dateOfCreation: number | string;
   artisan?: string;
   bibliographyReference?: string[];
   bibliographySource?: string;
@@ -87,56 +63,64 @@ export interface Painting {
   description?: string;
   city: string;
   state: string;
-  tag: Tag[];
+  tags: Tag[];
   church?: Church;
   placement?: string;
 }
 
 export const brazilianPaintings: Painting[] = [
   {
-    id: 1,
-    title: "A Primeira Missa no Brasil",
+    id: 152,
+    title: "A monja Teresa é protegida por Jesus",
     images: [{ url: pintura1 }],
-    dateOfCreation: 1860,
-    city: "Rio de Janeiro",
-    state: "RJ",
-    tag: [{ name: "pintura" }, { name: "história" }, { name: "brasil" }],
+    dateOfCreation: "Século XVIII ",
+    city: "Recife",
+    state: "PE",
+    tags: [
+      { name: "teresa" },
+      { name: "jesus" },
+      { name: "anjo" },
+      { name: "sepulveda" },
+    ],
   },
   {
-    id: 2,
-    title: "Abaporu",
+    id: 156,
+    title: "Visão: Santo Eduardo, rei da Inglaterra ",
     images: [{ url: pintura2 }],
-    dateOfCreation: 1928,
-    city: "São Paulo",
-    state: "SP",
-    tag: [{ name: "pintura" }, { name: "moderna" }, { name: "brasil" }],
+    dateOfCreation: "Século XIX",
+    city: "Recife",
+    state: "PE",
+    tags: [{ name: "eduardo" }, { name: "crucifixo" }, { name: "coroa" }],
   },
   {
-    id: 3,
-    title: "Retirantes",
-    images: [{ url: pintura1 }],
-    dateOfCreation: 1944,
-    city: "São Paulo",
-    state: "SP",
-    tag: [{ name: "pintura" }, { name: "social" }, { name: "brasil" }],
+    id: 153,
+    title: "O Nascimento do Profeta Elias",
+    images: [{ url: pintura3 }],
+    dateOfCreation: "Segunda metade do século XVIII ",
+    city: "Recife",
+    state: "PE",
+    tags: [
+      { name: "santo elias" },
+      { name: "profeta" },
+      { name: "fogo" },
+      { name: "brasa" },
+    ],
   },
   {
-    id: 4,
-    title: "Guerra e Paz",
-    images: [{ url: pintura2 }],
-    dateOfCreation: 1956,
-    city: "Rio de Janeiro",
-    state: "RJ",
-    tag: [{ name: "pintura" }, { name: "painel" }, { name: "brasil" }],
-  },
-  {
-    id: 5,
-    title: "O Vendedor de Frutas",
-    images: [{ url: pintura1 }],
-    dateOfCreation: 1893,
-    city: "São Paulo",
-    state: "SP",
-    tag: [{ name: "pintura" }, { name: "realismo" }, { name: "brasil" }],
+    id: 154,
+    title: "O Profeta Elias e o Profeta Eliseu",
+    images: [{ url: pintura4 }],
+    dateOfCreation: "Segunda metade do século XVIII  ",
+    city: "Recife",
+    state: "PE",
+    tags: [
+      { name: "santo elias" },
+      { name: "profeta" },
+      { name: "santo eliseu" },
+      { name: "arado" },
+      { name: "boi" },
+      { name: "manto" },
+    ],
   },
 ];
 
@@ -150,59 +134,6 @@ export interface Artist {
   dateOfBirth: string;
   tag: Tag[];
 }
-
-export const brazilianArtists: Artist[] = [
-  {
-    id: 1,
-    name: "Tarsila do Amaral",
-    images: [{ url: artista1 }],
-    specialty: "Pintura Modernista",
-    city: "São Paulo",
-    state: "SP",
-    dateOfBirth: "1886",
-    tag: [{ name: "artista" }, { name: "moderna" }, { name: "brasil" }],
-  },
-  {
-    id: 2,
-    name: "Cândido Portinari",
-    images: [{ url: artista2 }],
-    specialty: "Pintura Social",
-    city: "Brodowski",
-    state: "SP",
-    dateOfBirth: "1886",
-    tag: [{ name: "artista" }, { name: "social" }, { name: "brasil" }],
-  },
-  {
-    id: 3,
-    name: "Di Cavalcanti",
-    images: [{ url: artista1 }],
-    specialty: "Pintura Modernista",
-    city: "Rio de Janeiro",
-    state: "RJ",
-    dateOfBirth: "1886",
-    tag: [{ name: "artista" }, { name: "moderna" }, { name: "brasil" }],
-  },
-  {
-    id: 4,
-    name: "Anita Malfatti",
-    images: [{ url: artista2 }],
-    specialty: "Expressionismo",
-    city: "São Paulo",
-    state: "SP",
-    dateOfBirth: "1886",
-    tag: [{ name: "artista" }, { name: "expressionismo" }, { name: "brasil" }],
-  },
-  {
-    id: 5,
-    name: "Lygia Clark",
-    images: [{ url: artista1 }],
-    specialty: "Escultura e Pintura",
-    city: "Belo Horizonte",
-    state: "MG",
-    dateOfBirth: "1886",
-    tag: [{ name: "artista" }, { name: "moderna" }, { name: "brasil" }],
-  },
-];
 
 export const tags: Tag[] = [
   { name: "arte" },

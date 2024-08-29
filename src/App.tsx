@@ -2,15 +2,15 @@ import { faLaptop, faRobot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CircularProgress } from "@mui/material";
 import React, { Suspense, lazy, useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Footer from "src/components/Footer";
 import Header from "src/components/Header";
 import Assistant from "./assistant";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { AuthProvider } from "./context/AuthContext";
 import { PreventRightClickProvider } from "./context/PreventRightClickContext";
 import colors from "./utils/colors";
 import ScrollToTop from "./utils/scrollToTop";
-import ProtectedRoute from "./components/ProtectedRoute";
-import { AuthProvider } from "./context/AuthContext";
 
 const Home = lazy(() => import("src/pages/Home"));
 const LoginPage = lazy(() => import("src/pages/LoginPage"));
@@ -23,7 +23,6 @@ const ChurchDetail = lazy(() => import("src/pages/Details/ChurchDetail"));
 const RegisterPage = lazy(() => import("src/pages/RegisterPage"));
 const SubmitPage = lazy(() => import("src/pages/SubmitPage"));
 const DashbordPage = lazy(() => import("src/pages/Dashboard"));
-const UserDashPage = lazy(() => import("src/pages/UserDash"));
 
 interface Message {
   sender: "user" | "bot";
@@ -31,9 +30,6 @@ interface Message {
 }
 
 function Layout({ children }) {
-  const location = useLocation();
-  const isDashboardRoute = location.pathname.startsWith("/dashboard");
-
   const [showAssistant, setShowAssistant] = useState(false);
   const [conversation, setConversaation] = useState<Message[]>([
     { sender: "bot", text: "Olá! Como posso te ajudar?" },
@@ -63,41 +59,39 @@ function Layout({ children }) {
   return (
     <div className="app-container">
       <ScrollToTop />
-      {!isDashboardRoute && <Header />}
+      <Header />
       <main className="main-content">{children}</main>
-      {!isDashboardRoute && <Footer />}
-      {!isDashboardRoute && (
-        <div
-          className="assistant-button"
-          style={{
-            position: "fixed",
-            bottom: "2rem",
-            right: "2rem",
-          }}>
-          {!showAssistant ? (
-            <button
-              style={{
-                backgroundColor: "white",
-                opacity: 0.9,
-                borderRadius: "1.6rem",
-              }}
-              onClick={() => setShowAssistant(true)}>
-              <FontAwesomeIcon
-                icon={faRobot}
-                size="2x"
-              />
-            </button>
-          ) : (
-            <div>
-              <Assistant
-                setShowAssistant={setShowAssistant}
-                conversation={conversation}
-                setConversation={setConversaation}
-              />
-            </div>
-          )}
-        </div>
-      )}
+      <Footer />
+
+      <div
+        className="assistant-button"
+        style={{
+          position: "fixed",
+          bottom: "2rem",
+          right: "2rem",
+        }}
+      >
+        {!showAssistant ? (
+          <button
+            style={{
+              backgroundColor: "white",
+              opacity: 0.9,
+              borderRadius: "1.6rem",
+            }}
+            onClick={() => setShowAssistant(true)}
+          >
+            <FontAwesomeIcon icon={faRobot} size="2x" />
+          </button>
+        ) : (
+          <div>
+            <Assistant
+              setShowAssistant={setShowAssistant}
+              conversation={conversation}
+              setConversation={setConversaation}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -116,27 +110,20 @@ function App() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                }}>
+                }}
+              >
                 <CircularProgress
                   size={"10rem"}
                   style={{ color: colors.green }}
                 />
               </div>
-            }>
+            }
+          >
             <Layout>
               <Routes>
-                <Route
-                  path="/"
-                  element={<Home />}
-                />
-                <Route
-                  path="login"
-                  element={<LoginPage />}
-                />
-                <Route
-                  path="register"
-                  element={<RegisterPage />}
-                />
+                <Route path="/" element={<Home />} />
+                <Route path="login" element={<LoginPage />} />
+                <Route path="register" element={<RegisterPage />} />
 
                 <Route
                   path="submit"
@@ -147,23 +134,15 @@ function App() {
                   }
                 />
 
-                <Route
-                  path="pesquisa/:selected"
-                  element={<SearchPage />}
-                />
+                <Route path="pesquisa/:selected" element={<SearchPage />} />
 
                 <Route
-                  path="admin"
+                  path="dashboard"
                   element={
                     <ProtectedRoute>
                       <DashbordPage />
                     </ProtectedRoute>
                   }
-                />
-
-                <Route
-                  path="user"
-                  element={<UserDashPage />}
                 />
 
                 <Route
@@ -171,39 +150,19 @@ function App() {
                   element={<ChurchState />}
                 />
 
-                <Route
-                  path="topicos/:tag"
-                  element={<TagDetail />}
-                />
+                <Route path="topicos/:tag" element={<TagDetail />} />
 
-                <Route
-                  path="item/:id"
-                  element={<PaintingDetail />}
-                />
+                <Route path="item/:id" element={<PaintingDetail />} />
 
-                <Route
-                  path="item/paintings/:id"
-                  element={<PaintingDetail />}
-                />
+                <Route path="item/paintings/:id" element={<PaintingDetail />} />
 
-                <Route
-                  path="item/churches/:id"
-                  element={<ChurchDetail />}
-                />
+                <Route path="item/churches/:id" element={<ChurchDetail />} />
 
-                <Route
-                  path="sobre"
-                  element={<AboutPage />}
-                />
+                <Route path="sobre" element={<AboutPage />} />
 
-                <Route
-                  path="dashboard/:page"
-                  element={
-                    <ProtectedRoute>
-                      <DashbordPage />
-                    </ProtectedRoute>
-                  }
-                />
+                <Route path="sobre" element={<AboutPage />} />
+
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </Layout>
           </Suspense>

@@ -14,6 +14,11 @@ interface TopicSearchProps {
 
 const TopicSearch = ({ tags, isLoading }: TopicSearchProps) => {
   const navigate = useNavigate();
+  const [inputValue, setInputValue] = React.useState("");
+
+  const filteredTags = tags.filter((tag) => {
+    return tag.name.toLowerCase().includes(inputValue.toLowerCase());
+  });
 
   return (
     <>
@@ -21,6 +26,12 @@ const TopicSearch = ({ tags, isLoading }: TopicSearchProps) => {
         Nossos <span style={{ color: colors.green }}>Tópicos</span>
         <SearchBarContainer>
           <SearchBar
+            placeHolder={"Busque por Tópico"}
+            showButtons={false}
+          />
+          <SearchBar
+            inputValue={inputValue}
+            setInputValue={setInputValue}
             placeHolder={"Busque por Tópico"}
             showButtons={false}
           />
@@ -42,8 +53,8 @@ const TopicSearch = ({ tags, isLoading }: TopicSearchProps) => {
             }}>
             <CircularProgress style={{ color: colors.green }} />
           </div>
-        ) : tags && tags.length > 0 ? (
-          tags.map((tag, index) => (
+        ) : filteredTags && filteredTags.length > 0 ? (
+          filteredTags.map((tag, index) => (
             <BigTag
               onClick={() => navigate(`/topicos/${tag.name.toLocaleLowerCase()}`)}
               key={index}>

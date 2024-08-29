@@ -25,7 +25,7 @@ const ChurchState = () => {
     const fetchPaintings = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/churches/state/${state}`
+          `${import.meta.env.VITE_API_URL}/api/churches?state=${state}`
         );
         setData(response.data);
         setIsLoading(false);

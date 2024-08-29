@@ -48,12 +48,7 @@ const TagDetail = () => {
         ) : data && data.length > 0 ? (
           data.map((item: any, index: number) => (
             <SearchResult key={index}>
-              <Item
-                tagCount={2}
-                width="20rem"
-                item={item}
-                type={"paintings"}
-              />
+              <Item tagCount={2} width="20rem" item={item} type={"paintings"} />
             </SearchResult>
           ))
         ) : (
