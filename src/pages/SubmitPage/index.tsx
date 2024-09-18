@@ -181,7 +181,7 @@ const GravuraInput: React.FC<{
           />
         </label>
         <label className="label-wrapper">
-          <p className="input-label">Fotógrafo da Gravura</p>
+          <p className="input-label">Autor da Gravura</p>
           <input
             type="text"
             placeholder="Insira o nome do fotógrafo"
