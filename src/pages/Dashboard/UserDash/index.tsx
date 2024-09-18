@@ -17,28 +17,6 @@ import colors from "src/utils/colors";
 //   },
 // });
 
-export const fetchPaintings = async ({ token, filter = "all" }) => {
-  let url = `${import.meta.env.VITE_API_URL}/api/paintings/authorized`;
-
-  if (filter === "published") {
-    url += "?filter=published";
-  } else if (filter === "unpublished") {
-    url += "?filter=unpublished";
-  }
-
-  try {
-    const response = await axios.get(url, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error(`Error fetching ${filter} paintings:`, error);
-    throw error;
-  }
-};
-
 export default function Dashboard() {
   const [paintings, setPaintings] = useState([]);
   const [selectedType, setSelectedType] = useState("all");
@@ -48,12 +26,39 @@ export default function Dashboard() {
   const [isSuggestionModalOpen, setIsSuggestionModalOpen] = useState(false);
   const [suggestionText, setSuggestionText] = useState("");
   const [images, setImages] = useState([{ base64Image: "", photographer: "" }]);
-  const [isLoading, setIsLoading] = useState(false); // Add this line to define the isLoading state
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingPaintings, setIsLoadingPaintings] = useState(false);
+  const [isLoadingChurches, setIsLoadingChurches] = useState(false);
   const [selectedPainting, setSelectedPainting] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [paintingToEdit, setPaintingToEdit] = useState(null);
 
   const navigate = useNavigate();
+
+  const fetchPaintings = async ({ token, filter = "all" }) => {
+    setIsLoading(true);
+    let url = `${import.meta.env.VITE_API_URL}/api/paintings/authorized`;
+
+    if (filter === "published") {
+      url += "?filter=published";
+    } else if (filter === "unpublished") {
+      url += "?filter=unpublished";
+    }
+
+    try {
+      const response = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setIsLoading(false);
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching ${filter} paintings:`, error);
+      setIsLoading(false);
+      throw error;
+    }
+  };
 
   const handleExit = () => {
     localStorage.removeItem("token");
@@ -64,13 +69,11 @@ export default function Dashboard() {
 
   useEffect(() => {
     const getPaintings = async () => {
-      setIsLoading(true);
       const data = await fetchPaintings({ token, filter: "all" });
       setPaintings(data);
     };
 
     getPaintings();
-    setIsLoading(false);
   }, []);
 
   const handleDateArrow = (e) => {
@@ -278,64 +281,79 @@ export default function Dashboard() {
 
       <h2>Submissões Recentes</h2>
 
-      <main className="table">
-        <section className="table-header">
-          <div className="flex-group">
-            <a
-              onClick={() => handleClick("all")}
-              className={(selectedType === "all" && "active") || "all"}
-            >
-              Todas
-            </a>
-            <a
-              onClick={() => handleClick("published")}
-              className={
-                (selectedType === "published" && "active") || "published"
-              }
-            >
-              Publicadas
-            </a>
-            <a
-              onClick={() => handleClick("pending")}
-              className={(selectedType === "pending" && "active") || "pending"}
-            >
-              Pendentes
-            </a>
-          </div>
-        </section>
-        <section className="table-body">
-          <table className="content-table">
-            <thead>
-              <tr>
-                <th>Nome</th>
-                <th>Status</th>
-                <th>Usuário</th>
-                <th>
-                  <div className="flex-flow">
-                    Data de Submissão{" "}
-                    <button onClick={handleDateArrow}></button>
-                  </div>
-                </th>
-                <th>Opções</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredPaintings.map((painting) => (
-                <PaintingRow
-                  painting={painting}
-                  key={painting.id}
-                  onDelete={() => handleDelete(painting.id)}
-                  onEdit={() => handleEdit(painting.id)}
-                  onSuggestionClick={() => {
-                    setIsSuggestionModalOpen(true);
-                    setSelectedPainting(painting.id);
-                  }}
-                />
-              ))}
-            </tbody>
-          </table>
-        </section>
-      </main>
+      {isLoading ? (
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <CircularProgress size={70} style={{ color: colors.green }} />
+        </div>
+      ) : (
+        <main className="table">
+          <section className="table-header">
+            <div className="flex-group">
+              <a
+                onClick={() => handleClick("all")}
+                className={(selectedType === "all" && "active") || "all"}
+              >
+                Todas
+              </a>
+              <a
+                onClick={() => handleClick("published")}
+                className={
+                  (selectedType === "published" && "active") || "published"
+                }
+              >
+                Publicadas
+              </a>
+              <a
+                onClick={() => handleClick("pending")}
+                className={
+                  (selectedType === "pending" && "active") || "pending"
+                }
+              >
+                Pendentes
+              </a>
+            </div>
+          </section>
+          <section className="table-body">
+            <table className="content-table">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Status</th>
+                  <th>Usuário</th>
+                  <th>
+                    <div className="flex-flow">
+                      Data de Submissão{" "}
+                      <button onClick={handleDateArrow}></button>
+                    </div>
+                  </th>
+                  <th>Opções</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredPaintings.map((painting) => (
+                  <PaintingRow
+                    painting={painting}
+                    key={painting.id}
+                    onDelete={() => handleDelete(painting.id)}
+                    onEdit={() => handleEdit(painting.id)}
+                    onSuggestionClick={() => {
+                      setIsSuggestionModalOpen(true);
+                      setSelectedPainting(painting.id);
+                    }}
+                  />
+                ))}
+              </tbody>
+            </table>
+          </section>
+        </main>
+      )}
 
       <ExitContainer>
         <ExitButton onClick={handleExit}>Sair</ExitButton>

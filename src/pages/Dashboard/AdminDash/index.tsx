@@ -10,6 +10,7 @@ import SubmitPage from "src/pages/SubmitPage";
 import colors from "src/utils/colors";
 import { ChurchForm, Container, ExitButton, ExitContainer } from "./styles";
 import { useAuth } from "src/context/AuthContext";
+import { CircularProgress } from "@mui/material";
 
 export default function Dashboard() {
   const { token } = useAuth();
@@ -23,6 +24,8 @@ export default function Dashboard() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [paintingToEdit, setPaintingToEdit] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingPaintings, setIsLoadingPaintings] = useState(false);
+  const [isLoadingChurches, setIsLoadingChurches] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteChurchId, setDeleteChurchId] = useState(null);
   const [isChurchModalOpen, setIsChurchModalOpen] = useState(false);
@@ -65,6 +68,7 @@ export default function Dashboard() {
   const { user } = useAuth();
 
   const fetchChurches = async () => {
+    setIsLoadingChurches(true);
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/api/churches/authorized`,
@@ -74,9 +78,12 @@ export default function Dashboard() {
           },
         }
       );
+      setIsLoadingChurches(false);
+
       return response.data;
     } catch (error) {
       console.error("Error fetching churches:", error);
+      setIsLoadingChurches(false);
       throw error;
     }
   };
@@ -84,7 +91,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   const fetchPaintings = async () => {
-    setIsLoading(true);
+    setIsLoadingPaintings(true);
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/api/paintings/authorized`,
@@ -94,11 +101,12 @@ export default function Dashboard() {
           },
         }
       );
-      setIsLoading(false);
+      setIsLoadingPaintings(false);
+
       return response.data;
     } catch (error) {
       console.error("Error fetching paintings:", error);
-      setIsLoading(false);
+      setIsLoadingPaintings(false);
       throw error;
     }
   };
@@ -127,6 +135,10 @@ export default function Dashboard() {
   const handleClick = (typeName) => {
     setSelectedType(typeName);
   };
+
+  useEffect(() => {
+    setIsLoading(isLoadingChurches || isLoadingPaintings);
+  }, [isLoadingChurches, isLoadingPaintings]);
 
   const filteredPaintings =
     selectedType === "all"
@@ -587,75 +599,90 @@ export default function Dashboard() {
       />
       <h2>Submissões Recentes</h2>
 
-      <main className="table">
-        <section className="table-header">
-          <div className="flex-group">
-            <a
-              onClick={() => handleClick("all")}
-              className={(selectedType === "all" && "active") || "all"}
-            >
-              Todas
-            </a>
-            <a
-              onClick={() => handleClick("published")}
-              className={
-                (selectedType === "published" && "active") || "published"
-              }
-            >
-              Publicadas
-            </a>
-            <a
-              onClick={() => handleClick("pending")}
-              className={(selectedType === "pending" && "active") || "pending"}
-            >
-              Pendentes
-            </a>
-            <a
-              onClick={() => handleClick("churches")}
-              className={
-                (selectedType === "churches" && "active") || "churches"
-              }
-            >
-              Igrejas
-            </a>
-          </div>
-        </section>
-        <section className="table-body">
-          {selectedType === "churches" ? (
-            <ChurchesTable
-              churches={churches}
-              onEdit={handleEditChurch}
-              onDelete={handleDeleteChurch}
-              onPublish={handlePublishChurch}
-            />
-          ) : (
-            <table className="content-table">
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>Status</th>
-                  <th>Usuário</th>
-                  <th>
-                    <div className="flex-flow">Data de Submissão</div>
-                  </th>
-                  <th>Opções</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredPaintings.map((painting) => (
-                  <PaintingRow
-                    painting={painting}
-                    key={painting.id}
-                    onEdit={() => handleEdit(painting.id)}
-                    onDelete={() => handleDelete(painting.id)}
-                    onPublish={() => handlePublish(painting)}
-                  />
-                ))}
-              </tbody>
-            </table>
-          )}
-        </section>
-      </main>
+      {isLoading ? (
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <CircularProgress size={70} style={{ color: colors.green }} />
+        </div>
+      ) : (
+        <main className="table">
+          <section className="table-header">
+            <div className="flex-group">
+              <a
+                onClick={() => handleClick("all")}
+                className={(selectedType === "all" && "active") || "all"}
+              >
+                Todas
+              </a>
+              <a
+                onClick={() => handleClick("published")}
+                className={
+                  (selectedType === "published" && "active") || "published"
+                }
+              >
+                Publicadas
+              </a>
+              <a
+                onClick={() => handleClick("pending")}
+                className={
+                  (selectedType === "pending" && "active") || "pending"
+                }
+              >
+                Pendentes
+              </a>
+              <a
+                onClick={() => handleClick("churches")}
+                className={
+                  (selectedType === "churches" && "active") || "churches"
+                }
+              >
+                Igrejas
+              </a>
+            </div>
+          </section>
+          <section className="table-body">
+            {selectedType === "churches" ? (
+              <ChurchesTable
+                churches={churches}
+                onEdit={handleEditChurch}
+                onDelete={handleDeleteChurch}
+                onPublish={handlePublishChurch}
+              />
+            ) : (
+              <table className="content-table">
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Status</th>
+                    <th>Usuário</th>
+                    <th>
+                      <div className="flex-flow">Data de Submissão</div>
+                    </th>
+                    <th>Opções</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredPaintings.map((painting) => (
+                    <PaintingRow
+                      painting={painting}
+                      key={painting.id}
+                      onEdit={() => handleEdit(painting.id)}
+                      onDelete={() => handleDelete(painting.id)}
+                      onPublish={() => handlePublish(painting)}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </section>
+        </main>
+      )}
 
       <ExitContainer>
         <ExitButton onClick={handleExit}>Sair</ExitButton>
