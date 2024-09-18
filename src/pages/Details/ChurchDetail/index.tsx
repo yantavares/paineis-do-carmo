@@ -67,14 +67,14 @@ const PaintingDetails = () => {
     return (
       <div
         style={{
-          height: "100vh",
+          height: "80vh",
           width: "100vw",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <CircularProgress size="lg" style={{ color: colors.green }} />
+        <CircularProgress size={100} style={{ color: colors.green }} />
       </div>
     );
 
@@ -130,26 +130,32 @@ const PaintingDetails = () => {
           </div>
         </div>
       </div>
-      <h2 className="topic-title">Obras da Igreja</h2>
-      <EngravingLayout>
-        {data.paintings &&
-          data.paintings.map((painting, index) => (
-            <Col
-              key={index}
-              onClick={() => navigate(`/item/paintings/${painting.id}`)}
-            >
-              <EngravingImage src={painting?.images?.[0]?.url} alt="" />
-              <EngravingDescription>
-                <TextTruncate className="engraving-title">
-                  {painting.title}
-                </TextTruncate>
-                <p style={{ fontSize: "1.6rem" }}>
-                  {painting?.placement ?? "Sem localização"}
-                </p>
-              </EngravingDescription>
-            </Col>
-          ))}
-      </EngravingLayout>
+      {data?.paintings?.length > 0 && (
+        <>
+          <h2 className="topic-title">Obras da Igreja</h2>
+          <EngravingLayout>
+            {data.paintings.map((painting, index) => (
+              <Col
+                key={index}
+                onClick={() => navigate(`/item/paintings/${painting.id}`)}
+              >
+                <EngravingImage
+                  src={painting?.images?.[0]?.url}
+                  alt={painting.title || "Painting"}
+                />
+                <EngravingDescription>
+                  <TextTruncate className="engraving-title">
+                    {painting.title}
+                  </TextTruncate>
+                  <p style={{ fontSize: "1.6rem" }}>
+                    {painting?.placement ?? "Sem localização"}
+                  </p>
+                </EngravingDescription>
+              </Col>
+            ))}
+          </EngravingLayout>
+        </>
+      )}
     </Container>
   );
 };

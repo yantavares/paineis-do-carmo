@@ -56,7 +56,10 @@ const RegisterPage = () => {
           Se registre para poder logar e buscar obras <br /> no nosso banco de
           dados
         </p>
-        <button className="google-btn">
+        <button
+          className="google-btn"
+          onClick={() => toast.error("Disponível em breve!")}
+        >
           <img src={googleLogo} alt="" /> Entrar com o Google
         </button>
         <div className="divider"></div>

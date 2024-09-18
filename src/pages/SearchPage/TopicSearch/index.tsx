@@ -26,10 +26,6 @@ const TopicSearch = ({ tags, isLoading }: TopicSearchProps) => {
         Nossos <span style={{ color: colors.green }}>Tópicos</span>
         <SearchBarContainer>
           <SearchBar
-            placeHolder={"Busque por Tópico"}
-            showButtons={false}
-          />
-          <SearchBar
             inputValue={inputValue}
             setInputValue={setInputValue}
             placeHolder={"Busque por Tópico"}
@@ -43,21 +39,26 @@ const TopicSearch = ({ tags, isLoading }: TopicSearchProps) => {
           flex: 1,
           flexWrap: "wrap",
           gap: "4rem 2rem",
-        }}>
+        }}
+      >
         {isLoading ? (
           <div
             style={{
               width: "100%",
               display: "flex",
               justifyContent: "center",
-            }}>
+            }}
+          >
             <CircularProgress style={{ color: colors.green }} />
           </div>
         ) : filteredTags && filteredTags.length > 0 ? (
           filteredTags.map((tag, index) => (
             <BigTag
-              onClick={() => navigate(`/topicos/${tag.name.toLocaleLowerCase()}`)}
-              key={index}>
+              onClick={() =>
+                navigate(`/topicos/${tag.name.toLocaleLowerCase()}`)
+              }
+              key={index}
+            >
               {tag.name}
             </BigTag>
           ))

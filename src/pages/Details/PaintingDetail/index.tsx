@@ -59,10 +59,10 @@ const PaintingDetails = () => {
           `${import.meta.env.VITE_API_URL}/api/paintings/${id}`
         );
         setData(response.data as Painting);
-        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
+      setIsLoading(false);
     };
 
     fetchPaintings();
@@ -72,14 +72,14 @@ const PaintingDetails = () => {
     return (
       <div
         style={{
-          height: "100vh",
+          height: "80vh",
           width: "100vw",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <CircularProgress size="lg" style={{ color: colors.green }} />
+        <CircularProgress size={100} style={{ color: colors.green }} />
       </div>
     );
 
@@ -190,20 +190,26 @@ const PaintingDetails = () => {
           </div>
         </div>
       </div>
-      <h2 className="topic-title">Gravuras</h2>
-      <EngravingLayout>
-        {data.engravings &&
-          data.engravings.map((engraving, index) => (
-            <Col key={index} style={{ cursor: "not-allowed" }}>
-              <EngravingImage src={engraving.url} alt="" />
-              <EngravingDescription>
-                <TextTruncate className="engraving-title">
-                  {engraving.name}
-                </TextTruncate>
-              </EngravingDescription>
-            </Col>
-          ))}
-      </EngravingLayout>
+      {data?.engravings?.length > 0 && (
+        <>
+          <h2 className="topic-title">Gravuras</h2>
+          <EngravingLayout>
+            {data.engravings.map((engraving, index) => (
+              <Col key={index} style={{ cursor: "not-allowed" }}>
+                <EngravingImage
+                  src={engraving.url}
+                  alt={engraving.name || "Engraving"}
+                />
+                <EngravingDescription>
+                  <TextTruncate className="engraving-title">
+                    {engraving.name}
+                  </TextTruncate>
+                </EngravingDescription>
+              </Col>
+            ))}
+          </EngravingLayout>
+        </>
+      )}
     </Container>
   );
 };

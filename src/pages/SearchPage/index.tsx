@@ -35,16 +35,24 @@ const SearchPage = () => {
   const { selected } = useParams();
 
   const useQuery = () => {
-    return new URLSearchParams(useLocation().search).toString().replace("search=", "");
+    return new URLSearchParams(useLocation().search)
+      .toString()
+      .replace("search=", "");
   };
 
   const query = useQuery();
 
-  const [data, setData] = useState([]);
+  const [dataChurch, setDataChurch] = useState([]);
+  const [dataPainting, setDataPainting] = useState([]);
+  const [dataTopics, setDataTopics] = useState([]);
+
   const [inputValue, setInputValue] = useState(query ? query : "");
   const [isLoading, setIsLoading] = useState(false);
 
-  const translatedSelected = useMemo(() => translateSelected(selected), [selected]);
+  const translatedSelected = useMemo(
+    () => translateSelected(selected),
+    [selected]
+  );
 
   useEffect(() => {
     setInputValue(query ? query : "");
@@ -53,14 +61,21 @@ const SearchPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
+
+      setDataChurch([]);
+      setDataPainting([]);
+      setDataTopics([]);
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_API_URL}/api/${translatedSelected}`
         );
-        setData(response.data);
+        if (translatedSelected === "churches") setDataChurch(response.data);
+        if (translatedSelected === "paintings") setDataPainting(response.data);
+        if (translatedSelected === "tags") setDataTopics(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
+
       setIsLoading(false);
     };
 
@@ -69,17 +84,16 @@ const SearchPage = () => {
     }
   }, [translatedSelected]);
 
-  const filteredData = data.filter((item) => {
-    switch (selected) {
-      case "obras":
-        return item && item.title
-          ? item.title.toLowerCase().includes(inputValue.toLowerCase())
-          : false;
-      default:
-        return item && item.name
-          ? item.name.toLowerCase().includes(inputValue.toLowerCase())
-          : false;
-    }
+  const filteredDataPainting = dataPainting?.filter((item) => {
+    return item.title.toLowerCase().includes(inputValue.toLowerCase());
+  });
+
+  const filteredDataChurch = dataChurch?.filter((item) => {
+    return item.name.toLowerCase().includes(inputValue.toLowerCase());
+  });
+
+  const filteredDataTopics = dataTopics?.filter((item) => {
+    return item.name.toLowerCase().includes(inputValue.toLowerCase());
   });
 
   const renderContent = () => {
@@ -89,7 +103,10 @@ const SearchPage = () => {
         return (
           <>
             <SearchHeader>
-              Nossa Coleção de <span style={{ color: colors.green }}>{capitalize(selected)}</span>
+              Nossa Coleção de{" "}
+              <span style={{ color: colors.green }}>
+                {capitalize(selected)}
+              </span>
               <SearchBarContainer>
                 <SearchBar
                   placeHolder={`Busque por ${selected}`}
@@ -107,11 +124,12 @@ const SearchPage = () => {
                     width: "100%",
                     display: "flex",
                     justifyContent: "center",
-                  }}>
+                  }}
+                >
                   <CircularProgress style={{ color: colors.green }} />
                 </div>
-              ) : filteredData && filteredData.length > 0 ? (
-                filteredData.map((item) => {
+              ) : filteredDataPainting && filteredDataPainting.length > 0 ? (
+                filteredDataPainting.map((item) => {
                   return (
                     <SearchResult key={item?.id}>
                       <Item
@@ -134,7 +152,10 @@ const SearchPage = () => {
           <>
             <ChurchMap />
             <SearchHeader>
-              Todas as <span style={{ color: colors.green }}>{capitalize(selected)}</span>
+              Todas as{" "}
+              <span style={{ color: colors.green }}>
+                {capitalize(selected)}
+              </span>
               <SearchBarContainer>
                 <SearchBar
                   placeHolder={`Busque por ${selected}`}
@@ -145,8 +166,8 @@ const SearchPage = () => {
               </SearchBarContainer>
             </SearchHeader>
             <SearchResultsContainer>
-              {filteredData && filteredData.length > 0 ? (
-                filteredData.map((item, index) => (
+              {filteredDataChurch && filteredDataChurch.length > 0 ? (
+                filteredDataChurch.map((item, index) => (
                   <SearchResult key={index}>
                     <Item
                       item={item}
@@ -163,12 +184,7 @@ const SearchPage = () => {
         );
 
       case "topicos":
-        return (
-          <TopicSearch
-            isLoading={isLoading}
-            tags={filteredData}
-          />
-        );
+        return <TopicSearch isLoading={isLoading} tags={filteredDataTopics} />;
 
       default:
         return <p>Selecione uma categoria válida.</p>;
