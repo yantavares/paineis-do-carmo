@@ -60,23 +60,26 @@ const SearchPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
+      if (translatedSelected === "churches" && dataChurch.length === 0)
+        setIsLoading(true);
+      if (translatedSelected === "paintings" && dataPainting.length === 0)
+        setIsLoading(true);
+      if (translatedSelected === "tags" && dataTopics.length === 0)
+        setIsLoading(true);
 
-      setDataChurch([]);
-      setDataPainting([]);
-      setDataTopics([]);
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_API_URL}/api/${translatedSelected}`
         );
+
         if (translatedSelected === "churches") setDataChurch(response.data);
         if (translatedSelected === "paintings") setDataPainting(response.data);
         if (translatedSelected === "tags") setDataTopics(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
       }
-
-      setIsLoading(false);
     };
 
     if (translatedSelected !== "wrong") {
@@ -95,6 +98,9 @@ const SearchPage = () => {
   const filteredDataTopics = dataTopics?.filter((item) => {
     return item.name.toLowerCase().includes(inputValue.toLowerCase());
   });
+
+  if (isLoading) {
+  }
 
   const renderContent = () => {
     switch (selected) {
@@ -118,28 +124,28 @@ const SearchPage = () => {
             </SearchHeader>
 
             <SearchResultsContainer>
+              {/* Display loading spinner */}
               {isLoading ? (
                 <div
                   style={{
                     width: "100%",
                     display: "flex",
                     justifyContent: "center",
+                    marginTop: "20px",
                   }}
                 >
                   <CircularProgress style={{ color: colors.green }} />
                 </div>
-              ) : filteredDataPainting && filteredDataPainting.length > 0 ? (
-                filteredDataPainting.map((item) => {
-                  return (
-                    <SearchResult key={item?.id}>
-                      <Item
-                        item={item}
-                        type={translateTopicType(selected)}
-                        fixedImgHeight
-                      />
-                    </SearchResult>
-                  );
-                })
+              ) : filteredDataPainting?.length > 0 ? (
+                filteredDataPainting.map((item) => (
+                  <SearchResult key={item?.id}>
+                    <Item
+                      item={item}
+                      type={translateTopicType(selected)}
+                      fixedImgHeight
+                    />
+                  </SearchResult>
+                ))
               ) : (
                 <p>Nenhum item encontrado na busca...</p>
               )}
@@ -166,7 +172,18 @@ const SearchPage = () => {
               </SearchBarContainer>
             </SearchHeader>
             <SearchResultsContainer>
-              {filteredDataChurch && filteredDataChurch.length > 0 ? (
+              {isLoading ? (
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "20px",
+                  }}
+                >
+                  <CircularProgress style={{ color: colors.green }} />
+                </div>
+              ) : filteredDataChurch?.length > 0 ? (
                 filteredDataChurch.map((item, index) => (
                   <SearchResult key={index}>
                     <Item

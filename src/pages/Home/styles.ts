@@ -26,7 +26,7 @@ export const TopicSubTitle = styled.p`
 
 export const TopicsContainer = styled.div`
   display: flex;
-  gap: 5rem;
+  gap: 3rem;
   margin-top: 3rem;
   width: 100%;
   flex-direction: column;
