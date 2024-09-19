@@ -44,7 +44,16 @@ const TagDetail = () => {
       </SearchHeader>
       <SearchResultsContainer>
         {isLoading ? (
-          <CircularProgress style={{ color: colors.green }} />
+          <div
+            style={{
+              width: "100vw",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <CircularProgress style={{ color: colors.green }} />
+          </div>
         ) : data && data.length > 0 ? (
           data.map((item: any, index: number) => (
             <SearchResult key={index}>

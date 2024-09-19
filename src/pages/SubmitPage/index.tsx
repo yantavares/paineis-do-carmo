@@ -725,18 +725,18 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
         },
       });
 
-      setObra({
-        name: "",
-        description: "",
-        bibliographicReferences: "",
-        bibliographicSources: "",
-        dateOfCreation: "",
-        placement: "",
-        tags: [],
-        churchId: "",
-        authorId: "",
-        imagens: [],
-      });
+      // setObra({
+      //   name: "",
+      //   description: "",
+      //   bibliographicReferences: "",
+      //   bibliographicSources: "",
+      //   dateOfCreation: "",
+      //   placement: "",
+      //   tags: [],
+      //   churchId: "",
+      //   authorId: "",
+      //   imagens: [],
+      // });
       setImages([]);
       setSelectedTags([]);
       setGravuras([]);
