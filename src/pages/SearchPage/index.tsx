@@ -46,6 +46,8 @@ const SearchPage = () => {
   const [dataPainting, setDataPainting] = useState([]);
   const [dataTopics, setDataTopics] = useState([]);
 
+  const [error, setError] = useState(null);
+
   const [inputValue, setInputValue] = useState(query ? query : "");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -60,6 +62,7 @@ const SearchPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setError(null);
       if (translatedSelected === "churches" && dataChurch.length === 0)
         setIsLoading(true);
       if (translatedSelected === "paintings" && dataPainting.length === 0)
@@ -77,6 +80,7 @@ const SearchPage = () => {
         if (translatedSelected === "tags") setDataTopics(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setError(error);
       } finally {
         setIsLoading(false);
       }
@@ -147,7 +151,7 @@ const SearchPage = () => {
                   </SearchResult>
                 ))
               ) : (
-                <p>Nenhum item encontrado na busca...</p>
+                error && <p>Nenhum item encontrado na busca...</p>
               )}
             </SearchResultsContainer>
           </>
@@ -194,7 +198,7 @@ const SearchPage = () => {
                   </SearchResult>
                 ))
               ) : (
-                <p>Nenhum item encontrado na busca...</p>
+                error && <p>Nenhum item encontrado na busca...</p>
               )}
             </SearchResultsContainer>
           </>
