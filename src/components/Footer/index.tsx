@@ -14,7 +14,7 @@ import {
   TextContainer,
   TitleText,
 } from "./styles";
-import paintBucket from "src/assets/utils/paint-bucket-alt.svg";
+import paintBucket from "src/assets/utils/logo-alt.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faWhatsapp,
@@ -35,7 +35,7 @@ const Footer = () => {
   const navigate = useNavigate();
   return (
     <FooterContainer>
-      <PaintBucket src={paintBucket} alt="Paint Bucket" />
+      <PaintBucket height={35} src={paintBucket} alt="Paint Bucket" />
       <InnerDiv>
         <TextContainer>
           <ContactContainer>

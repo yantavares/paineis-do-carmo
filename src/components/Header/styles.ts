@@ -27,6 +27,7 @@ export const TitleContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: 30rem;
   gap: 1.4rem;
   cursor: pointer;
   transition: color 0.3s;
@@ -85,5 +86,5 @@ export const LoginButton = styled.button`
 `;
 
 export const Icon = styled.img`
-  max-height: 3rem;
+  max-height: 4rem;
 `;
