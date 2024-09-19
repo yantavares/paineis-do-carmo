@@ -1,6 +1,6 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
-import magGlass from "src/assets/mag-glass.svg";
+import magGlass from "src/assets/utils/mag-glass.svg";
 import colors from "src/utils/colors";
 import {
   Container,

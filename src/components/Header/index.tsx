@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import PaintBucket from "src/assets/paint-bucket.svg";
+import PaintBucket from "src/assets/utils/paint-bucket.svg";
 import {
   ButtonsContainer,
   Col1,

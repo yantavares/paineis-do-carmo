@@ -14,7 +14,7 @@ import {
   TextContainer,
   TitleText,
 } from "./styles";
-import paintBucket from "src/assets/paint-bucket-alt.svg";
+import paintBucket from "src/assets/utils/paint-bucket-alt.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faWhatsapp,
