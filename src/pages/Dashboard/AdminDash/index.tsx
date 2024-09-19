@@ -33,6 +33,7 @@ export default function Dashboard() {
   const [churchToEdit, setChurchToEdit] = useState(null);
   const [churchImages, setChurchImages] = useState([]);
   const [urlsToRemove, setUrlsToRemove] = useState([]);
+  const [isDeleting, setIsDeleting] = useState(false);
   const brazilianStates = [
     "AC",
     "AL",
@@ -231,6 +232,7 @@ export default function Dashboard() {
   };
 
   const confirmDeleteChurch = async () => {
+    setIsDeleting(true);
     try {
       // Proceed with deletion
       await axios.delete(
@@ -247,6 +249,8 @@ export default function Dashboard() {
       setDeleteChurchId(null);
     } catch (error) {
       toast.error("Erro ao deletar igreja: " + error.message);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -404,6 +408,7 @@ export default function Dashboard() {
       </h1>
       <Toaster />
       <DeleteConfirmationModal
+        isDeleting={isDeleting}
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={confirmDelete}
@@ -593,6 +598,7 @@ export default function Dashboard() {
         </ChurchForm>
       </Modal>
       <DeleteConfirmationModal
+        isDeleting={isDeleting}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onConfirm={confirmDeleteChurch}
