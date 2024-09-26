@@ -65,7 +65,7 @@ export const Container = styled.div`
 
     &:focus {
       outline: none;
-      border-color: #588157;
+      border-color: ${colors.mainColor};
     }
 
     &::placeholder {
@@ -160,7 +160,7 @@ export const Container = styled.div`
   .submit-btn {
     color: #fff;
     margin-top: 2rem;
-    background-color: #588157;
+    background-color: ${colors.mainColor};
 
     &:hover {
       background-color: #476b4f;

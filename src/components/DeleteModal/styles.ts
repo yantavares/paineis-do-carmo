@@ -1,3 +1,4 @@
+import colors from "src/utils/colors";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -63,7 +64,7 @@ export const Container = styled.div`
 
   .modal-actions .submit-btn {
     background-color: #dc3545;
-    color: #fff;
+    color: ${colors.mainColor};
     border: none;
     border-radius: 4px;
     padding: 10px 20px;

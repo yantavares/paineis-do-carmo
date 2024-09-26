@@ -22,11 +22,11 @@ export const AboutText = styled.h3`
 
 export const AboutSpan = styled.span`
   font-weight: bold;
-  color: ${colors.green};
+  color: ${colors.mainColor};
 `;
 
 export const HorizontalLine = styled.hr`
-  border: 0.1rem solid ${colors.green};
+  border: 0.1rem solid ${colors.mainColor};
   opacity: 0.4;
   width: 100%;
 `;
@@ -34,7 +34,8 @@ export const HorizontalLine = styled.hr`
 export const AboutUsContainer = styled.div`
   margin-top: 5rem;
   display: flex;
-  background-color: ${colors.green};
+  background-color: ${colors.darkMain};
+  opacity: 0.9;
   border-radius: 4rem;
   padding: 4%;
   color: ${colors.white};

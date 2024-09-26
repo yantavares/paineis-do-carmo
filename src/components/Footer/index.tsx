@@ -8,13 +8,13 @@ import {
   FooterButton,
   FooterContainer,
   InnerDiv,
-  PaintBucket,
+  LogoMain,
   SocialsContainer,
   Text,
   TextContainer,
   TitleText,
 } from "./styles";
-import paintBucket from "src/assets/utils/logo-alt.svg";
+import logoMain from "src/assets/utils/logo-alt.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faWhatsapp,
@@ -35,7 +35,7 @@ const Footer = () => {
   const navigate = useNavigate();
   return (
     <FooterContainer>
-      <PaintBucket height={35} src={paintBucket} alt="Paint Bucket" />
+      <LogoMain height={35} src={logoMain} alt="Paint Bucket" />
       <InnerDiv>
         <TextContainer>
           <ContactContainer>

@@ -7,7 +7,7 @@ export const FooterContainer = styled.footer`
   justify-content: space-evenly;
   align-items: center;
   height: 40%;
-  background-color: ${colors.green};
+  background-color: ${colors.darkMain};
   color: white;
   margin-top: 8rem;
   padding: 2% 0;
@@ -21,7 +21,7 @@ export const DashedLine = styled.div`
   margin-top: 2rem;
 `;
 
-export const PaintBucket = styled.img`
+export const LogoMain = styled.img`
   align-self: flex-start;
   padding-left: 5%;
 `;

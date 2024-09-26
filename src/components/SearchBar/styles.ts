@@ -25,7 +25,7 @@ export const StyledIcon = styled(FontAwesomeIcon)`
 
   &:hover {
     transform: scale(1.2);
-    color: ${colors.green};
+    color: ${colors.mainColor};
   }
 `;
 
@@ -53,7 +53,7 @@ interface SearchOptionProps {
 export const SearchOption = styled.button<SearchOptionProps>`
   border-radius: 1.2rem;
   border: ${(props) =>
-    props.selected ? "1px solid " + colors.green : "1px solid #cccccc"};
+    props.selected ? "1px solid " + colors.mainColor : "1px solid #cccccc"};
   font-size: 1.4rem;
   transition: color 0.3s;
   transition: all 0.3s;

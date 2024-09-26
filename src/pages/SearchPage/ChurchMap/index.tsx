@@ -29,9 +29,9 @@ const ChurchMap = () => {
       const originalStyle = () => ({
         weight: 10,
         stroke: true,
-        color: colors.darkGreen,
-        fillColor: colors.lightGreen,
-        fillOpacity: 0.9,
+        color: "#000",
+        fillColor: colors.mainColor,
+        fillOpacity: 0.3,
       });
 
       const geoJsonLayer = L.geoJSON(brazilGeoJSON, {
@@ -80,7 +80,7 @@ const ChurchMap = () => {
     <>
       <div style={{ display: "flex", alignItems: "flex-end", gap: "1.4em" }}>
         <SearchHeader>
-          Nossa Coleção de <span style={{ color: colors.green }}>Igrejas</span>
+          Nossa Coleção de <span style={{ color: colors.mainColor }}>Igrejas</span>
         </SearchHeader>
         <h4 style={{ padding: 0, margin: 0, fontSize: "2rem" }}>por estado</h4>
       </div>
@@ -112,13 +112,6 @@ const ChurchMap = () => {
         >
           <GeoJSON
             data={brazilGeoJSON}
-            style={() => ({
-              weight: 10,
-              stroke: true,
-              color: colors.darkGreen,
-              fillColor: colors.lightGreen,
-              fillOpacity: 0.8,
-            })}
           />
           <ShowStateNameOnHover />
         </MapContainer>

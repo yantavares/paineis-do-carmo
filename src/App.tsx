@@ -114,7 +114,7 @@ function App() {
               >
                 <CircularProgress
                   size={"10rem"}
-                  style={{ color: colors.green }}
+                  style={{ color: colors.mainColor }}
                 />
               </div>
             }

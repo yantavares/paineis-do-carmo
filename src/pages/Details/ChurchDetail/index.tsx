@@ -74,7 +74,7 @@ const PaintingDetails = () => {
           alignItems: "center",
         }}
       >
-        <CircularProgress size={100} style={{ color: colors.green }} />
+        <CircularProgress size={100} style={{ color: colors.mainColor }} />
       </div>
     );
 

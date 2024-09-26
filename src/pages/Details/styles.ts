@@ -76,7 +76,7 @@ export const Container = styled.div`
     cursor: pointer;
 
     &:hover {
-      color: ${colors.green};
+      color: ${colors.mainColor};
     }
   }
 

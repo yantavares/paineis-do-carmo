@@ -17,7 +17,7 @@ export const SeeMoreButton = styled.button`
   padding: 0;
   transition: all 0.3s;
   &:hover {
-    color: ${colors.green};
+    color: ${colors.mainColor};
   }
   &:focus {
     outline: none;

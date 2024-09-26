@@ -40,7 +40,7 @@ const TagDetail = () => {
   return (
     <SearchContainer>
       <SearchHeader>
-        Tópico: <span style={{ color: colors.green }}>{parseTag(tag)}</span>
+        Tópico: <span style={{ color: colors.mainColor }}>{parseTag(tag)}</span>
       </SearchHeader>
       <SearchResultsContainer>
         {isLoading ? (
@@ -52,7 +52,7 @@ const TagDetail = () => {
               alignItems: "center",
             }}
           >
-            <CircularProgress style={{ color: colors.green }} />
+            <CircularProgress style={{ color: colors.mainColor }} />
           </div>
         ) : data && data.length > 0 ? (
           data.map((item: any, index: number) => (
