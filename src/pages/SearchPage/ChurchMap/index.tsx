@@ -7,6 +7,13 @@ import colors from "src/utils/colors";
 import { SearchHeader } from "./styles";
 import { useNavigate } from "react-router-dom";
 
+const originalStyle = () => ({
+  weight: 10,
+  stroke: false,
+  fillColor: colors.green,
+  fillOpacity: 0.5,
+});
+
 const ChurchMap = () => {
   const ShowStateNameOnHover = () => {
     const map = useMap();
@@ -25,14 +32,6 @@ const ChurchMap = () => {
         fillColor: "gray",
         fillOpacity: 0.8,
       };
-
-      const originalStyle = () => ({
-        weight: 10,
-        stroke: true,
-        color: "#000",
-        fillColor: colors.mainColor,
-        fillOpacity: 0.3,
-      });
 
       const geoJsonLayer = L.geoJSON(brazilGeoJSON, {
         style: originalStyle,
@@ -112,6 +111,7 @@ const ChurchMap = () => {
         >
           <GeoJSON
             data={brazilGeoJSON}
+            style={originalStyle()}
           />
           <ShowStateNameOnHover />
         </MapContainer>
