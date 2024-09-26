@@ -29,15 +29,15 @@ export interface Church {
 
 export const brazilianChurches: Church[] = [
   {
-    id: 158,
-    name: "Igreja de Santa Teresa de Jesus da Ordem Terceira do Carmo do Recife",
+    id: 52,
+    name: "Igreja da Ordem Terceira do Carmo do Recife",
     images: [{ url: igreja1 }],
     city: "Recife",
     state: "PE",
     tags: [],
   },
   {
-    id: 162,
+    id: 101,
     name: "Basílica de Nossa Senhora do Carmo",
     images: [{ url: igreja2 }],
     city: "Recife",
@@ -70,8 +70,9 @@ export interface Painting {
 
 export const brazilianPaintings: Painting[] = [
   {
-    id: 152,
+    id: 64,
     title: "A monja Teresa é protegida por Jesus",
+    church: brazilianChurches[0],
     images: [{ url: pintura1 }],
     dateOfCreation: "Século XVIII ",
     city: "Recife",
@@ -84,8 +85,9 @@ export const brazilianPaintings: Painting[] = [
     ],
   },
   {
-    id: 156,
-    title: "Visão: Santo Eduardo, rei da Inglaterra ",
+    id: 67,
+    title: "Santo Eduardo, rei da Inglaterra ",
+    church: brazilianChurches[0],
     images: [{ url: pintura2 }],
     dateOfCreation: "Século XIX",
     city: "Recife",
@@ -93,8 +95,9 @@ export const brazilianPaintings: Painting[] = [
     tags: [{ name: "eduardo" }, { name: "crucifixo" }, { name: "coroa" }],
   },
   {
-    id: 153,
+    id: 101,
     title: "O Nascimento do Profeta Elias",
+    church: brazilianChurches[1],
     images: [{ url: pintura3 }],
     dateOfCreation: "Segunda metade do século XVIII ",
     city: "Recife",
@@ -107,9 +110,10 @@ export const brazilianPaintings: Painting[] = [
     ],
   },
   {
-    id: 154,
+    id: 101,
     title: "O Profeta Elias e o Profeta Eliseu",
     images: [{ url: pintura4 }],
+    church: brazilianChurches[1],
     dateOfCreation: "Segunda metade do século XVIII  ",
     city: "Recife",
     state: "PE",
