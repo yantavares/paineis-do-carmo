@@ -5,6 +5,13 @@ import brazilGeoJSON from "src/json/br_states.json";
 import colors from "src/utils/colors";
 import { SearchHeader } from "./styles";
 
+const originalStyle = () => ({
+  weight: 10,
+  stroke: false,
+  fillColor: colors.green,
+  fillOpacity: 0.5,
+});
+
 const ChurchMap = () => {
   const mapStyle = {
     color: "#aa1703", // This is the correct property for stroke color
