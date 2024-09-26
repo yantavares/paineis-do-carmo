@@ -6,7 +6,7 @@ import { trimString } from "src/utils/strings";
 const ChurchText = ({ church }: { church: Church }) => {
   return (
     <>
-      <DataTitle>{trimString(church.name, 35)}</DataTitle>
+      <DataTitle>{trimString(church.name, 34)}</DataTitle>
       <DataInfoContainer>
         {church.city && <DataInfo>{church.city}</DataInfo>}
         {church.state && church.city ? (
