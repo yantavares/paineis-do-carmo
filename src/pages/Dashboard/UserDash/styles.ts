@@ -1,3 +1,4 @@
+import colors from "src/utils/colors";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -177,7 +178,7 @@ export const FormContainer = styled.div`
 
     &:focus {
       outline: none;
-      border-color: #588157;
+      border-color: ${colors.mainColor};
     }
 
     &::placeholder {
@@ -189,8 +190,8 @@ export const FormContainer = styled.div`
 
   button.secondary {
     background: #fff;
-    color: #588157;
-    border: 1px solid #588157;
+    color: ${colors.mainColor};
+    border: 1px solid ${colors.mainColor};
     display: flex;
     align-items: center;
     margin-top: 1rem;
@@ -202,7 +203,7 @@ export const FormContainer = styled.div`
   }
 
   button {
-    background: #588157;
+    background: ${colors.mainColor};
     color: #f5f5f5;
     border: none;
     display: flex;

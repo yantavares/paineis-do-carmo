@@ -32,6 +32,7 @@ export default function Dashboard() {
   const [selectedPainting, setSelectedPainting] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [paintingToEdit, setPaintingToEdit] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const navigate = useNavigate();
 
@@ -104,6 +105,7 @@ export default function Dashboard() {
   };
 
   const confirmDelete = async () => {
+    setIsDeleting(true);
     try {
       await axios.delete(
         `${import.meta.env.VITE_API_URL}/api/paintings/${paintingToDelete}`,
@@ -120,6 +122,8 @@ export default function Dashboard() {
       setIsDeleteModalOpen(false);
     } catch (error) {
       toast.error("Erro ao deletar pintura: " + error.message);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -209,7 +213,7 @@ export default function Dashboard() {
 
   return (
     <Container>
-      <h1 style={{ color: colors.darkGreen, fontWeight: 400 }}>
+      <h1 style={{ color: colors.darkMain, fontWeight: 400 }}>
         Bem vindo(a) {user?.name ?? "Admin"}!
       </h1>
       <Toaster />
@@ -217,6 +221,7 @@ export default function Dashboard() {
         <SubmitPage painting={paintingToEdit} isEdit={true} />
       </Modal>
       <DeleteConfirmationModal
+        isDeleting={isDeleting}
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={confirmDelete}
@@ -290,7 +295,7 @@ export default function Dashboard() {
             alignItems: "center",
           }}
         >
-          <CircularProgress size={70} style={{ color: colors.green }} />
+          <CircularProgress size={70} style={{ color: colors.mainColor }} />
         </div>
       ) : (
         <main className="table">

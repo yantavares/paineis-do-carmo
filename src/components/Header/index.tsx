@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import PaintBucket from "src/assets/paint-bucket.svg";
+import LogoMain from "src/assets/utils/logo.svg";
 import {
   ButtonsContainer,
   Col1,
@@ -44,7 +44,7 @@ const Header = () => {
     <HeaderContainer>
       <Col1>
         <TitleContainer onClick={() => navigate("/")}>
-          <Icon src={PaintBucket} alt="Museu Barroco" />
+          <Icon src={LogoMain} alt="Museu Barroco" />
           <Title>Museu Barroco</Title>
         </TitleContainer>
 

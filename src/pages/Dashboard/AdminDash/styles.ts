@@ -1,3 +1,4 @@
+import colors from "src/utils/colors";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -236,7 +237,7 @@ export const ChurchForm = styled.div`
 
     &:focus {
       outline: none;
-      border-color: #588157;
+      border-color: ${colors.mainColor};
     }
 
     &::placeholder {
@@ -331,7 +332,7 @@ export const ChurchForm = styled.div`
   .submit-btn {
     color: #fff;
     margin-top: 2rem;
-    background-color: #588157;
+    background-color: ${colors.mainColor};
 
     &:hover {
       background-color: #476b4f;

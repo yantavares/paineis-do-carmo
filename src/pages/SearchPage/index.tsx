@@ -114,7 +114,7 @@ const SearchPage = () => {
           <>
             <SearchHeader>
               Nossa Coleção de{" "}
-              <span style={{ color: colors.green }}>
+              <span style={{ color: colors.mainColor }}>
                 {capitalize(selected)}
               </span>
               <SearchBarContainer>
@@ -138,7 +138,7 @@ const SearchPage = () => {
                     marginTop: "20px",
                   }}
                 >
-                  <CircularProgress style={{ color: colors.green }} />
+                  <CircularProgress style={{ color: colors.mainColor }} />
                 </div>
               ) : filteredDataPainting?.length > 0 ? (
                 filteredDataPainting.map((item) => (
@@ -163,7 +163,7 @@ const SearchPage = () => {
             <ChurchMap />
             <SearchHeader>
               Todas as{" "}
-              <span style={{ color: colors.green }}>
+              <span style={{ color: colors.mainColor }}>
                 {capitalize(selected)}
               </span>
               <SearchBarContainer>
@@ -185,7 +185,7 @@ const SearchPage = () => {
                     marginTop: "20px",
                   }}
                 >
-                  <CircularProgress style={{ color: colors.green }} />
+                  <CircularProgress style={{ color: colors.mainColor }} />
                 </div>
               ) : filteredDataChurch?.length > 0 ? (
                 filteredDataChurch.map((item, index) => (

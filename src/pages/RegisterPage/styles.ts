@@ -1,3 +1,4 @@
+import colors from "src/utils/colors";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -40,7 +41,7 @@ export const Container = styled.div`
 
   .login-btn {
     color: #fff;
-    background-color: #588157;
+    background-color: ${colors.mainColor};
     border-radius: 1rem;
     padding: 1rem;
     width: 100%;

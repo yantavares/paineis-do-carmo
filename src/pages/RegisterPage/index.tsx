@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 
 import { Container, Content } from "./styles";
-import googleLogo from "../../assets/google_symbol.svg.png";
+import googleLogo from "../../assets/utils/google_symbol.svg.png";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";

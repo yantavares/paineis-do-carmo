@@ -1,9 +1,9 @@
-import igreja1 from "src/assets/igreja1.jpg";
-import igreja2 from "src/assets/igreja2.jpg";
-import pintura1 from "src/assets/pintura1.jpg";
-import pintura2 from "src/assets/pintura2.jpg";
-import pintura3 from "src/assets/pintura3.jpg";
-import pintura4 from "src/assets/pintura4.jpg";
+import igreja1 from "src/assets/utils/igreja1.jpg";
+import igreja2 from "src/assets/utils/igreja2.jpg";
+import pintura1 from "src/assets/utils/pintura1.jpg";
+import pintura2 from "src/assets/utils/pintura2.jpg";
+import pintura3 from "src/assets/utils/pintura3.jpg";
+import pintura4 from "src/assets/utils/pintura4.jpg";
 
 type Image = {
   url: string;

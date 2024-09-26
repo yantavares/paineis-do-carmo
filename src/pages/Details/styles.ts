@@ -76,7 +76,7 @@ export const Container = styled.div`
     cursor: pointer;
 
     &:hover {
-      color: ${colors.green};
+      color: ${colors.mainColor};
     }
   }
 
@@ -248,7 +248,7 @@ export const DownloadButton = styled.button`
 export const EngravingLayout = styled.div`
   display: flex;
   gap: 2rem;
-  overflow-x: scroll;
+  overflow-x: auto;
   scrollbar-width: thin;
 `;
 

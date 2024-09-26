@@ -2,7 +2,12 @@ import React from "react";
 import { X } from "lucide-react";
 import { Container } from "./styles";
 
-const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm }) => {
+const DeleteConfirmationModal = ({
+  isOpen,
+  onClose,
+  onConfirm,
+  isDeleting,
+}) => {
   if (!isOpen) return null;
 
   return (
@@ -14,24 +19,30 @@ const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm }) => {
             <button
               onClick={onClose}
               aria-label="Close modal"
-              className="close-btn">
+              className="close-btn"
+            >
               <X />
             </button>
           </div>
           <div className="modal-content">
-            <p style={{ fontSize: "2rem" }}>Tem certeza que quer deletar este item?</p>
+            <p style={{ fontSize: "2rem" }}>
+              Tem certeza que quer deletar este item?
+            </p>
           </div>
           <div className="modal-actions">
             <button
               onClick={onConfirm}
               className="submit-btn"
-              style={{ fontSize: "1.5rem" }}>
+              disabled={isDeleting}
+              style={{ fontSize: "1.5rem" }}
+            >
               Sim, Deletar
             </button>
             <button
               onClick={onClose}
               className="cancel-btn"
-              style={{ fontSize: "1.5rem" }}>
+              style={{ fontSize: "1.5rem" }}
+            >
               Cancelar
             </button>
           </div>

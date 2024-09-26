@@ -4,7 +4,7 @@ import axios from "axios";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { makeOpenAIRequest } from "src/api/chatbot";
-import openAISvg from "src/assets/OpenAI.svg";
+import openAISvg from "src/assets/utils/OpenAI.svg";
 import { Church, Painting } from "./utils/mockData";
 
 interface AssistantProps {

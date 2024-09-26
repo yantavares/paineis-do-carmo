@@ -8,7 +8,7 @@ export const DataTitle = styled.h3`
   transition: all 0.3s;
   &:hover {
     cursor: pointer;
-    color: ${colors.green};
+    color: ${colors.mainColor};
   }
 `;
 

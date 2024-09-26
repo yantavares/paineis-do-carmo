@@ -23,7 +23,7 @@ const TopicSearch = ({ tags, isLoading }: TopicSearchProps) => {
   return (
     <>
       <SearchHeader>
-        Nossos <span style={{ color: colors.green }}>Tópicos</span>
+        Nossos <span style={{ color: colors.mainColor }}>Tópicos</span>
         <SearchBarContainer>
           <SearchBar
             inputValue={inputValue}
@@ -49,7 +49,7 @@ const TopicSearch = ({ tags, isLoading }: TopicSearchProps) => {
               justifyContent: "center",
             }}
           >
-            <CircularProgress style={{ color: colors.green }} />
+            <CircularProgress style={{ color: colors.mainColor }} />
           </div>
         ) : filteredTags && filteredTags.length > 0 ? (
           filteredTags.map((tag, index) => (

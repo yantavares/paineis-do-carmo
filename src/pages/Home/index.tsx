@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import temp3 from "src/assets/artista1.jpg";
-import temp4 from "src/assets/baroque.jpg";
-import temp2 from "src/assets/baroque2.jpg";
-import temp from "src/assets/baroque3.jpg";
-import temp6 from "src/assets/igreja2.jpg";
-import temp5 from "src/assets/pintura2.jpg";
+import temp3 from "src/assets/utils/artista1.jpg";
+import temp4 from "src/assets/utils/baroque.jpg";
+import temp2 from "src/assets/utils/baroque2.jpg";
+import temp from "src/assets/utils/baroque3.jpg";
+import temp6 from "src/assets/utils/igreja2.jpg";
+import temp5 from "src/assets/utils/pintura2.jpg";
 import ImageCarousel2 from "src/components/ImageCarousel2";
 import HomeSearch from "src/components/SearchBar";
 import colors from "src/utils/colors";
@@ -37,8 +37,8 @@ const Home = () => {
               O Barroco{" "}
               <span
                 style={{
-                  color: colors.green,
-                  borderBottom: "2px solid #ded",
+                  color: colors.mainColor,
+                  borderBottom: "2px solid #eedddd",
                 }}
               >
                 Reinventado
@@ -85,17 +85,17 @@ const Home = () => {
               <RoundBox
                 text={"Apresentação do projeto"}
                 buttonText={"Sobre nós"}
-                color={"#3A5A40"}
+                color={colors.darkMain}
               />
               <RoundBox
                 text={"Como navegar pelo site"}
                 buttonText={"Como utilizar"}
-                color={colors.green}
+                color={colors.mainColor}
               />
               <RoundBox
                 text={"Faça parte do projeto!"}
                 buttonText={"Fazer parte"}
-                color={"#A3B18A"}
+                color={colors.lightMain}
               />
             </TopicBody>
           </Topic>
