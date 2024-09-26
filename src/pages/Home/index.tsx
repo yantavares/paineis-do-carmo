@@ -38,7 +38,7 @@ const Home = () => {
               <span
                 style={{
                   color: colors.mainColor,
-                  borderBottom: "2px solid #ded",
+                  borderBottom: "2px solid #eedddd",
                 }}
               >
                 Reinventado
