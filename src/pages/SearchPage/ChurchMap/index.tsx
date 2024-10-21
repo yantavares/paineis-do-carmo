@@ -1,9 +1,12 @@
-import React, { memo } from "react";
-import { MapContainer, GeoJSON } from "react-leaflet";
+import React, { memo, useEffect } from "react";
+import { MapContainer, GeoJSON, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import brazilGeoJSON from "src/json/br_states.json";
 import colors from "src/utils/colors";
 import { SearchHeader } from "./styles";
+import L from "leaflet";
+import { useNavigate } from "react-router-dom";
+
 
 const originalStyle = () => ({
   weight: 10,
@@ -14,12 +17,80 @@ const originalStyle = () => ({
 
 const ChurchMap = () => {
   const mapStyle = {
-    color: "#aa1703", // This is the correct property for stroke color
     weight: 2,
     opacity: 1,
     fillColor: colors.mainColor,
     fillOpacity: 0.15,
   };
+
+  const ShowStateNameOnHover = () => {
+    const map = useMap();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      const initialStateNameIcon = L.marker(map.getCenter(), {
+        icon: L.divIcon({
+          className: "state-name-icon",
+          html: "",
+        }),
+        interactive: false,
+      }).addTo(map);
+
+      const hoverStyle = {
+        fillColor: "gray",
+        fillOpacity: 0.8,
+      };
+
+      const originalStyle = () => ({
+        color: "#aa1703",
+        weight: 2,
+        opacity: 1,
+        fillColor: colors.mainColor,
+        fillOpacity: 0.15,
+      });
+
+      const geoJsonLayer = L.geoJSON(brazilGeoJSON, {
+        style: originalStyle,
+        onEachFeature: (feature, layer) => {
+          layer.on("mouseover", (e) => {
+            const pathLayer = layer as L.Path;
+            pathLayer.setStyle(hoverStyle);
+
+            initialStateNameIcon.setIcon(
+              L.divIcon({
+                className: "state-name-icon",
+                html: `<div>${feature.properties.SIGLA}</div>`,
+              })
+            );
+            initialStateNameIcon.setOpacity(1);
+          });
+
+          layer.on("mousemove", (e) => {
+            initialStateNameIcon.setLatLng(e.latlng);
+          });
+
+          layer.on("mouseout", () => {
+            const pathLayer = layer as L.Path;
+            pathLayer.setStyle(originalStyle());
+            initialStateNameIcon.setOpacity(0);
+          });
+
+          layer.on("click", (e) => {
+            console.log(feature.properties.SIGLA);
+            navigate(`/pesquisa/igrejas/${feature.properties.SIGLA}`);
+          });
+        },
+      }).addTo(map);
+
+      return () => {
+        initialStateNameIcon.remove();
+        geoJsonLayer.remove();
+      };
+    }, [map]);
+
+    return null;
+  };
+  
 
   return (
     <>
@@ -57,6 +128,7 @@ const ChurchMap = () => {
             data={brazilGeoJSON}
             style={mapStyle}
           />
+          <ShowStateNameOnHover />
         </MapContainer>
       </div>
     </>
