@@ -163,7 +163,7 @@ export const Container = styled.div`
     background-color: ${colors.mainColor};
 
     &:hover {
-      background-color: #476b4f;
+      background-color: ${colors.darkMain};
     }
   }
 

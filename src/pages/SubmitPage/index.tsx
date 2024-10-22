@@ -1114,7 +1114,6 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
                 aria-label="Close modal"
                 className="close-btn"
               >
-                <X />
               </button>
             </div>
           </div>
