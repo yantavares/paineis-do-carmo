@@ -124,7 +124,7 @@ const Assistant: React.FC<AssistantProps> = ({
           }}
         >
           <h1>Museu Barroco IA</h1>
-          <img height={"15px"} src={openAISvg} alt="OpenAI logo" />
+          {/* <img height={"15px"} src={openAISvg} alt="OpenAI logo" /> */}
         </div>
         <button onClick={() => setShowAssistant(false)}>x</button>
       </div>
