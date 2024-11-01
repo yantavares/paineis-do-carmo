@@ -93,7 +93,7 @@ const Footer = () => {
               <span className="tooltip-social">Instagram</span>
             </a>
             <a
-              href="https://museubarroco.com"
+              href="https://github.com/yantavares/paineis-do-carmo"
               target="_blank"
               rel="noopener noreferrer"
             >

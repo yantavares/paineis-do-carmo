@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SearchBar from "src/components/SearchBar";
-import { Tag, tags } from "src/utils/mockData";
+import { Tag } from "src/utils/mockData";
 import { SearchHeader, SearchBarContainer } from "../styles";
 import colors from "src/utils/colors";
 import { BigTag } from "./styles";
@@ -14,11 +14,27 @@ interface TopicSearchProps {
 
 const TopicSearch = ({ tags, isLoading }: TopicSearchProps) => {
   const navigate = useNavigate();
-  const [inputValue, setInputValue] = React.useState("");
+  const [inputValue, setInputValue] = useState("");
+  const [filteredTags, setFilteredTags] = useState(tags);
+  const [showNoDataMessage, setShowNoDataMessage] = useState(false);
 
-  const filteredTags = tags.filter((tag) => {
-    return tag.name.toLowerCase().includes(inputValue.toLowerCase());
-  });
+  useEffect(() => {
+    let noDataTimeout;
+    const handleFilter = () => {
+      const filtered = tags.filter((tag) =>
+        tag.name.toLowerCase().includes(inputValue.toLowerCase())
+      );
+      setFilteredTags(filtered);
+
+      noDataTimeout = setTimeout(() => {
+        setShowNoDataMessage(filtered.length === 0);
+      }, 200);
+    };
+
+    handleFilter();
+
+    return () => clearTimeout(noDataTimeout);
+  }, [inputValue, tags]);
 
   return (
     <>
@@ -63,7 +79,7 @@ const TopicSearch = ({ tags, isLoading }: TopicSearchProps) => {
             </BigTag>
           ))
         ) : (
-          <p>Nenhum tópico encontrado...</p>
+          showNoDataMessage && <p>Nenhum tópico encontrado...</p>
         )}
       </div>
     </>
