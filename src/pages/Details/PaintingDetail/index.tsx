@@ -182,12 +182,14 @@ const PaintingDetails = () => {
               </p>
             </div>
           </div>
-          <div className="topic-wrapper">
-            <h2 className="tags-title">Tags</h2>
-            <div className="tags-wrapper">
-              <Tags tags={data.tags} />
+          {data.tags.length > 0 && (
+            <div className="topic-wrapper">
+              <h2 className="tags-title">Tags</h2>
+              <div className="tags-wrapper">
+                <Tags tags={data.tags} />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
       {data?.engravings?.length > 0 && (

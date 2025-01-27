@@ -315,9 +315,9 @@ export default function Dashboard() {
       );
     });
 
-    const updatedBibliographyReferences = churchToEdit?.bibliographyReferences
+    const newBibliographyReferences = churchToEdit?.bibliographyReferences
       ?.split("\n")
-      ?.filter((source) => source.trim() !== "");
+      ?.filter((reference) => reference !== "");
 
     const updatedChurch = {
       name: churchToEdit.name,
@@ -325,7 +325,7 @@ export default function Dashboard() {
       street: churchToEdit.street,
       city: churchToEdit.city,
       state: churchToEdit.state,
-      bibliographyReference: updatedBibliographyReferences,
+      bibliographyReference: newBibliographyReferences,
       bibliographySource: [...churchToEdit.bibliographySource],
       images: newImages.map((image) => ({
         base64Image: image.url,
@@ -525,11 +525,11 @@ export default function Dashboard() {
                   <p className="input-label">Referências Bibliográficas</p>
                   <textarea
                     placeholder="Insira as fontes"
-                    value={churchToEdit?.bibliographyReferences}
+                    value={churchToEdit?.bibliographyReferences || ""}
                     onChange={(e) =>
                       setChurchToEdit({
                         ...churchToEdit,
-                        bibliographicReferences: e.target.value,
+                        bibliographyReferences: e.target.value,
                       })
                     }
                   />
