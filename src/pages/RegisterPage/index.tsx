@@ -21,7 +21,6 @@ const RegisterPage = () => {
         password,
       })
       .then((response) => {
-        console.log("User registered:", response.data);
         toast.success("Usuário registrado com sucesso!");
         setTimeout(() => {
           navigate("/login");
