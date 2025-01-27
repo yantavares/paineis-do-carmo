@@ -178,7 +178,9 @@ const PaintingDetails = () => {
               <br />
               <p className="record-data">
                 <strong>Fonte Historiográfica:</strong>{" "}
-                {data?.bibliographySource ?? "N/A"}
+                {data?.bibliographySource?.[0]
+                  ? data?.bibliographySource?.[0]
+                  : "N/A"}
               </p>
             </div>
           </div>
