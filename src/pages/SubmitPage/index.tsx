@@ -467,8 +467,6 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       );
 
       setChurches(uniqueChurches);
-
-      console.log("Churches:", churches);
     } catch (error) {
       console.error("Error fetching churches:", error);
     }
@@ -666,13 +664,17 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       return array.some((item) => item[key] === value);
     };
 
+    const newBibliographicReferences = obra.bibliographicReferences
+      .split("\n")
+      .filter((source) => source.trim() !== "");
+
     const payload = {
       churchId: obra.churchId,
       title: obra.name,
       description: obra.description,
       dateOfCreation: obra.dateOfCreation,
       bibliographySource: obra.bibliographicSources,
-      bibliographyReference: [...obra.bibliographicReferences],
+      bibliographyReference: newBibliographicReferences,
       placement: obra.placement,
       artisan: obra.authorId.toString(),
       images: images
@@ -817,6 +819,10 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     );
   };
 
+  const newBibliographicReferences = obra.bibliographicReferences
+    .split("\n")
+    .filter((source) => source.trim() !== "");
+
   const handleNewChurch = async () => {
     setIsPublishing(true);
     const payload = {
@@ -829,7 +835,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
         base64Image: img.Base64Image,
         photographer: img.Photographer,
       })),
-      bibliographyReference: [church.bibliographicReferences],
+      bibliographyReference: newBibliographicReferences,
       bibliographySource: [church.bibliographicSources],
     };
 
@@ -1113,8 +1119,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
                 onClick={() => setIsAuthorModalOpen(false)}
                 aria-label="Close modal"
                 className="close-btn"
-              >
-              </button>
+              ></button>
             </div>
           </div>
           <p className="submit-description">

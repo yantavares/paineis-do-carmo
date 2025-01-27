@@ -8,8 +8,6 @@ export const makeOpenAIRequest = async (
   type: string,
   item: Painting | Church | null
 ) => {
-  console.log(type);
-
   let fullPrompt = `
     Você é um assistente útil que fala fluentemente português. 
     Seu objetivo é ajudar o usuário a aprender mais sobre o período Barroco da arte brasileira. 

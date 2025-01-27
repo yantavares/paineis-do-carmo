@@ -315,13 +315,17 @@ export default function Dashboard() {
       );
     });
 
+    const updatedBibliographyReferences = churchToEdit.bibliographyReferences
+      .split("\n")
+      .filter((source) => source.trim() !== "");
+
     const updatedChurch = {
       name: churchToEdit.name,
       description: churchToEdit.description,
       street: churchToEdit.street,
       city: churchToEdit.city,
       state: churchToEdit.state,
-      bibliographyReference: [...churchToEdit.bibliographyReferences],
+      bibliographyReference: updatedBibliographyReferences,
       bibliographySource: [...churchToEdit.bibliographySource],
       images: newImages.map((image) => ({
         base64Image: image.url,
