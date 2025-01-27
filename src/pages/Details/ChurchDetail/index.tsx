@@ -115,18 +115,24 @@ const PaintingDetails = () => {
             <p className="topic-text">{data.description}</p>
           </div>
           <div className="topic-wrapper">
-            <h3 className="topic-title">Referências</h3>
-            <ul className="reference-list">
-              {data?.bibliographyReference &&
-                data?.bibliographyReference.map((reference, index) => {
-                  if (reference && reference !== " ")
-                    return (
-                      <li key={index} className="reference-item">
-                        <sup>{index + 1} </sup> {reference}
-                      </li>
-                    );
-                })}
-            </ul>
+            {(data?.bibliographyReferences?.length > 1 ||
+              (data?.bibliographyReferences?.length == 1 &&
+                data.bibliographyReferences[0] !== "")) && (
+              <>
+                <h3 className="topic-title">Referências</h3>
+                <ul className="reference-list">
+                  {data?.bibliographyReferences &&
+                    data?.bibliographyReferences.map((reference, index) => {
+                      if (reference && reference !== " ")
+                        return (
+                          <li key={index} className="reference-item">
+                            <sup>{index + 1} </sup> {reference}
+                          </li>
+                        );
+                    })}
+                </ul>
+              </>
+            )}
           </div>
         </div>
       </div>

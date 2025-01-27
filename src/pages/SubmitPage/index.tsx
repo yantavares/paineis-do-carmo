@@ -819,6 +819,10 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     );
   };
 
+  const newBibliographicReferences = church?.bibliographicReferences
+    ?.split("\n")
+    ?.filter((source) => source.trim() !== "");
+
   const handleNewChurch = async () => {
     setIsPublishing(true);
     const payload = {
@@ -831,7 +835,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
         base64Image: img.Base64Image,
         photographer: img.Photographer,
       })),
-      bibliographyReference: [...church.bibliographicReferences],
+      bibliographyReference: newBibliographicReferences,
       bibliographySource: [church.bibliographicSources],
     };
 
