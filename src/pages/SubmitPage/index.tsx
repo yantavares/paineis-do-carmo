@@ -532,9 +532,9 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       tags: allTagIds,
     }));
 
-    const newBibliographicReferences = obra.bibliographicReferences
-      .split("\n")
-      .filter((source) => source.trim() !== "");
+    const newBibliographicReferences = obra?.bibliographicReferences
+      ?.split("\n")
+      ?.filter((source) => source.trim() !== "");
 
     const payload = {
       title: obra.name,
@@ -664,9 +664,9 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       return array.some((item) => item[key] === value);
     };
 
-    const newBibliographicReferences = obra.bibliographicReferences
-      .split("\n")
-      .filter((source) => source.trim() !== "");
+    const newBibliographicReferences2 = obra?.bibliographicReferences
+      ?.split("\n")
+      ?.filter((source) => source.trim() !== "");
 
     const payload = {
       churchId: obra.churchId,
@@ -674,7 +674,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       description: obra.description,
       dateOfCreation: obra.dateOfCreation,
       bibliographySource: obra.bibliographicSources,
-      bibliographyReference: newBibliographicReferences,
+      bibliographyReference: newBibliographicReferences2,
       placement: obra.placement,
       artisan: obra.authorId.toString(),
       images: images
@@ -819,10 +819,6 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     );
   };
 
-  const newBibliographicReferences = obra.bibliographicReferences
-    .split("\n")
-    .filter((source) => source.trim() !== "");
-
   const handleNewChurch = async () => {
     setIsPublishing(true);
     const payload = {
@@ -835,7 +831,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
         base64Image: img.Base64Image,
         photographer: img.Photographer,
       })),
-      bibliographyReference: newBibliographicReferences,
+      bibliographyReference: [...church.bibliographicReferences],
       bibliographySource: [church.bibliographicSources],
     };
 

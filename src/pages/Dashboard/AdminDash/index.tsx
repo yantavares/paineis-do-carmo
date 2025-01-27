@@ -315,9 +315,9 @@ export default function Dashboard() {
       );
     });
 
-    const updatedBibliographyReferences = churchToEdit.bibliographyReferences
-      .split("\n")
-      .filter((source) => source.trim() !== "");
+    const updatedBibliographyReferences = churchToEdit?.bibliographyReferences
+      ?.split("\n")
+      ?.filter((source) => source.trim() !== "");
 
     const updatedChurch = {
       name: churchToEdit.name,
