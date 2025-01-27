@@ -673,7 +673,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       title: obra.name,
       description: obra.description,
       dateOfCreation: obra.dateOfCreation,
-      bibliographySource: obra.bibliographicSources,
+      bibliographySource: [...obra.bibliographicSources],
       bibliographyReference: newBibliographicReferences2,
       placement: obra.placement,
       artisan: obra.authorId.toString(),

@@ -315,9 +315,13 @@ export default function Dashboard() {
       );
     });
 
+    console.log(churchToEdit.bibliographyReferences);
+
     const newBibliographyReferences = churchToEdit?.bibliographyReferences
       ?.split("\n")
       ?.filter((reference) => reference !== "");
+
+    console.log(newBibliographyReferences);
 
     const updatedChurch = {
       name: churchToEdit.name,
