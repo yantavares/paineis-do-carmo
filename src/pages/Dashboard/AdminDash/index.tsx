@@ -315,9 +315,28 @@ export default function Dashboard() {
       );
     });
 
-    const newBibliographyReferences = churchToEdit?.bibliographyReferences
-      ?.split("\n")
-      ?.filter((reference) => reference !== "");
+    // const newBibliographyReferences = churchToEdit?.bibliographyReferences;
+    // const newBilbiographySources =
+    //   churchToEdit?.bibliographySource &&
+    //   churchToEdit?.bibliographySource
+    //     ?.split(",")
+    //     ?.filter((source) => source.trim() !== "");
+
+    console.log(churchToEdit);
+
+    const newBibliographyReferences =
+      typeof churchToEdit?.bibliographyReferences === "string"
+        ? churchToEdit.bibliographyReferences
+            .split("\n")
+            .filter((source) => source.trim() !== "")
+        : churchToEdit?.bibliographyReferences || [];
+
+    const newBilbiographySources =
+      typeof churchToEdit?.bibliographySource === "string"
+        ? churchToEdit.bibliographySource
+            .split("\n")
+            .filter((source) => source.trim() !== "")
+        : churchToEdit?.bibliographySource || [];
 
     const updatedChurch = {
       name: churchToEdit.name,
@@ -326,7 +345,7 @@ export default function Dashboard() {
       city: churchToEdit.city,
       state: churchToEdit.state,
       bibliographyReference: newBibliographyReferences,
-      bibliographySource: [...churchToEdit.bibliographySource],
+      bibliographySource: newBilbiographySources,
       images: newImages.map((image) => ({
         base64Image: image.url,
         photographer: image.photographer,

@@ -664,16 +664,26 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       return array.some((item) => item[key] === value);
     };
 
-    const newBibliographicReferences2 = obra?.bibliographicReferences
-      ?.split("\n")
-      ?.filter((source) => source.trim() !== "");
+    const newBibliographicReferences2 =
+      typeof obra?.bibliographicReferences === "string"
+        ? obra.bibliographicReferences
+            .split("\n")
+            .filter((source) => source.trim() !== "")
+        : obra?.bibliographicReferences || [];
+
+    const newBiographicSources =
+      typeof obra?.bibliographicSources === "string"
+        ? obra.bibliographicSources
+            .split("\n")
+            .filter((source) => source.trim() !== "")
+        : obra?.bibliographicSources || [];
 
     const payload = {
       churchId: obra.churchId,
       title: obra.name,
       description: obra.description,
       dateOfCreation: obra.dateOfCreation,
-      bibliographySource: [...obra.bibliographicSources],
+      bibliographySource: newBiographicSources,
       bibliographyReference: newBibliographicReferences2,
       placement: obra.placement,
       artisan: obra.authorId.toString(),
