@@ -769,7 +769,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
   const handleAddGravura = () => {
     setGravuras((prevGravuras) => [
       ...prevGravuras,
-      { Name: "", Base64Image: "", Photographer: "" },
+      { Name: "", Base64Image: "", Photographer: "", id: "" },
     ]);
   };
 
@@ -781,10 +781,16 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     });
   }, []);
 
+  const [removedIndexes, setRemovedIndexes] = useState<number[]>([]);
+
   const handleRemoveGravura = (index: number) => {
     const gravura = gravuras[index];
-    setRemovedEngravings((prev) => [...prev, gravura.Base64Image]); // Add URL to removedEngravings array
-    setGravuras((prevGravuras) => prevGravuras.filter((_, i) => i !== index));
+    setRemovedEngravings((prev) => [...prev, gravura.Base64Image]);
+
+    //setGravuras((prevGravuras) => prevGravuras.filter((_, i) => i !== index));
+    setRemovedIndexes((prev) => [...prev, index]);
+
+    console.log(gravura);
   };
 
   const handleAddImage = () => {
@@ -1090,16 +1096,19 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
             </button>
           </div>
         </div>
-        {gravuras.map((gravura, index) => (
-          <GravuraInput
-            key={index}
-            index={index}
-            gravura={gravura}
-            onGravuraChange={handleGravuraChange}
-            onRemove={handleRemoveGravura}
-            painting={gravura}
-          />
-        ))}
+        {gravuras.map(
+          (gravura, index) =>
+            !removedIndexes.includes(index) && (
+              <GravuraInput
+                key={index}
+                index={index}
+                gravura={gravura}
+                onGravuraChange={handleGravuraChange}
+                onRemove={handleRemoveGravura}
+                painting={gravura}
+              />
+            )
+        )}
         <button
           style={{ display: "block", width: "100%" }}
           onClick={handleAddGravura}
