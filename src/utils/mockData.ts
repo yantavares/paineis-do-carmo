@@ -47,6 +47,7 @@ export const brazilianChurches: Church[] = [
 ];
 
 export interface Engraving {
+  createdBy: string;
   name: string;
   url: string;
 }

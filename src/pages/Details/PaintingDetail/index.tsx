@@ -208,6 +208,9 @@ const PaintingDetails = () => {
                   <TextTruncate className="engraving-title">
                     {engraving.name}
                   </TextTruncate>
+                  <p style={{ fontSize: "1.6rem" }}>
+                    {engraving?.createdBy ?? "Autor desconhecido"}
+                  </p>
                 </EngravingDescription>
               </Col>
             ))}
