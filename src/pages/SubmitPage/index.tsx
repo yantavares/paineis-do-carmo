@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Container } from "./styles";
-import { Upload, PlusCircle, X as CloseIcon } from "lucide-react";
-import TagInput from "../TagInput";
-import Modal from "../../components/Modal";
-import { X } from "lucide-react";
 import axios from "axios";
+import { X as CloseIcon, PlusCircle, Upload } from "lucide-react";
+import React, { useCallback, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuth } from "src/context/AuthContext";
 import { Church } from "src/utils/mockData";
+import Modal from "../../components/Modal";
+import TagInput from "../TagInput";
+import { Container } from "./styles";
 
 function formatErrorMessages(errors: any): string {
   let formattedMessages: string[] = [""];
