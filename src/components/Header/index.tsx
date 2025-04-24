@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import LogoMain from "src/assets/utils/logo.svg";
 import {
   ButtonsContainer,
@@ -14,6 +14,8 @@ import {
   TitleContainer,
 } from "./styles";
 import { jwtDecode } from "jwt-decode";
+import { Col1Mobile, Col2Mobile, Drawer, HeaderContainerMobile, MenuButton, Overlay } from "./stylesMobile";
+import { X, Menu } from "lucide-react";
 
 const isLoggedIn = (token: string) => {
   if (token && token !== "admin") {
@@ -34,12 +36,81 @@ const isLoggedIn = (token: string) => {
   return false;
 };
 
-const Header = () => {
+const Header: React.FC<{ isMobile?: boolean }> = ({ isMobile = false }) => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-
   const isLoggedin = isLoggedIn(token);
 
+  const [open, setOpen] = React.useState(false);
+  const toggle = () => setOpen((p) => !p);
+  const close = () => setOpen(false);
+
+  const location = useLocation();
+
+  React.useEffect(() => {
+    close();
+  }, [location]);
+
+  if (isMobile) {
+    return (
+      <>
+        <HeaderContainerMobile>
+          <Col1Mobile>
+            <TitleContainer onClick={() => { navigate("/"); close(); }}>
+              <Icon src={LogoMain} alt="Museu Barroco" />
+              <Title>Museu Barroco</Title>
+            </TitleContainer>
+          </Col1Mobile>
+
+          <MenuButton
+            aria-label={open ? "Fechar menu" : "Abrir menu"}
+            onClick={toggle}
+          >
+            {open ? <X size={28} /> : <Menu size={28} />}
+          </MenuButton>
+        </HeaderContainerMobile>
+
+        <Overlay open={open} onClick={close} />
+
+        <Drawer open={open} aria-hidden={!open}>
+          <button onClick={() => { navigate("/pesquisa/obras"); close(); }}>
+            Galeria de Obras
+          </button>
+          <button onClick={() => { navigate("/pesquisa/igrejas"); close(); }}>
+            Igrejas
+          </button>
+          <button onClick={() => { navigate("/pesquisa/topicos"); close(); }}>
+            Tópicos
+          </button>
+          <button onClick={() => { navigate("/sobre"); close(); }}>
+            Sobre
+          </button>
+
+          <hr />
+
+          {isLoggedin ? (
+            <>
+              <button onClick={() => { navigate("/dashboard"); close(); }}>
+                Dashboard
+              </button>
+              <button onClick={() => { navigate("/submit"); close(); }}>
+                Nova Obra
+              </button>
+            </>
+          ) : (
+            <>
+              <button onClick={() => { navigate("/login"); close(); }}>
+                Log In
+              </button>
+              <button onClick={() => { navigate("/register"); close(); }}>
+                Faça parte
+              </button>
+            </>
+          )}
+        </Drawer>
+      </>
+    );
+  }
   return (
     <HeaderContainer>
       <Col1>
