@@ -46,13 +46,12 @@ function Layout({ children }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-
   return (
     <div className="app-container">
       <ScrollToTop />
-      <Header />
+      <Header isMobile={isMobile} />
       <main className="main-content">{children}</main>
-      <Footer />
+      <Footer isMobile={isMobile} />
 
       <div
         className="assistant-button"
