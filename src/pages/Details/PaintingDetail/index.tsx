@@ -146,6 +146,26 @@ const PaintingDetails = () => {
             )}
           </div>
           <div className="topic-wrapper">
+            {(data?.bibliographySource?.length > 1 ||
+              (data?.bibliographySource?.length == 1 &&
+                data.bibliographySource[0] !== "")) && (
+              <>
+                <h3 className="topic-title">Fontes Historiográficas</h3>
+                <ul className="reference-list">
+                  {data?.bibliographySource &&
+                    data?.bibliographySource?.map((reference, index) => {
+                      if (reference && reference !== " ")
+                        return (
+                          <li key={index} className="reference-item">
+                            <sup>{index + 1} </sup> {reference}
+                          </li>
+                        );
+                    })}
+                </ul>
+              </>
+            )}
+          </div>
+          <div className="topic-wrapper">
             <h2 className="topic-title">Ficha da Obra</h2>
             <div className="record-info">
               <p className="record-data">
@@ -176,12 +196,12 @@ const PaintingDetails = () => {
                 )}
               </p>
               <br />
-              <p className="record-data">
+              {/* <p className="record-data">
                 <strong>Fonte Historiográfica:</strong>{" "}
                 {data?.bibliographySource?.[0]
                   ? data?.bibliographySource?.[0]
                   : "N/A"}
-              </p>
+              </p> */}
             </div>
           </div>
           {data.tags.length > 0 && (

@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Container } from "./styles";
-import { Upload, PlusCircle, X as CloseIcon } from "lucide-react";
-import TagInput from "../TagInput";
-import Modal from "../../components/Modal";
-import { X } from "lucide-react";
 import axios from "axios";
+import { X as CloseIcon, PlusCircle, Upload } from "lucide-react";
+import React, { useCallback, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAuth } from "src/context/AuthContext";
 import { Church } from "src/utils/mockData";
+import Modal from "../../components/Modal";
+import TagInput from "../TagInput";
+import { Container } from "./styles";
 
 function formatErrorMessages(errors: any): string {
   let formattedMessages: string[] = [""];
@@ -433,7 +432,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/api/paintings/artisans`
       );
-      setAuthors(response.data.artisans);
+      setAuthors(response.data.artisans.filter((author) => author && author.trim() !== ""));
     } catch (error) {
       console.error("Error fetching authors:", error);
     }
@@ -1010,6 +1009,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
           <label className="label-wrapper" style={{ marginBottom: "1rem" }}>
             <p className="input-label">Descrição</p>
             <textarea
+              style={{ height: "20rem" }}
               placeholder="Insira uma descrição da obra"
               value={obra.description}
               onChange={(e) =>
@@ -1023,10 +1023,11 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
           </p> */}
           <div className="grid-layout">
             <label className="label-wrapper">
-              <p className="input-label">Fonte Historiográfica</p>
+              <p className="input-label">Fontes Historiográficas</p>
               <textarea
-                placeholder="Exemplo: fonte1"
-                value={obra.bibliographicSources}
+                placeholder="Insira as fontes (uma por linha)"
+                style={{ height: "15rem" }}
+                value={Array.isArray(obra.bibliographicSources) ? obra.bibliographicSources.join("\n\n") : obra.bibliographicSources}
                 onChange={(e) =>
                   setObra({ ...obra, bibliographicSources: e.target.value })
                 }
@@ -1035,8 +1036,9 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
             <label className="label-wrapper">
               <p className="input-label">Referências Bibliográficas</p>
               <textarea
+                style={{ height: "15rem" }}
                 placeholder="Insira as referências (uma por linha)"
-                value={obra.bibliographicReferences}
+                value={Array.isArray(obra.bibliographicReferences) ? obra.bibliographicReferences.join("\n\n") : obra.bibliographicReferences}
                 onChange={(e) =>
                   setObra({ ...obra, bibliographicReferences: e.target.value })
                 }
