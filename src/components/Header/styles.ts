@@ -18,9 +18,6 @@ export const Col2 = styled.div`
   display: flex;
   place-items: center;
   gap: 1.4rem;
-  @media (max-width: 768px) {
-    display: none;
-  }
 `;
 
 export const TitleContainer = styled.div`
