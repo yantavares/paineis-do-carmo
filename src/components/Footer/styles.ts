@@ -11,6 +11,7 @@ export const FooterContainer = styled.footer`
   color: white;
   margin-top: 8rem;
   padding: 2% 0;
+  width: 100%;
 `;
 
 export const DashedLine = styled.div`
