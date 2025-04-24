@@ -59,7 +59,7 @@ export interface Painting {
   dateOfCreation: number | string;
   artisan?: string;
   bibliographyReference?: string[];
-  bibliographySource?: string;
+  bibliographySource?: string[];
   engravings?: Engraving[];
   description?: string;
   city: string;
