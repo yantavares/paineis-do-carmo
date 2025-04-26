@@ -84,4 +84,5 @@ export const LoginButton = styled.button`
 
 export const Icon = styled.img`
   max-height: 4rem;
+  max-width: 4rem;
 `;

@@ -170,7 +170,12 @@ const Footer = ({ isMobile = false }) => {
         <SocialsContainer>
           <DashedLine />
           <div className="social-media">
-            <a href={wppLink} target="_blank" rel="noopener noreferrer">
+            <a
+              href={wppLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ maxWidth: "fit-content" }}
+            >
               <FontAwesomeIcon icon={faWhatsapp} color="white" size="2xl" />
               <span className="tooltip-social">WhatsApp</span>
             </a>
@@ -186,6 +191,7 @@ const Footer = ({ isMobile = false }) => {
               href="https://github.com/yantavares/paineis-do-carmo"
               target="_blank"
               rel="noopener noreferrer"
+              style={{ maxWidth: "fit-content" }}
             >
               <FontAwesomeIcon icon={faGithub} color="white" size="2xl" />
               <span className="tooltip-social">GitHub</span>
