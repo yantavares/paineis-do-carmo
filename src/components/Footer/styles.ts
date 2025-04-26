@@ -30,7 +30,6 @@ export const LogoMain = styled.img`
 export const InnerDiv = styled.div`
   display: flex;
   flex-direction: column;
-  width: 90%;
 `;
 
 export const TextContainer = styled.div`
