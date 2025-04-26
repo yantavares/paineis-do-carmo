@@ -8,8 +8,8 @@ export const ImageContainer = styled.div`
 `;
 
 export const SliderImage = styled.img`
-  max-width: 82%;
   max-height: 400px;
+  width: 100%;
   object-fit: cover;
   border-radius: 2rem;
 `;
