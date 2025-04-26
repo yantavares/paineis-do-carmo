@@ -101,7 +101,7 @@ const Footer = ({ isMobile = false }) => {
                 href={wppLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ maxWidth: "fit-content" }}
+                style={{ maxWidth: "2rem" }}
               >
                 <FontAwesomeIcon icon={faWhatsapp} color="white" size="2xl" />
                 <span className="tooltip-social">WhatsApp</span>
@@ -118,7 +118,7 @@ const Footer = ({ isMobile = false }) => {
                 href="https://github.com/yantavares/paineis-do-carmo"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ maxWidth: "fit-content" }}
+                style={{ maxWidth: "2rem" }}
               >
                 <FontAwesomeIcon icon={faGithub} color="white" size="2xl" />
                 <span className="tooltip-social">GitHub</span>
