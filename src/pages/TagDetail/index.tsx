@@ -12,19 +12,36 @@ import {
 } from "./styles";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
+import {
+  SearchContainerMobile,
+  SearchHeaderMobile,
+  SearchResultMobile,
+  SearchResultsContainerMobile,
+} from "../SearchPage/stylesMobile";
 
 const TagDetail = () => {
   const { tag } = useParams();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showNoDataMessage, setShowNoDataMessage] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 860);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     let noDataTimeout;
 
     const fetchData = async () => {
       setIsLoading(true);
-      setShowNoDataMessage(false); 
+      setShowNoDataMessage(false);
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_API_URL}/api/paintings/tags/${tag}`
@@ -34,18 +51,57 @@ const TagDetail = () => {
         console.error("Error fetching data:", error);
       } finally {
         setIsLoading(false);
-        
+
         noDataTimeout = setTimeout(() => {
           setShowNoDataMessage(true);
-        }, 200); 
+        }, 200);
       }
     };
 
     fetchData();
 
-    
     return () => clearTimeout(noDataTimeout);
   }, [tag]);
+
+  if (isMobile) {
+    return (
+      <SearchContainerMobile>
+        <SearchHeaderMobile>
+          Tópico:{" "}
+          <span style={{ color: colors.mainColor }}>{parseTag(tag)}</span>
+        </SearchHeaderMobile>
+        <SearchResultsContainerMobile>
+          {isLoading ? (
+            <div
+              style={{
+                width: "100vw",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <CircularProgress style={{ color: colors.mainColor }} />
+            </div>
+          ) : data.length > 0 ? (
+            data.map((item, index) => (
+              <SearchResultMobile key={index}>
+                <Item
+                  tagCount={2}
+                  width="20rem"
+                  item={item}
+                  type={"paintings"}
+                />
+              </SearchResultMobile>
+            ))
+          ) : (
+            showNoDataMessage && (
+              <SearchSubHeader>Nenhuma obra foi encontrada...</SearchSubHeader>
+            )
+          )}
+        </SearchResultsContainerMobile>
+      </SearchContainerMobile>
+    );
+  }
 
   return (
     <SearchContainer>
@@ -71,7 +127,9 @@ const TagDetail = () => {
             </SearchResult>
           ))
         ) : (
-          showNoDataMessage && <SearchSubHeader>Nenhuma obra foi encontrada...</SearchSubHeader>
+          showNoDataMessage && (
+            <SearchSubHeader>Nenhuma obra foi encontrada...</SearchSubHeader>
+          )
         )}
       </SearchResultsContainer>
     </SearchContainer>
