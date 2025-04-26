@@ -61,6 +61,7 @@ export const AuthorMobile = styled.a`
   font-size: 1.6rem;
   font-weight: 450;
   transition: all 0.3s;
+  text-decoration: underline;
 `;
 
 export const TitleTextMobile = styled.h3`

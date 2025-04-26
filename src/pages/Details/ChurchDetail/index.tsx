@@ -41,7 +41,7 @@ const PaintingDetails = () => {
 
   const [data, setData] = useState<Church>(defaultChurch);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 860);
   const [images, setImages] = useState([]);
 
   useEffect(() => {

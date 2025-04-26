@@ -26,12 +26,12 @@ export default function Dashboard() {
   const [isSuggestionModalOpen, setIsSuggestionModalOpen] = useState(false);
   const [suggestionText, setSuggestionText] = useState("");
   const [images, setImages] = useState([{ base64Image: "", photographer: "" }]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedPainting, setSelectedPainting] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [paintingToEdit, setPaintingToEdit] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 860);
 
   useEffect(() => {
     const handleResize = () => {
