@@ -47,16 +47,17 @@ export const ContactContainerMobile = styled.div`
 `;
 
 export const CreditsContainerMobile = styled.div`
-  padding: 4rem;
+  padding: 0;
   display: flex;
   text-align: center;
   flex-direction: column;
-  gap: 1.8rem;
+  gap: 1rem;
 `;
 
 export const AuthorMobile = styled.a`
   color: white;
-  font-weight: 550;
+  font-size: 1.6rem;
+  font-weight: 450;
   transition: all 0.3s;
 `;
 

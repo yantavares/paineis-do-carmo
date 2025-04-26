@@ -103,7 +103,12 @@ const Footer = ({ isMobile = false }) => {
                 rel="noopener noreferrer"
                 style={{ maxWidth: "2rem" }}
               >
-                <FontAwesomeIcon icon={faWhatsapp} color="white" size="2xl" />
+                <FontAwesomeIcon
+                  style={{ maxWidth: "2rem" }}
+                  icon={faWhatsapp}
+                  color="white"
+                  size="2xl"
+                />
                 <span className="tooltip-social">WhatsApp</span>
               </a>
               {/* <a
@@ -120,7 +125,12 @@ const Footer = ({ isMobile = false }) => {
                 rel="noopener noreferrer"
                 style={{ maxWidth: "2rem" }}
               >
-                <FontAwesomeIcon icon={faGithub} color="white" size="2xl" />
+                <FontAwesomeIcon
+                  style={{ maxWidth: "2rem" }}
+                  icon={faGithub}
+                  color="white"
+                  size="2xl"
+                />
                 <span className="tooltip-social">GitHub</span>
               </a>
             </div>
