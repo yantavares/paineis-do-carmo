@@ -41,10 +41,13 @@ const ChurchState = () => {
     <SearchContainer>
       <SearchHeader>
         Igrejas por Estado:{" "}
-        <span style={{ color: colors.mainColor }}> {translateState(state)}</span>
+        <span style={{ color: colors.mainColor }}>
+          {" "}
+          {translateState(state)}
+        </span>
         <SearchBarContainer>
           <SearchBar
-            placeHolder={`Busque por igrejas em ${capitalize(state)}`}
+            placeHolder={`Busque em ${capitalize(state)}`}
             showButtons={false}
           />
         </SearchBarContainer>

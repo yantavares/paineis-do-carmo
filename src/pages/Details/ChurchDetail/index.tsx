@@ -17,8 +17,13 @@ import {
   EngravingLayout,
   Image,
   ImageContainer,
-} from "../stylesMobile";
+} from "../styles";
 import ImageCarousel from "src/components/ImageCarousel";
+import {
+  ColMobile,
+  ContainerMobile,
+  EngravingLayoutMobile,
+} from "../stylesMobile";
 
 const defaultChurch: Church = {
   id: 0,
@@ -77,7 +82,10 @@ const PaintingDetails = () => {
 
   useEffect(() => {
     if (data?.images) {
-      setImages(data.images);
+      let images = data.images?.map((image) => image.url);
+      if (images.length > 0) {
+        setImages(images);
+      }
     }
   }, [data]);
 
@@ -98,7 +106,7 @@ const PaintingDetails = () => {
 
   if (isMobile) {
     return (
-      <Container>
+      <ContainerMobile>
         <div className="flex-group">
           <a
             className="inner-link"
@@ -120,17 +128,8 @@ const PaintingDetails = () => {
           </span>{" "}
         </p>
         <div className="item-content">
-          <div className="img-container">
+          <div style={{ width: "100%" }}>
             <ImageCarousel images={images} />
-            {data.images &&
-              data.images.map((image, index) => (
-                <ImageContainer key={index}>
-                  <Image src={image.url} alt="" />
-                  <DownloadButton onClick={() => downloadImage(image.url)}>
-                    Baixar
-                  </DownloadButton>
-                </ImageContainer>
-              ))}
           </div>
           <div className="item-info">
             <div className="topic-wrapper">
@@ -162,9 +161,9 @@ const PaintingDetails = () => {
         {data?.paintings?.length > 0 && (
           <>
             <h2 className="topic-title">Obras da Igreja</h2>
-            <EngravingLayout>
+            <EngravingLayoutMobile>
               {data.paintings.map((painting, index) => (
-                <Col
+                <ColMobile
                   key={index}
                   onClick={() => navigate(`/item/paintings/${painting.id}`)}
                 >
@@ -180,12 +179,12 @@ const PaintingDetails = () => {
                       {painting?.placement ?? "Sem localização"}
                     </p>
                   </EngravingDescription>
-                </Col>
+                </ColMobile>
               ))}
-            </EngravingLayout>
+            </EngravingLayoutMobile>
           </>
         )}
-      </Container>
+      </ContainerMobile>
     );
   }
 

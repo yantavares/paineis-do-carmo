@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import colors from "src/utils/colors";
 
-export const Container = styled.div`
+export const ContainerMobile = styled.div`
   padding: 3.6rem;
   max-width: 1280px;
   margin: 0 auto;
@@ -225,7 +225,7 @@ export const ImageContainer = styled.div`
   }
 `;
 
-export const Image = styled.img`
+export const ImageMobile = styled.img`
   width: 440px;
   border-radius: 20px;
   transition: filter 0.3s ease;
@@ -251,21 +251,19 @@ export const DownloadButton = styled.button`
   }
 `;
 
-export const EngravingLayout = styled.div`
+export const EngravingLayoutMobile = styled.div`
   display: flex;
-  gap: 2rem;
+  gap: 4rem;
   overflow-x: auto;
-  scrollbar-width: thin;
+  scrollbar-width: auto;
 `;
 
-export const Col = styled.div`
-  flex: 1 1 220px;
+export const ColMobile = styled.div`
   padding-bottom: 2rem;
+  min-width: 20rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 340px;
-  max-width: 400px;
   cursor: pointer;
 `;
 

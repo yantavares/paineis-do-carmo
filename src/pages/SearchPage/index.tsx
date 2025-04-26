@@ -209,13 +209,13 @@ const SearchPage = () => {
                 </div>
               ) : filteredDataChurch?.length > 0 ? (
                 filteredDataChurch.map((item, index) => (
-                  <SearchResult key={index}>
+                  <SearchResultMobile key={index}>
                     <Item
                       item={item}
                       type={translateTopicType(selected)}
                       fixedImgHeight
                     />
-                  </SearchResult>
+                  </SearchResultMobile>
                 ))
               ) : (
                 error && <p>Nenhum item encontrado na busca...</p>
