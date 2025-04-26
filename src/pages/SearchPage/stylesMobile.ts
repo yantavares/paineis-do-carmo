@@ -32,8 +32,7 @@ export const SearchHeaderMobile = styled.h1`
 `;
 
 export const SearchResultMobile = styled.div`
-  height: 100%;
-  width: calc(20% - 2.92rem);
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
