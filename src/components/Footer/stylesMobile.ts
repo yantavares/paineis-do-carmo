@@ -22,58 +22,59 @@ export const DashedLine = styled.div`
   margin-top: 2rem;
 `;
 
-export const LogoMain = styled.img`
+export const LogoMainMobile = styled.img`
   align-self: flex-start;
   padding-left: 5%;
+  margin-top: 2rem;
 `;
 
-export const InnerDiv = styled.div`
+export const InnerDivMobile = styled.div`
   display: flex;
   flex-direction: column;
   width: 90%;
 `;
 
-export const TextContainer = styled.div`
+export const TextContainerMobile = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 
-export const ContactContainer = styled.div`
+export const ContactContainerMobile = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.8rem;
-  width: 25%;
 `;
 
-export const CreditsContainer = styled.div`
+export const CreditsContainerMobile = styled.div`
+  padding: 4rem;
   display: flex;
+  text-align: center;
   flex-direction: column;
   gap: 1.8rem;
-  width: 25%;
 `;
 
-export const Author = styled.a`
+export const AuthorMobile = styled.a`
   color: white;
   font-weight: 550;
   transition: all 0.3s;
 `;
 
-export const TitleText = styled.h3`
+export const TitleTextMobile = styled.h3`
   font-weight: 700;
   font-size: 1.8rem;
   padding: 0;
   margin: 0;
 `;
 
-export const Text = styled.p`
+export const TextMobile = styled.p`
   display: flex;
   gap: 1rem;
   padding: 0;
   margin: 0;
 `;
 
-export const FooterButton = styled.button`
+export const FooterButtonMobile = styled.button`
   color: white;
   width: fit-content;
   transition: all 0.3s;
@@ -83,7 +84,7 @@ export const FooterButton = styled.button`
   }
 `;
 
-export const FinancingContainer = styled.div`
+export const FinancingContainerMobile = styled.div`
   display: flex;
   flex-direction: column;
   padding: 3.2rem;
@@ -96,7 +97,7 @@ export const FinancingContainer = styled.div`
   }
 `;
 
-export const SocialsContainer = styled.div`
+export const SocialsContainerMobile = styled.div`
   display: flex;
   flex-direction: column;
 `;
