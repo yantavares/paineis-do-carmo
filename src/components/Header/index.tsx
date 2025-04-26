@@ -129,14 +129,14 @@ const Header: React.FC<{ isMobile?: boolean }> = ({ isMobile = false }) => {
               >
                 Dashboard
               </button>
-              <button
+              {/* <button
                 onClick={() => {
                   navigate("/submit");
                   close();
                 }}
               >
                 Nova Obra
-              </button>
+              </button> */}
             </>
           ) : (
             <>

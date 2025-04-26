@@ -120,3 +120,16 @@ button:focus {
   font-size: 18px;
   color: #3a5a40;
 }
+
+.slick-next {
+  background: lightgray !important;
+}
+
+.slick-prev {
+  background: lightgray !important;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: rgb(0, 0, 0);
+}

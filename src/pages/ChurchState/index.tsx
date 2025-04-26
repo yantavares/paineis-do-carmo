@@ -14,11 +14,28 @@ import {
 } from "../SearchPage/styles";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
+import {
+  SearchContainerMobile,
+  SearchHeaderMobile,
+  SearchResultMobile,
+  SearchResultsContainerMobile,
+} from "../SearchPage/stylesMobile";
 
 const ChurchState = () => {
   const { state } = useParams();
   const [data, setData] = useState<Church[]>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 860);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);
@@ -37,14 +54,51 @@ const ChurchState = () => {
     fetchPaintings();
   }, [state]);
 
+  if (isMobile) {
+    return (
+      <SearchContainerMobile>
+        <SearchHeaderMobile>
+          Igrejas por Estado:{" "}
+          <span style={{ color: colors.mainColor }}>
+            {" "}
+            {translateState(state)}
+          </span>
+          <SearchBarContainer>
+            <SearchBar
+              placeHolder={`Busque em ${capitalize(state)}`}
+              showButtons={false}
+            />
+          </SearchBarContainer>
+        </SearchHeaderMobile>
+
+        <SearchResultsContainerMobile>
+          {isLoading ? (
+            <CircularProgress style={{ color: colors.mainColor }} />
+          ) : data && data.length > 0 ? (
+            data?.map((item: any, index: number) => (
+              <SearchResultMobile key={index}>
+                <Item item={item} type={"churches"} fixedImgHeight />
+              </SearchResultMobile>
+            ))
+          ) : (
+            <p>Nenhuma igreja encontrada...</p>
+          )}
+        </SearchResultsContainerMobile>
+      </SearchContainerMobile>
+    );
+  }
+
   return (
     <SearchContainer>
       <SearchHeader>
         Igrejas por Estado:{" "}
-        <span style={{ color: colors.mainColor }}> {translateState(state)}</span>
+        <span style={{ color: colors.mainColor }}>
+          {" "}
+          {translateState(state)}
+        </span>
         <SearchBarContainer>
           <SearchBar
-            placeHolder={`Busque por igrejas em ${capitalize(state)}`}
+            placeHolder={`Busque em ${capitalize(state)}`}
             showButtons={false}
           />
         </SearchBarContainer>

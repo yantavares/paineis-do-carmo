@@ -44,12 +44,14 @@ export const ContactContainerMobile = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.8rem;
+  padding-right: 1rem;
 `;
 
 export const CreditsContainerMobile = styled.div`
   padding: 0;
   display: flex;
   text-align: center;
+  align-items: center;
   flex-direction: column;
   gap: 1rem;
 `;

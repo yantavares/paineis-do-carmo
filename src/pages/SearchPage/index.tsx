@@ -15,7 +15,11 @@ import {
   SearchResultsContainer,
 } from "./styles";
 import { CircularProgress } from "@mui/material";
-import { SearchContainerMobile, SearchHeaderMobile } from "./stylesMobile";
+import {
+  SearchContainerMobile,
+  SearchHeaderMobile,
+  SearchResultMobile,
+} from "./stylesMobile";
 
 const translateSelected = (selected: string) => {
   switch (selected) {
@@ -158,13 +162,13 @@ const SearchPage = () => {
                 </div>
               ) : filteredDataPainting?.length > 0 ? (
                 filteredDataPainting.map((item) => (
-                  <SearchResult key={item?.id}>
+                  <SearchResultMobile key={item?.id}>
                     <Item
                       item={item}
                       type={translateTopicType(selected)}
                       fixedImgHeight
                     />
-                  </SearchResult>
+                  </SearchResultMobile>
                 ))
               ) : (
                 error && <p>Nenhum item encontrado na busca...</p>
@@ -205,13 +209,13 @@ const SearchPage = () => {
                 </div>
               ) : filteredDataChurch?.length > 0 ? (
                 filteredDataChurch.map((item, index) => (
-                  <SearchResult key={index}>
+                  <SearchResultMobile key={index}>
                     <Item
                       item={item}
                       type={translateTopicType(selected)}
                       fixedImgHeight
                     />
-                  </SearchResult>
+                  </SearchResultMobile>
                 ))
               ) : (
                 error && <p>Nenhum item encontrado na busca...</p>

@@ -119,9 +119,9 @@ const ChurchMap = ({ isMobile }) => {
         >
           <MapContainer
             center={[-14.235, -51.9253]}
-            zoom={4}
+            zoom={3}
             style={{
-              height: "50rem",
+              height: "40rem",
               border: "1px dashed rgba(0, 0, 0, 0.25)",
               backgroundColor: "#f5f5f5",
               width: "100%",

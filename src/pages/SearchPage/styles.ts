@@ -32,7 +32,8 @@ export const SearchHeader = styled.h1`
 `;
 
 export const SearchResult = styled.div`
-  width: 100%;
+  height: 100%;
+  width: calc(20% - 2.92rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
