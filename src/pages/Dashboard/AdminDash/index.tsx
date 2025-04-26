@@ -1,16 +1,15 @@
+import { CircularProgress } from "@mui/material";
 import axios from "axios";
-import { X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import DeleteConfirmationModal from "src/components/DeleteModal";
 import Modal from "src/components/Modal";
 import OptionButton from "src/components/OptionButton";
+import { useAuth } from "src/context/AuthContext";
 import SubmitPage from "src/pages/SubmitPage";
 import colors from "src/utils/colors";
 import { ChurchForm, Container, ExitButton, ExitContainer } from "./styles";
-import { useAuth } from "src/context/AuthContext";
-import { CircularProgress } from "@mui/material";
 
 export default function Dashboard() {
   const { token } = useAuth();
@@ -34,6 +33,18 @@ export default function Dashboard() {
   const [churchImages, setChurchImages] = useState([]);
   const [urlsToRemove, setUrlsToRemove] = useState([]);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 860);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const brazilianStates = [
     "AC",
     "AL",
@@ -649,22 +660,26 @@ export default function Dashboard() {
               >
                 Todas
               </a>
-              <a
-                onClick={() => handleClick("published")}
-                className={
-                  (selectedType === "published" && "active") || "published"
-                }
-              >
-                Publicadas
-              </a>
-              <a
-                onClick={() => handleClick("pending")}
-                className={
-                  (selectedType === "pending" && "active") || "pending"
-                }
-              >
-                Pendentes
-              </a>
+              {!isMobile && (
+                <>
+                  <a
+                    onClick={() => handleClick("published")}
+                    className={
+                      (selectedType === "published" && "active") || "published"
+                    }
+                  >
+                    Publicadas
+                  </a>
+                  <a
+                    onClick={() => handleClick("pending")}
+                    className={
+                      (selectedType === "pending" && "active") || "pending"
+                    }
+                  >
+                    Pendentes
+                  </a>
+                </>
+              )}
               <a
                 onClick={() => handleClick("churches")}
                 className={
@@ -675,6 +690,7 @@ export default function Dashboard() {
               </a>
             </div>
           </section>
+
           <section className="table-body">
             {selectedType === "churches" ? (
               <ChurchesTable
@@ -682,6 +698,7 @@ export default function Dashboard() {
                 onEdit={handleEditChurch}
                 onDelete={handleDeleteChurch}
                 onPublish={handlePublishChurch}
+                isMobile={isMobile}
               />
             ) : (
               <table className="content-table">
@@ -689,21 +706,26 @@ export default function Dashboard() {
                   <tr>
                     <th>Nome</th>
                     <th>Status</th>
-                    <th>Usuário</th>
-                    <th>
-                      <div className="flex-flow">Data de Submissão</div>
-                    </th>
-                    <th>Opções</th>
+                    {!isMobile && (
+                      <>
+                        <th>Usuário</th>
+                        <th>
+                          <div className="flex-flow">Data de Submissão</div>
+                        </th>
+                        <th>Opções</th>
+                      </>
+                    )}
                   </tr>
                 </thead>
                 <tbody>
                   {filteredPaintings.map((painting) => (
                     <PaintingRow
-                      painting={painting}
                       key={painting.id}
+                      painting={painting}
                       onEdit={() => handleEdit(painting.id)}
                       onDelete={() => handleDelete(painting.id)}
                       onPublish={() => handlePublish(painting)}
+                      isMobile={isMobile}
                     />
                   ))}
                 </tbody>
@@ -720,7 +742,7 @@ export default function Dashboard() {
   );
 }
 
-function PaintingRow({ painting, onEdit, onDelete, onPublish }) {
+function PaintingRow({ painting, onEdit, onDelete, onPublish, isMobile }) {
   return (
     <tr>
       <td>{painting.title}</td>
@@ -733,31 +755,39 @@ function PaintingRow({ painting, onEdit, onDelete, onPublish }) {
           )}
         </span>
       </td>
-      <td>{painting.registeredBy}</td>
-      <td>
-        {new Date(painting.submittedAt).toLocaleDateString("pt-BR", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-        })}
-      </td>
-      <td style={{ display: "flex" }}>
-        <OptionButton onEdit={onEdit} onDelete={onDelete} />
-      </td>
+      {!isMobile && (
+        <>
+          <td>{painting.registeredBy}</td>
+          <td>
+            {new Date(painting.submittedAt).toLocaleDateString("pt-BR", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+            })}
+          </td>
+          <td style={{ display: "flex" }}>
+            <OptionButton onEdit={onEdit} onDelete={onDelete} />
+          </td>
+        </>
+      )}
     </tr>
   );
 }
 
-function ChurchesTable({ churches, onEdit, onDelete, onPublish }) {
+function ChurchesTable({ churches, onEdit, onDelete, onPublish, isMobile }) {
   return (
     <table className="content-table">
       <thead>
         <tr>
           <th>Nome</th>
           <th>Status</th>
-          <th>Cidade</th>
-          <th>Estado</th>
-          <th>Opções</th>
+          {!isMobile && (
+            <>
+              <th>Cidade</th>
+              <th>Estado</th>
+              <th>Opções</th>
+            </>
+          )}
         </tr>
       </thead>
       <tbody>
@@ -773,14 +803,18 @@ function ChurchesTable({ churches, onEdit, onDelete, onPublish }) {
                 )}
               </span>
             </td>
-            <td>{church.city}</td>
-            <td>{church.state}</td>
-            <td>
-              <OptionButton
-                onEdit={() => onEdit(church)}
-                onDelete={() => onDelete(church.id)}
-              />
-            </td>
+            {!isMobile && (
+              <>
+                <td>{church.city}</td>
+                <td>{church.state}</td>
+                <td>
+                  <OptionButton
+                    onEdit={() => onEdit(church)}
+                    onDelete={() => onDelete(church.id)}
+                  />
+                </td>
+              </>
+            )}
           </tr>
         ))}
       </tbody>

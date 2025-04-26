@@ -7,6 +7,7 @@ export const Container = styled.div`
   min-height: 39.45vh;
   margin: 5rem auto 0;
   font-size: 160%;
+  padding: 0 2rem;
 
   span {
     padding: 0.375rem;

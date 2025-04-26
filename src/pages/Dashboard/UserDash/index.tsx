@@ -1,15 +1,15 @@
+import { CircularProgress } from "@mui/material";
 import axios from "axios";
+import { Plus, Trash, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import DeleteConfirmationModal from "src/components/DeleteModal";
 import Modal from "src/components/Modal"; // Import the modal component
-import { Container, ExitButton, ExitContainer, FormContainer } from "./styles";
-import { useNavigate } from "react-router-dom";
-import { CircularProgress, Button, TextField, IconButton } from "@mui/material";
-import { Plus, Trash, X } from "lucide-react";
 import { useAuth } from "src/context/AuthContext";
-import SubmitPage from "../../SubmitPage";
 import colors from "src/utils/colors";
+import SubmitPage from "../../SubmitPage";
+import { Container, ExitButton, ExitContainer, FormContainer } from "./styles";
 
 // const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/paintings`, payload, {
 //   headers: {
@@ -27,12 +27,21 @@ export default function Dashboard() {
   const [suggestionText, setSuggestionText] = useState("");
   const [images, setImages] = useState([{ base64Image: "", photographer: "" }]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingPaintings, setIsLoadingPaintings] = useState(false);
-  const [isLoadingChurches, setIsLoadingChurches] = useState(false);
   const [selectedPainting, setSelectedPainting] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [paintingToEdit, setPaintingToEdit] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 860);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const navigate = useNavigate();
 
@@ -307,38 +316,47 @@ export default function Dashboard() {
               >
                 Todas
               </a>
-              <a
-                onClick={() => handleClick("published")}
-                className={
-                  (selectedType === "published" && "active") || "published"
-                }
-              >
-                Publicadas
-              </a>
-              <a
-                onClick={() => handleClick("pending")}
-                className={
-                  (selectedType === "pending" && "active") || "pending"
-                }
-              >
-                Pendentes
-              </a>
+              {!isMobile && (
+                <>
+                  <a
+                    onClick={() => handleClick("published")}
+                    className={
+                      (selectedType === "published" && "active") || "published"
+                    }
+                  >
+                    Publicadas
+                  </a>
+                  <a
+                    onClick={() => handleClick("pending")}
+                    className={
+                      (selectedType === "pending" && "active") || "pending"
+                    }
+                  >
+                    Pendentes
+                  </a>
+                </>
+              )}
             </div>
           </section>
+
           <section className="table-body">
             <table className="content-table">
               <thead>
                 <tr>
                   <th>Nome</th>
                   <th>Status</th>
-                  <th>Usuário</th>
-                  <th>
-                    <div className="flex-flow">
-                      Data de Submissão{" "}
-                      <button onClick={handleDateArrow}></button>
-                    </div>
-                  </th>
-                  <th>Opções</th>
+                  {!isMobile && (
+                    <>
+                      <th>Usuário</th>
+                      <th>
+                        <div className="flex-flow">
+                          Data de Submissão{" "}
+                          <button onClick={handleDateArrow}></button>
+                        </div>
+                      </th>
+                      <th>Opções</th>
+                    </>
+                  )}
                 </tr>
               </thead>
               <tbody>
@@ -352,6 +370,7 @@ export default function Dashboard() {
                       setIsSuggestionModalOpen(true);
                       setSelectedPainting(painting.id);
                     }}
+                    isMobile={isMobile}
                   />
                 ))}
               </tbody>
@@ -367,7 +386,13 @@ export default function Dashboard() {
   );
 }
 
-function PaintingRow({ painting, onDelete, onSuggestionClick, onEdit }) {
+function PaintingRow({
+  painting,
+  onDelete,
+  onSuggestionClick,
+  onEdit,
+  isMobile,
+}) {
   return (
     <tr>
       <td>{painting.title}</td>
@@ -376,26 +401,30 @@ function PaintingRow({ painting, onDelete, onSuggestionClick, onEdit }) {
           {painting.isPublished ? "Publicada" : "Pendente"}
         </span>
       </td>
-      <td>{painting.registeredBy}</td>
-      <td>
-        {new Date(painting.submittedAt).toLocaleDateString("pt-BR", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-        })}
-      </td>
-      <td style={{ display: "flex" }}>
-        {painting.isPublished && (
-          <button className="secondary" onClick={onSuggestionClick}>
-            Sugestão
-          </button>
-        )}
-        {!painting.isPublished && (
-          <button className="secondary" onClick={onEdit}>
-            Editar
-          </button>
-        )}
-      </td>
+      {!isMobile && (
+        <>
+          <td>{painting.registeredBy}</td>
+          <td>
+            {new Date(painting.submittedAt).toLocaleDateString("pt-BR", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+            })}
+          </td>
+          <td style={{ display: "flex" }}>
+            {painting.isPublished && (
+              <button className="secondary" onClick={onSuggestionClick}>
+                Sugestão
+              </button>
+            )}
+            {!painting.isPublished && (
+              <button className="secondary" onClick={onEdit}>
+                Editar
+              </button>
+            )}
+          </td>
+        </>
+      )}
     </tr>
   );
 }
