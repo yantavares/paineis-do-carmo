@@ -22,7 +22,7 @@ export default function Dashboard() {
   const [paintingToDelete, setPaintingToDelete] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [paintingToEdit, setPaintingToEdit] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isLoadingPaintings, setIsLoadingPaintings] = useState(false);
   const [isLoadingChurches, setIsLoadingChurches] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
