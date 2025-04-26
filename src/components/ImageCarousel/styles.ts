@@ -3,6 +3,10 @@ import styled from "styled-components";
 export const ImageContainer = styled.div`
   width: 100%;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  max-height: 60rem;
   &:focus {
     outline: none;
   }

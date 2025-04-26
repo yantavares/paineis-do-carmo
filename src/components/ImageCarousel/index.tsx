@@ -3,7 +3,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import { ImageContainer, SliderImage } from "./styles";
-import "./styles.css";
 
 const ImageCarousel = ({ images }: { images: string[] }) => {
   const settings = {
@@ -11,6 +10,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
     cssEase: "linear",
     arrows: true,
     dots: true,
+    className: "sl",
   };
 
   return (
