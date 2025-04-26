@@ -23,7 +23,20 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import "./social-media.css";
 import { useNavigate } from "react-router-dom";
-import { FooterContainerMobile } from "./stylesMobile";
+import {
+  AuthorMobile,
+  ContactContainerMobile,
+  CreditsContainerMobile,
+  FinancingContainerMobile,
+  FooterButtonMobile,
+  FooterContainerMobile,
+  InnerDivMobile,
+  LogoMainMobile,
+  SocialsContainerMobile,
+  TextContainerMobile,
+  TextMobile,
+  TitleTextMobile,
+} from "./stylesMobile";
 
 const wppMessage =
   "Olá, gostaria de saber mais sobre o projeto Paineis do Carmo!";
@@ -37,49 +50,51 @@ const Footer = ({ isMobile = false }) => {
   if (isMobile) {
     return (
       <FooterContainerMobile>
-        <LogoMain height={35} src={logoMain} alt="Paint Bucket" />
-        <InnerDiv>
-          <TextContainer>
-            <ContactContainer>
-              <TitleText>Ficou curioso?</TitleText>
-              <Text>Entre em contato para saber mais sobre o projeto</Text>
-              <FooterButton>
+        <LogoMainMobile height={35} src={logoMain} alt="Paint Bucket" />
+        <InnerDivMobile>
+          <TextContainerMobile>
+            <ContactContainerMobile>
+              <TitleTextMobile>Ficou curioso?</TitleTextMobile>
+              <TextMobile>
+                Entre em contato para saber mais sobre o projeto
+              </TextMobile>
+              <FooterButtonMobile>
                 <a href="mailto:yantdo1@gmail.com" style={{ all: "unset" }}>
                   Entrar em contato
                 </a>
-              </FooterButton>
-            </ContactContainer>
-            <CreditsContainer>
-              <TitleText>Créditos</TitleText>
-              <Text>
-                <Author href="https://github.com/gabrielccac">
+              </FooterButtonMobile>
+            </ContactContainerMobile>
+            <CreditsContainerMobile>
+              <TitleTextMobile>Créditos</TitleTextMobile>
+              <TextMobile>
+                <AuthorMobile href="https://github.com/gabrielccac">
                   Gabriel Farago
-                </Author>{" "}
-                UI/UX e Front End
-              </Text>
-              <Text>
-                <Author href="https://github.com/GuilhermeGonSoares">
+                </AuthorMobile>{" "}
+              </TextMobile>
+              <TextMobile>
+                <AuthorMobile href="https://github.com/GuilhermeGonSoares">
                   Guilherme Gonçalves
-                </Author>{" "}
-                Back End
-              </Text>
-              <Text>
-                <Author href="https://github.com/yantavares" target="_blank">
+                </AuthorMobile>{" "}
+              </TextMobile>
+              <TextMobile>
+                <AuthorMobile
+                  href="https://github.com/yantavares"
+                  target="_blank"
+                >
                   Yan Tavares
-                </Author>
-                Front End e integração com IA
-              </Text>
-            </CreditsContainer>
-            <FinancingContainer>
-              <TitleText>
+                </AuthorMobile>
+              </TextMobile>
+            </CreditsContainerMobile>
+            <FinancingContainerMobile>
+              <TitleTextMobile>
                 Este projeto foi financiado pela Universidade de Brasília
-              </TitleText>
-              <FooterButton onClick={() => navigate("/sobre")}>
+              </TitleTextMobile>
+              <FooterButtonMobile onClick={() => navigate("/sobre")}>
                 Saber mais
-              </FooterButton>
-            </FinancingContainer>
-          </TextContainer>
-          <SocialsContainer>
+              </FooterButtonMobile>
+            </FinancingContainerMobile>
+          </TextContainerMobile>
+          <SocialsContainerMobile>
             <DashedLine />
             <div className="social-media">
               <a href={wppLink} target="_blank" rel="noopener noreferrer">
@@ -103,8 +118,8 @@ const Footer = ({ isMobile = false }) => {
                 <span className="tooltip-social">GitHub</span>
               </a>
             </div>
-          </SocialsContainer>
-        </InnerDiv>
+          </SocialsContainerMobile>
+        </InnerDivMobile>
       </FooterContainerMobile>
     );
   }
