@@ -7,7 +7,6 @@ import { SearchHeader } from "./styles";
 import L from "leaflet";
 import { useNavigate } from "react-router-dom";
 
-
 const originalStyle = () => ({
   weight: 10,
   stroke: false,
@@ -76,7 +75,6 @@ const ChurchMap = () => {
           });
 
           layer.on("click", (e) => {
-            console.log(feature.properties.SIGLA);
             navigate(`/pesquisa/igrejas/${feature.properties.SIGLA}`);
           });
         },
@@ -90,13 +88,13 @@ const ChurchMap = () => {
 
     return null;
   };
-  
 
   return (
     <>
       <div style={{ display: "flex", alignItems: "flex-end", gap: "1.4em" }}>
         <SearchHeader>
-          Nossa Coleção de <span style={{ color: colors.mainColor }}>Igrejas</span>
+          Nossa Coleção de{" "}
+          <span style={{ color: colors.mainColor }}>Igrejas</span>
         </SearchHeader>
         <h4 style={{ padding: 0, margin: 0, fontSize: "2rem" }}>por estado</h4>
       </div>
@@ -106,7 +104,8 @@ const ChurchMap = () => {
           alignItems: "center",
           justifyContent: "center",
           width: "100%",
-        }}>
+        }}
+      >
         <MapContainer
           center={[-14.235, -51.9253]}
           zoom={4}
@@ -123,11 +122,9 @@ const ChurchMap = () => {
           zoomControl={true}
           dragging={true}
           zoomAnimation={true}
-          attributionControl={false}>
-          <GeoJSON
-            data={brazilGeoJSON}
-            style={mapStyle}
-          />
+          attributionControl={false}
+        >
+          <GeoJSON data={brazilGeoJSON} style={mapStyle} />
           <ShowStateNameOnHover />
         </MapContainer>
       </div>

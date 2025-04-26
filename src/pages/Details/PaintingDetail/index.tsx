@@ -146,6 +146,26 @@ const PaintingDetails = () => {
             )}
           </div>
           <div className="topic-wrapper">
+            {(data?.bibliographySource?.length > 1 ||
+              (data?.bibliographySource?.length == 1 &&
+                data.bibliographySource[0] !== "")) && (
+              <>
+                <h3 className="topic-title">Fontes Historiográficas</h3>
+                <ul className="reference-list">
+                  {data?.bibliographySource &&
+                    data?.bibliographySource?.map((reference, index) => {
+                      if (reference && reference !== " ")
+                        return (
+                          <li key={index} className="reference-item">
+                            <sup>{index + 1} </sup> {reference}
+                          </li>
+                        );
+                    })}
+                </ul>
+              </>
+            )}
+          </div>
+          <div className="topic-wrapper">
             <h2 className="topic-title">Ficha da Obra</h2>
             <div className="record-info">
               <p className="record-data">
@@ -176,18 +196,22 @@ const PaintingDetails = () => {
                 )}
               </p>
               <br />
-              <p className="record-data">
+              {/* <p className="record-data">
                 <strong>Fonte Historiográfica:</strong>{" "}
-                {data?.bibliographySource ?? "N/A"}
-              </p>
+                {data?.bibliographySource?.[0]
+                  ? data?.bibliographySource?.[0]
+                  : "N/A"}
+              </p> */}
             </div>
           </div>
-          <div className="topic-wrapper">
-            <h2 className="tags-title">Tags</h2>
-            <div className="tags-wrapper">
-              <Tags tags={data.tags} />
+          {data.tags.length > 0 && (
+            <div className="topic-wrapper">
+              <h2 className="tags-title">Tags</h2>
+              <div className="tags-wrapper">
+                <Tags tags={data.tags} />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
       {data?.engravings?.length > 0 && (
@@ -204,6 +228,9 @@ const PaintingDetails = () => {
                   <TextTruncate className="engraving-title">
                     {engraving.name}
                   </TextTruncate>
+                  <p style={{ fontSize: "1.6rem" }}>
+                    {engraving?.createdBy ?? "Autor desconhecido"}
+                  </p>
                 </EngravingDescription>
               </Col>
             ))}

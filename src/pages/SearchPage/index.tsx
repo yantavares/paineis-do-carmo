@@ -92,8 +92,12 @@ const SearchPage = () => {
   }, [translatedSelected]);
 
   const filteredDataPainting = dataPainting?.filter((item) => {
-    console.log(item)
-    return item.title.toLowerCase().includes(inputValue.toLowerCase()) || item.tags.some((tag) => tag.name.toLowerCase().includes(inputValue.toLowerCase()));
+    return (
+      item.title.toLowerCase().includes(inputValue.toLowerCase()) ||
+      item.tags.some((tag) =>
+        tag.name.toLowerCase().includes(inputValue.toLowerCase())
+      )
+    );
   });
 
   const filteredDataChurch = dataChurch?.filter((item) => {

@@ -32,7 +32,7 @@ const DeleteConfirmationModal = ({
           <div className="modal-actions">
             <button
               onClick={onConfirm}
-              className="submit-btn"
+              //className="submit-btn"
               disabled={isDeleting}
               style={{ fontSize: "1.5rem" }}
             >

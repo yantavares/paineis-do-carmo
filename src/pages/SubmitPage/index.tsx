@@ -432,7 +432,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/api/paintings/artisans`
       );
-      setAuthors(response.data.artisans);
+      setAuthors(response.data.artisans.filter((author) => author && author.trim() !== ""));
     } catch (error) {
       console.error("Error fetching authors:", error);
     }
@@ -466,8 +466,6 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       );
 
       setChurches(uniqueChurches);
-
-      console.log("Churches:", churches);
     } catch (error) {
       console.error("Error fetching churches:", error);
     }
@@ -533,9 +531,9 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       tags: allTagIds,
     }));
 
-    const newBibliographicReferences = obra.bibliographicReferences
-      .split("\n")
-      .filter((source) => source.trim() !== "");
+    const newBibliographicReferences = obra?.bibliographicReferences
+      ?.split("\n")
+      ?.filter((source) => source.trim() !== "");
 
     const payload = {
       title: obra.name,
@@ -665,13 +663,27 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       return array.some((item) => item[key] === value);
     };
 
+    const newBibliographicReferences2 =
+      typeof obra?.bibliographicReferences === "string"
+        ? obra.bibliographicReferences
+            .split("\n")
+            .filter((source) => source.trim() !== "")
+        : obra?.bibliographicReferences || [];
+
+    const newBiographicSources =
+      typeof obra?.bibliographicSources === "string"
+        ? obra.bibliographicSources
+            .split("\n")
+            .filter((source) => source.trim() !== "")
+        : obra?.bibliographicSources || [];
+
     const payload = {
       churchId: obra.churchId,
       title: obra.name,
       description: obra.description,
       dateOfCreation: obra.dateOfCreation,
-      bibliographySource: obra.bibliographicSources,
-      bibliographyReference: [...obra.bibliographicReferences],
+      bibliographySource: newBiographicSources,
+      bibliographyReference: newBibliographicReferences2,
       placement: obra.placement,
       artisan: obra.authorId.toString(),
       images: images
@@ -756,7 +768,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
   const handleAddGravura = () => {
     setGravuras((prevGravuras) => [
       ...prevGravuras,
-      { Name: "", Base64Image: "", Photographer: "" },
+      { Name: "", Base64Image: "", Photographer: "", id: "" },
     ]);
   };
 
@@ -768,10 +780,16 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     });
   }, []);
 
+  const [removedIndexes, setRemovedIndexes] = useState<number[]>([]);
+
   const handleRemoveGravura = (index: number) => {
     const gravura = gravuras[index];
-    setRemovedEngravings((prev) => [...prev, gravura.Base64Image]); // Add URL to removedEngravings array
-    setGravuras((prevGravuras) => prevGravuras.filter((_, i) => i !== index));
+    setRemovedEngravings((prev) => [...prev, gravura.Base64Image]);
+
+    //setGravuras((prevGravuras) => prevGravuras.filter((_, i) => i !== index));
+    setRemovedIndexes((prev) => [...prev, index]);
+
+    console.log(gravura);
   };
 
   const handleAddImage = () => {
@@ -816,6 +834,10 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
     );
   };
 
+  const newBibliographicReferences = church?.bibliographicReferences
+    ?.split("\n")
+    ?.filter((source) => source.trim() !== "");
+
   const handleNewChurch = async () => {
     setIsPublishing(true);
     const payload = {
@@ -828,7 +850,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
         base64Image: img.Base64Image,
         photographer: img.Photographer,
       })),
-      bibliographyReference: [church.bibliographicReferences],
+      bibliographyReference: newBibliographicReferences,
       bibliographySource: [church.bibliographicSources],
     };
 
@@ -987,6 +1009,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
           <label className="label-wrapper" style={{ marginBottom: "1rem" }}>
             <p className="input-label">Descrição</p>
             <textarea
+              style={{ height: "20rem" }}
               placeholder="Insira uma descrição da obra"
               value={obra.description}
               onChange={(e) =>
@@ -1000,10 +1023,11 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
           </p> */}
           <div className="grid-layout">
             <label className="label-wrapper">
-              <p className="input-label">Fonte Historiográfica</p>
+              <p className="input-label">Fontes Historiográficas</p>
               <textarea
-                placeholder="Exemplo: fonte1"
-                value={obra.bibliographicSources}
+                placeholder="Insira as fontes (uma por linha)"
+                style={{ height: "15rem" }}
+                value={Array.isArray(obra.bibliographicSources) ? obra.bibliographicSources.join("\n\n") : obra.bibliographicSources}
                 onChange={(e) =>
                   setObra({ ...obra, bibliographicSources: e.target.value })
                 }
@@ -1012,8 +1036,9 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
             <label className="label-wrapper">
               <p className="input-label">Referências Bibliográficas</p>
               <textarea
+                style={{ height: "15rem" }}
                 placeholder="Insira as referências (uma por linha)"
-                value={obra.bibliographicReferences}
+                value={Array.isArray(obra.bibliographicReferences) ? obra.bibliographicReferences.join("\n\n") : obra.bibliographicReferences}
                 onChange={(e) =>
                   setObra({ ...obra, bibliographicReferences: e.target.value })
                 }
@@ -1073,16 +1098,19 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
             </button>
           </div>
         </div>
-        {gravuras.map((gravura, index) => (
-          <GravuraInput
-            key={index}
-            index={index}
-            gravura={gravura}
-            onGravuraChange={handleGravuraChange}
-            onRemove={handleRemoveGravura}
-            painting={gravura}
-          />
-        ))}
+        {gravuras.map(
+          (gravura, index) =>
+            !removedIndexes.includes(index) && (
+              <GravuraInput
+                key={index}
+                index={index}
+                gravura={gravura}
+                onGravuraChange={handleGravuraChange}
+                onRemove={handleRemoveGravura}
+                painting={gravura}
+              />
+            )
+        )}
         <button
           style={{ display: "block", width: "100%" }}
           onClick={handleAddGravura}
@@ -1112,8 +1140,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
                 onClick={() => setIsAuthorModalOpen(false)}
                 aria-label="Close modal"
                 className="close-btn"
-              >
-              </button>
+              ></button>
             </div>
           </div>
           <p className="submit-description">

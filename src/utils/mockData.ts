@@ -17,7 +17,7 @@ export interface Tag {
 export interface Church {
   id: number;
   description?: string;
-  bibliographyReference?: string[];
+  bibliographyReferences?: string[];
   paintings?: Painting[];
   name: string;
   images: Image[];
@@ -47,6 +47,7 @@ export const brazilianChurches: Church[] = [
 ];
 
 export interface Engraving {
+  createdBy: string;
   name: string;
   url: string;
 }
@@ -58,7 +59,7 @@ export interface Painting {
   dateOfCreation: number | string;
   artisan?: string;
   bibliographyReference?: string[];
-  bibliographySource?: string;
+  bibliographySource?: string[];
   engravings?: Engraving[];
   description?: string;
   city: string;

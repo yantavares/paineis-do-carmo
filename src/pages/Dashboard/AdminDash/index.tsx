@@ -315,14 +315,37 @@ export default function Dashboard() {
       );
     });
 
+    // const newBibliographyReferences = churchToEdit?.bibliographyReferences;
+    // const newBilbiographySources =
+    //   churchToEdit?.bibliographySource &&
+    //   churchToEdit?.bibliographySource
+    //     ?.split(",")
+    //     ?.filter((source) => source.trim() !== "");
+
+    console.log(churchToEdit);
+
+    const newBibliographyReferences =
+      typeof churchToEdit?.bibliographyReferences === "string"
+        ? churchToEdit.bibliographyReferences
+            .split("\n")
+            .filter((source) => source.trim() !== "")
+        : churchToEdit?.bibliographyReferences || [];
+
+    const newBilbiographySources =
+      typeof churchToEdit?.bibliographySource === "string"
+        ? churchToEdit.bibliographySource
+            .split("\n")
+            .filter((source) => source.trim() !== "")
+        : churchToEdit?.bibliographySource || [];
+
     const updatedChurch = {
       name: churchToEdit.name,
       description: churchToEdit.description,
       street: churchToEdit.street,
       city: churchToEdit.city,
       state: churchToEdit.state,
-      bibliographyReference: [...churchToEdit.bibliographyReferences],
-      bibliographySource: [...churchToEdit.bibliographySource],
+      bibliographyReference: newBibliographyReferences,
+      bibliographySource: newBilbiographySources,
       images: newImages.map((image) => ({
         base64Image: image.url,
         photographer: image.photographer,
@@ -521,11 +544,11 @@ export default function Dashboard() {
                   <p className="input-label">Referências Bibliográficas</p>
                   <textarea
                     placeholder="Insira as fontes"
-                    value={churchToEdit?.bibliographyReferences}
+                    value={churchToEdit?.bibliographyReferences || ""}
                     onChange={(e) =>
                       setChurchToEdit({
                         ...churchToEdit,
-                        bibliographicReferences: e.target.value,
+                        bibliographyReferences: e.target.value,
                       })
                     }
                   />
