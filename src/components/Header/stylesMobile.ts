@@ -1,20 +1,21 @@
 import styled from "styled-components";
 import colors from "src/utils/colors";
 
-export const HeaderContainer = styled.header`
+export const HeaderContainerMobile = styled.header`
   display: flex;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
   padding: 0 5%;
   border-bottom: 2px dashed #ededed;
 `;
 
-export const Col1 = styled.div`
+export const Col1Mobile = styled.div`
   display: flex;
   gap: 3rem;
 `;
 
-export const Col2 = styled.div`
+export const Col2Mobile = styled.div`
   display: flex;
   place-items: center;
   gap: 1.4rem;
@@ -84,4 +85,41 @@ export const LoginButton = styled.button`
 
 export const Icon = styled.img`
   max-height: 4rem;
+`;
+
+export const MenuButton = styled.button`
+  border: none;
+  background: transparent;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+`;
+
+export const Overlay = styled.div<{ open: boolean }>`
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: ${({ open }) => (open ? 1 : 0)};
+  pointer-events: ${({ open }) => (open ? "auto" : "none")};
+  transition: opacity 0.25s ease;
+  z-index: 998;
+`;
+
+export const Drawer = styled.nav<{ open: boolean }>`
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 260px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  gap: 0.75rem;
+  z-index: 999;
+
+  transform: translateX(${({ open }) => (open ? "0" : "100%")});
+  transition: transform 0.25s ease;
 `;

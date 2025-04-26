@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import temp3 from "src/assets/utils/artista1.jpg";
 import temp4 from "src/assets/utils/baroque.jpg";
 import temp2 from "src/assets/utils/baroque2.jpg";
@@ -25,9 +25,132 @@ import {
   TopicTitle,
   TopicsContainer,
 } from "./styles";
+import {
+  PaddingContainerMobile,
+  GreetingContainerMobile,
+  MainTextContainerMobile,
+  MainTextHeaderMobile,
+  MainTextMobile,
+  TopicsContainerMobile,
+  TopicMobile,
+  TopicHeaderMobile,
+  TopicTitleMobile,
+  TopicSubTitleMobile,
+  TopicBodyMobile,
+  TopicOneMobile,
+} from "./stylesMobile";
+import HomeTopicMobile from "./HomeTopicMobile";
 
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 860);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  if (isMobile) {
+    return (
+      <div>
+        <PaddingContainerMobile>
+          <GreetingContainerMobile>
+            <MainTextContainerMobile>
+              <MainTextHeaderMobile>
+                O Barroco{" "}
+                <span
+                  style={{
+                    color: colors.mainColor,
+                    borderBottom: "2px solid #eedddd",
+                  }}
+                >
+                  Reinventado
+                </span>
+              </MainTextHeaderMobile>
+              <div style={{}}>
+                <ImageCarousel2 images={[temp, temp2, temp4, temp6]} />
+              </div>
+              <MainTextMobile>
+                Bem-vindo ao nosso site! Aqui você pode encontrar informações
+                sobre igrejas, pinturas e artifices do período barroco
+                brasileiro. O barroco foi um período de grande efervescência
+                artística no Brasil, com a chegada dos colonizadores portugueses
+                e a influência da igreja católica.
+              </MainTextMobile>
+            </MainTextContainerMobile>
+          </GreetingContainerMobile>
+          <HomeSearch
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+            placeHolder={"Descubra o barroco"}
+          />
+        </PaddingContainerMobile>
+        {/* <CarouselContainer>
+      <ImageCarousel images={[temp, temp2, temp3, temp4, temp5, temp6]} />
+    </CarouselContainer> */}
+        <PaddingContainerMobile>
+          <TopicsContainerMobile>
+            <TopicMobile>
+              <TopicHeaderMobile>
+                <TopicTitleMobile>Como utilizar</TopicTitleMobile>
+                <TopicSubTitleMobile>
+                  Formas que você pode usufruir do nosso site
+                </TopicSubTitleMobile>
+              </TopicHeaderMobile>
+              <TopicBodyMobile>
+                <RoundBox
+                  videoURL={"FMgvlhz8Ryc"}
+                  text={"Apresentação do projeto"}
+                  buttonText={"Sobre nós"}
+                  color={colors.darkMain}
+                />
+                <RoundBox
+                  videoURL={"SOXdIAh9pQs"}
+                  text={"Como navegar pelo site"}
+                  buttonText={"Como utilizar"}
+                  color={colors.mainColor}
+                />
+                <RoundBox
+                  videoURL={"DId_2vG8S0g"}
+                  text={"Faça parte do projeto!"}
+                  buttonText={"Fazer parte"}
+                  color={colors.lightMain}
+                />
+              </TopicBodyMobile>
+            </TopicMobile>
+            <TopicOneMobile>
+              <TopicHeaderMobile>
+                <TopicTitleMobile>Obras</TopicTitleMobile>
+                <TopicSubTitleMobile>
+                  Procure por pinturas do período barroco brasileiro
+                </TopicSubTitleMobile>
+              </TopicHeaderMobile>
+              <HomeTopicMobile
+                size={2}
+                type={"paintings"}
+                data={brazilianPaintings}
+              />
+            </TopicOneMobile>
+            <TopicMobile>
+              <TopicHeaderMobile>
+                <TopicTitleMobile>Igrejas</TopicTitleMobile>
+                <TopicSubTitleMobile>
+                  Procure por igrejas do período barroco brasileiro
+                </TopicSubTitleMobile>
+              </TopicHeaderMobile>
+              <HomeTopicMobile type={"churches"} data={brazilianChurches} />
+            </TopicMobile>
+          </TopicsContainerMobile>
+        </PaddingContainerMobile>
+      </div>
+    );
+  }
+
   return (
     <div>
       <PaddingContainer>

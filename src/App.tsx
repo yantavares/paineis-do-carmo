@@ -46,22 +46,12 @@ function Layout({ children }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  if (isMobile) {
-    return (
-      <div className="mobile-warning">
-        <FontAwesomeIcon icon={faLaptop} />
-        <h2>Por enquanto, este site só funciona em laptops e computadores.</h2>
-        <p>Volte em breve para conferir a versão para celulares!</p>
-      </div>
-    );
-  }
-
   return (
     <div className="app-container">
       <ScrollToTop />
-      <Header />
+      <Header isMobile={isMobile} />
       <main className="main-content">{children}</main>
-      <Footer />
+      <Footer isMobile={isMobile} />
 
       <div
         className="assistant-button"
