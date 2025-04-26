@@ -15,6 +15,7 @@ import {
   SearchResultsContainer,
 } from "./styles";
 import { CircularProgress } from "@mui/material";
+import { SearchContainerMobile, SearchHeaderMobile } from "./stylesMobile";
 
 const translateSelected = (selected: string) => {
   switch (selected) {
@@ -50,6 +51,17 @@ const SearchPage = () => {
 
   const [inputValue, setInputValue] = useState(query ? query : "");
   const [isLoading, setIsLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 860);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 860);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const translatedSelected = useMemo(
     () => translateSelected(selected),
@@ -111,6 +123,117 @@ const SearchPage = () => {
   if (isLoading) {
   }
 
+  const renderContentMobile = () => {
+    switch (selected) {
+      case "obras":
+        return (
+          <>
+            <SearchHeaderMobile>
+              Nossa Coleção de{" "}
+              <span style={{ color: colors.mainColor }}>
+                {capitalize(selected)}
+              </span>
+              <SearchBarContainer>
+                <SearchBar
+                  placeHolder={`Busque por ${selected}`}
+                  showButtons={false}
+                  inputValue={inputValue}
+                  setInputValue={setInputValue}
+                />
+              </SearchBarContainer>
+            </SearchHeaderMobile>
+
+            <SearchResultsContainer>
+              {/* Display loading spinner */}
+              {isLoading ? (
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "20px",
+                  }}
+                >
+                  <CircularProgress style={{ color: colors.mainColor }} />
+                </div>
+              ) : filteredDataPainting?.length > 0 ? (
+                filteredDataPainting.map((item) => (
+                  <SearchResult key={item?.id}>
+                    <Item
+                      item={item}
+                      type={translateTopicType(selected)}
+                      fixedImgHeight
+                    />
+                  </SearchResult>
+                ))
+              ) : (
+                error && <p>Nenhum item encontrado na busca...</p>
+              )}
+            </SearchResultsContainer>
+          </>
+        );
+
+      case "igrejas":
+        return (
+          <>
+            <ChurchMap isMobile={isMobile} />
+            <SearchHeaderMobile>
+              Todas as{" "}
+              <span style={{ color: colors.mainColor }}>
+                {capitalize(selected)}
+              </span>
+              <SearchBarContainer>
+                <SearchBar
+                  placeHolder={`Busque por ${selected}`}
+                  showButtons={false}
+                  inputValue={inputValue}
+                  setInputValue={setInputValue}
+                />
+              </SearchBarContainer>
+            </SearchHeaderMobile>
+            <SearchResultsContainer>
+              {isLoading ? (
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "20px",
+                  }}
+                >
+                  <CircularProgress style={{ color: colors.mainColor }} />
+                </div>
+              ) : filteredDataChurch?.length > 0 ? (
+                filteredDataChurch.map((item, index) => (
+                  <SearchResult key={index}>
+                    <Item
+                      item={item}
+                      type={translateTopicType(selected)}
+                      fixedImgHeight
+                    />
+                  </SearchResult>
+                ))
+              ) : (
+                error && <p>Nenhum item encontrado na busca...</p>
+              )}
+            </SearchResultsContainer>
+          </>
+        );
+
+      case "topicos":
+        return (
+          <TopicSearch
+            isLoading={isLoading}
+            tags={filteredDataTopics}
+            isMobile={isMobile}
+          />
+        );
+
+      default:
+        return <p>Selecione uma categoria válida.</p>;
+    }
+  };
+
   const renderContent = () => {
     switch (selected) {
       case "artifices":
@@ -165,7 +288,7 @@ const SearchPage = () => {
       case "igrejas":
         return (
           <>
-            <ChurchMap />
+            <ChurchMap isMobile={isMobile} />
             <SearchHeader>
               Todas as{" "}
               <span style={{ color: colors.mainColor }}>
@@ -210,14 +333,24 @@ const SearchPage = () => {
         );
 
       case "topicos":
-        return <TopicSearch isLoading={isLoading} tags={filteredDataTopics} />;
+        return (
+          <TopicSearch
+            isLoading={isLoading}
+            tags={filteredDataTopics}
+            isMobile={isMobile}
+          />
+        );
 
       default:
         return <p>Selecione uma categoria válida.</p>;
     }
   };
 
-  return <SearchContainer>{renderContent()}</SearchContainer>;
+  if (isMobile)
+    return (
+      <SearchContainerMobile>{renderContentMobile()}</SearchContainerMobile>
+    );
+  else return <SearchContainer>{renderContent()}</SearchContainer>;
 };
 
 export default SearchPage;

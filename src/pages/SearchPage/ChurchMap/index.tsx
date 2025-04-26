@@ -6,6 +6,7 @@ import colors from "src/utils/colors";
 import { SearchHeader } from "./styles";
 import L from "leaflet";
 import { useNavigate } from "react-router-dom";
+import { SearchHeaderMobile } from "../stylesMobile";
 
 const originalStyle = () => ({
   weight: 10,
@@ -14,7 +15,7 @@ const originalStyle = () => ({
   fillOpacity: 0.5,
 });
 
-const ChurchMap = () => {
+const ChurchMap = ({ isMobile }) => {
   const mapStyle = {
     weight: 2,
     opacity: 1,
@@ -89,47 +90,101 @@ const ChurchMap = () => {
     return null;
   };
 
-  return (
-    <>
-      <div style={{ display: "flex", alignItems: "flex-end", gap: "1.4em" }}>
-        <SearchHeader>
-          Nossa Coleção de{" "}
-          <span style={{ color: colors.mainColor }}>Igrejas</span>
-        </SearchHeader>
-        <h4 style={{ padding: 0, margin: 0, fontSize: "2rem" }}>por estado</h4>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "100%",
-        }}
-      >
-        <MapContainer
-          center={[-14.235, -51.9253]}
-          zoom={4}
+  if (isMobile) {
+    return (
+      <>
+        <div style={{ display: "flex", alignItems: "flex-end", gap: "1.4em" }}>
+          <SearchHeaderMobile>
+            Nossa Coleção de{" "}
+            <span style={{ color: colors.mainColor }}>Igrejas</span>
+            <span
+              style={{
+                padding: 0,
+                margin: 0,
+                fontSize: "2rem",
+                paddingLeft: "1rem",
+              }}
+            >
+              por estado
+            </span>
+          </SearchHeaderMobile>
+        </div>
+        <div
           style={{
-            height: "52rem",
-            border: "1px dashed rgba(0, 0, 0, 0.25)",
-            backgroundColor: "#f5f5f5",
-            width: "70%",
-            cursor: "pointer",
-            transition: "all 0.3s",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
           }}
-          scrollWheelZoom={true}
-          doubleClickZoom={false}
-          zoomControl={true}
-          dragging={true}
-          zoomAnimation={true}
-          attributionControl={false}
         >
-          <GeoJSON data={brazilGeoJSON} style={mapStyle} />
-          <ShowStateNameOnHover />
-        </MapContainer>
-      </div>
-    </>
-  );
+          <MapContainer
+            center={[-14.235, -51.9253]}
+            zoom={4}
+            style={{
+              height: "50rem",
+              border: "1px dashed rgba(0, 0, 0, 0.25)",
+              backgroundColor: "#f5f5f5",
+              width: "100%",
+              cursor: "pointer",
+              transition: "all 0.3s",
+            }}
+            scrollWheelZoom={true}
+            doubleClickZoom={false}
+            zoomControl={true}
+            dragging={true}
+            zoomAnimation={true}
+            attributionControl={false}
+          >
+            <GeoJSON data={brazilGeoJSON} style={mapStyle} />
+            <ShowStateNameOnHover />
+          </MapContainer>
+        </div>
+      </>
+    );
+  } else
+    return (
+      <>
+        <div style={{ display: "flex", alignItems: "flex-end", gap: "1.4em" }}>
+          <SearchHeader>
+            Nossa Coleção de{" "}
+            <span style={{ color: colors.mainColor }}>Igrejas</span>
+          </SearchHeader>
+          <h4 style={{ padding: 0, margin: 0, fontSize: "2rem" }}>
+            por estado
+          </h4>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+          }}
+        >
+          <MapContainer
+            center={[-14.235, -51.9253]}
+            zoom={4}
+            style={{
+              height: "52rem",
+              border: "1px dashed rgba(0, 0, 0, 0.25)",
+              backgroundColor: "#f5f5f5",
+              width: "70%",
+              cursor: "pointer",
+              transition: "all 0.3s",
+            }}
+            scrollWheelZoom={true}
+            doubleClickZoom={false}
+            zoomControl={true}
+            dragging={true}
+            zoomAnimation={true}
+            attributionControl={false}
+          >
+            <GeoJSON data={brazilGeoJSON} style={mapStyle} />
+            <ShowStateNameOnHover />
+          </MapContainer>
+        </div>
+      </>
+    );
 };
 
 export default memo(ChurchMap);

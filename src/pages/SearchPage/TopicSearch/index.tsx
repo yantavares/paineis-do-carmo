@@ -3,16 +3,18 @@ import SearchBar from "src/components/SearchBar";
 import { Tag } from "src/utils/mockData";
 import { SearchHeader, SearchBarContainer } from "../styles";
 import colors from "src/utils/colors";
-import { BigTag } from "./styles";
+import { BigTag, BigTagMobile } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
+import { SearchHeaderMobile } from "../stylesMobile";
 
 interface TopicSearchProps {
   tags: Tag[];
   isLoading: boolean;
+  isMobile: boolean;
 }
 
-const TopicSearch = ({ tags, isLoading }: TopicSearchProps) => {
+const TopicSearch = ({ tags, isLoading, isMobile }: TopicSearchProps) => {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState("");
   const [filteredTags, setFilteredTags] = useState(tags);
@@ -35,6 +37,58 @@ const TopicSearch = ({ tags, isLoading }: TopicSearchProps) => {
 
     return () => clearTimeout(noDataTimeout);
   }, [inputValue, tags]);
+
+  if (isMobile) {
+    return (
+      <>
+        <SearchHeaderMobile>
+          Nossos <span style={{ color: colors.mainColor }}>Tópicos</span>
+          <SearchBarContainer>
+            <SearchBar
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+              placeHolder={"Busque por Tópico"}
+              showButtons={false}
+            />
+          </SearchBarContainer>
+        </SearchHeaderMobile>
+        <div
+          style={{
+            display: "flex",
+            flex: 1,
+            flexWrap: "wrap",
+            gap: "4rem 2rem",
+            justifyContent: "center",
+          }}
+        >
+          {isLoading ? (
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <CircularProgress style={{ color: colors.mainColor }} />
+            </div>
+          ) : filteredTags && filteredTags.length > 0 ? (
+            filteredTags.map((tag, index) => (
+              <BigTagMobile
+                onClick={() =>
+                  navigate(`/topicos/${tag.name.toLocaleLowerCase()}`)
+                }
+                key={index}
+              >
+                {tag.name}
+              </BigTagMobile>
+            ))
+          ) : (
+            showNoDataMessage && <p>Nenhum tópico encontrado...</p>
+          )}
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
