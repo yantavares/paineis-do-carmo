@@ -5,6 +5,7 @@ export const HeaderContainerMobile = styled.header`
   display: flex;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
   padding: 0 5%;
   border-bottom: 2px dashed #ededed;
 `;
@@ -122,4 +123,3 @@ export const Drawer = styled.nav<{ open: boolean }>`
   transform: translateX(${({ open }) => (open ? "0" : "100%")});
   transition: transform 0.25s ease;
 `;
-
