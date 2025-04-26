@@ -1,15 +1,36 @@
 import styled from "styled-components";
 
 export const ImageContainer = styled.div`
-  height: 100px;
+  width: 100%;
+  display: flex;
   &:focus {
     outline: none;
   }
 `;
 
 export const SliderImage = styled.img`
-  width: 90%;
-  height: 100%;
+  width: 98%;
+  max-height: 100%;
   object-fit: cover;
   border-radius: 2rem;
+`;
+
+export const DownloadButton = styled.button`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+  }
 `;
