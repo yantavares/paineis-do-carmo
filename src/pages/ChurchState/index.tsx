@@ -25,7 +25,7 @@ const ChurchState = () => {
   const { state } = useParams();
   const [data, setData] = useState<Church[]>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 860);
 
   useEffect(() => {
     const handleResize = () => {

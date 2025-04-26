@@ -33,7 +33,7 @@ export default function Dashboard() {
   const [churchImages, setChurchImages] = useState([]);
   const [urlsToRemove, setUrlsToRemove] = useState([]);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 860);
 
   useEffect(() => {
     const handleResize = () => {

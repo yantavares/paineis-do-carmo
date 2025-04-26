@@ -34,7 +34,7 @@ function Layout({ children }) {
   const [conversation, setConversaation] = useState<Message[]>([
     { sender: "bot", text: "Olá! Como posso te ajudar?" },
   ]);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 860);
 
   useEffect(() => {
     const handleResize = () => {

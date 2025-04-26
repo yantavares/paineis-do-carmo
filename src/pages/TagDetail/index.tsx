@@ -24,7 +24,7 @@ const TagDetail = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showNoDataMessage, setShowNoDataMessage] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 860);
 
   useEffect(() => {
     const handleResize = () => {

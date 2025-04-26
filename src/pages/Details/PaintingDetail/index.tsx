@@ -48,7 +48,7 @@ const PaintingDetails = () => {
   const [data, setData] = useState<Painting>(defaultPainting);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [images, setImages] = useState([]);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 860);
 
   useEffect(() => {
     const handleResize = () => {

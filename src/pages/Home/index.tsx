@@ -43,7 +43,7 @@ import HomeTopicMobile from "./HomeTopicMobile";
 
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 860);
 
   useEffect(() => {
     const handleResize = () => {
