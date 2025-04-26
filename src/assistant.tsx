@@ -107,11 +107,12 @@ const Assistant: React.FC<AssistantProps> = ({
         border: "1px solid black",
         borderRadius: "1rem",
         padding: "1rem",
-        width: "45rem",
+        width: "44rem",
         height: "40rem",
         overflowY: "auto",
         display: "flex",
         flexDirection: "column",
+        maxWidth: "85vw",
       }}
     >
       <div style={{ display: "flex", justifyContent: "space-between" }}>

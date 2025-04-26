@@ -1,5 +1,7 @@
+import { jwtDecode } from "jwt-decode";
+import { Menu, X } from "lucide-react";
 import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import LogoMain from "src/assets/utils/logo.svg";
 import {
   ButtonsContainer,
@@ -13,9 +15,13 @@ import {
   Title,
   TitleContainer,
 } from "./styles";
-import { jwtDecode } from "jwt-decode";
-import { Col1Mobile, Col2Mobile, Drawer, HeaderContainerMobile, MenuButton, Overlay } from "./stylesMobile";
-import { X, Menu } from "lucide-react";
+import {
+  Col1Mobile,
+  Drawer,
+  HeaderContainerMobile,
+  MenuButton,
+  Overlay,
+} from "./stylesMobile";
 
 const isLoggedIn = (token: string) => {
   if (token && token !== "admin") {
@@ -56,7 +62,12 @@ const Header: React.FC<{ isMobile?: boolean }> = ({ isMobile = false }) => {
       <>
         <HeaderContainerMobile>
           <Col1Mobile>
-            <TitleContainer onClick={() => { navigate("/"); close(); }}>
+            <TitleContainer
+              onClick={() => {
+                navigate("/");
+                close();
+              }}
+            >
               <Icon src={LogoMain} alt="Museu Barroco" />
               <Title>Museu Barroco</Title>
             </TitleContainer>
@@ -73,16 +84,36 @@ const Header: React.FC<{ isMobile?: boolean }> = ({ isMobile = false }) => {
         <Overlay open={open} onClick={close} />
 
         <Drawer open={open} aria-hidden={!open}>
-          <button onClick={() => { navigate("/pesquisa/obras"); close(); }}>
+          <button
+            onClick={() => {
+              navigate("/pesquisa/obras");
+              close();
+            }}
+          >
             Galeria de Obras
           </button>
-          <button onClick={() => { navigate("/pesquisa/igrejas"); close(); }}>
+          <button
+            onClick={() => {
+              navigate("/pesquisa/igrejas");
+              close();
+            }}
+          >
             Igrejas
           </button>
-          <button onClick={() => { navigate("/pesquisa/topicos"); close(); }}>
+          <button
+            onClick={() => {
+              navigate("/pesquisa/topicos");
+              close();
+            }}
+          >
             Tópicos
           </button>
-          <button onClick={() => { navigate("/sobre"); close(); }}>
+          <button
+            onClick={() => {
+              navigate("/sobre");
+              close();
+            }}
+          >
             Sobre
           </button>
 
@@ -90,21 +121,41 @@ const Header: React.FC<{ isMobile?: boolean }> = ({ isMobile = false }) => {
 
           {isLoggedin ? (
             <>
-              <button onClick={() => { navigate("/dashboard"); close(); }}>
+              <button
+                onClick={() => {
+                  navigate("/dashboard");
+                  close();
+                }}
+              >
                 Dashboard
               </button>
-              <button onClick={() => { navigate("/submit"); close(); }}>
+              <button
+                onClick={() => {
+                  navigate("/submit");
+                  close();
+                }}
+              >
                 Nova Obra
               </button>
             </>
           ) : (
             <>
-              <button onClick={() => { navigate("/login"); close(); }}>
+              <LoginButton
+                onClick={() => {
+                  navigate("/login");
+                  close();
+                }}
+              >
                 Log In
-              </button>
-              <button onClick={() => { navigate("/register"); close(); }}>
+              </LoginButton>
+              <ContribButton
+                onClick={() => {
+                  navigate("/register");
+                  close();
+                }}
+              >
                 Faça parte
-              </button>
+              </ContribButton>
             </>
           )}
         </Drawer>
