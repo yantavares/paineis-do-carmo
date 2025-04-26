@@ -79,10 +79,10 @@ export const brazilianPaintings: Painting[] = [
     city: "Recife",
     state: "PE",
     tags: [
-      { name: "teresa" },
-      { name: "jesus" },
-      { name: "anjo" },
-      { name: "sepulveda" },
+      // { name: "teresa" },
+      // { name: "jesus" },
+      // { name: "anjo" },
+      // { name: "sepulveda" },
     ],
   },
   {
@@ -93,7 +93,11 @@ export const brazilianPaintings: Painting[] = [
     dateOfCreation: "Século XIX",
     city: "Recife",
     state: "PE",
-    tags: [{ name: "eduardo" }, { name: "crucifixo" }, { name: "coroa" }],
+    tags: [
+      // { name: "eduardo" },
+      //  { name: "crucifixo" },
+      //   { name: "coroa" }
+    ],
   },
   {
     id: 101,
@@ -104,10 +108,10 @@ export const brazilianPaintings: Painting[] = [
     city: "Recife",
     state: "PE",
     tags: [
-      { name: "santo elias" },
-      { name: "profeta" },
-      { name: "fogo" },
-      { name: "brasa" },
+      // { name: "santo elias" },
+      // { name: "profeta" },
+      // { name: "fogo" },
+      // { name: "brasa" },
     ],
   },
   {
@@ -119,12 +123,12 @@ export const brazilianPaintings: Painting[] = [
     city: "Recife",
     state: "PE",
     tags: [
-      { name: "santo elias" },
-      { name: "profeta" },
-      { name: "santo eliseu" },
-      { name: "arado" },
-      { name: "boi" },
-      { name: "manto" },
+      // { name: "santo elias" },
+      // { name: "profeta" },
+      // { name: "santo eliseu" },
+      // { name: "arado" },
+      // { name: "boi" },
+      // { name: "manto" },
     ],
   },
 ];
