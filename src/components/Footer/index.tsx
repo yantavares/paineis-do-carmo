@@ -186,7 +186,7 @@ const Footer = ({ isMobile = false }) => {
         <SocialsContainer>
           <DashedLine />
           <div className="social-media">
-            <a
+            {/* <a
               href={wppLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -194,7 +194,7 @@ const Footer = ({ isMobile = false }) => {
             >
               <FontAwesomeIcon icon={faWhatsapp} color="white" size="2xl" />
               <span className="tooltip-social">WhatsApp</span>
-            </a>
+            </a> */}
             {/* <a
               href="https://www.instagram.com/museu_barroco/"
               target="_blank"
