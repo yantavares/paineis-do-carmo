@@ -40,7 +40,7 @@ import {
 
 const wppMessage =
   "Olá, gostaria de saber mais sobre o projeto Paineis do Carmo!";
-const phoneNumber = "5561981020218";
+const phoneNumber = "";
 
 const wppMessageFormatted = wppMessage.replace(" ", "%20");
 const wppLink = `https://wa.me/${phoneNumber}?text=${wppMessageFormatted}`;
