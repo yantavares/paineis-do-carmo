@@ -1,3 +1,8 @@
+import {
+  faCircleArrowDown,
+  faCircleArrowUp,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -10,6 +15,26 @@ import { useAuth } from "src/context/AuthContext";
 import SubmitPage from "src/pages/SubmitPage";
 import colors from "src/utils/colors";
 import { ChurchForm, Container, ExitButton, ExitContainer } from "./styles";
+
+function SortableHeader({ label, column, sortState, onSort }) {
+  return (
+    <th
+      onClick={() => onSort(column)}
+      style={{ cursor: "pointer", userSelect: "none" }}
+    >
+      {label}{" "}
+      {sortState.column === column ? (
+        sortState.direction === "asc" ? (
+          <FontAwesomeIcon icon={faCircleArrowUp} />
+        ) : (
+          <FontAwesomeIcon icon={faCircleArrowDown} />
+        )
+      ) : (
+        ""
+      )}
+    </th>
+  );
+}
 
 export default function Dashboard() {
   const { token } = useAuth();
@@ -34,6 +59,38 @@ export default function Dashboard() {
   const [urlsToRemove, setUrlsToRemove] = useState([]);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 860);
+
+  const [paintingsSort, setPaintingsSort] = useState({
+    column: "title",
+    direction: "asc",
+  });
+  const [churchesSort, setChurchesSort] = useState({
+    column: "name",
+    direction: "asc",
+  });
+
+  const handleSortPaintings = (column) => {
+    setPaintingsSort((prev) => ({
+      column,
+      direction:
+        prev.column === column && prev.direction === "asc" ? "desc" : "asc",
+    }));
+  };
+
+  const handleSortChurches = (column) => {
+    setChurchesSort((prev) => ({
+      column,
+      direction:
+        prev.column === column && prev.direction === "asc" ? "desc" : "asc",
+    }));
+  };
+
+  const sortStrings = (a, b, dir) =>
+    dir === "asc" ? a.localeCompare(b) : b.localeCompare(a);
+  const sortDates = (a, b, dir) =>
+    dir === "asc"
+      ? new Date(a).getTime() - new Date(b).getTime()
+      : new Date(b).getTime() - new Date(a).getTime();
 
   useEffect(() => {
     const handleResize = () => {
@@ -156,8 +213,54 @@ export default function Dashboard() {
     selectedType === "all"
       ? paintings
       : selectedType === "published"
-      ? paintings.filter((painting) => painting.isPublished)
-      : paintings.filter((painting) => !painting.isPublished);
+      ? paintings.filter((p) => p.isPublished)
+      : selectedType === "pending"
+      ? paintings.filter((p) => !p.isPublished)
+      : paintings;
+
+  const sortedPaintings = [...filteredPaintings].sort((a, b) => {
+    const { column, direction } = paintingsSort;
+    switch (column) {
+      case "title":
+        return sortStrings(a.title, b.title, direction);
+      case "status":
+        return sortStrings(
+          a.isPublished ? "1" : "0",
+          b.isPublished ? "1" : "0",
+          direction
+        );
+      case "registeredBy":
+        return sortStrings(
+          a.registeredBy || "",
+          b.registeredBy || "",
+          direction
+        );
+      case "submittedAt":
+        return sortDates(a.submittedAt, b.submittedAt, direction);
+      default:
+        return 0;
+    }
+  });
+
+  const sortedChurches = [...churches].sort((a, b) => {
+    const { column, direction } = churchesSort;
+    switch (column) {
+      case "name":
+        return sortStrings(a.name, b.name, direction);
+      case "city":
+        return sortStrings(a.city || "", b.city || "", direction);
+      case "state":
+        return sortStrings(a.state || "", b.state || "", direction);
+      case "status":
+        return sortStrings(
+          a.isPublished ? "1" : "0",
+          b.isPublished ? "1" : "0",
+          direction
+        );
+      default:
+        return 0;
+    }
+  });
 
   const handleEdit = async (id) => {
     try {
@@ -694,31 +797,51 @@ export default function Dashboard() {
           <section className="table-body">
             {selectedType === "churches" ? (
               <ChurchesTable
-                churches={churches}
+                churches={sortedChurches}
                 onEdit={handleEditChurch}
                 onDelete={handleDeleteChurch}
                 onPublish={handlePublishChurch}
                 isMobile={isMobile}
+                sortState={churchesSort}
+                onSort={handleSortChurches}
               />
             ) : (
               <table className="content-table">
                 <thead>
                   <tr>
-                    <th>Nome</th>
-                    <th>Status</th>
+                    <SortableHeader
+                      label="Nome"
+                      column="title"
+                      sortState={paintingsSort}
+                      onSort={handleSortPaintings}
+                    />
+                    <SortableHeader
+                      label="Status"
+                      column="status"
+                      sortState={paintingsSort}
+                      onSort={handleSortPaintings}
+                    />
                     {!isMobile && (
                       <>
-                        <th>Usuário</th>
-                        <th>
-                          <div className="flex-flow">Data de Submissão</div>
-                        </th>
+                        <SortableHeader
+                          label="Usuário"
+                          column="registeredBy"
+                          sortState={paintingsSort}
+                          onSort={handleSortPaintings}
+                        />
+                        <SortableHeader
+                          label="Data de Submissão"
+                          column="submittedAt"
+                          sortState={paintingsSort}
+                          onSort={handleSortPaintings}
+                        />
                         <th>Opções</th>
                       </>
                     )}
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredPaintings.map((painting) => (
+                  {sortedPaintings.map((painting) => (
                     <PaintingRow
                       key={painting.id}
                       painting={painting}
@@ -774,17 +897,45 @@ function PaintingRow({ painting, onEdit, onDelete, onPublish, isMobile }) {
   );
 }
 
-function ChurchesTable({ churches, onEdit, onDelete, onPublish, isMobile }) {
+function ChurchesTable({
+  churches,
+  onEdit,
+  onDelete,
+  onPublish,
+  isMobile,
+  sortState,
+  onSort,
+}) {
   return (
     <table className="content-table">
       <thead>
         <tr>
-          <th>Nome</th>
-          <th>Status</th>
+          <SortableHeader
+            label="Nome"
+            column="name"
+            sortState={sortState}
+            onSort={onSort}
+          />
+          <SortableHeader
+            label="Status"
+            column="status"
+            sortState={sortState}
+            onSort={onSort}
+          />
           {!isMobile && (
             <>
-              <th>Cidade</th>
-              <th>Estado</th>
+              <SortableHeader
+                label="Cidade"
+                column="city"
+                sortState={sortState}
+                onSort={onSort}
+              />
+              <SortableHeader
+                label="Estado"
+                column="state"
+                sortState={sortState}
+                onSort={onSort}
+              />
               <th>Opções</th>
             </>
           )}
