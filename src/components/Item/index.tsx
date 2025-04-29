@@ -26,9 +26,11 @@ const Item = ({
 }: ItemProps) => {
   const navigate = useNavigate();
   return (
-    <Data style={width && { width }}>
+    <Data
+      style={width && { width }}
+      onClick={() => navigate(`/item/${type}/${item.id}`)}
+    >
       <DataImage
-        onClick={() => navigate(`/item/${type}/${item.id}`)}
         height={fixedImgHeight ? "100%" : "auto"}
         width={fixedImgHeight ? "100%" : "100%"}
         src={item.images?.[0]?.url}
