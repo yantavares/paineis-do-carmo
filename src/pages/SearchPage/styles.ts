@@ -14,6 +14,10 @@ export const SearchContainer = styled.div`
 export const SearchBarContainer = styled.div`
   padding-top: 1rem;
   font-size: 1rem;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const SearchResultsContainer = styled.div`
