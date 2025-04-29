@@ -107,6 +107,7 @@ export const ContainerMobile = styled.div`
     font-size: 16px;
     line-height: 1.5;
     font-weight: 400;
+    text-align: justify;
   }
 
   .reference-title {
@@ -129,6 +130,7 @@ export const ContainerMobile = styled.div`
     color: #1b1d1d;
     font-size: 1.6rem;
     font-weight: 400;
+    text-align: justify;
   }
 
   .item-record {
