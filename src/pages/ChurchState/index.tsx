@@ -73,7 +73,15 @@ const ChurchState = () => {
 
         <SearchResultsContainerMobile>
           {isLoading ? (
-            <CircularProgress style={{ color: colors.mainColor }} />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                width: "100%",
+              }}
+            >
+              <CircularProgress style={{ color: colors.mainColor }} />
+            </div>
           ) : data && data.length > 0 ? (
             data?.map((item: any, index: number) => (
               <SearchResultMobile key={index}>
