@@ -6,6 +6,7 @@ interface ModalProps {
   children: ReactNode;
   isOpen: boolean;
   onClose: () => void;
+  shouldLock?: boolean;
 }
 
 const lockScroll = () => {
@@ -16,17 +17,22 @@ const unlockScroll = () => {
   document.body.style.overflow = "";
 };
 
-const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
+const Modal: React.FC<ModalProps> = ({
+  children,
+  isOpen,
+  onClose,
+  shouldLock = true,
+}) => {
   useEffect(() => {
     if (isOpen) {
-      lockScroll();
+      if (shouldLock) lockScroll();
       document.addEventListener("keydown", handleEscapeKey);
     } else {
-      unlockScroll();
+      if (shouldLock) unlockScroll();
       document.removeEventListener("keydown", handleEscapeKey);
     }
     return () => {
-      unlockScroll();
+      if (shouldLock) unlockScroll();
       document.removeEventListener("keydown", handleEscapeKey);
     };
   }, [isOpen]);
@@ -46,12 +52,8 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
   }
 
   return (
-    <Container
-      aria-modal="true"
-      role="dialog">
-      <ModalContent
-        className="modal-content"
-        onClick={handleContainerClick}>
+    <Container aria-modal="true" role="dialog">
+      <ModalContent className="modal-content" onClick={handleContainerClick}>
         <button
           onClick={onClose}
           className="close-btn"
@@ -63,7 +65,8 @@ const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
             border: "none",
             fontSize: "16px",
             cursor: "pointer",
-          }}>
+          }}
+        >
           <X />
         </button>
         {children}

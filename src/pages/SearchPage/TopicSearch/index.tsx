@@ -55,10 +55,8 @@ const TopicSearch = ({ tags, isLoading, isMobile }: TopicSearchProps) => {
         <div
           style={{
             display: "flex",
-            flex: 1,
             flexWrap: "wrap",
-            gap: "4rem 2rem",
-            justifyContent: "center",
+            gap: "2rem",
           }}
         >
           {isLoading ? (
