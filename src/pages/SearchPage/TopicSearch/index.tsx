@@ -44,12 +44,14 @@ const TopicSearch = ({ tags, isLoading, isMobile }: TopicSearchProps) => {
         <SearchHeaderMobile>
           Nossos <span style={{ color: colors.mainColor }}>Tópicos</span>
           <SearchBarContainer>
-            <SearchBar
-              inputValue={inputValue}
-              setInputValue={setInputValue}
-              placeHolder={"Busque por Tópico"}
-              showButtons={false}
-            />
+            <div style={{ width: "100%" }}>
+              <SearchBar
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                placeHolder={"Busque por Tópico"}
+                showButtons={false}
+              />
+            </div>
           </SearchBarContainer>
         </SearchHeaderMobile>
         <div
@@ -93,12 +95,14 @@ const TopicSearch = ({ tags, isLoading, isMobile }: TopicSearchProps) => {
       <SearchHeader>
         Nossos <span style={{ color: colors.mainColor }}>Tópicos</span>
         <SearchBarContainer>
-          <SearchBar
-            inputValue={inputValue}
-            setInputValue={setInputValue}
-            placeHolder={"Busque por Tópico"}
-            showButtons={false}
-          />
+          <div style={{ width: "100%" }}>
+            <SearchBar
+              inputValue={inputValue}
+              setInputValue={setInputValue}
+              placeHolder={"Busque por Tópico"}
+              showButtons={false}
+            />
+          </div>
         </SearchBarContainer>
       </SearchHeader>
       <div
