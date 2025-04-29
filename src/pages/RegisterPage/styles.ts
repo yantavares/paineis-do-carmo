@@ -85,6 +85,7 @@ export const Container = styled.div`
     border-radius: 0.75rem;
     padding: 1rem;
     margin: 0.5rem 0;
+    font-size: 16px;
     width: 100%;
 
     transition: all ease-in 0.2s;
@@ -100,6 +101,7 @@ export const Container = styled.div`
     font-size: 1.2rem;
     color: #343a40;
     text-align: center;
+    font-size: 14px;
   }
 `;
 

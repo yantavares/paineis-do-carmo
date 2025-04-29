@@ -86,6 +86,7 @@ export const Container = styled.div`
     padding: 1rem;
     margin: 0.5rem 0;
     width: 100%;
+    font-size: 16px;
 
     transition: all ease-in 0.2s;
 
@@ -100,6 +101,7 @@ export const Container = styled.div`
     font-size: 1.2rem;
     color: ${colors.mainColor};
     text-align: center;
+    font-size: 14px;
   }
 `;
 
