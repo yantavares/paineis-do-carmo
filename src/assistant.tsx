@@ -172,6 +172,7 @@ const Assistant: React.FC<AssistantProps> = ({
             color: "inherit",
             padding: "0.5rem",
             borderRadius: "0.5rem",
+            fontSize: "16px",
             marginRight: "0.5rem",
           }}
           value={prompt}
