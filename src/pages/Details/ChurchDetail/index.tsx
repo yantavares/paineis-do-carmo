@@ -136,6 +136,14 @@ const PaintingDetails = () => {
               <h2 className="topic-title">Sobre esta Igreja</h2>
               <p className="topic-text">{data.description}</p>
             </div>
+            <div>
+              {data?.street && (
+                <p className="topic-text">
+                  <strong>Endereço: </strong>
+                  {data.street}
+                </p>
+              )}
+            </div>
             <div className="topic-wrapper">
               {(data?.bibliographyReferences?.length > 1 ||
                 (data?.bibliographyReferences?.length == 1 &&
@@ -223,6 +231,14 @@ const PaintingDetails = () => {
           <div className="topic-wrapper">
             <h2 className="topic-title">Sobre esta Igreja</h2>
             <p className="topic-text">{data.description}</p>
+          </div>
+          <div>
+            {data?.street && (
+              <p className="topic-text">
+                <strong>Endereço: </strong>
+                {data.street}
+              </p>
+            )}
           </div>
           <div className="topic-wrapper">
             {(data?.bibliographyReferences?.length > 1 ||
