@@ -10,7 +10,7 @@ export const FooterContainer = styled.footer`
   background-color: ${colors.darkMain};
   color: white;
   margin-top: 8rem;
-  padding: 2% 0;
+  padding: 2% 6%;
   width: 100%;
 `;
 
@@ -49,7 +49,6 @@ export const CreditsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.8rem;
-  width: 25%;
 `;
 
 export const Author = styled.a`
