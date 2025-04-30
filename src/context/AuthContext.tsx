@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   useEffect(() => {
-    setRole(user?.groups[0]);
+    setRole(user?.groups ? user?.groups[0] : "user");
   }, [user]);
 
   useEffect(() => {
