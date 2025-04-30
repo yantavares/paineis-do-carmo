@@ -1,11 +1,12 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 
-import { Container, Content } from "./styles";
+import { Container } from "./styles";
 import googleLogo from "../../assets/utils/google_symbol.svg.png";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -27,14 +28,43 @@ const RegisterPage = () => {
         }, 2000);
       })
       .catch((error) => {
-        console.error("Error registering user:", error);
+        console.error("Erro ao registrar usuário:", error);
         const errorMessages = error?.response?.data?.violations?.map(
           (violation: any) => violation.message
         );
         toast.error(
-          "Erro ao registrar usuário: " + errorMessages.join(", ") ||
-            "Erro desconhecido"
+          "Erro ao registrar usuário: " +
+            (errorMessages?.join(", ") || "Erro desconhecido")
         );
+      });
+  };
+
+  const handleGoogleRegister = (credentialResponse: any) => {
+    const token = credentialResponse.credential;
+    const decoded: any = jwtDecode(token);
+
+    const googleName = decoded.name;
+    const googleEmail = decoded.email;
+
+    axios
+      .post(`${import.meta.env.VITE_API_URL}/api/users/register`, {
+        name: googleName,
+        email: googleEmail,
+        password: "GOOGLE_LOGIN",
+      })
+      .then((response) => {
+        toast.success("Registrado com o Google!");
+        setTimeout(() => {
+          navigate("/login");
+        }, 1500);
+      })
+      .catch((error) => {
+        console.error("Erro ao registrar com Google:", error);
+        if (error.response?.status === 409) {
+          toast.error("Este e-mail já está registrado. Faça login.");
+        } else {
+          toast.error("Erro ao registrar com o Google");
+        }
       });
   };
 
@@ -55,13 +85,16 @@ const RegisterPage = () => {
           Se registre para poder logar e buscar obras <br /> no nosso banco de
           dados
         </p>
-        <button
-          className="google-btn"
-          onClick={() => toast.error("Disponível em breve!")}
-        >
-          <img src={googleLogo} alt="" /> Entrar com o Google
-        </button>
+
+        <div>
+          <GoogleLogin
+            onSuccess={handleGoogleRegister}
+            onError={() => toast.error("Erro ao registrar com Google")}
+          />
+        </div>
+
         <div className="divider"></div>
+
         <form
           className="form-container"
           onSubmit={(e) => {
@@ -100,6 +133,7 @@ const RegisterPage = () => {
             <button className="login-btn">Registrar-se</button>
           </div>
         </form>
+
         <p className="register-cta">
           Já tem uma conta? <a href="login">Faça Login</a>
         </p>
@@ -107,4 +141,5 @@ const RegisterPage = () => {
     </div>
   );
 };
+
 export default RegisterPage;

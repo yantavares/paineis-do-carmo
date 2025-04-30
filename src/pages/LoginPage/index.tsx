@@ -5,12 +5,25 @@ import { Container } from "./styles";
 import googleLogo from "../../assets/utils/google_symbol.svg.png";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import { GoogleLogin } from "@react-oauth/google";
 import { useAuth } from "src/context/AuthContext";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState();
+
+  const handleGoogleLogin = (credentialResponse: { credential: any }) => {
+    const token = credentialResponse.credential;
+
+    const decoded = jwtDecode(token);
+    console.log("Usuário Google:", decoded);
+
+    login(token);
+    navigate("/dashboard");
+  };
 
   const navigate = useNavigate();
 
@@ -48,12 +61,10 @@ const LoginPage = () => {
         <p className="login-description">
           Faça login para buscar obras <br /> no nosso banco de dados
         </p>
-        <button
-          className="google-btn"
-          onClick={() => toast.error("Disponível em breve!")}
-        >
-          <img src={googleLogo} alt="" /> Entrar com o Google
-        </button>
+        <GoogleLogin
+          onSuccess={handleGoogleLogin}
+          onError={() => console.log("Erro no login")}
+        />
         <div className="divider"></div>
         <form
           className="form-container"
