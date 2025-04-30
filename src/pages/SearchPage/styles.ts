@@ -9,6 +9,7 @@ export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6.4rem;
+  width: 100%;
 `;
 
 export const SearchBarContainer = styled.div`
