@@ -171,7 +171,7 @@ const Footer = ({ isMobile = false }) => {
               <Author href="https://github.com/yantavares" target="_blank">
                 Yan Tavares
               </Author>
-              Front End e integração com IA
+              Front End e IA
             </Text>
           </CreditsContainer>
           <FinancingContainer>
