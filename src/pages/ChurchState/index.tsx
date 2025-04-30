@@ -105,10 +105,12 @@ const ChurchState = () => {
           {translateState(state)}
         </span>
         <SearchBarContainer>
-          <SearchBar
-            placeHolder={`Busque em ${capitalize(state)}`}
-            showButtons={false}
-          />
+          <div style={{ width: "100%" }}>
+            <SearchBar
+              placeHolder={`Busque em ${capitalize(state)}`}
+              showButtons={false}
+            />
+          </div>
         </SearchBarContainer>
       </SearchHeader>
 
