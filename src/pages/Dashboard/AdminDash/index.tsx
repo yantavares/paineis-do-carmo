@@ -630,6 +630,7 @@ export default function Dashboard() {
               <label className="label-wrapper">
                 <p className="input-label">Descrição</p>
                 <textarea
+                  className="big-input"
                   placeholder="Insira uma descrição da obra"
                   value={churchToEdit?.description}
                   onChange={(e) =>
@@ -640,34 +641,42 @@ export default function Dashboard() {
                   }
                 />
               </label>
-              <div className="grid-layout">
-                <label className="label-wrapper">
-                  <p className="input-label">Fontes Bibliográficas</p>
-                  <textarea
-                    placeholder="Insira as fontes"
-                    value={churchToEdit?.bibliographySource || ""}
-                    onChange={(e) =>
-                      setChurchToEdit({
-                        ...churchToEdit,
-                        bibliographySource: e.target.value, // Corrected this line
-                      })
-                    }
-                  />
-                </label>
-                <label className="label-wrapper">
-                  <p className="input-label">Referências Bibliográficas</p>
-                  <textarea
-                    placeholder="Insira as fontes"
-                    value={churchToEdit?.bibliographyReferences || ""}
-                    onChange={(e) =>
-                      setChurchToEdit({
-                        ...churchToEdit,
-                        bibliographyReferences: e.target.value,
-                      })
-                    }
-                  />
-                </label>
-              </div>
+              <label className="label-wrapper">
+                <p className="input-label">Fontes Historiográficas</p>
+                <textarea
+                  className="big-input"
+                  placeholder="Insira as fontes"
+                  value={
+                    Array.isArray(churchToEdit?.bibliographySource)
+                      ? churchToEdit.bibliographySource.join("\n\n")
+                      : churchToEdit?.bibliographySource || ""
+                  }
+                  onChange={(e) =>
+                    setChurchToEdit({
+                      ...churchToEdit,
+                      bibliographySource: e.target.value,
+                    })
+                  }
+                />
+              </label>
+              <label className="label-wrapper">
+                <p className="input-label">Referências Bibliográficas</p>
+                <textarea
+                  className="big-input"
+                  placeholder="Insira as Referências"
+                  value={
+                    Array.isArray(churchToEdit?.bibliographyReferences)
+                      ? churchToEdit.bibliographyReferences.join("\n\n")
+                      : churchToEdit?.bibliographyReferences || ""
+                  }
+                  onChange={(e) =>
+                    setChurchToEdit({
+                      ...churchToEdit,
+                      bibliographyReferences: e.target.value,
+                    })
+                  }
+                />
+              </label>
               <div className="input-container">
                 <p className="input-label">Imagens da Igreja *</p>
                 {images.map((image, index) => (

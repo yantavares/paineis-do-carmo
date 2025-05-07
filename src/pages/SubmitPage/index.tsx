@@ -7,6 +7,7 @@ import { Church } from "src/utils/mockData";
 import Modal from "../../components/Modal";
 import TagInput from "../TagInput";
 import { Container } from "./styles";
+import "./styles.css";
 
 function formatErrorMessages(errors: any): string {
   let formattedMessages: string[] = [""];
@@ -432,7 +433,11 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}/api/paintings/artisans`
       );
-      setAuthors(response.data.artisans.filter((author) => author && author.trim() !== ""));
+      setAuthors(
+        response.data.artisans.filter(
+          (author) => author && author.trim() !== ""
+        )
+      );
     } catch (error) {
       console.error("Error fetching authors:", error);
     }
@@ -1009,7 +1014,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
           <label className="label-wrapper" style={{ marginBottom: "1rem" }}>
             <p className="input-label">Descrição</p>
             <textarea
-              style={{ height: "20rem" }}
+              className="big-input"
               placeholder="Insira uma descrição da obra"
               value={obra.description}
               onChange={(e) =>
@@ -1021,30 +1026,36 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
             Observação: Referências Bibliográficas devem ser separadas por Enter
             (uma linha por referência)
           </p> */}
-          <div className="grid-layout">
-            <label className="label-wrapper">
-              <p className="input-label">Fontes Historiográficas</p>
-              <textarea
-                placeholder="Insira as fontes (uma por linha)"
-                style={{ height: "15rem" }}
-                value={Array.isArray(obra.bibliographicSources) ? obra.bibliographicSources.join("\n\n") : obra.bibliographicSources}
-                onChange={(e) =>
-                  setObra({ ...obra, bibliographicSources: e.target.value })
-                }
-              />
-            </label>
-            <label className="label-wrapper">
-              <p className="input-label">Referências Bibliográficas</p>
-              <textarea
-                style={{ height: "15rem" }}
-                placeholder="Insira as referências (uma por linha)"
-                value={Array.isArray(obra.bibliographicReferences) ? obra.bibliographicReferences.join("\n\n") : obra.bibliographicReferences}
-                onChange={(e) =>
-                  setObra({ ...obra, bibliographicReferences: e.target.value })
-                }
-              />
-            </label>
-          </div>
+          <label className="label-wrapper">
+            <p className="input-label">Fontes Historiográficas</p>
+            <textarea
+              className="big-input"
+              placeholder="Insira as fontes (uma por linha)"
+              value={
+                Array.isArray(obra.bibliographicSources)
+                  ? obra.bibliographicSources.join("\n\n")
+                  : obra.bibliographicSources
+              }
+              onChange={(e) =>
+                setObra({ ...obra, bibliographicSources: e.target.value })
+              }
+            />
+          </label>
+          <label className="label-wrapper">
+            <p className="input-label">Referências Bibliográficas</p>
+            <textarea
+              className="big-input"
+              placeholder="Insira as referências (uma por linha)"
+              value={
+                Array.isArray(obra.bibliographicReferences)
+                  ? obra.bibliographicReferences.join("\n\n")
+                  : obra.bibliographicReferences
+              }
+              onChange={(e) =>
+                setObra({ ...obra, bibliographicReferences: e.target.value })
+              }
+            />
+          </label>
           <div className="grid-layout">
             <label className="label-wrapper">
               <p className="input-label">Data da criação</p>
@@ -1237,6 +1248,7 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
             <label className="label-wrapper">
               <p className="input-label">Descrição</p>
               <textarea
+                className="big-input"
                 placeholder="Insira uma descrição da obra"
                 value={church.description}
                 onChange={(e) =>
@@ -1244,34 +1256,34 @@ const SubmitPage: React.FC<{ painting?: any; isEdit?: boolean }> = ({
                 }
               />
             </label>
-            <div className="grid-layout">
-              <label className="label-wrapper">
-                <p className="input-label">Fontes Bibliográficas</p>
-                <textarea
-                  placeholder="Insira as fontes"
-                  value={church.bibliographicSources}
-                  onChange={(e) =>
-                    setChurch({
-                      ...church,
-                      bibliographicSources: e.target.value,
-                    })
-                  }
-                />
-              </label>
-              <label className="label-wrapper">
-                <p className="input-label">Referências Bibliográficas</p>
-                <textarea
-                  placeholder="Insira as fontes"
-                  value={church.bibliographicReferences}
-                  onChange={(e) =>
-                    setChurch({
-                      ...church,
-                      bibliographicReferences: e.target.value,
-                    })
-                  }
-                />
-              </label>
-            </div>
+            <label className="label-wrapper">
+              <p className="input-label">Fontes Bibliográficas</p>
+              <textarea
+                placeholder="Insira as fontes"
+                className="big-input"
+                value={church.bibliographicSources}
+                onChange={(e) =>
+                  setChurch({
+                    ...church,
+                    bibliographicSources: e.target.value,
+                  })
+                }
+              />
+            </label>
+            <label className="label-wrapper">
+              <p className="input-label">Referências Bibliográficas</p>
+              <textarea
+                placeholder="Insira as Referências"
+                className="big-input"
+                value={church.bibliographicReferences}
+                onChange={(e) =>
+                  setChurch({
+                    ...church,
+                    bibliographicReferences: e.target.value,
+                  })
+                }
+              />
+            </label>
             <div className="input-container">
               <p className="input-label">Imagens da Igreja *</p>
               {churchImages.map((image, index) => (

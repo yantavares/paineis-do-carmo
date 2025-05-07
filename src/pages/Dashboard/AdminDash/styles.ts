@@ -226,7 +226,7 @@ export const ChurchForm = styled.div`
   input,
   textarea,
   select {
-    resize: none;
+    resize: vertical;
     width: 100%;
     color: #202020;
     font-weight: 500;
@@ -383,5 +383,9 @@ export const ChurchForm = styled.div`
 
   input[type="file"] {
     display: none;
+  }
+
+  .big-input {
+    height: 30rem;
   }
 `;
