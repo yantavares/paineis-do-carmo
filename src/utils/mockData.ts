@@ -18,6 +18,7 @@ export interface Church {
   id: number;
   description?: string;
   bibliographyReferences?: string[];
+  bibliographySource?: string[];
   paintings?: Painting[];
   name: string;
   images: Image[];
