@@ -53,7 +53,7 @@ export const Container = styled.div`
   input,
   textarea,
   select {
-    resize: none;
+    resize: vertical;
     width: 100%;
     color: #202020;
     font-weight: 500;
