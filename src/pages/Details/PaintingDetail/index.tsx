@@ -495,37 +495,41 @@ const PaintingDetails = () => {
 
       <Modal isOpen={isModalOpen} onClose={closeModal} shouldLock={false}>
         {selectedEngraving && (
-          <figure style={{ textAlign: "center" }}>
-            <img
-              src={selectedEngraving.url}
-              alt={selectedEngraving.name}
-              style={{ maxHeight: "40rem", borderRadius: "0.5rem" }}
-            />
-            <figcaption style={{ marginTop: "2rem" }}>
-              <h3 style={{ fontSize: "2.2rem", fontWeight: 600 }}>
-                {selectedEngraving.name}
-              </h3>
-              <p style={{ fontSize: "1.6rem", marginBottom: "1rem" }}>
-                {selectedEngraving.createdBy ?? "Autor desconhecido"}
-              </p>
-              {data.images[0] && (
-                <>
-                  <p style={{ fontSize: "1.4rem", marginTop: "2rem" }}>
-                    Obra de referência
-                  </p>
-                  <img
-                    src={data.images[0].url}
-                    alt={data.title}
-                    style={{
-                      maxHeight: "40rem",
-                      marginTop: "1rem",
-                      borderRadius: "0.5rem",
-                    }}
-                  />
-                </>
-              )}
-            </figcaption>
-          </figure>
+          <div
+            style={{ textAlign: "center", width: isMobile ? "100%" : "50vw" }}
+          >
+            <figure style={{ textAlign: "center" }}>
+              <img
+                src={selectedEngraving.url}
+                alt={selectedEngraving.name}
+                style={{ maxHeight: "40rem", borderRadius: "0.5rem" }}
+              />
+              <figcaption style={{ marginTop: "2rem" }}>
+                <h3 style={{ fontSize: "2.2rem", fontWeight: 600 }}>
+                  {selectedEngraving.name}
+                </h3>
+                <p style={{ fontSize: "1.6rem", marginBottom: "1rem" }}>
+                  {selectedEngraving.createdBy ?? "Autor desconhecido"}
+                </p>
+                {data.images[0] && (
+                  <>
+                    <p style={{ fontSize: "1.4rem", marginTop: "2rem" }}>
+                      Obra de referência
+                    </p>
+                    <img
+                      src={data.images[0].url}
+                      alt={data.title}
+                      style={{
+                        maxHeight: "40rem",
+                        marginTop: "1rem",
+                        borderRadius: "0.5rem",
+                      }}
+                    />
+                  </>
+                )}
+              </figcaption>
+            </figure>
+          </div>
         )}
       </Modal>
     </>
