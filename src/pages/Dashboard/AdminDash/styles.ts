@@ -386,6 +386,6 @@ export const ChurchForm = styled.div`
   }
 
   .big-input {
-    min-height: 30rem;
+    height: 30rem;
   }
 `;
