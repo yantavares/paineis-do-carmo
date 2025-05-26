@@ -223,7 +223,8 @@ export const ImageContainer = styled.div`
 `;
 
 export const Image = styled.img`
-  width: 440px;
+  max-width: 440px;
+  max-height: 440px;
   border-radius: 20px;
   transition: filter 0.3s ease;
 `;
