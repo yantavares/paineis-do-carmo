@@ -237,6 +237,14 @@ export default function Dashboard() {
         );
       case "submittedAt":
         return sortDates(a.submittedAt, b.submittedAt, direction);
+
+      case "church.name":
+        return sortStrings(
+          a.church?.name || "",
+          b.church?.name || "",
+          direction
+        );
+
       default:
         return 0;
     }
@@ -839,8 +847,14 @@ export default function Dashboard() {
                           onSort={handleSortPaintings}
                         />
                         <SortableHeader
-                          label="Data de Submissão"
+                          label="Submissão"
                           column="submittedAt"
+                          sortState={paintingsSort}
+                          onSort={handleSortPaintings}
+                        />
+                        <SortableHeader
+                          label="Igreja"
+                          column="church.name"
                           sortState={paintingsSort}
                           onSort={handleSortPaintings}
                         />
@@ -897,6 +911,14 @@ function PaintingRow({ painting, onEdit, onDelete, onPublish, isMobile }) {
               year: "numeric",
             })}
           </td>
+          <td title={painting.church?.name || "—"}>
+            {painting.church?.name
+              ? painting.church.name.length > 15
+                ? painting.church.name.slice(0, 15) + "..."
+                : painting.church.name
+              : "—"}
+          </td>
+
           <td style={{ display: "flex" }}>
             <OptionButton onEdit={onEdit} onDelete={onDelete} />
           </td>
