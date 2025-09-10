@@ -211,6 +211,7 @@ export const ImageContainer = styled.div`
   gap: 1rem;
   width: fit-content;
   cursor: pointer;
+  justify-content: center;
 
   &:hover {
     img {
