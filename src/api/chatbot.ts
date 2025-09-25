@@ -1,7 +1,8 @@
 import axios from "axios";
 import { Church, Painting } from "src/utils/mockData";
 
-const openaiApiKey = import.meta.env.VITE_OPENAI_API_KEY;
+const PROXY_URL =
+  "https://museu-barroco-env.yantdo1.workers.dev/v1/chat/completions";
 
 export const makeOpenAIRequest = async (
   prompt: string,
@@ -39,7 +40,7 @@ export const makeOpenAIRequest = async (
 
   try {
     const response = await axios.post(
-      "https://api.openai.com/v1/chat/completions",
+      PROXY_URL,
       {
         model: "gpt-3.5-turbo",
         messages: [
@@ -50,7 +51,6 @@ export const makeOpenAIRequest = async (
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${openaiApiKey}`,
         },
       }
     );
