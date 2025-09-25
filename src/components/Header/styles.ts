@@ -76,6 +76,7 @@ export const ContribButton = styled.button`
 export const LoginButton = styled.button`
   padding: 1rem 1.6rem;
   font-size: 1.6rem;
+  background-color: #fff;
   transition: background-color 0.3s;
   &:hover {
     background-color: #eeeeee;
