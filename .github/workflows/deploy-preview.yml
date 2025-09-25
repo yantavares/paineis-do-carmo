@@ -37,6 +37,11 @@ jobs:
           node-version: 18
           cache: "npm"
 
+      - name: Inject Environment Variables
+        run: |
+          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> $GITHUB_ENV
+          echo "VITE_GOOGLE_CLIENT_ID=${{ secrets.VITE_GOOGLE_CLIENT_ID }}" >> $GITHUB_ENV
+
       - name: Install dependencies
         run: npm install
 
