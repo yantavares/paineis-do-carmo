@@ -85,12 +85,14 @@ const TagDetail = () => {
           ) : data.length > 0 ? (
             data.map((item, index) => (
               <SearchResultMobile key={index}>
-                <Item
-                  tagCount={2}
-                  width="20rem"
-                  item={item}
-                  type={"paintings"}
-                />
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <Item
+                    tagCount={2}
+                    width="80%"
+                    item={item}
+                    type={"paintings"}
+                  />
+                </div>
               </SearchResultMobile>
             ))
           ) : (

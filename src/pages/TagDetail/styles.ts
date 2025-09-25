@@ -15,7 +15,6 @@ export const SearchContainer = styled.div`
 export const SearchResultsContainer = styled.div`
   width: 100%;
   min-height: 30rem;
-  align-items: center;
   padding-left: 4rem;
   display: flex;
   flex-wrap: wrap;
