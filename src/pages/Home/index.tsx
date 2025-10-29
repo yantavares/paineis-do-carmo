@@ -62,25 +62,33 @@ const Home = () => {
           <GreetingContainerMobile>
             <MainTextContainerMobile>
               <MainTextHeaderMobile>
-                O Barroco{" "}
+                O Museu{" "}
                 <span
                   style={{
                     color: colors.mainColor,
                     borderBottom: "2px solid #eedddd",
                   }}
                 >
-                  Reinventado
+                  Barroco
                 </span>
               </MainTextHeaderMobile>
               <div style={{}}>
                 <ImageCarousel2 images={[temp, temp2, temp4, temp6]} />
               </div>
               <MainTextMobile>
-                Bem-vindo ao nosso site! Aqui você pode encontrar informações
-                sobre igrejas, pinturas e artifices do período barroco
-                brasileiro. O barroco foi um período de grande efervescência
-                artística no Brasil, com a chegada dos colonizadores portugueses
-                e a influência da igreja católica.
+                Na América portuguesa, a arte dita barroca tem seu auge no
+                século XVIII relegando um patrimônio histórico sacro de inegável
+                importância para a nossa contemporaneidade. Apesar de termos
+                trabalhos acadêmicos de qualidade voltados para a produção desta
+                manifestação artística, não havia nenhum trabalho de História
+                Pública que buscasse unir a divulgação deste vasto acervo com as
+                suas bases iconográficas. Através da bolsa produtividade do
+                CNPQ, junto com o apoio da Universidade de Brasília em seu
+                programa de Iniciação Científica, foi possível desenvolver o
+                presente site o qual será constantemente alimentado com novos
+                acervos. Mais do que um projeto pessoal, o Museu barroco almeja
+                ser um espaço colaborativo onde pesquisadores poderão contribuir
+                com a suas pesquisas por meio de ferramenta de interação.
               </MainTextMobile>
             </MainTextContainerMobile>
           </GreetingContainerMobile>
@@ -157,22 +165,30 @@ const Home = () => {
         <GreetingContainer>
           <MainTextContainer>
             <MainTextHeader>
-              O Barroco{" "}
+              O Museu{" "}
               <span
                 style={{
                   color: colors.mainColor,
                   borderBottom: "2px solid #eedddd",
                 }}
               >
-                Reinventado
+                Barroco
               </span>
             </MainTextHeader>
             <MainText>
-              Bem-vindo ao nosso site! Aqui você pode encontrar informações
-              sobre igrejas, pinturas e artifices do período barroco brasileiro.
-              O barroco foi um período de grande efervescência artística no
-              Brasil, com a chegada dos colonizadores portugueses e a influência
-              da igreja católica.
+              Na América portuguesa, a arte dita barroca tem seu auge no século
+              XVIII relegando um patrimônio histórico sacro de inegável
+              importância para a nossa contemporaneidade. Apesar de termos
+              trabalhos acadêmicos de qualidade voltados para a produção desta
+              manifestação artística, não havia nenhum trabalho de História
+              Pública que buscasse unir a divulgação deste vasto acervo com as
+              suas bases iconográficas. Através da bolsa produtividade do CNPQ,
+              junto com o apoio da Universidade de Brasília em seu programa de
+              Iniciação Científica, foi possível desenvolver o presente site o
+              qual será constantemente alimentado com novos acervos. Mais do que
+              um projeto pessoal, o Museu barroco almeja ser um espaço
+              colaborativo onde pesquisadores poderão contribuir com a suas
+              pesquisas por meio de ferramenta de interação.
             </MainText>
           </MainTextContainer>
           <div
