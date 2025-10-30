@@ -25,9 +25,9 @@ function SortableHeader({ label, column, sortState, onSort }) {
       {label}{" "}
       {sortState.column === column ? (
         sortState.direction === "asc" ? (
-          <FontAwesomeIcon icon={faCircleArrowUp} />
+          <FontAwesomeIcon icon={faCircleArrowUp as any} />
         ) : (
-          <FontAwesomeIcon icon={faCircleArrowDown} />
+          <FontAwesomeIcon icon={faCircleArrowDown as any} />
         )
       ) : (
         ""

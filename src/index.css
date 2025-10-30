@@ -99,7 +99,6 @@ button:focus {
 
 /* Dark mode button overrides for readability */
 [data-theme="dark"] button {
-  background: var(--color-surface);
   border-color: var(--color-border);
   color: var(--color-text);
 }
