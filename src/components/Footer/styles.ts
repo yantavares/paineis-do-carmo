@@ -73,6 +73,8 @@ export const Text = styled.p`
 
 export const FooterButton = styled.button`
   color: white;
+  background-color: transparent !important;
+  border: 1px solid white !important;
   width: fit-content;
   transition: all 0.3s;
   &:hover {

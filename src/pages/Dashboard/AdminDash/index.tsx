@@ -548,7 +548,12 @@ export default function Dashboard() {
 
   return (
     <Container>
-      <h1 style={{ color: colors.darkMain, fontWeight: 400 }}>
+      <h1
+        style={{
+          color: colors.mainColor,
+          fontWeight: 400,
+        }}
+      >
         Bem vindo(a) {user?.name ?? "Admin"}!
       </h1>
       <Toaster />

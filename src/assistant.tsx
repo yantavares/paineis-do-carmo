@@ -105,7 +105,8 @@ const Assistant: React.FC<AssistantProps> = ({
       style={{
         backgroundColor: "var(--color-surface)",
         color: "var(--color-text)",
-        border: "1px solid var(--color-border)",
+        border: "1px solid var(--color-outline)",
+        boxShadow: "0 4px 14px rgba(0,0,0,0.18)",
         borderRadius: "1rem",
         padding: "1rem",
         width: "44rem",
@@ -186,7 +187,7 @@ const Assistant: React.FC<AssistantProps> = ({
           rows={2}
         ></textarea>
         <button type="submit" style={{ padding: "0.5rem 1rem" }}>
-          <FontAwesomeIcon icon={faCircleArrowRight} />
+          <FontAwesomeIcon icon={faCircleArrowRight as any} />
         </button>
       </form>
     </div>

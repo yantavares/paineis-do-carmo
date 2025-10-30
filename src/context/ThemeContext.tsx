@@ -49,6 +49,29 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
     applyThemeAttribute(theme);
   }, [theme]);
 
+  // Ensure persistence after refresh and any external changes
+  React.useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem(
+        STORAGE_KEY
+      ) as ThemeMode | null;
+      if (saved === "light" || saved === "dark") {
+        if (saved !== theme) setTheme(saved);
+      }
+    } catch {}
+
+    const onStorage = (e: StorageEvent) => {
+      if (
+        e.key === STORAGE_KEY &&
+        (e.newValue === "light" || e.newValue === "dark")
+      ) {
+        setTheme(e.newValue as ThemeMode);
+      }
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, [theme, setTheme]);
+
   const value = React.useMemo(
     () => ({ theme, toggleTheme, setTheme }),
     [theme, toggleTheme, setTheme]

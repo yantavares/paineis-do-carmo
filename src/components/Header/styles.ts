@@ -98,7 +98,7 @@ export const ThemeToggleButton = styled.button`
   padding: 0;
   border-radius: 10px;
   background: var(--color-surface);
-  border: 2px solid var(--color-outline);
+  border: 1px solid var(--color-outline);
   color: var(--color-text);
   &:hover {
     background: var(--color-surface-2);

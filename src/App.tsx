@@ -67,7 +67,7 @@ function Layout({ children }) {
             style={{
               backgroundColor: "var(--color-surface)",
               color: "var(--color-text)",
-              border: "2px solid var(--color-outline)",
+              border: "1px solid var(--color-outline)",
               boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
               opacity: 0.98,
               borderRadius: "1.6rem",
