@@ -135,7 +135,22 @@ const RegisterPage = () => {
         </form>
 
         <p className="register-cta">
-          Já tem uma conta? <a href="login">Faça Login</a>
+          Já tem uma conta?{" "}
+          <button
+            onClick={() => navigate("/login")}
+            style={{
+              background: "transparent",
+              border: "none",
+              color: "inherit",
+              textDecoration: "underline",
+              cursor: "pointer",
+              padding: 0,
+              margin: 0,
+              font: "inherit",
+            }}
+          >
+            Faça Login
+          </button>
         </p>
       </Container>
     </div>

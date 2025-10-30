@@ -96,7 +96,22 @@ const LoginPage = () => {
           </div>
         </form>
         <p className="register-cta">
-          Não tem uma conta ainda? <a href="register">Registre-se agora</a>
+          Não tem uma conta ainda?{" "}
+          <button
+            onClick={() => navigate("/register")}
+            style={{
+              background: "transparent",
+              border: "none",
+              color: "inherit",
+              textDecoration: "underline",
+              cursor: "pointer",
+              padding: 0,
+              margin: 0,
+              font: "inherit",
+            }}
+          >
+            Registre-se agora
+          </button>
         </p>
       </Container>
     </div>

@@ -6,6 +6,7 @@ export const DataTitle = styled.h3`
   margin: 0;
   font-size: 1.4rem;
   transition: all 0.3s;
+  color: var(--color-text);
   &:hover {
     cursor: pointer;
     color: ${colors.mainColor};
@@ -17,6 +18,7 @@ export const DataInfo = styled.span`
   margin: 0;
   font-size: 1.4rem;
   height: "100%";
+  color: var(--color-text);
 `;
 
 export const DataInfoContainer = styled.div`
@@ -25,5 +27,5 @@ export const DataInfoContainer = styled.div`
 
 export const PaintingDate = styled.span`
   font-size: 1.2rem;
-  color: ${colors.gray};
+  color: ${colors.lightGray};
 `;

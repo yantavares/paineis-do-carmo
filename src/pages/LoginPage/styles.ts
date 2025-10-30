@@ -2,7 +2,7 @@ import colors from "src/utils/colors";
 import styled from "styled-components";
 
 export const Container = styled.div`
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-border);
 
   h3,
   p {
@@ -12,7 +12,8 @@ export const Container = styled.div`
 
   min-width: 360px;
   border-radius: 2rem;
-  background-color: #fff;
+  background-color: var(--color-surface);
+  color: var(--color-text);
   display: flex;
   gap: 2rem;
   flex-direction: column;
@@ -33,21 +34,22 @@ export const Container = styled.div`
   }
 
   .google-btn {
-    color: #343a40;
-    background-color: #fff;
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: 1rem;
     padding: 1rem;
     width: 100%;
 
     &:hover {
-      background-color: #f5f5f5;
+      background-color: var(--color-surface-2);
     }
   }
 
   .divider {
     width: 100%;
     height: 1px;
-    background-color: #e0e0e0;
+    background-color: var(--color-border);
     margin: 1rem 0;
   }
 
@@ -78,10 +80,10 @@ export const Container = styled.div`
   }
 
   input {
-    color: #343a40;
+    color: var(--color-text);
     font-weight: 500;
-    background-color: #f5f5f5;
-    border: 1px solid #e0e0e0;
+    background-color: var(--color-surface-2);
+    border: 1px solid var(--color-border);
     border-radius: 0.75rem;
     padding: 1rem;
     margin: 0.5rem 0;
@@ -92,14 +94,14 @@ export const Container = styled.div`
 
     &:focus {
       outline: none;
-      background-color: #fff;
+      background-color: var(--color-surface);
+      border-color: ${colors.mainColor};
     }
   }
 
   .register-cta {
     margin-top: -0.5rem;
     font-size: 1.2rem;
-    color: ${colors.mainColor};
     text-align: center;
     font-size: 14px;
   }
