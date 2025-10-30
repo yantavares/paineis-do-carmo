@@ -81,7 +81,7 @@ export const MainTextHeader = styled.h1`
 `;
 
 export const MainText = styled.h2`
-  font-size: 2rem;
+  font-size: 1.9rem;
   font-weight: 600;
   color: ${colors.lightGray};
   text-align: justify;

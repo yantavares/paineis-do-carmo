@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
-import temp3 from "src/assets/utils/artista1.jpg";
 import temp4 from "src/assets/utils/baroque.jpg";
 import temp2 from "src/assets/utils/baroque2.jpg";
 import temp from "src/assets/utils/baroque3.jpg";
 import temp6 from "src/assets/utils/igreja2.jpg";
-import temp5 from "src/assets/utils/pintura2.jpg";
 import ImageCarousel2 from "src/components/ImageCarousel2";
+import igreja1 from "src/assets/churches/igreja1.jpeg";
+import igreja2 from "src/assets/churches/igreja2.jpeg";
+import igreja3 from "src/assets/churches/igreja3.jpeg";
+import igreja4 from "src/assets/churches/igreja4.jpeg";
+import igreja5 from "src/assets/churches/igreja5.jpeg";
 import HomeSearch from "src/components/SearchBar";
 import colors from "src/utils/colors";
 import { brazilianChurches, brazilianPaintings } from "../../utils/mockData";
 import HomeTopic from "./HomeTopic";
+import HomeTopicMobile from "./HomeTopicMobile";
 import RoundBox from "./RoundBox";
 import {
   GreetingContainer,
@@ -26,20 +30,19 @@ import {
   TopicsContainer,
 } from "./styles";
 import {
-  PaddingContainerMobile,
   GreetingContainerMobile,
   MainTextContainerMobile,
   MainTextHeaderMobile,
   MainTextMobile,
-  TopicsContainerMobile,
-  TopicMobile,
-  TopicHeaderMobile,
-  TopicTitleMobile,
-  TopicSubTitleMobile,
+  PaddingContainerMobile,
   TopicBodyMobile,
+  TopicHeaderMobile,
+  TopicMobile,
   TopicOneMobile,
+  TopicSubTitleMobile,
+  TopicTitleMobile,
+  TopicsContainerMobile,
 } from "./stylesMobile";
-import HomeTopicMobile from "./HomeTopicMobile";
 
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
@@ -198,7 +201,7 @@ const Home = () => {
             }}
           >
             <ImageCarousel2
-              images={[temp, temp2, temp3, temp4, temp5, temp6]}
+              images={[igreja1, igreja2, igreja3, igreja4, igreja5]}
             />
           </div>
         </GreetingContainer>
