@@ -25,9 +25,9 @@ function SortableHeader({ label, column, sortState, onSort }) {
       {label}{" "}
       {sortState.column === column ? (
         sortState.direction === "asc" ? (
-          <FontAwesomeIcon icon={faCircleArrowUp} />
+          <FontAwesomeIcon icon={faCircleArrowUp as any} />
         ) : (
-          <FontAwesomeIcon icon={faCircleArrowDown} />
+          <FontAwesomeIcon icon={faCircleArrowDown as any} />
         )
       ) : (
         ""
@@ -548,7 +548,12 @@ export default function Dashboard() {
 
   return (
     <Container>
-      <h1 style={{ color: colors.darkMain, fontWeight: 400 }}>
+      <h1
+        style={{
+          color: colors.mainColor,
+          fontWeight: 400,
+        }}
+      >
         Bem vindo(a) {user?.name ?? "Admin"}!
       </h1>
       <Toaster />

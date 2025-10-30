@@ -16,11 +16,11 @@ export const Container = styled.div`
   .close-btn {
     background-color: transparent;
     border: none;
-    color: #202020;
+    color: var(--color-text);
     padding: 0.25rem;
 
     &:hover {
-      color: #000;
+      color: var(--color-link-hover);
     }
 
     &:focus {
@@ -30,7 +30,9 @@ export const Container = styled.div`
 `;
 
 export const ModalContent = styled.div`
-  background: white;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
   max-height: 80%;
   border-radius: 2rem;
   overflow-y: auto;

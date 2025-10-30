@@ -17,6 +17,13 @@ export const BigTag = styled.span`
     transform: scale(1.1);
     cursor: pointer;
   }
+
+  /* Dark mode */
+  [data-theme="dark"] & {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border-color: var(--color-border);
+  }
 `;
 
 export const BigTagMobile = styled.span`
@@ -34,5 +41,12 @@ export const BigTagMobile = styled.span`
     border-color: ${colors.mainColor};
     transform: scale(1.1);
     cursor: pointer;
+  }
+
+  /* Dark mode */
+  [data-theme="dark"] & {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border-color: var(--color-border);
   }
 `;

@@ -6,7 +6,7 @@ export const HeaderContainer = styled.header`
   width: 100%;
   justify-content: space-between;
   padding: 0 5%;
-  border-bottom: 2px dashed #ededed;
+  border-bottom: 2px dashed var(--color-border);
 `;
 
 export const Col1 = styled.div`
@@ -43,6 +43,7 @@ export const ButtonsContainer = styled.div`
 
 export const HeaderButton = styled.button`
   border: none;
+  background: transparent;
   font-size: 1.8rem;
   transition: color 0.3s;
   &:hover {
@@ -76,14 +77,30 @@ export const ContribButton = styled.button`
 export const LoginButton = styled.button`
   padding: 1rem 1.6rem;
   font-size: 1.6rem;
-  background-color: #fff;
+  background-color: var(--color-surface);
   transition: background-color 0.3s;
   &:hover {
-    background-color: #eeeeee;
+    background-color: var(--color-surface-2);
   }
 `;
 
 export const Icon = styled.img`
   max-height: 4rem;
   max-width: 4rem;
+`;
+
+export const ThemeToggleButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 10px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-outline);
+  color: var(--color-text);
+  &:hover {
+    background: var(--color-surface-2);
+  }
 `;

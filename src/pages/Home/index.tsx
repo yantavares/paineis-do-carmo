@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
-import temp3 from "src/assets/utils/artista1.jpg";
 import temp4 from "src/assets/utils/baroque.jpg";
 import temp2 from "src/assets/utils/baroque2.jpg";
 import temp from "src/assets/utils/baroque3.jpg";
 import temp6 from "src/assets/utils/igreja2.jpg";
-import temp5 from "src/assets/utils/pintura2.jpg";
 import ImageCarousel2 from "src/components/ImageCarousel2";
+import igreja1 from "src/assets/churches/igreja1.jpeg";
+import igreja2 from "src/assets/churches/igreja2.jpeg";
+import igreja3 from "src/assets/churches/igreja3.jpeg";
+import igreja4 from "src/assets/churches/igreja4.jpeg";
+import igreja5 from "src/assets/churches/igreja5.jpeg";
 import HomeSearch from "src/components/SearchBar";
 import colors from "src/utils/colors";
 import { brazilianChurches, brazilianPaintings } from "../../utils/mockData";
 import HomeTopic from "./HomeTopic";
+import HomeTopicMobile from "./HomeTopicMobile";
 import RoundBox from "./RoundBox";
 import {
   GreetingContainer,
@@ -26,20 +30,19 @@ import {
   TopicsContainer,
 } from "./styles";
 import {
-  PaddingContainerMobile,
   GreetingContainerMobile,
   MainTextContainerMobile,
   MainTextHeaderMobile,
   MainTextMobile,
-  TopicsContainerMobile,
-  TopicMobile,
-  TopicHeaderMobile,
-  TopicTitleMobile,
-  TopicSubTitleMobile,
+  PaddingContainerMobile,
   TopicBodyMobile,
+  TopicHeaderMobile,
+  TopicMobile,
   TopicOneMobile,
+  TopicSubTitleMobile,
+  TopicTitleMobile,
+  TopicsContainerMobile,
 } from "./stylesMobile";
-import HomeTopicMobile from "./HomeTopicMobile";
 
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
@@ -62,25 +65,33 @@ const Home = () => {
           <GreetingContainerMobile>
             <MainTextContainerMobile>
               <MainTextHeaderMobile>
-                O Barroco{" "}
+                O Museu{" "}
                 <span
                   style={{
                     color: colors.mainColor,
                     borderBottom: "2px solid #eedddd",
                   }}
                 >
-                  Reinventado
+                  Barroco
                 </span>
               </MainTextHeaderMobile>
               <div style={{}}>
                 <ImageCarousel2 images={[temp, temp2, temp4, temp6]} />
               </div>
               <MainTextMobile>
-                Bem-vindo ao nosso site! Aqui você pode encontrar informações
-                sobre igrejas, pinturas e artifices do período barroco
-                brasileiro. O barroco foi um período de grande efervescência
-                artística no Brasil, com a chegada dos colonizadores portugueses
-                e a influência da igreja católica.
+                Na América portuguesa, a arte dita barroca tem seu auge no
+                século XVIII relegando um patrimônio histórico sacro de inegável
+                importância para a nossa contemporaneidade. Apesar de termos
+                trabalhos acadêmicos de qualidade voltados para a produção desta
+                manifestação artística, não havia nenhum trabalho de História
+                Pública que buscasse unir a divulgação deste vasto acervo com as
+                suas bases iconográficas. Através da bolsa produtividade do
+                CNPQ, junto com o apoio da Universidade de Brasília em seu
+                programa de Iniciação Científica, foi possível desenvolver o
+                presente site o qual será constantemente alimentado com novos
+                acervos. Mais do que um projeto pessoal, o Museu barroco almeja
+                ser um espaço colaborativo onde pesquisadores poderão contribuir
+                com a suas pesquisas por meio de ferramenta de interação.
               </MainTextMobile>
             </MainTextContainerMobile>
           </GreetingContainerMobile>
@@ -157,22 +168,30 @@ const Home = () => {
         <GreetingContainer>
           <MainTextContainer>
             <MainTextHeader>
-              O Barroco{" "}
+              O Museu{" "}
               <span
                 style={{
                   color: colors.mainColor,
                   borderBottom: "2px solid #eedddd",
                 }}
               >
-                Reinventado
+                Barroco
               </span>
             </MainTextHeader>
             <MainText>
-              Bem-vindo ao nosso site! Aqui você pode encontrar informações
-              sobre igrejas, pinturas e artifices do período barroco brasileiro.
-              O barroco foi um período de grande efervescência artística no
-              Brasil, com a chegada dos colonizadores portugueses e a influência
-              da igreja católica.
+              Na América portuguesa, a arte dita barroca tem seu auge no século
+              XVIII relegando um patrimônio histórico sacro de inegável
+              importância para a nossa contemporaneidade. Apesar de termos
+              trabalhos acadêmicos de qualidade voltados para a produção desta
+              manifestação artística, não havia nenhum trabalho de História
+              Pública que buscasse unir a divulgação deste vasto acervo com as
+              suas bases iconográficas. Através da bolsa produtividade do CNPQ,
+              junto com o apoio da Universidade de Brasília em seu programa de
+              Iniciação Científica, foi possível desenvolver o presente site o
+              qual será constantemente alimentado com novos acervos. Mais do que
+              um projeto pessoal, o Museu barroco almeja ser um espaço
+              colaborativo onde pesquisadores poderão contribuir com a suas
+              pesquisas por meio de ferramenta de interação.
             </MainText>
           </MainTextContainer>
           <div
@@ -182,7 +201,7 @@ const Home = () => {
             }}
           >
             <ImageCarousel2
-              images={[temp, temp2, temp3, temp4, temp5, temp6]}
+              images={[igreja1, igreja2, igreja3, igreja4, igreja5]}
             />
           </div>
         </GreetingContainer>

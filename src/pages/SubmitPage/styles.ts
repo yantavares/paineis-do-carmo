@@ -36,7 +36,9 @@ export const Container = styled.div`
     width: 800px;
     margin: 0 auto;
     padding: 3rem;
-    background-color: #fff;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
   }
 
   .input-label {
@@ -55,10 +57,10 @@ export const Container = styled.div`
   select {
     resize: vertical;
     width: 100%;
-    color: #202020;
+    color: var(--color-text);
     font-weight: 500;
-    background-color: #f5f5f5;
-    border: 1px solid #e0e0e0;
+    background-color: var(--color-surface-2);
+    border: 1px solid var(--color-border);
     border-radius: 0.75rem;
     padding: 1rem;
     margin: 0.5rem 0;
@@ -71,7 +73,7 @@ export const Container = styled.div`
     &::placeholder {
       font-family: "Inter", sans-serif;
       font-size: 14px;
-      color: #b0b0b0;
+      color: ${colors.lightGray};
     }
   }
 
@@ -99,23 +101,20 @@ export const Container = styled.div`
   }
 
   .file-input-wrapper {
-    /* do the custom file input here */
     display: flex;
     flex-direction: column;
     gap: 1rem;
     justify-content: center;
     align-items: center;
     padding: 3rem;
-    border: 1px dashed #e0e0e0;
-    background-color: #f5f5f5;
+    border: 1px dashed var(--color-border);
+    background-color: var(--color-surface-2);
     border-radius: 0.75rem;
-    display: flex;
-    align-items: center;
 
     transition: all ease-in 0.1s;
     &:hover {
       cursor: pointer;
-      background-color: #f2f2f2;
+      background-color: var(--color-surface);
     }
   }
 
@@ -170,11 +169,11 @@ export const Container = styled.div`
   .close-btn {
     background-color: transparent;
     border: none;
-    color: #202020;
+    color: var(--color-text);
     padding: 0.25rem;
 
     &:hover {
-      color: #000;
+      color: ${colors.white};
     }
 
     &:focus {

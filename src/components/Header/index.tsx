@@ -1,7 +1,8 @@
 import { jwtDecode } from "jwt-decode";
-import { Menu, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTheme } from "src/context/ThemeContext";
 import LogoMain from "src/assets/utils/logo.svg";
 import {
   ButtonsContainer,
@@ -14,6 +15,7 @@ import {
   LoginButton,
   Title,
   TitleContainer,
+  ThemeToggleButton,
 } from "./styles";
 import {
   Col1Mobile,
@@ -21,6 +23,7 @@ import {
   HeaderContainerMobile,
   MenuButton,
   Overlay,
+  ThemeToggleRow,
 } from "./stylesMobile";
 
 const isLoggedIn = (token: string) => {
@@ -28,7 +31,7 @@ const isLoggedIn = (token: string) => {
     const decodedToken = jwtDecode(token);
     const currentTime = Date.now() / 1000;
 
-    if (decodedToken.exp < currentTime) {
+    if ((decodedToken as any).exp < currentTime) {
       localStorage.removeItem("token");
       alert("Sessão expirada. Por favor, faça login novamente.");
       return false;
@@ -52,6 +55,7 @@ const Header: React.FC<{ isMobile?: boolean }> = ({ isMobile = false }) => {
   const close = () => setOpen(false);
 
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   React.useEffect(() => {
     close();
@@ -84,6 +88,12 @@ const Header: React.FC<{ isMobile?: boolean }> = ({ isMobile = false }) => {
         <Overlay open={open} onClick={close} />
 
         <Drawer open={open} aria-hidden={!open}>
+          <ThemeToggleRow>
+            <ThemeToggleButton onClick={toggleTheme} aria-label="Alternar tema">
+              {theme === "light" ? <Sun size={18} /> : <Moon size={18} />}
+            </ThemeToggleButton>
+          </ThemeToggleRow>
+
           <button
             onClick={() => {
               navigate("/pesquisa/obras");
@@ -129,14 +139,6 @@ const Header: React.FC<{ isMobile?: boolean }> = ({ isMobile = false }) => {
               >
                 Dashboard
               </button>
-              {/* <button
-                onClick={() => {
-                  navigate("/submit");
-                  close();
-                }}
-              >
-                Nova Obra
-              </button> */}
             </>
           ) : (
             <>
@@ -185,6 +187,10 @@ const Header: React.FC<{ isMobile?: boolean }> = ({ isMobile = false }) => {
       </Col1>
 
       <Col2>
+        <ThemeToggleButton onClick={toggleTheme} aria-label="Alternar tema">
+          {theme === "light" ? <Sun size={18} /> : <Moon size={18} />}
+        </ThemeToggleButton>
+
         {isLoggedin ? (
           <LoginButton onClick={() => navigate("/dashboard")}>
             Dashboard

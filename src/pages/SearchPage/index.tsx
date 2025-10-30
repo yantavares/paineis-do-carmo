@@ -125,14 +125,11 @@ export const SortControl: React.FC<SortControlProps> = React.memo(
             cursor: "pointer",
             marginTop: "3.8rem",
             outline: "none",
+            color: show ? colors.mainColor : "var(--color-text)",
           }}
           onClick={toggle}
         >
-          <FontAwesomeIcon
-            icon={faArrowUpAZ}
-            size="xl"
-            color={show ? colors.mainColor : colors.black}
-          />
+          <FontAwesomeIcon icon={faArrowUpAZ as any} size="xl" />
         </button>
         {show && (
           <div
@@ -145,7 +142,8 @@ export const SortControl: React.FC<SortControlProps> = React.memo(
               border: `1px solid ${colors.mainColor}`,
               borderRadius: "0.5rem",
               zIndex: 20,
-              backgroundColor: colors.white,
+              backgroundColor: "var(--color-surface)",
+              color: "var(--color-text)",
               width: "12rem",
             }}
           >
@@ -158,9 +156,9 @@ export const SortControl: React.FC<SortControlProps> = React.memo(
                 {c === "name" ? "Nome" : "Recentes"}{" "}
                 {criterion === c &&
                   (direction === "asc" ? (
-                    <FontAwesomeIcon icon={faCircleArrowUp} />
+                    <FontAwesomeIcon icon={faCircleArrowUp as any} />
                   ) : (
-                    <FontAwesomeIcon icon={faCircleArrowDown} />
+                    <FontAwesomeIcon icon={faCircleArrowDown as any} />
                   ))}
               </p>
             ))}

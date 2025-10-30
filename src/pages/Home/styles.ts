@@ -74,14 +74,14 @@ export const GreetingContainer = styled.div`
 `;
 
 export const MainTextHeader = styled.h1`
-  font-size: 10rem;
+  font-size: 8rem;
   line-height: 1;
   margin: 0;
   padding: 0;
 `;
 
 export const MainText = styled.h2`
-  font-size: 2.6rem;
+  font-size: 1.9rem;
   font-weight: 600;
   color: ${colors.lightGray};
   text-align: justify;

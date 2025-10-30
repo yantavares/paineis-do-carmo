@@ -206,6 +206,33 @@ export const ContainerMobile = styled.div`
     font-weight: 400;
     margin: 0;
   }
+
+  /* Dark mode overrides */
+  [data-theme="dark"] & {
+    .inner-link {
+      color: var(--color-text);
+    }
+    .item-updater {
+      color: ${colors.lightGray};
+    }
+    .black {
+      color: var(--color-text);
+    }
+    .topic-text {
+      color: var(--color-text);
+    }
+    .reference-item {
+      color: var(--color-text);
+    }
+    .record-data {
+      color: var(--color-text);
+    }
+    .tag {
+      background-color: var(--color-surface-2);
+      border-color: var(--color-border);
+      color: var(--color-text);
+    }
+  }
 `;
 
 export const ImageContainer = styled.div`

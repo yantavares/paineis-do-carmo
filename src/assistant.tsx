@@ -103,8 +103,10 @@ const Assistant: React.FC<AssistantProps> = ({
   return (
     <div
       style={{
-        backgroundColor: "white",
-        border: "1px solid black",
+        backgroundColor: "var(--color-surface)",
+        color: "var(--color-text)",
+        border: "1px solid var(--color-outline)",
+        boxShadow: "0 4px 14px rgba(0,0,0,0.18)",
         borderRadius: "1rem",
         padding: "1rem",
         width: "44rem",
@@ -154,7 +156,10 @@ const Assistant: React.FC<AssistantProps> = ({
                 padding: "0.5rem 1rem",
                 borderRadius: "1rem",
                 backgroundColor:
-                  message.sender === "user" ? "#dcf8c6" : "#f0f0f0",
+                  message.sender === "user"
+                    ? "var(--color-surface-2)"
+                    : "var(--color-surface)",
+                border: "1px solid var(--color-border)",
               }}
             >
               {message.text}
@@ -167,13 +172,14 @@ const Assistant: React.FC<AssistantProps> = ({
         <textarea
           style={{
             width: "100%",
-            backgroundColor: "#f0f0f0",
+            backgroundColor: "var(--color-surface-2)",
             fontFamily: "monospace",
-            color: "inherit",
+            color: "var(--color-text)",
             padding: "0.5rem",
             borderRadius: "0.5rem",
             fontSize: "16px",
             marginRight: "0.5rem",
+            border: "1px solid var(--color-border)",
           }}
           value={prompt}
           onChange={handlePromptChange}
@@ -181,7 +187,7 @@ const Assistant: React.FC<AssistantProps> = ({
           rows={2}
         ></textarea>
         <button type="submit" style={{ padding: "0.5rem 1rem" }}>
-          <FontAwesomeIcon icon={faCircleArrowRight} />
+          <FontAwesomeIcon icon={faCircleArrowRight as any} />
         </button>
       </form>
     </div>

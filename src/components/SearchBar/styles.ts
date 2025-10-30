@@ -3,16 +3,20 @@ import colors from "src/utils/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const HomeInput = styled.input`
-  background-color: #eeefef;
-  color: #555555;
-  border: 1px solid #d5d6d6;
+  background-color: var(--color-surface-2);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
   font-size: 2.6rem;
   padding: 1.8rem 2.5rem;
   padding-left: 5.6rem;
   border-radius: 2.4rem;
   width: 100%;
+  &::placeholder {
+    color: ${colors.lightGray};
+  }
   &:focus {
     outline: none;
+    border-color: ${colors.mainColor};
   }
 `;
 
@@ -53,7 +57,9 @@ interface SearchOptionProps {
 export const SearchOption = styled.button<SearchOptionProps>`
   border-radius: 1.2rem;
   border: ${(props) =>
-    props.selected ? "1px solid " + colors.mainColor : "1px solid #cccccc"};
+    props.selected
+      ? "1px solid " + colors.mainColor
+      : "1px solid var(--color-border)"};
   font-size: 1.4rem;
   transition: color 0.3s;
   transition: all 0.3s;
