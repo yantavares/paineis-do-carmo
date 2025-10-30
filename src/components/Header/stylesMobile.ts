@@ -7,7 +7,7 @@ export const HeaderContainerMobile = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 0 5%;
-  border-bottom: 2px dashed #ededed;
+  border-bottom: 2px dashed var(--color-border);
 `;
 
 export const Col1Mobile = styled.div`
@@ -112,8 +112,9 @@ export const Drawer = styled.nav<{ open: boolean }>`
   right: 0;
   width: 260px;
   height: 100vh;
-  background: #fff;
-  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   padding: 1.25rem;
@@ -122,4 +123,9 @@ export const Drawer = styled.nav<{ open: boolean }>`
 
   transform: translateX(${({ open }) => (open ? "0" : "100%")});
   transition: transform 0.25s ease;
+`;
+
+export const ThemeToggleRow = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;

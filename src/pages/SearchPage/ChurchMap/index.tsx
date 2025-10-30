@@ -122,8 +122,9 @@ const ChurchMap = ({ isMobile }) => {
             zoom={3}
             style={{
               height: "40rem",
-              border: "1px dashed rgba(0, 0, 0, 0.25)",
-              backgroundColor: "#f5f5f5",
+              border: "2px solid var(--color-outline)",
+              borderRadius: "1rem",
+              backgroundColor: "var(--color-surface)",
               width: "100%",
               cursor: "pointer",
               transition: "all 0.3s",
@@ -166,8 +167,9 @@ const ChurchMap = ({ isMobile }) => {
             zoom={4}
             style={{
               height: "52rem",
-              border: "1px dashed rgba(0, 0, 0, 0.25)",
-              backgroundColor: "#f5f5f5",
+              border: "2px solid var(--color-outline)",
+              borderRadius: "1rem",
+              backgroundColor: "var(--color-surface)",
               width: "70%",
               cursor: "pointer",
               transition: "all 0.3s",

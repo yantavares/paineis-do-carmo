@@ -14,6 +14,13 @@ export const Tag = styled.span`
     transform: scale(1.08);
     cursor: pointer;
   }
+
+  /* Dark mode */
+  [data-theme="dark"] & {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border-color: var(--color-border);
+  }
 `;
 
 export const TagsContainer = styled.div`

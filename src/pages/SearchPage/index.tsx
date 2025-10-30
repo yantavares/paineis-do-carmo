@@ -129,7 +129,7 @@ export const SortControl: React.FC<SortControlProps> = React.memo(
           onClick={toggle}
         >
           <FontAwesomeIcon
-            icon={faArrowUpAZ}
+            icon={faArrowUpAZ as any}
             size="xl"
             color={show ? colors.mainColor : colors.black}
           />
@@ -158,9 +158,9 @@ export const SortControl: React.FC<SortControlProps> = React.memo(
                 {c === "name" ? "Nome" : "Recentes"}{" "}
                 {criterion === c &&
                   (direction === "asc" ? (
-                    <FontAwesomeIcon icon={faCircleArrowUp} />
+                    <FontAwesomeIcon icon={faCircleArrowUp as any} />
                   ) : (
-                    <FontAwesomeIcon icon={faCircleArrowDown} />
+                    <FontAwesomeIcon icon={faCircleArrowDown as any} />
                   ))}
               </p>
             ))}

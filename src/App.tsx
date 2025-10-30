@@ -9,6 +9,7 @@ import Assistant from "./assistant";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
 import { PreventRightClickProvider } from "./context/PreventRightClickContext";
+import { ThemeProvider } from "./context/ThemeContext";
 import colors from "./utils/colors";
 import ScrollToTop from "./utils/scrollToTop";
 
@@ -64,13 +65,17 @@ function Layout({ children }) {
         {!showAssistant ? (
           <button
             style={{
-              backgroundColor: "white",
-              opacity: 0.9,
+              backgroundColor: "var(--color-surface)",
+              color: "var(--color-text)",
+              border: "2px solid var(--color-outline)",
+              boxShadow: "0 2px 10px rgba(0,0,0,0.15)",
+              opacity: 0.98,
               borderRadius: "1.6rem",
             }}
             onClick={() => setShowAssistant(true)}
+            aria-label="Abrir assistente"
           >
-            <FontAwesomeIcon icon={faRobot} size="2x" />
+            <FontAwesomeIcon icon={faRobot as any} size="2x" />
           </button>
         ) : (
           <div>
@@ -90,73 +95,78 @@ function App() {
   return (
     <AuthProvider>
       <PreventRightClickProvider>
-        <BrowserRouter>
-          <Suspense
-            fallback={
-              <div
-                style={{
-                  height: "100vh",
-                  width: "100vw",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <CircularProgress
-                  size={"10rem"}
-                  style={{ color: colors.mainColor }}
-                />
-              </div>
-            }
-          >
-            <Layout>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="login" element={<LoginPage />} />
-                <Route path="register" element={<RegisterPage />} />
+        <ThemeProvider>
+          <BrowserRouter>
+            <Suspense
+              fallback={
+                <div
+                  style={{
+                    height: "100vh",
+                    width: "100vw",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <CircularProgress
+                    size={"10rem"}
+                    style={{ color: colors.mainColor }}
+                  />
+                </div>
+              }
+            >
+              <Layout>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="login" element={<LoginPage />} />
+                  <Route path="register" element={<RegisterPage />} />
 
-                <Route
-                  path="submit"
-                  element={
-                    <ProtectedRoute>
-                      <SubmitPage />
-                    </ProtectedRoute>
-                  }
-                />
+                  <Route
+                    path="submit"
+                    element={
+                      <ProtectedRoute>
+                        <SubmitPage />
+                      </ProtectedRoute>
+                    }
+                  />
 
-                <Route path="pesquisa/:selected" element={<SearchPage />} />
+                  <Route path="pesquisa/:selected" element={<SearchPage />} />
 
-                <Route
-                  path="dashboard"
-                  element={
-                    <ProtectedRoute>
-                      <DashbordPage />
-                    </ProtectedRoute>
-                  }
-                />
+                  <Route
+                    path="dashboard"
+                    element={
+                      <ProtectedRoute>
+                        <DashbordPage />
+                      </ProtectedRoute>
+                    }
+                  />
 
-                <Route
-                  path="pesquisa/igrejas/:state"
-                  element={<ChurchState />}
-                />
+                  <Route
+                    path="pesquisa/igrejas/:state"
+                    element={<ChurchState />}
+                  />
 
-                <Route path="topicos/:tag" element={<TagDetail />} />
+                  <Route path="topicos/:tag" element={<TagDetail />} />
 
-                <Route path="item/:id" element={<PaintingDetail />} />
+                  <Route path="item/:id" element={<PaintingDetail />} />
 
-                <Route path="item/paintings/:id" element={<PaintingDetail />} />
+                  <Route
+                    path="item/paintings/:id"
+                    element={<PaintingDetail />}
+                  />
 
-                <Route path="item/churches/:id" element={<ChurchDetail />} />
+                  <Route path="item/churches/:id" element={<ChurchDetail />} />
 
-                <Route path="sobre" element={<AboutPage />} />
+                  <Route path="sobre" element={<AboutPage />} />
 
-                <Route path="sobre" element={<AboutPage />} />
+                  <Route path="sobre" element={<AboutPage />} />
 
-                <Route path="*" element={<Navigate to="/" replace />} />
-              </Routes>
-            </Layout>
-          </Suspense>
-        </BrowserRouter>
+                  <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
+              </Layout>
+            </Suspense>
+          </BrowserRouter>
+        </ThemeProvider>
       </PreventRightClickProvider>
     </AuthProvider>
   );
