@@ -22,7 +22,7 @@ const PaintingText = ({ painting }: { painting: Painting }) => {
         ) : (
           <DataInfo>{painting.state}</DataInfo>
         )} */}
-        <DataInfo>{trimString(painting?.church?.name, 35)}</DataInfo>
+        <DataInfo>{trimString(painting?.church?.name, 24)}</DataInfo>
       </DataInfoContainer>
     </>
   );
