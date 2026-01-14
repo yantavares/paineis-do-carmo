@@ -22,7 +22,7 @@ const HomeTopic = ({ data, type, size = 0 }) => {
         }
       >
         <p>{getTypeText(type)}</p>
-        <FontAwesomeIcon icon={faArrowRight} />
+        <FontAwesomeIcon icon={faArrowRight as any} />
       </SeeMoreButton>
       <DataContainer>
         {data.map((item: Church | Artist | Painting, index: number) => {
