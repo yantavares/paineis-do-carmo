@@ -29,7 +29,7 @@ const HomeTopic = ({ data, type, size = 0 }) => {
           if (size != 0 && index >= size) return null;
           return (
             <div key={index + 1}>
-              <Item item={item} type={type} key={index} />
+              <Item item={item} type={type} key={index} fixedImgHeight={true} />
             </div>
           );
         })}

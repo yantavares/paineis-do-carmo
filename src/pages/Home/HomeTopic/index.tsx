@@ -27,7 +27,7 @@ const HomeTopic = ({ data, type }) => {
       <DataContainer>
         {data.map((item: Church | Artist | Painting, index: number) => (
           <div style={{ width: "18%" }} key={index + 1}>
-            <Item item={item} type={type} key={index} />
+            <Item item={item} type={type} key={index} fixedImgHeight={true} />
           </div>
         ))}
       </DataContainer>

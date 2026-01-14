@@ -228,9 +228,10 @@ export const Header: React.FC<HeaderProps> = React.memo(
 const SearchPage: React.FC = () => {
   /* ------------------------------ route/query ------------------------------ */
   const { selected = "" } = useParams<{ selected: string }>();
+  const location = useLocation();
   const query = useMemo(() => {
-    return new URLSearchParams(useLocation().search).get("search") || "";
-  }, []);
+    return new URLSearchParams(location.search).get("search") || "";
+  }, [location.search]);
 
   /* ------------------------------- state ---------------------------------- */
   const [dataPaintings, setDataPaintings] = useState<any[]>([]);
