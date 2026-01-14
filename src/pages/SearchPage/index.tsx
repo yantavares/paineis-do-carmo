@@ -10,6 +10,7 @@ import axios from "axios";
 import { useLocation, useParams } from "react-router-dom";
 import Item from "src/components/Item";
 import SearchBar from "src/components/SearchBar";
+import Pagination from "src/components/Pagination";
 import colors from "src/utils/colors";
 import { capitalize, translateTopicType } from "src/utils/strings";
 import ChurchMap from "./ChurchMap";
@@ -181,6 +182,7 @@ interface HeaderProps {
   criterion: "name" | "date";
   direction: "asc" | "desc";
   onChooseCriterion: (criterion: "name" | "date") => void;
+  headerRef?: React.RefObject<HTMLDivElement>;
 }
 
 export const Header: React.FC<HeaderProps> = React.memo(
@@ -195,10 +197,11 @@ export const Header: React.FC<HeaderProps> = React.memo(
     criterion,
     direction,
     onChooseCriterion,
+    headerRef,
   }) => {
     const Wrapper = mobile ? SearchHeaderMobile : SearchHeader;
     return (
-      <Wrapper>
+      <Wrapper ref={headerRef}>
         {title}
         <SearchBarContainer>
           <div style={{ width: "98%" }}>
@@ -228,9 +231,10 @@ export const Header: React.FC<HeaderProps> = React.memo(
 const SearchPage: React.FC = () => {
   /* ------------------------------ route/query ------------------------------ */
   const { selected = "" } = useParams<{ selected: string }>();
+  const location = useLocation();
   const query = useMemo(() => {
-    return new URLSearchParams(useLocation().search).get("search") || "";
-  }, []);
+    return new URLSearchParams(location.search).get("search") || "";
+  }, [location.search]);
 
   /* ------------------------------- state ---------------------------------- */
   const [dataPaintings, setDataPaintings] = useState<any[]>([]);
@@ -241,12 +245,18 @@ const SearchPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const isMobile = useIsMobile();
+  const searchHeaderRef = useRef<HTMLDivElement>(null);
 
   /* sort controls */
   const [criterion, setCriterion] = useState<"name" | "date">("name");
   const [direction, setDirection] = useState<"asc" | "desc">("asc");
   const [showSort, setShowSort] = useState(false);
   const toggleSort = useCallback(() => setShowSort((p) => !p), []);
+
+  /* pagination controls */
+  const ITEMS_PER_PAGE = 10;
+  const [currentPagePaintings, setCurrentPagePaintings] = useState(1);
+  const [currentPageChurches, setCurrentPageChurches] = useState(1);
 
   /* ------------------------------ fetch data ------------------------------ */
   const translatedSelected = translateSelected(selected);
@@ -316,6 +326,39 @@ const SearchPage: React.FC = () => {
       setDirection("asc");
     }
   };
+
+  /* ------------------------------- pagination ----------------------------- */
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    if (selected === "obras" || selected === "artifices") {
+      setCurrentPagePaintings(1);
+    } else if (selected === "igrejas") {
+      setCurrentPageChurches(1);
+    }
+  }, [inputValue, selected, criterion, direction]);
+
+  const getPaginatedData = (data: any[], currentPage: number) => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    return data.slice(startIndex, endIndex);
+  };
+
+  const currentPage = 
+    selected === "obras" || selected === "artifices" 
+      ? currentPagePaintings 
+      : currentPageChurches;
+
+  const setCurrentPage = 
+    selected === "obras" || selected === "artifices"
+      ? setCurrentPagePaintings
+      : setCurrentPageChurches;
+
+  const paginatedData = useMemo(
+    () => getPaginatedData(sorted, currentPage),
+    [sorted, currentPage]
+  );
+
+  const totalPages = Math.ceil(sorted.length / ITEMS_PER_PAGE);
 
   /* ------------------------------ render list ----------------------------- */
   const Spinner = (
@@ -391,6 +434,7 @@ const SearchPage: React.FC = () => {
       criterion={criterion}
       direction={direction}
       onChooseCriterion={chooseCriterion}
+      headerRef={searchHeaderRef}
     />
   );
 
@@ -402,8 +446,18 @@ const SearchPage: React.FC = () => {
           <>
             {commonHeader}
             <SearchResultsContainer>
-              {renderList(sorted, ResultMobile, ResultMobile)}
+              {renderList(paginatedData, ResultMobile, ResultMobile)}
             </SearchResultsContainer>
+            {totalPages > 1 && (
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+                itemsPerPage={ITEMS_PER_PAGE}
+                totalItems={sorted.length}
+                scrollToRef={searchHeaderRef}
+              />
+            )}
           </>
         );
       case "igrejas":
@@ -412,8 +466,18 @@ const SearchPage: React.FC = () => {
             <ChurchMap isMobile={isMobile} />
             {commonHeader}
             <SearchResultsContainer>
-              {renderList(sorted, ResultMobile, ResultMobile)}
+              {renderList(paginatedData, ResultMobile, ResultMobile)}
             </SearchResultsContainer>
+            {totalPages > 1 && (
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+                itemsPerPage={ITEMS_PER_PAGE}
+                totalItems={sorted.length}
+                scrollToRef={searchHeaderRef}
+              />
+            )}
           </>
         );
       case "topicos":

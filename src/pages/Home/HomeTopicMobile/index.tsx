@@ -22,14 +22,14 @@ const HomeTopic = ({ data, type, size = 0 }) => {
         }
       >
         <p>{getTypeText(type)}</p>
-        <FontAwesomeIcon icon={faArrowRight} />
+        <FontAwesomeIcon icon={faArrowRight as any} />
       </SeeMoreButton>
       <DataContainer>
         {data.map((item: Church | Artist | Painting, index: number) => {
           if (size != 0 && index >= size) return null;
           return (
             <div key={index + 1}>
-              <Item item={item} type={type} key={index} />
+              <Item item={item} type={type} key={index} fixedImgHeight={true} />
             </div>
           );
         })}

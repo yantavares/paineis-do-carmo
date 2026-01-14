@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
+import axios from "axios";
 import temp4 from "src/assets/utils/baroque.jpg";
 import temp2 from "src/assets/utils/baroque2.jpg";
 import temp from "src/assets/utils/baroque3.jpg";
@@ -11,7 +12,6 @@ import igreja4 from "src/assets/churches/igreja4.jpeg";
 import igreja5 from "src/assets/churches/igreja5.jpeg";
 import HomeSearch from "src/components/SearchBar";
 import colors from "src/utils/colors";
-import { brazilianChurches, brazilianPaintings } from "../../utils/mockData";
 import HomeTopic from "./HomeTopic";
 import HomeTopicMobile from "./HomeTopicMobile";
 import RoundBox from "./RoundBox";
@@ -47,6 +47,67 @@ import {
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
   const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 860);
+  const [dataPaintings, setDataPaintings] = useState<any[]>([]);
+  const [dataChurches, setDataChurches] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Fetch data from API
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const [paintingsResponse, churchesResponse] = await Promise.all([
+          axios.get(`${import.meta.env.VITE_API_URL}/api/paintings`),
+          axios.get(`${import.meta.env.VITE_API_URL}/api/churches`)
+        ]);
+        setDataPaintings(paintingsResponse.data);
+        setDataChurches(churchesResponse.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const selectItemsByFibonacci = (items: any[]) => {
+    const fibonacci = [1, 2, 3, 5];
+    const selectedItems: any[] = [];
+    const totalItems = items.length;
+
+    fibonacci.forEach(fibNum => {
+      const index = totalItems - fibNum;
+      if (index >= 0 && index < totalItems) {
+        selectedItems.push(items[index]);
+      }
+    });
+
+    return selectedItems;
+  };
+
+  const getImagesFromItems = (items: any[], fibonacciSequence: number[]) => {
+    const images: string[] = [];
+    const totalItems = items.length;
+
+    fibonacciSequence.forEach(fibNum => {
+      const index = totalItems - fibNum;
+      if (index >= 0 && index < totalItems) {
+        const item = items[index];
+        if (item.images && item.images.length > 0) {
+          images.push(item.images[0].url);
+        }
+      }
+    });
+
+    return images;
+  };
+
+  const selectedPaintings = useMemo(() => selectItemsByFibonacci(dataPaintings), [dataPaintings]);
+  const selectedChurches = useMemo(() => selectItemsByFibonacci(dataChurches), [dataChurches]);
+  
+  const carouselPaintingImages = useMemo(() => getImagesFromItems(dataPaintings, [8, 13, 21, 34]), [dataPaintings]);
+  const carouselChurchImages = useMemo(() => getImagesFromItems(dataChurches, [8, 13, 21, 34]), [dataChurches]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -76,7 +137,9 @@ const Home = () => {
                 </span>
               </MainTextHeaderMobile>
               <div style={{}}>
-                <ImageCarousel2 images={[temp, temp2, temp4, temp6]} />
+                <ImageCarousel2 
+                  images={carouselPaintingImages.length > 0 ? carouselPaintingImages : [temp, temp2, temp4, temp6]} 
+                />
               </div>
               <MainTextMobile>
                 Na América portuguesa, a arte dita barroca tem seu auge no
@@ -142,9 +205,8 @@ const Home = () => {
                 </TopicSubTitleMobile>
               </TopicHeaderMobile>
               <HomeTopicMobile
-                size={2}
                 type={"paintings"}
-                data={brazilianPaintings}
+                data={selectedPaintings}
               />
             </TopicOneMobile>
             <TopicMobile>
@@ -154,7 +216,7 @@ const Home = () => {
                   Procure por igrejas do período barroco brasileiro
                 </TopicSubTitleMobile>
               </TopicHeaderMobile>
-              <HomeTopicMobile type={"churches"} data={brazilianChurches} />
+              <HomeTopicMobile type={"churches"} data={selectedChurches} />
             </TopicMobile>
           </TopicsContainerMobile>
         </PaddingContainerMobile>
@@ -201,7 +263,7 @@ const Home = () => {
             }}
           >
             <ImageCarousel2
-              images={[igreja1, igreja2, igreja3, igreja4, igreja5]}
+              images={carouselChurchImages.length > 0 ? carouselChurchImages : [igreja1, igreja2, igreja3, igreja4, igreja5]}
             />
           </div>
         </GreetingContainer>
@@ -251,7 +313,7 @@ const Home = () => {
                 Procure por pinturas do período barroco brasileiro
               </TopicSubTitle>
             </TopicHeader>
-            <HomeTopic type={"paintings"} data={brazilianPaintings} />
+            <HomeTopic type={"paintings"} data={selectedPaintings} />
           </TopicOne>
           <Topic>
             <TopicHeader>
@@ -260,7 +322,7 @@ const Home = () => {
                 Procure por igrejas do período barroco brasileiro
               </TopicSubTitle>
             </TopicHeader>
-            <HomeTopic type={"churches"} data={brazilianChurches} />
+            <HomeTopic type={"churches"} data={selectedChurches} />
           </Topic>
         </TopicsContainer>
       </PaddingContainer>
