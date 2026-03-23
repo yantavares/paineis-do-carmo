@@ -289,7 +289,7 @@ export const EngravingLayoutMobile = styled.div`
 
 export const ColMobile = styled.div`
   padding-bottom: 2rem;
-  min-width: 20rem;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
