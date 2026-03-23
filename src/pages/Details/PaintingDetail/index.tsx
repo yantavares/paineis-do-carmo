@@ -145,7 +145,7 @@ const PaintingDetails = () => {
           </div>
           <h1 className="item-name">{data.title} </h1>
           <p className="item-updater">
-            <FontAwesomeIcon style={{ paddingRight: "1rem" }} icon={faChurch} />
+            <FontAwesomeIcon style={{ paddingRight: "1rem" }} icon={faChurch as any} />
             Localizada em •
             <span
               onClick={() => navigate(`/item/churches/${data.church.id}`)}
@@ -341,7 +341,7 @@ const PaintingDetails = () => {
         </div>
         <h1 className="item-name">{data.title} </h1>
         <p className="item-updater" style={{ display: "flex", gap: "1rem" }}>
-          <FontAwesomeIcon icon={faChurch} />
+          <FontAwesomeIcon icon={faChurch as any} />
           Localizada em •
           <span
             onClick={() => navigate(`/item/churches/${data.church.id}`)}

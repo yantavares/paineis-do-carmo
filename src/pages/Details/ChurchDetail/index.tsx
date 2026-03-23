@@ -116,7 +116,7 @@ const PaintingDetails = () => {
         </div>
         <h1 className="item-name">{data.name} </h1>
         <p className="item-updater" style={{ display: "flex", gap: "1rem" }}>
-          <FontAwesomeIcon icon={faLocation} />
+          <FontAwesomeIcon icon={faLocation as any} />
           Localizada em {data.city}
           <span
             onClick={() => navigate(`/pesquisa/igrejas/${data.state}`)}
@@ -204,7 +204,7 @@ const PaintingDetails = () => {
       </div>
       <h1 className="item-name">{data.name} </h1>
       <p className="item-updater" style={{ display: "flex", gap: "1rem" }}>
-        <FontAwesomeIcon icon={faLocation} />
+        <FontAwesomeIcon icon={faLocation as any} />
         Localizada em {data.city}
         <span
           onClick={() => navigate(`/pesquisa/igrejas/${data.state}`)}
