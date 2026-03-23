@@ -14,7 +14,6 @@ import {
   DownloadButton,
   EngravingDescription,
   EngravingImage,
-  EngravingLayout,
   Image,
   ImageContainer,
 } from "../styles";
@@ -22,8 +21,8 @@ import ImageCarousel from "src/components/ImageCarousel";
 import {
   ColMobile,
   ContainerMobile,
-  EngravingLayoutMobile,
 } from "../stylesMobile";
+import ItemsCarousel from "src/components/ItemsCarousel";
 
 const defaultChurch: Church = {
   id: 0,
@@ -117,7 +116,7 @@ const PaintingDetails = () => {
         </div>
         <h1 className="item-name">{data.name} </h1>
         <p className="item-updater" style={{ display: "flex", gap: "1rem" }}>
-          <FontAwesomeIcon icon={faLocation} />
+          <FontAwesomeIcon icon={faLocation as any} />
           Localizada em {data.city}
           <span
             onClick={() => navigate(`/pesquisa/igrejas/${data.state}`)}
@@ -169,7 +168,7 @@ const PaintingDetails = () => {
         {data?.paintings?.length > 0 && (
           <>
             <h2 className="topic-title">Obras da Igreja</h2>
-            <EngravingLayoutMobile>
+            <ItemsCarousel>
               {data.paintings.map((painting, index) => (
                 <ColMobile
                   key={index}
@@ -189,7 +188,7 @@ const PaintingDetails = () => {
                   </EngravingDescription>
                 </ColMobile>
               ))}
-            </EngravingLayoutMobile>
+            </ItemsCarousel>
           </>
         )}
       </ContainerMobile>
@@ -205,7 +204,7 @@ const PaintingDetails = () => {
       </div>
       <h1 className="item-name">{data.name} </h1>
       <p className="item-updater" style={{ display: "flex", gap: "1rem" }}>
-        <FontAwesomeIcon icon={faLocation} />
+        <FontAwesomeIcon icon={faLocation as any} />
         Localizada em {data.city}
         <span
           onClick={() => navigate(`/pesquisa/igrejas/${data.state}`)}
@@ -215,18 +214,16 @@ const PaintingDetails = () => {
           • {data.state}{" "}
         </span>{" "}
       </p>
+      <div className="img-container" style={{ width: "100%", paddingBottom: "2rem" }}>
+        {images && images.length > 0 && (
+          <ImageCarousel
+            images={images}
+            showDownload
+            onDownload={downloadImage}
+          />
+        )}
+      </div>
       <div className="item-content">
-        <div className="img-container">
-          {data.images &&
-            data.images.map((image, index) => (
-              <ImageContainer key={index}>
-                <Image src={image.url} alt="" />
-                <DownloadButton onClick={() => downloadImage(image.url)}>
-                  Baixar
-                </DownloadButton>
-              </ImageContainer>
-            ))}
-        </div>
         <div className="item-info">
           <div className="topic-wrapper">
             <h2 className="topic-title">Sobre esta Igreja</h2>
@@ -285,7 +282,7 @@ const PaintingDetails = () => {
       {data?.paintings?.length > 0 && (
         <>
           <h2 className="topic-title">Obras da Igreja</h2>
-          <EngravingLayout>
+          <ItemsCarousel>
             {data.paintings.map((painting, index) => (
               <Col
                 key={index}
@@ -305,7 +302,7 @@ const PaintingDetails = () => {
                 </EngravingDescription>
               </Col>
             ))}
-          </EngravingLayout>
+          </ItemsCarousel>
         </>
       )}
     </Container>

@@ -13,9 +13,12 @@ export const ImageContainer = styled.div`
 `;
 
 export const SliderImage = styled.img`
-  width: 98%;
-  max-height: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 60vh;
+  min-height: 30rem;
+  width: auto;
+  height: auto;
+  object-fit: contain;
   border-radius: 2rem;
 `;
 

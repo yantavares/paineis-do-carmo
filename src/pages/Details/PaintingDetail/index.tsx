@@ -15,7 +15,6 @@ import {
   DownloadButton,
   EngravingDescription,
   EngravingImage,
-  EngravingLayout,
   Image,
   ImageContainer,
 } from "../styles";
@@ -23,8 +22,8 @@ import ImageCarousel from "src/components/ImageCarousel";
 import {
   ColMobile,
   ContainerMobile,
-  EngravingLayoutMobile,
 } from "../stylesMobile";
+import ItemsCarousel from "src/components/ItemsCarousel";
 import Modal from "src/components/Modal";
 
 const defaultPainting: Painting = {
@@ -146,7 +145,7 @@ const PaintingDetails = () => {
           </div>
           <h1 className="item-name">{data.title} </h1>
           <p className="item-updater">
-            <FontAwesomeIcon style={{ paddingRight: "1rem" }} icon={faChurch} />
+            <FontAwesomeIcon style={{ paddingRight: "1rem" }} icon={faChurch as any} />
             Localizada em •
             <span
               onClick={() => navigate(`/item/churches/${data.church.id}`)}
@@ -267,7 +266,7 @@ const PaintingDetails = () => {
           {data?.engravings?.length ? (
             <>
               <h2 className="topic-title">Gravuras</h2>
-              <EngravingLayoutMobile>
+              <ItemsCarousel>
                 {data.engravings.map((engraving, idx) => (
                   <ColMobile
                     key={idx}
@@ -288,7 +287,7 @@ const PaintingDetails = () => {
                     </EngravingDescription>
                   </ColMobile>
                 ))}
-              </EngravingLayoutMobile>
+              </ItemsCarousel>
             </>
           ) : null}
         </ContainerMobile>
@@ -342,7 +341,7 @@ const PaintingDetails = () => {
         </div>
         <h1 className="item-name">{data.title} </h1>
         <p className="item-updater" style={{ display: "flex", gap: "1rem" }}>
-          <FontAwesomeIcon icon={faChurch} />
+          <FontAwesomeIcon icon={faChurch as any} />
           Localizada em •
           <span
             onClick={() => navigate(`/item/churches/${data.church.id}`)}
@@ -358,18 +357,16 @@ const PaintingDetails = () => {
             • {data.church.state}
           </span>
         </p>
+        <div className="img-container" style={{ width: "100%", paddingBottom: "2rem" }}>
+          {images && images.length > 0 && (
+            <ImageCarousel
+              images={images}
+              showDownload
+              onDownload={downloadImage}
+            />
+          )}
+        </div>
         <div className="item-content">
-          <div className="img-container">
-            {data.images &&
-              data.images.map((image, index) => (
-                <ImageContainer key={index}>
-                  <Image src={image.url} alt="" />
-                  <DownloadButton onClick={() => downloadImage(image.url)}>
-                    Baixar
-                  </DownloadButton>
-                </ImageContainer>
-              ))}
-          </div>
           <div className="item-info">
             <div className="topic-wrapper">
               <h2 className="topic-title">Sobre esta Obra</h2>
@@ -467,9 +464,9 @@ const PaintingDetails = () => {
         {data?.engravings?.length ? (
           <>
             <h2 className="topic-title">Gravuras</h2>
-            <EngravingLayoutMobile>
+            <ItemsCarousel>
               {data.engravings.map((engraving, idx) => (
-                <ColMobile
+                <Col
                   key={idx}
                   onClick={() => openModal(engraving)}
                   style={{ cursor: "pointer" }}
@@ -486,9 +483,9 @@ const PaintingDetails = () => {
                       {engraving?.createdBy ?? "Autor desconhecido"}
                     </p>
                   </EngravingDescription>
-                </ColMobile>
+                </Col>
               ))}
-            </EngravingLayoutMobile>
+            </ItemsCarousel>
           </>
         ) : null}
       </Container>

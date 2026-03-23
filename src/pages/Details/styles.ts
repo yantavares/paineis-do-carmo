@@ -285,13 +285,11 @@ export const EngravingLayout = styled.div`
 `;
 
 export const Col = styled.div`
-  flex: 1 1 220px;
   padding-bottom: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 340px;
-  max-width: 400px;
+  width: 100%;
   cursor: pointer;
 `;
 
